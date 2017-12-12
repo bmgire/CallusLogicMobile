@@ -14,6 +14,8 @@
 		B536C36D1FDF855300FD886E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */; };
 		B536C3781FDF855300FD886E /* CallusLogicMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */; };
 		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
+		B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3901FDF86A700FD886E /* FretboardView.swift */; };
+		B5C08FF61FDF9EF000393583 /* PickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		B536C37E1FDF855300FD886E /* CallusLogicMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallusLogicMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallusLogicMobileUITests.swift; sourceTree = "<group>"; };
 		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B536C3901FDF86A700FD886E /* FretboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardView.swift; sourceTree = "<group>"; };
+		B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				B536C3691FDF855300FD886E /* Assets.xcassets */,
 				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
 				B536C36E1FDF855300FD886E /* Info.plist */,
+				B536C3901FDF86A700FD886E /* FretboardView.swift */,
+				B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */,
 			);
 			path = CallusLogicMobile;
 			sourceTree = "<group>";
@@ -260,7 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B536C3651FDF855300FD886E /* ViewController.swift in Sources */,
+				B5C08FF61FDF9EF000393583 /* PickerDataModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
+				B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,7 +440,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -446,7 +454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
