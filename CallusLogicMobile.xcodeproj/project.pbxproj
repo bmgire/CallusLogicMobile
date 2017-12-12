@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3621FDF855300FD886E /* AppDelegate.swift */; };
+		B536C3651FDF855300FD886E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3641FDF855300FD886E /* ViewController.swift */; };
+		B536C3681FDF855300FD886E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B536C3661FDF855300FD886E /* Main.storyboard */; };
+		B536C36A1FDF855300FD886E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B536C3691FDF855300FD886E /* Assets.xcassets */; };
+		B536C36D1FDF855300FD886E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */; };
+		B536C3781FDF855300FD886E /* CallusLogicMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */; };
+		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B536C3741FDF855300FD886E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B536C3571FDF855300FD886E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B536C35E1FDF855300FD886E;
+			remoteInfo = CallusLogicMobile;
+		};
+		B536C37F1FDF855300FD886E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B536C3571FDF855300FD886E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B536C35E1FDF855300FD886E;
+			remoteInfo = CallusLogicMobile;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B536C35F1FDF855300FD886E /* CallusLogicMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallusLogicMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B536C3621FDF855300FD886E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B536C3641FDF855300FD886E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B536C3671FDF855300FD886E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B536C3691FDF855300FD886E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B536C36C1FDF855300FD886E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B536C36E1FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B536C3731FDF855300FD886E /* CallusLogicMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallusLogicMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallusLogicMobileTests.swift; sourceTree = "<group>"; };
+		B536C3791FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B536C37E1FDF855300FD886E /* CallusLogicMobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CallusLogicMobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallusLogicMobileUITests.swift; sourceTree = "<group>"; };
+		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B536C35C1FDF855300FD886E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B536C3701FDF855300FD886E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B536C37B1FDF855300FD886E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B536C3561FDF855300FD886E = {
+			isa = PBXGroup;
+			children = (
+				B536C3611FDF855300FD886E /* CallusLogicMobile */,
+				B536C3761FDF855300FD886E /* CallusLogicMobileTests */,
+				B536C3811FDF855300FD886E /* CallusLogicMobileUITests */,
+				B536C3601FDF855300FD886E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B536C3601FDF855300FD886E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B536C35F1FDF855300FD886E /* CallusLogicMobile.app */,
+				B536C3731FDF855300FD886E /* CallusLogicMobileTests.xctest */,
+				B536C37E1FDF855300FD886E /* CallusLogicMobileUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B536C3611FDF855300FD886E /* CallusLogicMobile */ = {
+			isa = PBXGroup;
+			children = (
+				B536C3621FDF855300FD886E /* AppDelegate.swift */,
+				B536C3641FDF855300FD886E /* ViewController.swift */,
+				B536C3661FDF855300FD886E /* Main.storyboard */,
+				B536C3691FDF855300FD886E /* Assets.xcassets */,
+				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
+				B536C36E1FDF855300FD886E /* Info.plist */,
+			);
+			path = CallusLogicMobile;
+			sourceTree = "<group>";
+		};
+		B536C3761FDF855300FD886E /* CallusLogicMobileTests */ = {
+			isa = PBXGroup;
+			children = (
+				B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */,
+				B536C3791FDF855300FD886E /* Info.plist */,
+			);
+			path = CallusLogicMobileTests;
+			sourceTree = "<group>";
+		};
+		B536C3811FDF855300FD886E /* CallusLogicMobileUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */,
+				B536C3841FDF855300FD886E /* Info.plist */,
+			);
+			path = CallusLogicMobileUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B536C35E1FDF855300FD886E /* CallusLogicMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B536C3871FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobile" */;
+			buildPhases = (
+				B536C35B1FDF855300FD886E /* Sources */,
+				B536C35C1FDF855300FD886E /* Frameworks */,
+				B536C35D1FDF855300FD886E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CallusLogicMobile;
+			productName = CallusLogicMobile;
+			productReference = B536C35F1FDF855300FD886E /* CallusLogicMobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B536C3721FDF855300FD886E /* CallusLogicMobileTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B536C38A1FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobileTests" */;
+			buildPhases = (
+				B536C36F1FDF855300FD886E /* Sources */,
+				B536C3701FDF855300FD886E /* Frameworks */,
+				B536C3711FDF855300FD886E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B536C3751FDF855300FD886E /* PBXTargetDependency */,
+			);
+			name = CallusLogicMobileTests;
+			productName = CallusLogicMobileTests;
+			productReference = B536C3731FDF855300FD886E /* CallusLogicMobileTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B536C37D1FDF855300FD886E /* CallusLogicMobileUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B536C38D1FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobileUITests" */;
+			buildPhases = (
+				B536C37A1FDF855300FD886E /* Sources */,
+				B536C37B1FDF855300FD886E /* Frameworks */,
+				B536C37C1FDF855300FD886E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B536C3801FDF855300FD886E /* PBXTargetDependency */,
+			);
+			name = CallusLogicMobileUITests;
+			productName = CallusLogicMobileUITests;
+			productReference = B536C37E1FDF855300FD886E /* CallusLogicMobileUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B536C3571FDF855300FD886E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = Gire;
+				TargetAttributes = {
+					B536C35E1FDF855300FD886E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					B536C3721FDF855300FD886E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B536C35E1FDF855300FD886E;
+					};
+					B536C37D1FDF855300FD886E = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B536C35E1FDF855300FD886E;
+					};
+				};
+			};
+			buildConfigurationList = B536C35A1FDF855300FD886E /* Build configuration list for PBXProject "CallusLogicMobile" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B536C3561FDF855300FD886E;
+			productRefGroup = B536C3601FDF855300FD886E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B536C35E1FDF855300FD886E /* CallusLogicMobile */,
+				B536C3721FDF855300FD886E /* CallusLogicMobileTests */,
+				B536C37D1FDF855300FD886E /* CallusLogicMobileUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B536C35D1FDF855300FD886E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B536C36D1FDF855300FD886E /* LaunchScreen.storyboard in Resources */,
+				B536C36A1FDF855300FD886E /* Assets.xcassets in Resources */,
+				B536C3681FDF855300FD886E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B536C3711FDF855300FD886E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B536C37C1FDF855300FD886E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B536C35B1FDF855300FD886E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B536C3651FDF855300FD886E /* ViewController.swift in Sources */,
+				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B536C36F1FDF855300FD886E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B536C3781FDF855300FD886E /* CallusLogicMobileTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B536C37A1FDF855300FD886E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B536C3751FDF855300FD886E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B536C35E1FDF855300FD886E /* CallusLogicMobile */;
+			targetProxy = B536C3741FDF855300FD886E /* PBXContainerItemProxy */;
+		};
+		B536C3801FDF855300FD886E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B536C35E1FDF855300FD886E /* CallusLogicMobile */;
+			targetProxy = B536C37F1FDF855300FD886E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B536C3661FDF855300FD886E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B536C3671FDF855300FD886E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B536C36C1FDF855300FD886E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B536C3851FDF855300FD886E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B536C3861FDF855300FD886E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B536C3881FDF855300FD886E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CallusLogicMobile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B536C3891FDF855300FD886E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CallusLogicMobile/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B536C38B1FDF855300FD886E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CallusLogicMobileTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobileTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CallusLogicMobile.app/CallusLogicMobile";
+			};
+			name = Debug;
+		};
+		B536C38C1FDF855300FD886E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CallusLogicMobileTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobileTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CallusLogicMobile.app/CallusLogicMobile";
+			};
+			name = Release;
+		};
+		B536C38E1FDF855300FD886E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CallusLogicMobileUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobileUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CallusLogicMobile;
+			};
+			name = Debug;
+		};
+		B536C38F1FDF855300FD886E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = CallusLogicMobileUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobileUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CallusLogicMobile;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B536C35A1FDF855300FD886E /* Build configuration list for PBXProject "CallusLogicMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B536C3851FDF855300FD886E /* Debug */,
+				B536C3861FDF855300FD886E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B536C3871FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B536C3881FDF855300FD886E /* Debug */,
+				B536C3891FDF855300FD886E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B536C38A1FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobileTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B536C38B1FDF855300FD886E /* Debug */,
+				B536C38C1FDF855300FD886E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B536C38D1FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobileUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B536C38E1FDF855300FD886E /* Debug */,
+				B536C38F1FDF855300FD886E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B536C3571FDF855300FD886E /* Project object */;
+}
