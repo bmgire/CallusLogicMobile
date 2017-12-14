@@ -15,6 +15,15 @@
 		B536C3781FDF855300FD886E /* CallusLogicMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */; };
 		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
 		B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3901FDF86A700FD886E /* FretboardView.swift */; };
+		B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F31FE1EE8E00CB5F11 /* Scale.swift */; };
+		B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */; };
+		B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */; };
+		B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */; };
+		B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51FE1FE2176D00CB5F11 /* testView.swift */; };
+		B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED31FE324DE00174544 /* NSString+drawing.swift */; };
+		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
+		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
+		B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED81FE32D3D00174544 /* NoteModel.swift */; };
 		B5C08FF61FDF9EF000393583 /* PickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +59,15 @@
 		B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallusLogicMobileUITests.swift; sourceTree = "<group>"; };
 		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B536C3901FDF86A700FD886E /* FretboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardView.swift; sourceTree = "<group>"; };
+		B55D51F31FE1EE8E00CB5F11 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
+		B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesByIntervals.swift; sourceTree = "<group>"; };
+		B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootToIntervalNotes.swift; sourceTree = "<group>"; };
+		B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		B55D51FE1FE2176D00CB5F11 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
+		B5786ED31FE324DE00174544 /* NSString+drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+drawing.swift"; sourceTree = "<group>"; };
+		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
+		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
+		B5786ED81FE32D3D00174544 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +103,7 @@
 				B536C3761FDF855300FD886E /* CallusLogicMobileTests */,
 				B536C3811FDF855300FD886E /* CallusLogicMobileUITests */,
 				B536C3601FDF855300FD886E /* Products */,
+				B55D51FE1FE2176D00CB5F11 /* testView.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,14 +120,15 @@
 		B536C3611FDF855300FD886E /* CallusLogicMobile */ = {
 			isa = PBXGroup;
 			children = (
-				B536C3621FDF855300FD886E /* AppDelegate.swift */,
-				B536C3641FDF855300FD886E /* ViewController.swift */,
-				B536C3661FDF855300FD886E /* Main.storyboard */,
-				B536C3691FDF855300FD886E /* Assets.xcassets */,
 				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
+				B536C3661FDF855300FD886E /* Main.storyboard */,
+				B536C3621FDF855300FD886E /* AppDelegate.swift */,
+				B536C3691FDF855300FD886E /* Assets.xcassets */,
 				B536C36E1FDF855300FD886E /* Info.plist */,
-				B536C3901FDF86A700FD886E /* FretboardView.swift */,
-				B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */,
+				B5786ED31FE324DE00174544 /* NSString+drawing.swift */,
+				B536C3641FDF855300FD886E /* ViewController.swift */,
+				B55D51FD1FE1FC1800CB5F11 /* Views */,
+				B55D51F91FE1F22600CB5F11 /* Models */,
 			);
 			path = CallusLogicMobile;
 			sourceTree = "<group>";
@@ -129,6 +149,29 @@
 				B536C3841FDF855300FD886E /* Info.plist */,
 			);
 			path = CallusLogicMobileUITests;
+			sourceTree = "<group>";
+		};
+		B55D51F91FE1F22600CB5F11 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5786ED71FE32D3D00174544 /* FretboardModel.swift */,
+				B5786ED81FE32D3D00174544 /* NoteModel.swift */,
+				B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */,
+				B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */,
+				B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */,
+				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
+				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B55D51FD1FE1FC1800CB5F11 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */,
+				B536C3901FDF86A700FD886E /* FretboardView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,8 +309,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B536C3651FDF855300FD886E /* ViewController.swift in Sources */,
+				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,
 				B5C08FF61FDF9EF000393583 /* PickerDataModel.swift in Sources */,
+				B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */,
+				B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */,
+				B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
+				B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */,
+				B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */,
+				B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */,
+				B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */,
+				B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */,
 				B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +487,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EJ3FU9C3NN;
 				INFOPLIST_FILE = CallusLogicMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -449,7 +503,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EJ3FU9C3NN;
 				INFOPLIST_FILE = CallusLogicMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gire.CallusLogicMobile;
 				PRODUCT_NAME = "$(TARGET_NAME)";
