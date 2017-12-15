@@ -24,7 +24,7 @@ class NoteView: UIView {
     
     fileprivate var isDisplayed = false
     
-    fileprivate var noteFontSize: CGFloat = 16
+    fileprivate var noteFontSize: CGFloat = 24
     
     fileprivate var myColor: UIColor = UIColor.yellow
     
@@ -121,10 +121,11 @@ class NoteView: UIView {
         // Assigns a value to the noteRect.
        noteRect = bounds.insetBy(dx: bounds.width * 0.1, dy: bounds.height * 0.1)
         
+      //  noteRect = bounds
     //    noteRect = bounds
         
         // Defines the radius of the corners of a rounded rect.
-       let cornerRadius = bounds.size.height * 0.1
+       let cornerRadius = bounds.size.height * 0.2
         
         // Assign a value to the path.
       // From macOS   path = NSBezierPath(roundedRect: noteRect!, xRadius: cornerRadius , yRadius: cornerRadius)
@@ -144,9 +145,7 @@ class NoteView: UIView {
             
  
             // Set color and fill.
-            
             myColor.setFill()
-        
             path?.fill()
             
  
@@ -172,7 +171,7 @@ class NoteView: UIView {
             
             attributedNote = NSMutableAttributedString(string: displayText, attributes: attrs)
      
-            attributedNote.draw(in: bounds)
+            attributedNote.drawCenterCustomInRect(bounds, withAttributes: attrs)
            
         
             

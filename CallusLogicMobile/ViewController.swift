@@ -60,6 +60,9 @@ class ViewController: UIViewController {
         buildArrayOfScaleNames()
         setupPickerDataAndView(scalePickerView, dataModel: scalePickerData, array: arrayOfScaleNames, width: 280)
         setupPickerDataAndView(displayModePickerView, dataModel: displayModePickerData, array: arrrayOfDisplayModes, width: 120)
+        
+        addNotesAction(addNotes)
+        
         }
     
     @IBAction func addNotesAction(_ sender: UIButton){
