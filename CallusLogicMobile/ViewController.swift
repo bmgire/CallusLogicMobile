@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     var arrayOfScaleNames = [String]()
     
     
-    var rootPickerData = PickerDataModel()
+ var rootPickerData: PickerDataModel = PickerDataModel()
     var accidentalPickerData = PickerDataModel()
     var scalePickerData = PickerDataModel()
     var displayModePickerData = PickerDataModel()
@@ -61,34 +61,57 @@ class ViewController: UIViewController {
         setupPickerDataAndView(scalePickerView, dataModel: scalePickerData, array: arrayOfScaleNames, width: 280)
         setupPickerDataAndView(displayModePickerView, dataModel: displayModePickerData, array: arrrayOfDisplayModes, width: 120)
         
-        addNotesAction(addNotes)
-        
+        rootPickerView.selectRow(4, inComponent: 0, animated: false)
+        scalePickerView.selectRow(21, inComponent: 0, animated: false)
+   
         }
+    
+    // viewDidLayoutSubviews means autolayout has been applied and you can draw with bounds information.
+ 
+    override func viewDidLayoutSubviews() {
+        // update lengths and heights of noteview drawing.
+        fretboardView.buildNoteRects()
+        fretboardView.buildNoteViews()
+        fretboardView.addSubviews()
+        addNotesAction(addNotes)
+    }
     
     @IBAction func addNotesAction(_ sender: UIButton){
         updateToneArraysCreator()
         updatefretboardModel()
     }
     func updateToneArraysCreator() {
-        // Update Model with current values.
+        
+        let arrayOfPickerStrings = getPickerValues()
+        
+        toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
+                                           accidental: arrayOfPickerStrings[1],
+                                           scaleName: arrayOfPickerStrings[2])
+    }
+    
+    fileprivate func getPickerValues()->[String] {
+        
         let rootRow = rootPickerView.selectedRow(inComponent: 0)
-        let root = rootPickerData.pickerView(rootPickerView, titleForRow: rootRow, forComponent: 0)
-      
+        let root = rootPickerData.pickerView(rootPickerView, titleForRow: rootRow, forComponent: 0)!
+        
         let accidentalRow = accidentalPickerView.selectedRow(inComponent: 0)
-        let accidental = accidentalPickerData.pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)
+        let accidental = accidentalPickerData.pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)!
         
         let scaleRow = scalePickerView.selectedRow(inComponent: 0)
-        let scale = scalePickerData.pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)
+        let scale = scalePickerData.pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)!
         
-        toneArraysCreator.updateWithValues(root!,
-                                           accidental: accidental!,
-                                           scaleName: scale!)
+        var arrayOfStrings = [String]()
+        arrayOfStrings.append(root)
+        arrayOfStrings.append(accidental)
+        arrayOfStrings.append(scale)
+        return arrayOfStrings
     }
+    
 
     func updatefretboardModel() {
         model.updateNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
         
-        //fillSpacesWithChromatic()
+        fillSpacesWithChromatic()
         
       //  updateDisplayModeAction(displayModePopUp)
         
@@ -133,6 +156,16 @@ class ViewController: UIViewController {
         let displayMode = displayModePickerData.pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
         
         fretboardView.updateSubviews(model.getFretboardArray(), displayMode: displayMode!)
+    }
+   
+    func fillSpacesWithChromatic()
+    {
+        
+          let arrayOfPickerStrings = getPickerValues()
+        toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
+                                           accidental: arrayOfPickerStrings[1],
+                                           scaleName: "Chromatic Scale")
+        model.updateNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
     
 }

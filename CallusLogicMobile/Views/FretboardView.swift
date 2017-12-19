@@ -12,9 +12,9 @@ class FretboardView: UIImageView {
     
     let NOTES_PER_STRING = 13
     let NOTES_ON_FRETBOARD =  78
-    let noteView = NoteView()
+   // let noteView = NoteView()
     //#####################################
-    // right handed fretboardView dimensions. 1024 * 307
+    // right handed fretboardView dimensions. 1092 * 307
     
     let fretPositions: [CGFloat] =
             [0, // 0
@@ -32,20 +32,23 @@ class FretboardView: UIImageView {
             0.94] // 12
     
     //#####################################
+
+    
     let noteWidths: [CGFloat] =
-        [ 58,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          80,
-          76, //9
-          72,
-          68,
-          64]
+        [0.725,
+        1.0,
+        1.0,
+        1.0, // 3
+        1.0,
+        1.0,
+        1.0, //6
+        1.0,
+        1.0,
+        0.95,
+        0.9,
+        0.85,
+        0.80]
+    
     
     //#####################################
     // Radians for guitar string rotation, ordered from lowest pitched string to highest.
@@ -81,11 +84,17 @@ class FretboardView: UIImageView {
     override func awakeFromNib() {
         
         // Build rects for each guitar string of notes.
+       
+        /*
         for index in 0...5{
             buildNoteRects(stringHeightMultipliers[index], radians: radians[index])
        }
+ 
+ */
+     /*   buildNoteRects()
         buildNoteViews()
         addSubviews()
+ */
         
         
         
@@ -110,43 +119,51 @@ class FretboardView: UIImageView {
          */
         
     }
+    
+
+/*    fileprivate func buildNoteRects() {
+        var array = [CGRect]()
+        for _ in 0...NOTES_ON_FRETBOARD - 1 {
+            array.append(CGRect())
+        }
+        arrayOfNoteRects = array
+    }
+  */
     //#####################################
-    // Build Note Rects. Build 13 rects and reuse them on each string.
-    fileprivate func buildNoteRects(_ yMultiplier: CGFloat,  radians: CGFloat)  {
+    // update Note Rects. Build 13 rects and reuse them on each string.
+    func buildNoteRects()  {
         
         // Create a temp array and copy any rects in rectArray to it.
         var tempRects = [CGRect]()
         
-       let length = bounds.maxX * 0.998
-      
-         // Adjusts the lengths of the bottom 3 strings on a right handed guitar
-        // for aesthetic purposes.
-   /*    if radians < 0 {
-            length *= 0.998
-        }
-   */
-        let height = bounds.maxY
-        
-        // the X value of the first NoteViews Rect.
-        var noteX = CGFloat(0)
-        
-        // For all notes.
-        for index in 0...NOTES_PER_STRING - 1 {
+        for stringIndex in 0...5 {
+            //  buildNoteRects(stringHeightMultipliers[index], radians: radians[index])
             
-            // Calculate the X position.
-            noteX = length * fretPositions[index]
-            // Build the rect and append
-            //tempRects.append(CGRect(x: noteX, y: height * yMultiplier + sin(radians) * noteX , width: noteWidths[index], height: 25))
-            tempRects.append(CGRect(x: noteX, y: height * yMultiplier + sin(radians) * noteX, width: noteWidths[index], height: 40))
+            let width = bounds.width * 0.998
+            
+            let height = bounds.height
+            
+            // the X value of the first NoteViews Rect.
+            var noteX = CGFloat(0)
+            
+            // For all notes on 1 string.
+            for index in 0...NOTES_PER_STRING - 1 {
+                
+                // Calculate the X position.
+                noteX = width * fretPositions[index]
+                
+                // Build the rect and append
+                tempRects.append(CGRect(x: noteX,
+                                        y: height * stringHeightMultipliers[stringIndex] + sin(radians[stringIndex]) * noteX, width: width * 0.079 * noteWidths[index],
+                                        height: height * 0.13))
+            }
         }
-        
-        // update RectArray.
-        arrayOfNoteRects += tempRects
+        arrayOfNoteRects = tempRects
     }
     
     //#####################################
     // Builds the noteViewsArray.
-    fileprivate func buildNoteViews() {
+    func buildNoteViews() {
         
         // String index represents each guitar string. 0 is highest pitch, 5 is lowest.
         for stringIndex in 0...5 {
@@ -163,12 +180,6 @@ class FretboardView: UIImageView {
                 
                 // The views number in the fretboard, for NoteView identification for Event notifications.
              note.viewNumberDict = ["number" : index]
-                
-                // If the NoteView isn't at the nut, rotate it.
-       /*      if noteIndex != 0 {
-                note.rotate(byDegrees: radians[stringIndex] * CGFloat(180/Double.pi))
-                }
-            */
                note.isOpaque = false
                 arrayOfNoteViews.append(note)
             }
@@ -177,7 +188,7 @@ class FretboardView: UIImageView {
     
     //#####################################
     // Add all NoteViews as subviews.
-    fileprivate func addSubviews() {
+    func addSubviews() {
         for index in 0...(arrayOfNoteViews.count - 1) {
             addSubview(arrayOfNoteViews[index])
         }
