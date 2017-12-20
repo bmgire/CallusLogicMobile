@@ -8,20 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
+    let ROW_HEIGHT = 30
+    let ROOT_WIDTH = 50
+    let ACCIDENTAL_WIDTH = 90
+    let SCALE_WIDTH = 280
+    let DISPLAYMODE_WIDTH = 120
+    
     let toneArraysCreator = ToneArraysCreator()
  
     let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-46"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     var arrayOfScaleNames = [String]()
-    
-    
- var rootPickerData: PickerDataModel = PickerDataModel()
-    var accidentalPickerData = PickerDataModel()
-    var scalePickerData = PickerDataModel()
-    var displayModePickerData = PickerDataModel()
     
     fileprivate var fretboardModelArray: [FretboardModel] = [FretboardModel()] /*{
         didSet {
@@ -54,16 +54,10 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        setupPickerDataAndView(rootPickerView, dataModel: rootPickerData, array: arrayOfRootNotes, width: 50)
-        setupPickerDataAndView(accidentalPickerView, dataModel: accidentalPickerData, array: arrayOfAccidentals, width:90)
         buildArrayOfScaleNames()
-        setupPickerDataAndView(scalePickerView, dataModel: scalePickerData, array: arrayOfScaleNames, width: 280)
-        setupPickerDataAndView(displayModePickerView, dataModel: displayModePickerData, array: arrrayOfDisplayModes, width: 120)
-        
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
         scalePickerView.selectRow(21, inComponent: 0, animated: false)
-   
+ 
         }
     
     // viewDidLayoutSubviews means autolayout has been applied and you can draw with bounds information.
@@ -90,15 +84,17 @@ class ViewController: UIViewController {
     }
     
     fileprivate func getPickerValues()->[String] {
-        
+  
         let rootRow = rootPickerView.selectedRow(inComponent: 0)
-        let root = rootPickerData.pickerView(rootPickerView, titleForRow: rootRow, forComponent: 0)!
+        let root = pickerView(rootPickerView, titleForRow: rootRow, forComponent: 0)!
         
         let accidentalRow = accidentalPickerView.selectedRow(inComponent: 0)
-        let accidental = accidentalPickerData.pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)!
+        let accidental = pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)!
         
         let scaleRow = scalePickerView.selectedRow(inComponent: 0)
-        let scale = scalePickerData.pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)!
+        let scale = pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)!
+ 
+        
         
         var arrayOfStrings = [String]()
         arrayOfStrings.append(root)
@@ -126,7 +122,7 @@ class ViewController: UIViewController {
     }
 
     //#######################
-    
+/*
     fileprivate func setupPickerDataAndView(_  pickerView: UIPickerView,
                                             dataModel: PickerDataModel,
                                             array: [String],
@@ -139,7 +135,7 @@ class ViewController: UIViewController {
         pickerView.dataSource = dataModel
         
     }
-    
+  */
     // Adds the scale names to the Scale PopUp
     func buildArrayOfScaleNames(){
         let scalesDict = ScalesByIntervals()
@@ -153,7 +149,7 @@ class ViewController: UIViewController {
         //NSColorPanel.shared.close()
         
         let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
-        let displayMode = displayModePickerData.pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
+        let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
         
         fretboardView.updateSubviews(model.getFretboardArray(), displayMode: displayMode!)
     }
@@ -167,6 +163,86 @@ class ViewController: UIViewController {
                                            scaleName: "Chromatic Scale")
         model.updateNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
+    
+    //##############################################
+    // UIPickerView Data Model and Delegate funcs
+    
+    //#######################
+    // UIPickerViewDataSource
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        switch pickerView {
+        case rootPickerView:
+            return arrayOfRootNotes.count
+        case accidentalPickerView:
+            return arrayOfAccidentals.count
+        case scalePickerView:
+            return arrayOfScaleNames.count
+        default:
+            return arrrayOfDisplayModes.count
+        }
+
+    }
+    
+    //#######################
+    // UI PickerViewDelegate
+    //#######################
+    
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return CGFloat(30)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        switch pickerView {
+            case rootPickerView:
+            return CGFloat(ROOT_WIDTH)
+            
+            case accidentalPickerView:
+            return CGFloat(ACCIDENTAL_WIDTH)
+            
+            case scalePickerView:
+            return CGFloat(SCALE_WIDTH)
+            
+            default:
+            return CGFloat(DISPLAYMODE_WIDTH)
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView,
+                    titleForRow row: Int,
+                    forComponent component: Int) -> String? {
+        // Include an if depending on the picker view selected
+        
+        switch pickerView {
+        case rootPickerView:
+            return arrayOfRootNotes[row]
+        case accidentalPickerView:
+            return arrayOfAccidentals[row]
+        case scalePickerView:
+            return arrayOfScaleNames[row]
+        default:
+            return arrrayOfDisplayModes[row]
+        }
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView,
+                    didSelectRow row: Int,
+                    inComponent component: Int) {
+        
+        if pickerView == displayModePickerView {
+            // update fretboardview with that display setting.
+            updateFretboardView()
+        }
+    }
+    
+    
+    
     
 }
 

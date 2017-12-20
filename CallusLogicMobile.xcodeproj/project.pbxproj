@@ -24,7 +24,7 @@
 		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
 		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
 		B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED81FE32D3D00174544 /* NoteModel.swift */; };
-		B5C08FF61FDF9EF000393583 /* PickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */; };
+		B5C08FF61FDF9EF000393583 /* NoLongerUsingPickerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C08FF51FDF9EF000393583 /* NoLongerUsingPickerDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
 		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
 		B5786ED81FE32D3D00174544 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
-		B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataModel.swift; sourceTree = "<group>"; };
+		B5C08FF51FDF9EF000393583 /* NoLongerUsingPickerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLongerUsingPickerDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,7 +157,7 @@
 				B5786ED71FE32D3D00174544 /* FretboardModel.swift */,
 				B5786ED81FE32D3D00174544 /* NoteModel.swift */,
 				B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */,
-				B5C08FF51FDF9EF000393583 /* PickerDataModel.swift */,
+				B5C08FF51FDF9EF000393583 /* NoLongerUsingPickerDataModel.swift */,
 				B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */,
 				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
@@ -310,7 +310,7 @@
 			files = (
 				B536C3651FDF855300FD886E /* ViewController.swift in Sources */,
 				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,
-				B5C08FF61FDF9EF000393583 /* PickerDataModel.swift in Sources */,
+				B5C08FF61FDF9EF000393583 /* NoLongerUsingPickerDataModel.swift in Sources */,
 				B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */,
 				B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */,
 				B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */,
