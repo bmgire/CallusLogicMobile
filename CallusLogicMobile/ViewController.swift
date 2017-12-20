@@ -14,11 +14,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let ROOT_WIDTH = 50
     let ACCIDENTAL_WIDTH = 90
     let SCALE_WIDTH = 280
-    let DISPLAYMODE_WIDTH = 120
+    let DISPLAYMODE_WIDTH = 180
     
     let toneArraysCreator = ToneArraysCreator()
  
-    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-46"]
+    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     var arrayOfScaleNames = [String]()
@@ -146,8 +146,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func updateFretboardView() {
         // Close the color panel if still open.
-        //NSColorPanel.shared.close()
-        
         let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
         let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
         
