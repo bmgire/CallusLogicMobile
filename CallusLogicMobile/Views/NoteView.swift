@@ -18,24 +18,26 @@ class NoteView: UIView {
     
     var viewNumberDict: [String: Int] = [:]
     
-    fileprivate var displayText = ""
+    var displayText = ""
     
-    fileprivate var isGhost = true
+    var isGhost = true
     
-    fileprivate var isDisplayed = false
+    var isDisplayed = false
     
-    fileprivate var noteFontSize: CGFloat = 24
+    var noteFontSize: CGFloat = 24
     
-    fileprivate var myColor: UIColor = UIColor.yellow
+    var myColor: UIColor = UIColor.yellow
     
     // Indicates whether the button has been pressed successfully.
-    fileprivate var pressed: Bool = false
+    var pressed: Bool = false
+    
+    var moveTouchIsInView = false 
     
     // Variable to hold this notes BezierPath.
-    fileprivate var path: UIBezierPath?
+    var path: UIBezierPath?
     
     // The rect for the NoteView.
-    fileprivate var noteRect: CGRect?
+    var noteRect: CGRect?
    
     
    
@@ -65,6 +67,21 @@ class NoteView: UIView {
         setNeedsDisplay()
     }
     
+    // When a touch begins, (Note I only care about the first touch)...
+    // check if the button is pressed and update the color's opacity as appropriate.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // Only deal with the first event because I don't care about mu
+        touchThisView()
+        super.touchesBegan(touches, with: event)
+        
+    }
+    
+    func touchThisView(){
+        pressed = !pressed
+        isGhost = !isGhost
+        setNeedsDisplay()
+        drawNote()
+    }
    /*
     //##########################################################
     // MARK: - Mouse Events
