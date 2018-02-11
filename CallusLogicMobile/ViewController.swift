@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
@@ -42,6 +43,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // If I exited the views bounds, I can can update it,
     // if I didn't leave the bounds, I cannot update.
     var dictOfViewIDs = [NSValue: Bool]()
+    
+    let sixTonesController = SixTones()
     
     fileprivate var arrayOfTableViewCells = [UITableViewCell]()
     
@@ -141,6 +144,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         tableView.selectRow(at: path, animated: false, scrollPosition: UITableViewScrollPosition.none)
         //Sets the model to the 0 index in arrayOfFretboardModels.
         modelIndex = 0
+        
+        AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
+        AudioKit.start()
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+        } catch {
+            print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
+        }
+        
     }
     
     //############
