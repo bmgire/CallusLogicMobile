@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B531471E2030BAC80022AAC5 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B531471D2030BAC70022AAC5 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B53147202030BEF30022AAC5 /* SixTones.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531471F2030BEF30022AAC5 /* SixTones.swift */; };
+		B53147222030BF610022AAC5 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B531471D2030BAC70022AAC5 /* AudioKit.framework */; };
 		B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3621FDF855300FD886E /* AppDelegate.swift */; };
 		B536C3651FDF855300FD886E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3641FDF855300FD886E /* ViewController.swift */; };
 		B536C3681FDF855300FD886E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B536C3661FDF855300FD886E /* Main.storyboard */; };
@@ -43,7 +46,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B531471C2030BA050022AAC5 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B531471E2030BAC80022AAC5 /* AudioKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B531471D2030BAC70022AAC5 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
+		B531471F2030BEF30022AAC5 /* SixTones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixTones.swift; sourceTree = "<group>"; };
 		B536C35F1FDF855300FD886E /* CallusLogicMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallusLogicMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B536C3621FDF855300FD886E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B536C3641FDF855300FD886E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B53147222030BF610022AAC5 /* AudioKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +117,7 @@
 		B536C3561FDF855300FD886E = {
 			isa = PBXGroup;
 			children = (
+				B531471D2030BAC70022AAC5 /* AudioKit.framework */,
 				B536C3611FDF855300FD886E /* CallusLogicMobile */,
 				B536C3761FDF855300FD886E /* CallusLogicMobileTests */,
 				B536C3811FDF855300FD886E /* CallusLogicMobileUITests */,
@@ -158,6 +179,7 @@
 				B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */,
 				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
+				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -181,6 +203,7 @@
 				B536C35B1FDF855300FD886E /* Sources */,
 				B536C35C1FDF855300FD886E /* Frameworks */,
 				B536C35D1FDF855300FD886E /* Resources */,
+				B531471C2030BA050022AAC5 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -313,6 +336,7 @@
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
 				B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */,
 				B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */,
+				B53147202030BEF30022AAC5 /* SixTones.swift in Sources */,
 				B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */,
 				B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */,
 				B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */,
@@ -484,6 +508,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EJ3FU9C3NN;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CallusLogicMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -500,6 +528,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EJ3FU9C3NN;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CallusLogicMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
