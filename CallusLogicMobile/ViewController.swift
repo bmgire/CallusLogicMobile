@@ -42,7 +42,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Bool: yes = canUpdate.
     // If I exited the views bounds, I can can update it,
     // if I didn't leave the bounds, I cannot update.
-    var dictOfViewIDs = [NSValue: Bool]()
+    var dictOfTouchedNoteViewNumbers = [Int: Bool]()
     
     let sixTonesController = SixTones()
     
@@ -382,17 +382,37 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     if noteView.isGhost == false {
                         addViewIdToDictionary(noteView)
                         // play sound.
-                        sixTonesController.rampUpStart(0)
+                        
+                        // Get zeroTo46Number
+                        let zeroTo36Number = getZeroTo36Number(noteView)
+                        sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
                     }
                 }
             }
         }
+        super.touchesBegan(touches, with: event)
     }
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        sixTonesController.rampDownStop(0)
-        dictOfViewIDs.removeAll()
+        
+       
+        for touch in touches {
+            if let noteView = getNoteViewOrNil(touch.view) {
+                if noteView.isDisplayed {
+                     sixTonesController.rampDownStop(noteView.stringNumber)
+                }
+            }
+        }
+        
+        // Turn off all notes in the stored in the dictionary.
+        // Maybe I should be removing dictionary entries when they are turned off. Maybe?
+        for (noteViewNumber, _) in dictOfTouchedNoteViewNumbers {
+            let stringNumber = fretboardView.arrayOfNoteViews[noteViewNumber].stringNumber
+            sixTonesController.rampDownStop(stringNumber)
+        }
+        dictOfTouchedNoteViewNumbers.removeAll()
+        super.touchesEnded(touches, with: event)
     }
     
   
@@ -404,49 +424,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             // Search for location hits in NoteViews, handle ass approriate.
             for noteView in fretboardView.arrayOfNoteViews {
                 if noteView.isDisplayed {
-                    let (key, pointIsInNoteView) = getKeyTestPointHit(noteView, touch: touch)
+                    let (noteViewNumber, pointIsInNoteView) = getKeyTestPointHit(noteView, touch: touch)
                     if pointIsInNoteView {
                         // Check the dictionary for the key,
-                        if let canTouchView = dictOfViewIDs[key] {
+                        if let canTouchView = dictOfTouchedNoteViewNumbers[noteViewNumber] {
                             // respond to canUse value
                             if canTouchView {
-                                // Touch the view.
-                                noteView.touchThisView()
-                                if noteView.isGhost {
-                                    sixTonesController.rampDownStop(0)
-                                } else {
-                                    sixTonesController.rampUpStart(0)
-                                }
-                                dictOfViewIDs[key] = false
-                               
-                            } else {
-                                if noteView.isGhost {
-                                    sixTonesController.rampDownStop(0)
-                                }
+                            playOrStopTouchAndUpdateDictionary(noteView)
                             }
-                            
-                            // Else there is no for the key Dictionary record,
-                            // Create Dictionary Record and touch.
+                            // Else there is no entry for the key Dictionary record,
                         } else {
-                            
-                           
-                            if noteView.isGhost {
-                                sixTonesController.rampUpStart(0)
-                                
-                            }  else {
-                                sixTonesController.rampDownStop(0)
-                            }
-                            noteView.touchThisView()
-                            dictOfViewIDs[key] = false
-                            
+                            playOrStopTouchAndUpdateDictionary(noteView)
                         }
                         //Else, the NoteView DOES NOT contain the point
                         // so stop playing a note.
                     } else {
                         // if the dictionary canTouchView bool is false, update to true
-                        if dictOfViewIDs[key] == false {
-                            dictOfViewIDs[key] = true
-                            sixTonesController.rampDownStop(0)
+                        if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
+                            dictOfTouchedNoteViewNumbers[noteViewNumber] = true
+                            sixTonesController.rampDownStop(noteView.stringNumber)
                             
                         }
                     }
@@ -472,25 +468,42 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func addViewIdToDictionary(_ noteView: NoteView){
         
             // so create a key and test if it's in the dictionary.
-            let key = NSValue(nonretainedObject: noteView)
+            let number = noteView.viewNumber
             // Create a dictionary entry if the key does not have an entry.
-                if dictOfViewIDs[key] == nil {
-                    dictOfViewIDs[key] = false
+                if dictOfTouchedNoteViewNumbers[number] == nil {
+                    dictOfTouchedNoteViewNumbers[number] = false
                 }
     }
     
     //########################################
     // if getKeyIfNoteViewContainsPoint
-    func getKeyTestPointHit(_ noteView: NoteView, touch: UITouch)->(NSValue, Bool) {
+    func getKeyTestPointHit(_ noteView: NoteView, touch: UITouch)->(Int, Bool) {
             // get the point relative to the view, and test for a point hit.
             let point = touch.location(in: noteView)
-            let key = NSValue(nonretainedObject: noteView)
+            let number = noteView.viewNumber
             // If the view's bounds contains the point,
-            return (key, noteView.bounds.contains(point) ? true : false)
+            return (number, noteView.bounds.contains(point) ? true : false)
         
     }
     //########################################
-        
     
+    func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView) {
+        let stringNumber = noteView.stringNumber
+        // Note, I'm playing then touching.
+        let zeroTo36Number = getZeroTo36Number(noteView)
+        if noteView.isGhost {
+            sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
+        } else {
+            sixTonesController.rampDownStop(stringNumber)
+        }
+        noteView.touchThisView()
+        dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false
+    }
+    
+    func getZeroTo36Number(_ noteView: NoteView)->Int {
+        // Get zeroTo46Number
+        let viewNumber = noteView.viewNumber
+        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
+    }
  }
 

@@ -178,9 +178,14 @@ class FretboardView: UIImageView {
                 note.frame = arrayOfNoteRects[index]
                 // Adjust fonts for frets with small widths.
                 
+                // Set note and string identifiers. 
+                note.viewNumber = index
+                note.stringNumber = stringIndex
+                
                 // The views number in the fretboard, for NoteView identification for Event notifications.
-             note.viewNumberDict = ["number" : index]
-               note.isOpaque = false
+                note.viewNumberDict = ["number" : index]
+                note.isOpaque = false
+                
                 arrayOfNoteViews.append(note)
             }
         }

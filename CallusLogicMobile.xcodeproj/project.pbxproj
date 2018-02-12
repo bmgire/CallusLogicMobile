@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5196C9220324101005A018E /* NoteFrequencies.swift */; };
 		B531471E2030BAC80022AAC5 /* AudioKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B531471D2030BAC70022AAC5 /* AudioKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B53147202030BEF30022AAC5 /* SixTones.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531471F2030BEF30022AAC5 /* SixTones.swift */; };
 		B53147222030BF610022AAC5 /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B531471D2030BAC70022AAC5 /* AudioKit.framework */; };
@@ -61,6 +62,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B5196C9220324101005A018E /* NoteFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFrequencies.swift; sourceTree = "<group>"; };
 		B531471D2030BAC70022AAC5 /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AudioKit.framework; sourceTree = "<group>"; };
 		B531471F2030BEF30022AAC5 /* SixTones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixTones.swift; sourceTree = "<group>"; };
 		B536C35F1FDF855300FD886E /* CallusLogicMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallusLogicMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 				B536C3641FDF855300FD886E /* ViewController.swift */,
 				B55D51FD1FE1FC1800CB5F11 /* Views */,
 				B55D51F91FE1F22600CB5F11 /* Models */,
+				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 			);
 			path = CallusLogicMobile;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */,
 				B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
+				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
 				B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */,
 				B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */,
 				B53147202030BEF30022AAC5 /* SixTones.swift in Sources */,

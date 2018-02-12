@@ -13,6 +13,7 @@ class SixTones {
     
     var arrayOfOscillators = [AKOscillator]()
     
+    let arrayOfNoteFrequencies = NoteFrequencies().arrayOfNoteFrequencies
     
     init() {
             createArrayOfOscillators()
@@ -25,21 +26,25 @@ class SixTones {
             let os = AKOscillator()
             os.amplitude = 0
             os.frequency = 660 + index * 40
-            os.rampTime = 0.01
             os.start()
             arrayOfOscillators.append(os)
         }
     }
     
-    func rampUpStart(_ index: Int) {
+    func rampUpStart(_ index: Int, zeroTo36Number: Int) {
         let os = arrayOfOscillators[index]
-        os.amplitude = 0
+        os.rampTime = 0.01
+        os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
         os.amplitude = 0.3
+        
     }
     
-    func rampDownStop(_ index: Int) {
-        arrayOfOscillators[index].amplitude = 0
+    func rampDownStop(_ stringIndex: Int) {
+        let os = arrayOfOscillators[stringIndex]
+        os.rampTime = 1
+        os.amplitude = 0
     }
+    
     
 }
  

@@ -16,6 +16,10 @@ class NoteView: UIView {
     // MARK: - Variables
     //##########################################################
     
+    var viewNumber = 0
+    
+    var stringNumber = 0
+    
     var viewNumberDict: [String: Int] = [:]
     
     var displayText = ""
