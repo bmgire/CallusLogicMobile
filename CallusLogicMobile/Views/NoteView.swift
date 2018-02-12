@@ -28,9 +28,6 @@ class NoteView: UIView {
     
     var myColor: UIColor = UIColor.yellow
     
-    // Indicates whether the button has been pressed successfully.
-    var pressed: Bool = false
-    
     var moveTouchIsInView = false 
     
     // Variable to hold this notes BezierPath.
@@ -77,7 +74,6 @@ class NoteView: UIView {
     }
     
     func touchThisView(){
-        pressed = !pressed
         isGhost = !isGhost
         setNeedsDisplay()
         drawNote()
