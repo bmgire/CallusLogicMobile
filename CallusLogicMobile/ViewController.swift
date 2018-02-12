@@ -374,69 +374,84 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         fretboardTitle?.resignFirstResponder()
         return true
     }
+    
+    
+    
   
       // I may need to override for playing notes.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         // for all sent touches (probably only one touch.
         for touch in touches {
-            // If the touch being passed to this method originated from a NoteView,
-            // The NoteView already reacted via the touchesBegan method,
-            if let touchView = touch.view as? NoteView {
-                // so create a key and test if it's in the dictionary.
-                let key = NSValue(nonretainedObject: touchView)
-                // Create a dictionary entry if the key does not have an entry.
-                if dictOfViewIDs[key] == nil {
-                    dictOfViewIDs[key] = false
-                    super.touchesMoved(touches, with: event)
-                    return
-                }
+            if touchIsFromNoteViewAddToDictionary(touch.view) {
+                return
             }
-            
             // Get the arrayOfNoteViews from the fretboardModel.
-           let arrayOfNoteViews = fretboardView.arrayOfNoteViews
-            // Get the touch's location and test for IUView hits.
+            let arrayOfNoteViews = fretboardView.arrayOfNoteViews
             for noteView in arrayOfNoteViews {
-                // get the point relative to the view, and test for a point hit.
-                let point = touch.location(in: noteView)
-                
-                let key = NSValue(nonretainedObject: noteView)
-                
-                // If the view's bounds contains the point,
-                if noteView.bounds.contains(point) {
-                    // Determine if the view has allready been updated by this view. during this touch.
-                   
+                let(key, pointIsInNoteView) = getKeyTestPointHit(noteView, touch: touch)
+                if pointIsInNoteView {
                     // Check the dictionary for the key,
-                    if let canUse = dictOfViewIDs[key] {
+                    if let canTouchView = dictOfViewIDs[key] {
                         // respond to canUse value
-                        if canUse
-                        {
+                        if canTouchView {
+                            // Touch the view.
                             noteView.touchThisView()
-                            // make canUse false after updating.
                             dictOfViewIDs[key] = false
-                            super.touchesMoved(touches, with: event)
                             return
                         }
+                        // Else there is no for the key Dictionary record,
+                        // Create Dictionary Record and touch.
+                    } else {
+                        dictOfViewIDs[key] = false; noteView.touchThisView(); return
                     }
-                    // Otherwise, create a key, add it to the dictionary, and call touchThisView()
-                    else {
-                        dictOfViewIDs[key] = false
-                         noteView.touchThisView()
-                        super.touchesMoved(touches, with: event)
-                        return
-                    }
-                // Else, the location is outside the view.
+                    //Else, the NoteView DOES NOT contain the point
                 } else {
-                    
-                    // if the dictionary is false, update to true
+                    // if the dictionary canTouchView bool is false, update to true
                     if dictOfViewIDs[key] == false {
-                       
                         dictOfViewIDs[key] = true
-                        super.touchesMoved(touches, with: event)
                         return
                     }
                 }
             }
         }
+        super.touchesMoved(touches, with: event)
     }
+    
+    
+    
+    //########################################
+    // Add key to dictionary if need be
+    func touchIsFromNoteViewAddToDictionary(_ view: UIView?)->Bool {
+       
+        if let noteView = view as? NoteView {
+            // so create a key and test if it's in the dictionary.
+            let key = NSValue(nonretainedObject: noteView)
+            // Create a dictionary entry if the key does not have an entry.
+                if dictOfViewIDs[key] == nil {
+                    dictOfViewIDs[key] = false
+                    // super.touchesMoved(touches, with: event)
+                    return true
+                }
+        }
+        return false
+    }
+    
+    //########################################
+    // if getKeyIfNoteViewContainsPoint
+    func getKeyTestPointHit(_ noteView: NoteView, touch: UITouch)->(NSValue, Bool) {
+        
+        
+            // get the point relative to the view, and test for a point hit.
+            let point = touch.location(in: noteView)
+            
+            let key = NSValue(nonretainedObject: noteView)
+            
+            // If the view's bounds contains the point,
+            return (key, noteView.bounds.contains(point) ? true : false)
+        
+    }
+    //########################################
+        
+    
  }
 
