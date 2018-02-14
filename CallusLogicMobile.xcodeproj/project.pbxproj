@@ -150,7 +150,6 @@
 				B536C3641FDF855300FD886E /* ViewController.swift */,
 				B55D51FD1FE1FC1800CB5F11 /* Views */,
 				B55D51F91FE1F22600CB5F11 /* Models */,
-				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 			);
 			path = CallusLogicMobile;
 			sourceTree = "<group>";
@@ -183,6 +182,7 @@
 				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
 				B531471F2030BEF30022AAC5 /* SixTones.swift */,
+				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

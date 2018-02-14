@@ -32,7 +32,7 @@ class NoteView: UIView {
     
     var myColor: UIColor = UIColor.yellow
     
-    var moveTouchIsInView = false 
+    //var moveTouchIsInView = false 
     
     // Variable to hold this notes BezierPath.
     var path: UIBezierPath?

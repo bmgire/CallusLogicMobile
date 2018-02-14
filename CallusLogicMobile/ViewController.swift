@@ -74,7 +74,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var addFretboardButton: UIButton!
     
-    @IBOutlet weak var fretboardTitle: UITextField! 
+    @IBOutlet weak var fretboardTitleTextField: UITextField!
+    
+
+    
+    @IBOutlet var lockSwitchLabel: UILabel!
+    
     //###################################
     // Actions
     //
@@ -123,25 +128,37 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         loadToneArraysIntoSelectedBoard()
     }
     
+    
+    @IBAction func lockFretboard(_ sender: UISwitch) {
+        
+      let isOn = sender.isOn
+        
+        selectedBoard.setIsLocked(isOn)
+        let text = isOn ? "Locked" : "Unlock" 
+        lockSwitchLabel.text = text
+    }
+    
+    
     //###################################
     // UIViewController overridden functions
    
     //############
-    // setup after viewLoads from the main.storyboard
+    // setup after viewLoads from the main.storyboard in memory
     override func viewDidLoad() {
     
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         buildArrayOfScaleNames()
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
-        scalePickerView.selectRow(21, inComponent: 0, animated: false)
+        scalePickerView.selectRow(28, inComponent: 0, animated: false)
         
-        let testCell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: selectedBoard.getFretboardTitle())
-        testCell.textLabel!.text = selectedBoard.getFretboardTitle()
-        arrayOfTableViewCells.append(testCell)
+        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: selectedBoard.getFretboardTitle())
+        cell.textLabel!.text = selectedBoard.getFretboardTitle()
+        arrayOfTableViewCells.append(cell)
         
         let path = IndexPath(row: arrayOfFretboardModels.startIndex,  section: 0)
         tableView.selectRow(at: path, animated: false, scrollPosition: UITableViewScrollPosition.none)
+        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
         //Sets the model to the 0 index in arrayOfFretboardModels.
         modelIndex = 0
         
@@ -151,10 +168,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            try audioSession.setCategory(AVAudioSessionCategoryAmbient, with: AVAudioSessionCategoryOptions.mixWithOthers)
+            //try audioSession.setCategory(AVAudioSessionCategoryPlayback)
         } catch {
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
+        
+        
         
     }
     
@@ -349,8 +369,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let myRow = indexPath.row
         
         viewSelectedFretboard(row: myRow)
-        fretboardTitle?.text = arrayOfFretboardModels[myRow].getFretboardTitle()
-        fretboardTitle?.resignFirstResponder()
+        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
+        
+        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
+        fretboardTitleTextField.resignFirstResponder()
         
     }
     
@@ -367,11 +389,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     //############
     // Is called when the return key is hit by the keyboard for the fretboardTitle textField.
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Update the currentBoard.title field. 
         
         // Close keyboard
-        fretboardTitle?.resignFirstResponder()
+        fretboardTitleTextField.resignFirstResponder()
         return true
     }
     

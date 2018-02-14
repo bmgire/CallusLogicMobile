@@ -21,6 +21,8 @@ class NoteModel /*: NSObject, NSCoding */ {
     fileprivate var isDisplayed = false
     fileprivate var isPassingNote = false
     
+    var isLocked = false 
+    
     // Indicates the note should be kept.
     fileprivate var isKept = false
     

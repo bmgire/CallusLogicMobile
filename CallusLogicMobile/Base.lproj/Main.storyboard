@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZd-ye-ZjK">
-                                <rect key="frame" x="102" y="546" width="100" height="149"/>
+                                <rect key="frame" x="96" y="176" width="100" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="Xup-ML-NbW"/>
@@ -27,7 +26,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJK-VG-dU2">
-                                <rect key="frame" x="210" y="546" width="280" height="149"/>
+                                <rect key="frame" x="204" y="176" width="280" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="sdk-pZ-caS"/>
@@ -35,7 +34,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-8t-WgQ">
-                                <rect key="frame" x="44" y="546" width="50" height="149"/>
+                                <rect key="frame" x="38" y="176" width="50" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="aHx-ll-HkI"/>
@@ -43,7 +42,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
-                                <rect key="frame" x="44" y="390" width="180" height="137"/>
+                                <rect key="frame" x="38" y="20" width="180" height="137"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="evT-5U-Tvo"/>
@@ -51,7 +50,7 @@
                                 </connections>
                             </pickerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lWO-ho-zCK">
-                                <rect key="frame" x="743" y="416" width="250" height="279"/>
+                                <rect key="frame" x="737" y="46" width="250" height="279"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -87,7 +86,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbX-UF-hne">
-                                <rect key="frame" x="743" y="703" width="46" height="30"/>
+                                <rect key="frame" x="737" y="333" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                 <state key="normal" title="+"/>
@@ -96,7 +95,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSZ-pv-1h5" userLabel="-">
-                                <rect key="frame" x="813" y="703" width="46" height="30"/>
+                                <rect key="frame" x="807" y="333" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                 <state key="normal" title="-"/>
@@ -104,29 +103,16 @@
                                     <action selector="removeFretboardAction:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="leZ-24-Zxu"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Mp-ms-G2p">
-                                <rect key="frame" x="29" y="46" width="383" height="40"/>
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RightHandedFretboard" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc1-9a-Ltk" customClass="FretboardView" customModule="CallusLogicMobile" customModuleProvider="target">
+                                <rect key="frame" x="20" y="433" width="984" height="307"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="6VY-O0-pLd"/>
-                                </connections>
-                            </textField>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightHandedFretboard" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc1-9a-Ltk" customClass="FretboardView" customModule="CallusLogicMobile" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75" width="1024" height="307"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES" image="YES" updatesFrequently="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="lc1-9a-Ltk" secondAttribute="height" multiplier="1024:307" id="7o6-bf-0jK"/>
-                                    <constraint firstAttribute="width" secondItem="lc1-9a-Ltk" secondAttribute="height" multiplier="1024:307" id="AVC-89-kcY"/>
-                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcn-Q8-7yy">
-                                <rect key="frame" x="498" y="575" width="118" height="61"/>
+                                <rect key="frame" x="492" y="205" width="118" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Add Notes"/>
@@ -134,14 +120,33 @@
                                     <action selector="addNotesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FwG-vD-Wwh"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tXL-hi-w9W">
+                                <rect key="frame" x="32" y="339" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="lockFretboard:" destination="BYZ-38-t0r" eventType="valueChanged" id="ysP-dk-EpX"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Unlock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F8s-Js-4zc">
+                                <rect key="frame" x="87" y="344" width="133" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUl-vB-oyC">
+                                <rect key="frame" x="38" y="395" width="182" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="dKr-iI-TaH"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="lc1-9a-Ltk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="FMo-hn-1cK"/>
-                            <constraint firstItem="lc1-9a-Ltk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LxC-Qe-m4v"/>
-                            <constraint firstItem="lc1-9a-Ltk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="pxf-m9-SSe"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
@@ -149,8 +154,9 @@
                         <outlet property="addFretboardButton" destination="fbX-UF-hne" id="CDd-8G-2tz"/>
                         <outlet property="addNotes" destination="bcn-Q8-7yy" id="ph0-zK-MrS"/>
                         <outlet property="displayModePickerView" destination="fo2-ol-wXK" id="hVS-tx-Ps1"/>
-                        <outlet property="fretboardTitle" destination="5Mp-ms-G2p" id="arh-Wd-jqa"/>
+                        <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
+                        <outlet property="lockSwitchLabel" destination="F8s-Js-4zc" id="WWg-r4-fPJ"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
                         <outlet property="scalePickerView" destination="pJK-VG-dU2" id="JZr-Uc-w78"/>
                         <outlet property="tableView" destination="lWO-ho-zCK" id="a4L-xp-wFv"/>

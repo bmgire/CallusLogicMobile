@@ -21,7 +21,8 @@ class FretboardModel /*: NSObject, NSCoding */ {
     //##########################################################
     
     // The array of noteModels that make up the fretboard.
-    fileprivate var fretboardArray: [NoteModel]? = []
+    // why is this an optional
+    fileprivate var fretboardArray: [NoteModel] = []
     
     // The fretboards Title
     fileprivate var fretboardTitle: String? = "Untitled"
@@ -30,7 +31,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     // The userColor for note selection.
     fileprivate var userColor: UIColor? = UIColor.yellow
     
-    fileprivate var isLocked = 0
+    fileprivate var isLocked = true
     fileprivate var zoomLevel = 100.0
     fileprivate var showAdditionalNotes = 0
     
@@ -138,7 +139,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     init() {
         // If no encoded fretboardModel was loaded, build a fretboard model.
        
-        if fretboardArray!.count == 0 {
+        if fretboardArray.count == 0 {
             // Build 138 item array of NoteModels.
             var temp : [NoteModel] = []
             for _ in 0...NOTES_ON_FRETBOARD - 1 {
@@ -154,7 +155,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     fileprivate func setFretNumbers() {
     
         var fret = 0
-        for note in fretboardArray! {
+        for note in fretboardArray {
             note.setFretNumber(String(fret))
             fret += 1
             if fret == NOTES_PER_STRING {
@@ -194,7 +195,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 //get the array values and plug update the fretboard model.
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
-                if let noteModel = fretboardArray?[fretIndex  + stringIndex * NOTES_PER_STRING]{
+                let noteModel = fretboardArray[fretIndex  + stringIndex * NOTES_PER_STRING] //{
                     
                     
                     if noteModel.getIsKept() == false && isInScale {
@@ -204,14 +205,14 @@ class FretboardModel /*: NSObject, NSCoding */ {
                         updateSingleModel(noteModel: noteModel, index: toneIndex)
                     }
                         
-                }
+                //}
             }
         }
     }
     
     func showNotesOnFretboard( _ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
-            let noteModel = fretboardArray![index]
+            let noteModel = fretboardArray[index]
             
             // if is note kept
             if noteModel.getIsKept() != true {
@@ -232,7 +233,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     
     func keepOrUnkeepSelectedNotes(_ doKeep: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
-            let noteModel = fretboardArray![index]
+            let noteModel = fretboardArray[index]
             // If ghosted, don't keep
             if noteModel.getIsGhost() == true {
                 noteModel.setIsKept(false)
@@ -249,22 +250,28 @@ class FretboardModel /*: NSObject, NSCoding */ {
         }
     }
     
+    func lockOrUnlockFretboard(yesOrNo: Bool){
+        for noteModel in fretboardArray {
+            noteModel.isLocked = yesOrNo
+        }
+    }
+    
     
     //##########################################################
     // MARK: - Getters and Setters.
     //##########################################################
     func getFretboardArray()-> [NoteModel] {
-        return fretboardArray!
+        return fretboardArray
     }
     
     func getFretboardArrayCopy()-> [NoteModel] {
         var array:[NoteModel] = []
         
-        for index in 0...(fretboardArray!.count - 1) {
+        for index in 0...(fretboardArray.count - 1) {
             
            
             let note = NoteModel()
-            note.setNoteModel(fretboardArray![index])
+            note.setNoteModel(fretboardArray[index])
             array.append(note)
         }
         
@@ -291,10 +298,10 @@ class FretboardModel /*: NSObject, NSCoding */ {
         userColor = newColor
     }
     
-    func setIsLocked(_ state: Int) {
+    func setIsLocked(_ state: Bool) {
         isLocked = state
     }
-    func getIsLocked()-> Int {
+    func getIsLocked()->Bool {
         return isLocked
     }
     
