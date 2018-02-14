@@ -19,6 +19,7 @@
 		B536C3781FDF855300FD886E /* CallusLogicMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */; };
 		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
 		B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3901FDF86A700FD886E /* FretboardView.swift */; };
+		B54D27FF2034E34500CE38ED /* RootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54D27FE2034E34500CE38ED /* RootTableViewController.swift */; };
 		B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F31FE1EE8E00CB5F11 /* Scale.swift */; };
 		B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */; };
 		B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */; };
@@ -79,6 +80,7 @@
 		B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallusLogicMobileUITests.swift; sourceTree = "<group>"; };
 		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B536C3901FDF86A700FD886E /* FretboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardView.swift; sourceTree = "<group>"; };
+		B54D27FE2034E34500CE38ED /* RootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTableViewController.swift; sourceTree = "<group>"; };
 		B55D51F31FE1EE8E00CB5F11 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesByIntervals.swift; sourceTree = "<group>"; };
 		B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootToIntervalNotes.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				B536C3641FDF855300FD886E /* ViewController.swift */,
+				B54D27FE2034E34500CE38ED /* RootTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
 				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
+				B54D27FF2034E34500CE38ED /* RootTableViewController.swift in Sources */,
 				B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */,
 				B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */,
 				B53147202030BEF30022AAC5 /* SixTones.swift in Sources */,
