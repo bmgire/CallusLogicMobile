@@ -141,10 +141,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         lockSwitchLabel.text = text
     }
     
-    /*
+    
     @IBAction func selectNoteButton(_ sender: UIButton) {
     
-        let controller = NoteTableViewController()
+        let controller = RootTableViewController()
         controller.modalPresentationStyle = .popover
         present(controller, animated: true, completion: nil)
         
@@ -154,14 +154,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
        
        
         
-  
+  /*
      
         let popoverController = selectNoteTVC.popoverPresentationController
         
-      popoverController?.sourceView = sender
+        popoverController?.sourceView = sender
         present(selectNoteTVC, animated: true, completion: nil)
- 
-    } */
+ */
+    }
     
     
     

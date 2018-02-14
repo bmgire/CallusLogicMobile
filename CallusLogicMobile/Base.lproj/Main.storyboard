@@ -149,9 +149,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="UE7-GZ-sUN" kind="popoverPresentation" popoverAnchorView="7Su-iX-4MM" id="wTO-Ak-Ebh">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="selectNoteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AGm-0g-Zvr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -175,37 +173,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="279" y="131"/>
-        </scene>
-        <!--Root Table View Controller-->
-        <scene sceneID="tRF-I2-FMX">
-            <objects>
-                <tableViewController id="UE7-GZ-sUN" customClass="RootTableViewController" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gFy-kJ-mNo">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="rootNote" id="MBX-3i-f9A">
-                                <rect key="frame" x="0.0" y="28" width="200" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MBX-3i-f9A" id="49I-Iv-scf">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="UE7-GZ-sUN" id="BV3-vk-CXX"/>
-                            <outlet property="delegate" destination="UE7-GZ-sUN" id="mbR-Yh-AP3"/>
-                        </connections>
-                    </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="50" height="500"/>
-                    <size key="freeformSize" width="200" height="400"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uPA-XH-ZY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="971" y="222"/>
         </scene>
     </scenes>
     <resources>

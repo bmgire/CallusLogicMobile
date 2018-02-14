@@ -14,6 +14,7 @@ class RootTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "rootNote")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,7 +42,10 @@ class RootTableViewController: UITableViewController {
 
     // Note the withIdentifier needs to be set to the correct rootNote if for this to work.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "rootNote", for: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "rootNote", for: indexPath) 
+            
+        
 
         // Configure the cell...
         cell.textLabel?.text = arrayOfRootNotes[indexPath.row]
