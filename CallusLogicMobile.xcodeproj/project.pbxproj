@@ -141,13 +141,13 @@
 		B536C3611FDF855300FD886E /* CallusLogicMobile */ = {
 			isa = PBXGroup;
 			children = (
-				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
-				B536C3661FDF855300FD886E /* Main.storyboard */,
 				B536C3621FDF855300FD886E /* AppDelegate.swift */,
 				B536C3691FDF855300FD886E /* Assets.xcassets */,
 				B536C36E1FDF855300FD886E /* Info.plist */,
 				B5786ED31FE324DE00174544 /* NSString+drawing.swift */,
-				B536C3641FDF855300FD886E /* ViewController.swift */,
+				B536C3661FDF855300FD886E /* Main.storyboard */,
+				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
+				B57926E22034C4D500272C74 /* ViewControllers */,
 				B55D51FD1FE1FC1800CB5F11 /* Views */,
 				B55D51F91FE1F22600CB5F11 /* Models */,
 			);
@@ -194,6 +194,14 @@
 				B536C3901FDF86A700FD886E /* FretboardView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B57926E22034C4D500272C74 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B536C3641FDF855300FD886E /* ViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

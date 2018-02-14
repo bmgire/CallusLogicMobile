@@ -44,6 +44,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // if I didn't leave the bounds, I cannot update.
     var dictOfTouchedNoteViewNumbers = [Int: Bool]()
     
+ 
+    
     let sixTonesController = SixTones()
     
     fileprivate var arrayOfTableViewCells = [UITableViewCell]()
@@ -76,7 +78,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var fretboardTitleTextField: UITextField!
     
-
+    
+    
     
     @IBOutlet var lockSwitchLabel: UILabel!
     
@@ -137,6 +140,29 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let text = isOn ? "Locked" : "Unlock" 
         lockSwitchLabel.text = text
     }
+    
+    /*
+    @IBAction func selectNoteButton(_ sender: UIButton) {
+    
+        let controller = NoteTableViewController()
+        controller.modalPresentationStyle = .popover
+        present(controller, animated: true, completion: nil)
+        
+        let pController = controller.popoverPresentationController
+        pController?.sourceView = sender
+        
+       
+       
+        
+  
+     
+        let popoverController = selectNoteTVC.popoverPresentationController
+        
+      popoverController?.sourceView = sender
+        present(selectNoteTVC, animated: true, completion: nil)
+ 
+    } */
+    
     
     
     //###################################
