@@ -39,7 +39,7 @@ class RootTableViewController: UITableViewController {
         return arrayOfRootNotes.count
     }
 
-    
+    // Note the withIdentifier needs to be set to the correct rootNote if for this to work.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "rootNote", for: indexPath)
 
