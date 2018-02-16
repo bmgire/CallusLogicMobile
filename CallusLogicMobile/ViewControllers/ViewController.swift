@@ -9,7 +9,7 @@
 import UIKit
 import AudioKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, RootNoteTVCDelegate {
 
     
     //###################################
@@ -78,10 +78,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var fretboardTitleTextField: UITextField!
     
-    
-    
-    
     @IBOutlet var lockSwitchLabel: UILabel!
+    
+    
+    
+    @IBOutlet var rootNoteButton: UIButton!
+    
+    let rootNoteTVC = RootNoteTVC() 
     
     //###################################
     // Actions
@@ -141,29 +144,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         lockSwitchLabel.text = text
     }
     
-    
-    @IBAction func selectNoteButton(_ sender: UIButton) {
-    
-        let controller = RootTableViewController()
-        controller.modalPresentationStyle = .popover
-        present(controller, animated: true, completion: nil)
+    @IBAction func selectRootNote(_ sender: UIButton) {
         
-        let pController = controller.popoverPresentationController
-        pController?.sourceView = sender
+        rootNoteTVC.modalPresentationStyle = .popover
+        rootNoteTVC.preferredContentSize = CGSize(width: 60, height: 300)
+        let popoverC = rootNoteTVC.popoverPresentationController
+        popoverC?.sourceView = sender
+        popoverC?.sourceRect = sender.bounds
+        popoverC?.permittedArrowDirections = UIPopoverArrowDirection.up
+        popoverC?.delegate = self
         
-       
-       
-        
-  /*
-     
-        let popoverController = selectNoteTVC.popoverPresentationController
-        
-        popoverController?.sourceView = sender
-        present(selectNoteTVC, animated: true, completion: nil)
- */
+        present(rootNoteTVC, animated: true, completion: nil)
     }
-    
-    
     
     //###################################
     // UIViewController overridden functions
@@ -200,7 +192,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         
-        
+        rootNoteTVC.delegate = self
         
     }
     
@@ -553,5 +545,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let viewNumber = noteView.viewNumber
         return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
     }
+    
+    func rootNoteChanged(text: String) {
+        rootNoteButton.setTitle(text, for: .normal)
+        rootNoteButton.setNeedsDisplay()
+    }
+    
  }
 

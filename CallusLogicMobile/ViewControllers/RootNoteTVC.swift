@@ -8,14 +8,21 @@
 
 import UIKit
 
-class RootTableViewController: UITableViewController {
+protocol RootNoteTVCDelegate: class {
+    func rootNoteChanged(text: String)
+}
+
+class RootNoteTVC: UITableViewController {
 
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G"]
+    var selectedNote = ""
+    
+    weak var delegate: RootNoteTVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "rootNote")
-
+        selectedNote = arrayOfRootNotes[0]
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -44,13 +51,26 @@ class RootTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "rootNote", for: indexPath) 
-            
+        
+        let bgColorView = UIView()
+        // Color is LightBlue
+        let color = UIColor(red: 0, green: 0.6, blue: 1.0, alpha: 0.5)
+        bgColorView.backgroundColor = color
+        cell.selectedBackgroundView = bgColorView
         
 
         // Configure the cell...
         cell.textLabel?.text = arrayOfRootNotes[indexPath.row]
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Dissmiss the view after a selection is made.
+        
+        selectedNote = arrayOfRootNotes[indexPath.row]
+        delegate?.rootNoteChanged(text: selectedNote)
+        dismiss(animated: true, completion: nil)
     }
     
 

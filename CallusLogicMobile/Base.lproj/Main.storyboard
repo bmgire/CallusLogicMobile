@@ -144,12 +144,13 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dKr-iI-TaH"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Su-iX-4MM">
-                                <rect key="frame" x="289" y="56" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFc-aO-JJC">
+                                <rect key="frame" x="265" y="92" width="31" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <state key="normal" title="A"/>
                                 <connections>
-                                    <action selector="selectNoteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AGm-0g-Zvr"/>
+                                    <action selector="selectRootNote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A4L-wJ-NTI"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -157,6 +158,8 @@
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="accidentalPickerView" destination="MZd-ye-ZjK" id="708-qD-s9V"/>
                         <outlet property="addFretboardButton" destination="fbX-UF-hne" id="CDd-8G-2tz"/>
@@ -165,6 +168,7 @@
                         <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
                         <outlet property="lockSwitchLabel" destination="F8s-Js-4zc" id="WWg-r4-fPJ"/>
+                        <outlet property="rootNoteButton" destination="QFc-aO-JJC" id="SMJ-O4-bQP"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
                         <outlet property="scalePickerView" destination="pJK-VG-dU2" id="JZr-Uc-w78"/>
                         <outlet property="tableView" destination="lWO-ho-zCK" id="a4L-xp-wFv"/>
@@ -172,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="279" y="131"/>
+            <point key="canvasLocation" x="278.90625" y="130.46875"/>
         </scene>
     </scenes>
     <resources>
