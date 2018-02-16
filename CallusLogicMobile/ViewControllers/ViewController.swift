@@ -67,7 +67,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     @IBOutlet weak var rootPickerView: UIPickerView!
     @IBOutlet weak var accidentalPickerView: UIPickerView!
-    @IBOutlet weak var scalePickerView: UIPickerView!
+  //  @IBOutlet weak var scalePickerView: UIPickerView!
     
     @IBOutlet weak var addNotes: UIButton!
     @IBOutlet weak var displayModePickerView: UIPickerView!
@@ -169,7 +169,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Do any additional setup after loading the view, typically from a nib.
        // buildArrayOfScaleNames()
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
-        scalePickerView.selectRow(28, inComponent: 0, animated: false)
+        
         
         let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: selectedBoard.getFretboardTitle())
         cell.textLabel!.text = selectedBoard.getFretboardTitle()
@@ -302,8 +302,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             return arrayOfRootNotes.count
         case accidentalPickerView:
             return arrayOfAccidentals.count
-        case scalePickerView:
-            return scalesTVC.arrayOfScaleNames.count
         default:
             return arrrayOfDisplayModes.count
         }
@@ -328,9 +326,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             case accidentalPickerView:
             return CGFloat(ACCIDENTAL_WIDTH)
             
-            case scalePickerView:
-            return CGFloat(SCALE_WIDTH)
-            
             default:
             return CGFloat(DISPLAYMODE_WIDTH)
         }
@@ -347,8 +342,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             return arrayOfRootNotes[row]
         case accidentalPickerView:
             return arrayOfAccidentals[row]
-        case scalePickerView:
-            return scalesTVC.selectedScale
         default:
             return arrrayOfDisplayModes[row]
         }

@@ -25,28 +25,12 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="SdB-cF-LPk"/>
                                 </connections>
                             </pickerView>
-                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pJK-VG-dU2">
-                                <rect key="frame" x="204" y="176" width="280" height="149"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="sdk-pZ-caS"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="5hv-W8-iwk"/>
-                                </connections>
-                            </pickerView>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-8t-WgQ">
                                 <rect key="frame" x="38" y="176" width="50" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="aHx-ll-HkI"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="RNl-to-lNg"/>
-                                </connections>
-                            </pickerView>
-                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
-                                <rect key="frame" x="38" y="20" width="180" height="137"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="evT-5U-Tvo"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="YGJ-wh-cYW"/>
                                 </connections>
                             </pickerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lWO-ho-zCK">
@@ -112,7 +96,7 @@
                                 </accessibility>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcn-Q8-7yy">
-                                <rect key="frame" x="492" y="205" width="118" height="61"/>
+                                <rect key="frame" x="524" y="220" width="118" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <state key="normal" title="Add Notes"/>
@@ -134,7 +118,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUl-vB-oyC">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUl-vB-oyC">
                                 <rect key="frame" x="38" y="395" width="182" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
@@ -144,17 +128,28 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dKr-iI-TaH"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFc-aO-JJC">
-                                <rect key="frame" x="226" y="92" width="258" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFc-aO-JJC">
+                                <rect key="frame" x="226" y="226" width="258" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                <state key="normal" title="A"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Scales">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.65107471449999998" green="0.65107471449999998" blue="0.65107471449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="selectRootNote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A4L-wJ-NTI"/>
                                 </connections>
                             </button>
+                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
+                                <rect key="frame" x="506" y="286" width="180" height="137"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="evT-5U-Tvo"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="YGJ-wh-cYW"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -169,7 +164,6 @@
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
                         <outlet property="lockSwitchLabel" destination="F8s-Js-4zc" id="WWg-r4-fPJ"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
-                        <outlet property="scalePickerView" destination="pJK-VG-dU2" id="JZr-Uc-w78"/>
                         <outlet property="scalesButton" destination="QFc-aO-JJC" id="AF6-gT-zV8"/>
                         <outlet property="tableView" destination="lWO-ho-zCK" id="a4L-xp-wFv"/>
                     </connections>

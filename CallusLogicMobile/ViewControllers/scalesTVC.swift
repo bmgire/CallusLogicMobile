@@ -30,7 +30,7 @@ class ScalesTVC: UITableViewController {
         buildArrayOfScaleNames()
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "scale")
-        selectedScale = arrayOfScaleNames[0]
+        selectedScale = arrayOfScaleNames[21]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -103,11 +103,13 @@ class ScalesTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Dissmiss the view after a selection is made.
         
+        
+        
         selectedScale = arrayOfScaleNames[indexPath.row]
         delegate?.scaleChanged(text: selectedScale)
         dismiss(animated: true, completion: nil)
     }
-    
+
 
     /*
     // Override to support conditional editing of the table view.
