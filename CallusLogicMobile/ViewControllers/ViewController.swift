@@ -9,7 +9,7 @@
 import UIKit
 import AudioKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, RootNoteTVCDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate {
 
     
     //###################################
@@ -35,7 +35,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // The names of all selectable scales.
     // Is a variable because of the pointer swap in viewDidLoad()
-    var arrayOfScaleNames = [String]()
+  
+     //  var arrayOfScaleNames = [String]()
     
     // Variable to keep track of views updated during a single view track event.
     // Is a dictionary of view IDs and Bools.
@@ -82,9 +83,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     
-    @IBOutlet var rootNoteButton: UIButton!
+    @IBOutlet var scalesButton: UIButton!
     
-    let rootNoteTVC = RootNoteTVC() 
+    let scalesTVC = ScalesTVC()
     
     //###################################
     // Actions
@@ -146,15 +147,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBAction func selectRootNote(_ sender: UIButton) {
         
-        rootNoteTVC.modalPresentationStyle = .popover
-        rootNoteTVC.preferredContentSize = CGSize(width: 60, height: 300)
-        let popoverC = rootNoteTVC.popoverPresentationController
+        scalesTVC.modalPresentationStyle = .popover
+        scalesTVC.preferredContentSize = CGSize(width: 300, height: 500)
+        let popoverC = scalesTVC.popoverPresentationController
         popoverC?.sourceView = sender
         popoverC?.sourceRect = sender.bounds
         popoverC?.permittedArrowDirections = UIPopoverArrowDirection.up
         popoverC?.delegate = self
         
-        present(rootNoteTVC, animated: true, completion: nil)
+        present(scalesTVC, animated: true, completion: nil)
     }
     
     //###################################
@@ -166,7 +167,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        buildArrayOfScaleNames()
+       // buildArrayOfScaleNames()
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
         scalePickerView.selectRow(28, inComponent: 0, animated: false)
         
@@ -192,7 +193,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
         
-        rootNoteTVC.delegate = self
+        scalesTVC.delegate = self
+        scalesButton.setTitle(scalesTVC.selectedScale, for: .normal)
         
     }
     
@@ -228,9 +230,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let accidentalRow = accidentalPickerView.selectedRow(inComponent: 0)
         let accidental = pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)!
         
-        let scaleRow = scalePickerView.selectedRow(inComponent: 0)
-        let scale = pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)!
+        //let scaleRow = scalePickerView.selectedRow(inComponent: 0)
+        //let scale = pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)!
  
+        let scale = scalesTVC.selectedScale
         
         var arrayOfStrings = [String]()
         arrayOfStrings.append(root)
@@ -251,7 +254,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         updateFretboardView()
     }
- 
+ /*
     //############
     // Adds the scale names to the Scale PopUp
     func buildArrayOfScaleNames(){
@@ -260,7 +263,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             arrayOfScaleNames.append(scalesDict.getScaleArray()[index].getScaleName())
         }
     }
-    
+ */
     //############
     func updateFretboardView() {
         // get the displayMode
@@ -300,7 +303,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         case accidentalPickerView:
             return arrayOfAccidentals.count
         case scalePickerView:
-            return arrayOfScaleNames.count
+            return scalesTVC.arrayOfScaleNames.count
         default:
             return arrrayOfDisplayModes.count
         }
@@ -345,7 +348,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         case accidentalPickerView:
             return arrayOfAccidentals[row]
         case scalePickerView:
-            return arrayOfScaleNames[row]
+            return scalesTVC.selectedScale
         default:
             return arrrayOfDisplayModes[row]
         }
@@ -546,9 +549,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
     }
     
-    func rootNoteChanged(text: String) {
-        rootNoteButton.setTitle(text, for: .normal)
-        rootNoteButton.setNeedsDisplay()
+    func scaleChanged(text: String) {
+        scalesButton.setTitle(text, for: .normal)
+        scalesButton.setNeedsDisplay()
     }
     
  }

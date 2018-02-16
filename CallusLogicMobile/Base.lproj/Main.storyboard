@@ -145,7 +145,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFc-aO-JJC">
-                                <rect key="frame" x="265" y="92" width="31" height="36"/>
+                                <rect key="frame" x="226" y="92" width="258" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                 <state key="normal" title="A"/>
@@ -168,9 +168,9 @@
                         <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
                         <outlet property="lockSwitchLabel" destination="F8s-Js-4zc" id="WWg-r4-fPJ"/>
-                        <outlet property="rootNoteButton" destination="QFc-aO-JJC" id="SMJ-O4-bQP"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
                         <outlet property="scalePickerView" destination="pJK-VG-dU2" id="JZr-Uc-w78"/>
+                        <outlet property="scalesButton" destination="QFc-aO-JJC" id="AF6-gT-zV8"/>
                         <outlet property="tableView" destination="lWO-ho-zCK" id="a4L-xp-wFv"/>
                     </connections>
                 </viewController>
