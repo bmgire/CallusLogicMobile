@@ -479,7 +479,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
                             dictOfTouchedNoteViewNumbers[noteViewNumber] = true
                             sixTonesController.rampDownStop(noteView.stringNumber)
-                            
                         }
                     }
                 }
