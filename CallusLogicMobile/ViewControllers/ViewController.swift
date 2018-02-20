@@ -51,10 +51,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     fileprivate var arrayOfTableViewCells = [UITableViewCell]()
     
-    fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()] {
+    fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()] /*{
         // reload tableView if arrayOfFretboardModels is loaded from a saved file.
-        didSet { tableView?.reloadData() }
-    }
+        didSet { tableView.reloadData() }
+    } */
     
     fileprivate var selectedBoard = FretboardModel()
     
@@ -91,23 +91,31 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Actions
     //
     //############
+    
+    
+    @IBAction func changeFretboardTitle(_ sender: UITextField) {
+        selectedBoard.setFretboardTitle(sender.text!)
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.reloadRows(at: [indexPath], with: .none)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        } else {
+            print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
+        }
+       
+    }
+    
+    
+    
     @IBAction func addFretboardAction(_ sender: UIButton) {
         // Add a new blank fretboard Model
-        arrayOfFretboardModels.append(FretboardModel())
         
-        // add a new UITableViewCell
-        let testCell2 = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: selectedBoard.getFretboardTitle())
-        testCell2.textLabel!.text = "Untitled"
-        arrayOfTableViewCells.append(testCell2)
-       
-        // load updated data model
-        tableView?.reloadData()
+        if let indexPath = tableView.indexPathForSelectedRow {
+            arrayOfFretboardModels.insert(FretboardModel(), at: indexPath.row)
+            tableView?.insertRows(at: [indexPath], with: .none)
+        } else {
+            print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
+        }
         
-        // Select row of added data.// Always loads from the back
-        let row = arrayOfFretboardModels.endIndex - 1
-        tableView.selectRow(at: IndexPath(row: row , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
-        
-        viewSelectedFretboard(row: row)
     }
     
     //############
@@ -118,7 +126,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             arrayOfFretboardModels.remove(at: index)
             arrayOfTableViewCells.remove(at: index)
             
-            tableView?.reloadData()
+            tableView.reloadData()
             
             let lastRow = arrayOfFretboardModels.endIndex - 1
             tableView.selectRow(at: IndexPath(row: lastRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
@@ -171,15 +179,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
         
         
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: selectedBoard.getFretboardTitle())
-        cell.textLabel!.text = selectedBoard.getFretboardTitle()
-        arrayOfTableViewCells.append(cell)
-        
-        let path = IndexPath(row: arrayOfFretboardModels.startIndex,  section: 0)
-        tableView.selectRow(at: path, animated: false, scrollPosition: UITableViewScrollPosition.none)
-        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
         //Sets the model to the 0 index in arrayOfFretboardModels.
         modelIndex = 0
+        
+        let indexPath = IndexPath(row: modelIndex, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        
+         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
         
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
         AudioKit.start()
@@ -195,7 +201,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         scalesTVC.delegate = self
         scalesButton.setTitle(scalesTVC.selectedScale, for: .normal)
-        
+       
     }
     
     //############
@@ -207,6 +213,48 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         fretboardView.addSubviews()
         addNotesAction(addNotes)
     }
+    
+    //###################################
+    // UITableView  DataSource functions
+    
+    //############
+    // Returns the number of rows in the tableview.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arrayOfFretboardModels.count
+    }
+    
+    //############
+    // Returns the UITableCellView for each Row.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "fretboardCell", for: indexPath)
+        cell.textLabel?.text = arrayOfFretboardModels[indexPath.row].getFretboardTitle()
+        return cell
+    }
+  
+    
+    //############
+    // FCN is informed when a new object is selected by the user. Not when a new board is added with the + button.
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        // change the displayed fretboard to match the selection.
+        
+        let myRow = indexPath.row
+        viewSelectedFretboard(row: myRow)
+        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
+        
+    }
+ 
+    
+    
+    //############
+    // Custom function called by UITableView delegate methods
+    // updates the selectedBoard and displays it.
+    fileprivate func viewSelectedFretboard(row: Int){
+        modelIndex = row
+        updateFretboardView()
+    }
+    
+    
     
     //###################################
     // Custom Functions
@@ -271,6 +319,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
         // Update View
         fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode!)
+        
     }
    
     //############
@@ -360,43 +409,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
 
-    //###################################
-    // UITableView  DataSource functions
-    
-    //############
-    // Returns the number of rows in the tableview.
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return arrayOfFretboardModels.count
-    }
-    
-    //############
-    // Returns the UITableCellView for each Row.
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       return arrayOfTableViewCells[indexPath.row]
-    }
-    
-    //############
-    // FCN is informed when a new object is selected by the user. Not when a new board is added with the + button.
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        // change the displayed fretboard to match the selection.
-        let myRow = indexPath.row
-        
-        viewSelectedFretboard(row: myRow)
-        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
-        
-        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
-        fretboardTitleTextField.resignFirstResponder()
-        
-    }
-    
-    //############
-    // Custom function called by UITableView delegate methods
-    // updates the selectedBoard and displays it.
-    fileprivate func viewSelectedFretboard(row: Int){
-        modelIndex = row
-        updateFretboardView()
-    }
+
     
     //###################################
     // UITextFieldDelegateMethods.
