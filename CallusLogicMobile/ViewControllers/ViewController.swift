@@ -280,7 +280,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
-        selectedBoard.updateNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
+        selectedBoard.updateAllNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
         fillSpacesWithChromatic()
         
       //  updateDisplayModeAction(displayModePopUp)
@@ -318,7 +318,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
                                            scaleName: "Chromatic Scale")
-       selectedBoard.updateNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
+       selectedBoard.updateAllNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
     
     //##############################################
@@ -416,16 +416,33 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
+            // If the view is a noteView, and is displayed.
             if let noteView = getNoteViewOrNil(touch.view) {
                 if noteView.isDisplayed {
-                    if noteView.isGhost == false {
+                    // If the noteView is a ghost,
+                  //  if noteView.isGhost == true {
+                        // add the view to the dictionary in case this is part of a dragged touch.
                         addViewIdToDictionary(noteView)
-                        // play sound.
                         
-                        // Get zeroTo46Number
+                        // Use the noteView.viewNumber to determine which noteModel to update.
+                        // Update the noteModel in the FretboardModel to reflect a touch.
+                        // That is, update isGhost and isKept.
+                        
+                        // Code will look like:
+                         selectedBoard.updateSingleNoteModel(modelNumber: noteView.viewNumber, flipIsGhost: true, flipIsKept: true)
+                        
+                        // Load the specific noteModel data into the fretboardView
+                        // Be sure the noteView gets set to needsDisplay()
+                        let isGhost = selectedBoard.getFretboardArray()[noteView.viewNumber].getIsGhost()
+                        fretboardView.updateSingleNoteView(viewNumber: noteView.viewNumber, isGhost: isGhost)
+            
+                        
+                        // play sound if the note was unghosted.
+                    if isGhost == false {
                         let zeroTo36Number = getZeroTo36Number(noteView)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
                     }
+                    
                 }
             }
         }
@@ -526,15 +543,23 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //########################################
     
     func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView) {
+    
+        // Update the noteModel
+        let viewNumber = noteView.viewNumber
+        selectedBoard.updateSingleNoteModel(modelNumber: viewNumber, flipIsGhost: true, flipIsKept: true)
+        // Update the noteView
+        let isGhost = selectedBoard.getFretboardArray()[viewNumber].getIsGhost()
+        fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: isGhost)
+        
+        // Rampup or rampdown note.
         let stringNumber = noteView.stringNumber
-        // Note, I'm playing then touching.
         let zeroTo36Number = getZeroTo36Number(noteView)
-        if noteView.isGhost {
+        if isGhost == false {
             sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
         } else {
             sixTonesController.rampDownStop(stringNumber)
         }
-        noteView.touchThisView()
+       
         dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false
     }
     

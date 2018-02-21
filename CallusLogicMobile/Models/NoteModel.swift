@@ -174,6 +174,13 @@ class NoteModel /*: NSObject, NSCoding */ {
         isKept = bool
     }
     
+    func flipIsGhost(){
+        isGhost = !isGhost
+    }
+    
+    func flipIsKept() {
+        isKept = !isKept
+    }
     
     func makePassingNote(_ bool: Bool) {
         if bool {

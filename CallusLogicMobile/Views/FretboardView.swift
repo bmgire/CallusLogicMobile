@@ -224,6 +224,13 @@ class FretboardView: UIImageView {
             view.updateNoteView(noteModel, display: displayText)
             
         }
-        // needsDisplay = true
+    }
+    
+    // Allows just one noteView to be updated. 
+    func updateSingleNoteView(viewNumber: Int, isGhost: Bool) {
+        let view = arrayOfNoteViews[viewNumber]
+        view.isGhost = isGhost
+        view.drawNote()
+        view.setNeedsDisplay()
     }
 }

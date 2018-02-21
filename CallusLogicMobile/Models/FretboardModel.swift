@@ -22,7 +22,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     
     // The array of noteModels that make up the fretboard.
     // why is this an optional
-    fileprivate var fretboardArray: [NoteModel] = []
+    fileprivate var arrayOfNoteModels: [NoteModel] = []
     
     // The fretboards Title
     fileprivate var fretboardTitle: String? = "Untitled"
@@ -139,13 +139,13 @@ class FretboardModel /*: NSObject, NSCoding */ {
     init() {
         // If no encoded fretboardModel was loaded, build a fretboard model.
        
-        if fretboardArray.count == 0 {
+        if arrayOfNoteModels.count == 0 {
             // Build 138 item array of NoteModels.
             var temp : [NoteModel] = []
             for _ in 0...NOTES_ON_FRETBOARD - 1 {
                 temp.append(NoteModel())
             }
-            fretboardArray = temp
+            arrayOfNoteModels = temp
         }
         setFretNumbers()
         
@@ -155,7 +155,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     fileprivate func setFretNumbers() {
     
         var fret = 0
-        for note in fretboardArray {
+        for note in arrayOfNoteModels {
             note.setFretNumber(String(fret))
             fret += 1
             if fret == NOTES_PER_STRING {
@@ -170,7 +170,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
      3 = intervalsArray
     */
     // Function takes an array of tone arrays and updates the appropriate noteModels.
-    func updateNoteModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
+    func updateAllNoteModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
         
         // Internal function to prevent duplicate code.
         func updateSingleModel(noteModel: NoteModel, index: Int) {
@@ -195,7 +195,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 //get the array values and plug update the fretboard model.
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
-                let noteModel = fretboardArray[fretIndex  + stringIndex * NOTES_PER_STRING] //{
+                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
                     
                     
                     if noteModel.getIsKept() == false && isInScale {
@@ -212,9 +212,9 @@ class FretboardModel /*: NSObject, NSCoding */ {
     
     func showNotesOnFretboard( _ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
-            let noteModel = fretboardArray[index]
+            let noteModel = arrayOfNoteModels[index]
             
-            // if is note kept
+            // if note is kept
             if noteModel.getIsKept() != true {
                 // if the noteModels isInScale bool value equals the passed value.
                 // Allows me to update notes in the scale(if bool is true), or additional notes (if bool is false).
@@ -233,7 +233,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     
     func keepOrUnkeepSelectedNotes(_ doKeep: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
-            let noteModel = fretboardArray[index]
+            let noteModel = arrayOfNoteModels[index]
             // If ghosted, don't keep
             if noteModel.getIsGhost() == true {
                 noteModel.setIsKept(false)
@@ -251,9 +251,15 @@ class FretboardModel /*: NSObject, NSCoding */ {
     }
     
     func lockOrUnlockFretboard(yesOrNo: Bool){
-        for noteModel in fretboardArray {
+        for noteModel in arrayOfNoteModels {
             noteModel.isLocked = yesOrNo
         }
+    }
+    
+    func updateSingleNoteModel(modelNumber: Int, flipIsGhost: Bool, flipIsKept: Bool) {
+        let model = arrayOfNoteModels[modelNumber]
+        if flipIsGhost { model.flipIsGhost() }
+        if flipIsKept { model.flipIsKept() }
     }
     
     
@@ -261,17 +267,17 @@ class FretboardModel /*: NSObject, NSCoding */ {
     // MARK: - Getters and Setters.
     //##########################################################
     func getFretboardArray()-> [NoteModel] {
-        return fretboardArray
+        return arrayOfNoteModels
     }
     
     func getFretboardArrayCopy()-> [NoteModel] {
         var array:[NoteModel] = []
         
-        for index in 0...(fretboardArray.count - 1) {
+        for index in 0...(arrayOfNoteModels.count - 1) {
             
            
             let note = NoteModel()
-            note.setNoteModel(fretboardArray[index])
+            note.setNoteModel(arrayOfNoteModels[index])
             array.append(note)
         }
         
@@ -279,7 +285,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     }
     
     func setFretboardArray(_ newArray: [NoteModel]) {
-        fretboardArray = newArray
+        arrayOfNoteModels = newArray
     }
     
     func getFretboardTitle()-> String {

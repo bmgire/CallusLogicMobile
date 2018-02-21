@@ -65,23 +65,9 @@ class NoteView: UIView {
     
     override func draw(_ dirtyRect: CGRect) {
         drawNote()
-        setNeedsDisplay()
+       // setNeedsDisplay()
     }
     
-    // When a touch begins, (Note I only care about the first touch)...
-    // check if the button is pressed and update the color's opacity as appropriate.
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // Only deal with the first event because I don't care about mu
-        touchThisView()
-        super.touchesBegan(touches, with: event)
-        
-    }
-    
-    func touchThisView(){
-        isGhost = !isGhost
-        setNeedsDisplay()
-        drawNote()
-    }
    /*
     //##########################################################
     // MARK: - Mouse Events
@@ -134,24 +120,18 @@ class NoteView: UIView {
     
     
     // Draws the note or number
-    fileprivate func drawNote() {
+    func drawNote() {
         // Assigns a value to the noteRect.
        noteRect = bounds.insetBy(dx: bounds.width * 0.1, dy: bounds.height * 0.1)
-        
-      //  noteRect = bounds
-    //    noteRect = bounds
         
         // Defines the radius of the corners of a rounded rect.
        let cornerRadius = bounds.size.height * 0.2
         
         // Assign a value to the path.
-      // From macOS   path = NSBezierPath(roundedRect: noteRect!, xRadius: cornerRadius , yRadius: cornerRadius)
       path = UIBezierPath(roundedRect: noteRect!, cornerRadius: cornerRadius)
-     //   path = UIBezierPath(roundedRect: noteRect, byRoundingCorners: UIRectCorner.allCorners, cornerRadii: CGSize(width: 11, height: 11))
         
         if isDisplayed {
             
-         
             // If appropriate, set alpha to ghosting transparency
             if isGhost {
                 myColor = myColor.withAlphaComponent(CGFloat(0.4))
@@ -160,12 +140,10 @@ class NoteView: UIView {
                 myColor = myColor.withAlphaComponent(CGFloat(1))
             }
             
- 
             // Set color and fill.
             myColor.setFill()
             path?.fill()
             
- 
             // Create an NSParagraphStyle object
             let paraStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
             
@@ -184,14 +162,10 @@ class NoteView: UIView {
             // Define an attributed string set to display the note.
             var attributedNote = NSMutableAttributedString()
             
-            // Choose which displayMode mode to use.
-            
+            //Draw Note
             attributedNote = NSMutableAttributedString(string: displayText, attributes: attrs)
-     
             attributedNote.drawCenterCustomInRect(bounds, withAttributes: attrs)
-           
         
-            
         }
    
     }
