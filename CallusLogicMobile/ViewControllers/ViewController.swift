@@ -411,6 +411,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return true
     }
     
+    // ###############################
+    // Touches methods
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if let noteView = getNoteViewOrNil(touch.view) {
