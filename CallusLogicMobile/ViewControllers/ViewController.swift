@@ -79,10 +79,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var fretboardTitleTextField: UITextField!
     
-    @IBOutlet var lockSwitchLabel: UILabel!
-    
-    
-    
     @IBOutlet var scalesButton: UIButton!
     
     let scalesTVC = ScalesTVC()
@@ -143,15 +139,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         loadToneArraysIntoSelectedBoard()
     }
     
-    
-    @IBAction func lockFretboard(_ sender: UISwitch) {
-        
-      let isOn = sender.isOn
-        
-        selectedBoard.setIsLocked(isOn)
-        let text = isOn ? "Locked" : "Unlock" 
-        lockSwitchLabel.text = text
-    }
     
     @IBAction func selectRootNote(_ sender: UIButton) {
         
