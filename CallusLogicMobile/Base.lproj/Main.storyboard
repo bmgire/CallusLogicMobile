@@ -132,6 +132,7 @@
                                 <rect key="frame" x="236" y="294" width="100" height="89"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <size key="titleShadowOffset" width="8" height="8"/>
                                 <connections>
                                     <action selector="selectColor:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r4l-VI-ps4"/>
                                 </connections>

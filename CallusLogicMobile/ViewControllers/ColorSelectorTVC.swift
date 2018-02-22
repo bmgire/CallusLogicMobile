@@ -25,7 +25,7 @@ class ColorSelectorTVC: UITableViewController {
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "colorSelectionCell")
         
         modalPresentationStyle = .popover
-        preferredContentSize = CGSize(width: 200, height: 300)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

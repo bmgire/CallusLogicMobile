@@ -156,12 +156,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func selectColor(_ sender: UIButton) {
+        
+        // Set height and width for colorSelectorTVC.preferredContentSize
+        let width = sender.frame.width
+        let cellHeight = UITableViewCell().contentView.frame.height
+        let numberOfColors = CGFloat(colorSelectorTVC.arrayOfColors.count)
+        let popoverHeight =  cellHeight * numberOfColors
+        colorSelectorTVC.preferredContentSize = CGSize(width: width, height: popoverHeight)
+        
+        // setup popoverPrestationController
         let popC = colorSelectorTVC.popoverPresentationController
         popC?.sourceView = sender
         popC?.sourceRect = sender.bounds
         popC?.permittedArrowDirections = UIPopoverArrowDirection.up
         popC?.delegate = self
         
+        // Present
         present(colorSelectorTVC, animated: true, completion: nil)
         
     }
