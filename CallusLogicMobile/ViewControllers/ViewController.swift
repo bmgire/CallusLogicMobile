@@ -140,16 +140,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     
-    @IBAction func selectRootNote(_ sender: UIButton) {
-        
-        scalesTVC.modalPresentationStyle = .popover
-        scalesTVC.preferredContentSize = CGSize(width: 300, height: 500)
+    @IBAction func selectScale(_ sender: UIButton) {
+       
         let popoverC = scalesTVC.popoverPresentationController
         popoverC?.sourceView = sender
         popoverC?.sourceRect = sender.bounds
         popoverC?.permittedArrowDirections = UIPopoverArrowDirection.up
         popoverC?.delegate = self
-        
+ 
         present(scalesTVC, animated: true, completion: nil)
     }
     

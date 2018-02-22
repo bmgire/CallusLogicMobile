@@ -31,6 +31,11 @@ class ScalesTVC: UITableViewController {
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "scale")
         selectedScale = arrayOfScaleNames[21]
+        
+        modalPresentationStyle = .popover
+        preferredContentSize = CGSize(width: 300, height: 500)
+    
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

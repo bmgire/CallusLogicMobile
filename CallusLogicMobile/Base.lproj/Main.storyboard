@@ -106,7 +106,7 @@
                                     <color key="titleShadowColor" red="0.65107471449999998" green="0.65107471449999998" blue="0.65107471449999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectRootNote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="A4L-wJ-NTI"/>
+                                    <action selector="selectScale:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uPx-2q-lUF"/>
                                 </connections>
                             </button>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
