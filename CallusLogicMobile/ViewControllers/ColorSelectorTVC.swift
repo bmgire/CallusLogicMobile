@@ -1,69 +1,47 @@
 //
-//  RootTableViewController.swift
+//  colorSelectorTVC.swift
 //  CallusLogicMobile
 //
-//  Created by Ben Gire on 2/14/18.
+//  Created by Ben Gire on 2/22/18.
 //  Copyright © 2018 Gire. All rights reserved.
 //
 
 import UIKit
 
-protocol ScalesTVCDelegate: class {
-    func scaleChanged(text: String)
+protocol ColorSelectorTVCDelegate: class {
+    func colorChanged(color: UIColor)
 }
 
-class ScalesTVC: UITableViewController {
-
+class ColorSelectorTVC: UITableViewController {
     
-    var selectedScale = ""
     
-    var arrayOfScaleNames = [String]()
     
-    weak var delegate: ScalesTVCDelegate?
+    let arrayOfColors = [UIColor.red, UIColor.orange, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple ]
     
-    init(){
+    weak var delegate: ColorSelectorTVCDelegate?
+    
+    init() {
         super.init(style: .plain)
-        buildArrayOfScaleNames()
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "scale")
-        selectedScale = arrayOfScaleNames[21]
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "colorSelectionCell")
         
         modalPresentationStyle = .popover
-        preferredContentSize = CGSize(width: 300, height: 500)
-    
-        
+        preferredContentSize = CGSize(width: 200, height: 300)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-     /*   buildArrayOfScaleNames()
-        
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "scale")
-        selectedScale = arrayOfScaleNames[0]
- 
- */
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
-    //############
-    // Adds the scale names to the Scale PopUp
-    func buildArrayOfScaleNames(){
-        let scalesDict = ScalesByIntervals()
-        for index in 0...(scalesDict.getScaleArray().count - 1){
-            arrayOfScaleNames.append(scalesDict.getScaleArray()[index].getScaleName())
-        }
-    }
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -78,37 +56,22 @@ class ScalesTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arrayOfScaleNames.count
+        return arrayOfColors.count
     }
 
-    // Note the withIdentifier needs to be set to the correct rootNote if for this to work.
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-     
-        let cell =  tableView.dequeueReusableCell(withIdentifier: "scale", for: indexPath)
-       
-        let bgColorView = UIView()
-        // Color is LightBlue
-        let color = UIColor(red: 0, green: 0.6, blue: 1.0, alpha: 0.5)
-        bgColorView.backgroundColor = color
-        cell.selectedBackgroundView = bgColorView
-        
-
-        // Configure the cell...
-        cell.textLabel?.text = arrayOfScaleNames[indexPath.row]
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "colorSelectionCell", for: indexPath)
+        cell.backgroundColor = arrayOfColors[indexPath.row]
+        cell.selectionStyle = .none
         return cell
-        
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Dissmiss the view after a selection is made.
-        
-        selectedScale = arrayOfScaleNames[indexPath.row]
-        delegate?.scaleChanged(text: selectedScale)
+        let selectedColor = arrayOfColors[indexPath.row]
+        delegate?.colorChanged(color: selectedColor)
         dismiss(animated: true, completion: nil)
     }
-
 
     /*
     // Override to support conditional editing of the table view.

@@ -9,7 +9,7 @@
 import UIKit
 import AudioKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate {
 
     
     //###################################
@@ -81,7 +81,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet var scalesButton: UIButton!
     
+    @IBOutlet var colorButton: UIButton!
+    
     let scalesTVC = ScalesTVC()
+    let colorSelectorTVC = ColorSelectorTVC()
     
     //###################################
     // Actions
@@ -151,6 +154,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         present(scalesTVC, animated: true, completion: nil)
     }
     
+    
+    @IBAction func selectColor(_ sender: UIButton) {
+        let popC = colorSelectorTVC.popoverPresentationController
+        popC?.sourceView = sender
+        popC?.sourceRect = sender.bounds
+        popC?.permittedArrowDirections = UIPopoverArrowDirection.up
+        popC?.delegate = self
+        
+        present(colorSelectorTVC, animated: true, completion: nil)
+        
+    }
+    
     //###################################
     // UIViewController overridden functions
    
@@ -185,6 +200,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
         scalesTVC.delegate = self
+        colorSelectorTVC.delegate = self
         scalesButton.setTitle(scalesTVC.selectedScale, for: .normal)
        
     }
@@ -567,10 +583,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
     }
     
+    //###########################
+    // scalesTVCDelegate Method
     func scaleChanged(text: String) {
         scalesButton.setTitle(text, for: .normal)
         scalesButton.setNeedsDisplay()
     }
+    //###########################
+    // colorSelectorTVCDelegate Method
+    // use the color for note selections or additions.
+    func colorChanged(color: UIColor) {
+        colorButton.backgroundColor = color
+    }
+    
     
  }
 

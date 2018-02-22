@@ -29,6 +29,7 @@
 		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
 		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
 		B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED81FE32D3D00174544 /* NoteModel.swift */; };
+		B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
 		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
 		B5786ED81FE32D3D00174544 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			children = (
 				B536C3641FDF855300FD886E /* ViewController.swift */,
 				B54D27FE2034E34500CE38ED /* scalesTVC.swift */,
+				B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */,
 				B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */,
 				B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */,
+				B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */,
 				B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
