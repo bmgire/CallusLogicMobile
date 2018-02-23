@@ -109,8 +109,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Add a new blank fretboard Model
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            arrayOfFretboardModels.insert(FretboardModel(), at: indexPath.row)
+            // Adding 1 to the row to get the row after the selected fretboard.
+            let row = indexPath.row + 1
+            arrayOfFretboardModels.insert(FretboardModel(), at: row)
             tableView?.insertRows(at: [indexPath], with: .none)
+            viewSelectedFretboard(row: row)
+            
         } else {
             print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
         }
