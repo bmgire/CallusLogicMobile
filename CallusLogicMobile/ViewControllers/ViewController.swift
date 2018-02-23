@@ -218,7 +218,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         colorSelectorTVC.delegate = self
         colorChanged(color: UIColor.yellow)
-       
     }
     
     //############
