@@ -210,8 +210,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
         scalesTVC.delegate = self
-        colorSelectorTVC.delegate = self
         scalesButton.setTitle(scalesTVC.selectedScale, for: .normal)
+        
+        colorSelectorTVC.delegate = self
+        colorChanged(color: UIColor.yellow)
        
     }
     
@@ -304,7 +306,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
-        selectedBoard.updateAllNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
+        selectedBoard.updateNotKeptNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
         fillSpacesWithChromatic()
         
       //  updateDisplayModeAction(displayModePopUp)
@@ -313,16 +315,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         updateFretboardView()
     }
- /*
-    //############
-    // Adds the scale names to the Scale PopUp
-    func buildArrayOfScaleNames(){
-        let scalesDict = ScalesByIntervals()
-        for index in 0...(scalesDict.getScaleArray().count - 1){
-            arrayOfScaleNames.append(scalesDict.getScaleArray()[index].getScaleName())
-        }
-    }
- */
+
     //############
     func updateFretboardView() {
         // get the displayMode
@@ -342,7 +335,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
                                            scaleName: "Chromatic Scale")
-       selectedBoard.updateAllNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
+       selectedBoard.updateNotKeptNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
     
     //##############################################
@@ -458,7 +451,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         // Load the specific noteModel data into the fretboardView
                         // Be sure the noteView gets set to needsDisplay()
                         let isGhost = selectedBoard.getFretboardArray()[noteView.viewNumber].getIsGhost()
-                        fretboardView.updateSingleNoteView(viewNumber: noteView.viewNumber, isGhost: isGhost)
+                    fretboardView.updateSingleNoteView(viewNumber: noteView.viewNumber, isGhost: isGhost, color: colorButton.backgroundColor!)
             
                         
                         // play sound if the note was unghosted.
@@ -573,7 +566,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         selectedBoard.updateSingleNoteModel(modelNumber: viewNumber, flipIsGhost: true, flipIsKept: true)
         // Update the noteView
         let isGhost = selectedBoard.getFretboardArray()[viewNumber].getIsGhost()
-        fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: isGhost)
+        fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: isGhost, color: colorButton.backgroundColor!)
         
         // Rampup or rampdown note.
         let stringNumber = noteView.stringNumber
@@ -604,6 +597,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // use the color for note selections or additions.
     func colorChanged(color: UIColor) {
         colorButton.backgroundColor = color
+        selectedBoard.setUserColor(color)
     }
     
     

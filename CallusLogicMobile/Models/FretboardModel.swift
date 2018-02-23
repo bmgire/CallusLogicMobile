@@ -29,7 +29,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     
    
     // The userColor for note selection.
-    fileprivate var userColor: UIColor? = UIColor.yellow
+    fileprivate var userColor = UIColor.yellow
     
     fileprivate var isLocked = true
     fileprivate var zoomLevel = 100.0
@@ -170,7 +170,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
      3 = intervalsArray
     */
     // Function takes an array of tone arrays and updates the appropriate noteModels.
-    func updateAllNoteModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
+    func updateNotKeptNoteModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
         
         // Internal function to prevent duplicate code.
         func updateSingleModel(noteModel: NoteModel, index: Int) {
@@ -184,7 +184,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 noteModel.setMyColor(UIColor.red)
             }
             else {
-                noteModel.setMyColor(userColor!)
+                noteModel.setMyColor(userColor)
             }
         }
         
@@ -224,7 +224,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
                     noteModel.setIsGhost(_isGhosted)
                     // futhermore, if isInScale == true, set the user color.
                     if _isInScale == true {
-                        noteModel.setMyColor(userColor!)
+                        noteModel.setMyColor(userColor)
                     }
                 }
             }
@@ -260,6 +260,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
         let model = arrayOfNoteModels[modelNumber]
         if flipIsGhost { model.flipIsGhost() }
         if flipIsKept { model.flipIsKept() }
+        model.setMyColor(userColor)
     }
     
     
@@ -297,7 +298,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     }
     
     func getUserColor()-> UIColor {
-        return userColor!
+        return userColor
     }
     
     func setUserColor(_ newColor: UIColor) {
