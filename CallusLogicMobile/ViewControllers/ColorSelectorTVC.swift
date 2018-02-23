@@ -16,7 +16,17 @@ class ColorSelectorTVC: UITableViewController {
     
     
     
-    let arrayOfColors = [UIColor.red, UIColor.orange, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple ]
+    let arrayOfColors = [ UIColor.red,
+                         UIColor.orange,
+                         UIColor.yellow,
+                         UIColor.green,
+                         UIColor(red: 0, green: 0.8, blue: 1.0, alpha: 1),   // Blue
+                         UIColor(red: 1.0, green: 0.5, blue: 1.0, alpha: 1),   // light purple-ish
+                         UIColor(red: 1.0, green: 0.41, blue: 0.11, alpha: 1),
+                         UIColor.white]
+        
+    
+    
     
     weak var delegate: ColorSelectorTVCDelegate?
     
