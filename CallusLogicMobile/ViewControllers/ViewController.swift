@@ -83,6 +83,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet var colorButton: UIButton!
     
+    @IBOutlet var LockedStatusLabel: UILabel!
+    
+    @IBOutlet var modeLabel: UILabel!
+    
+    
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
     
@@ -177,8 +182,29 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         // Present
         present(colorSelectorTVC, animated: true, completion: nil)
+    }
+    
+    @IBAction func lockOrUnlockFretboard(_ sender: UISwitch) {
         
     }
+    
+
+    @IBAction func switchToCustomMode(_ sender: UIButton) {
+        selectedBoard.flipCanEditFretboard()
+        if selectedBoard.canEditFretboard == true {
+            selectedBoard.keepOrUnkeepSelectedNotes(doKeep: true)
+            modeLabel.text = "Custom Mode"
+            sender.setTitle("The Fretboard Can Be Customized", for: .normal)
+        }
+        else {
+            modeLabel.text = "Default Mode"
+            sender.setTitle("Switch to Edit Fretboard", for: .normal)
+        }
+        
+        
+    }
+    
+    
     
     //###################################
     // UIViewController overridden functions
@@ -257,7 +283,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let myRow = indexPath.row
         viewSelectedFretboard(row: myRow)
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
-        
     }
  
     
@@ -309,13 +334,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
-        selectedBoard.updateNotKeptNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
-        fillSpacesWithChromatic()
-        
-      //  updateDisplayModeAction(displayModePopUp)
-        
-        selectedBoard.showNotesOnFretboard(true, _isDisplayed: true, _isGhosted: true)
-        
+            // Update all  note models that are not kept. Should initially be zero.
+            selectedBoard.updateNoteModelsThatAreNotKept(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
+            // Fill with chromatic even if canEdit is false, just in case you ever want to edit.
+            fillSpacesWithChromatic()
+        // If canEdit. ghost notes.
+        if selectedBoard.canEditFretboard {
+            selectedBoard.showNotesOnFretboard(true, _isDisplayed: true, _isGhosted: true)
+        }
+        // Else cannot edit, do not ghost the notes.
+        else {
+            selectedBoard.showNotesOnFretboard(true, _isDisplayed: true, _isGhosted: false)
+        }
         updateFretboardView()
     }
 
@@ -338,7 +368,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
                                            scaleName: "Chromatic Scale")
-       selectedBoard.updateNotKeptNoteModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
+       selectedBoard.updateNoteModelsThatAreNotKept(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
     
     //##############################################
@@ -435,38 +465,40 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Touches methods
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         for touch in touches {
             // If the view is a noteView, and is displayed.
             if let noteView = getNoteViewOrNil(touch.view) {
                 if noteView.isDisplayed {
-                    // If the noteView is a ghost,
-                  //  if noteView.isGhost == true {
-                        // add the view to the dictionary in case this is part of a dragged touch.
-                        addViewIdToDictionary(noteView)
+                    // add the view to the dictionary in case this is part of a dragged touch.
+                    addViewIdToDictionary(noteView)
+                    
+                    // Get needed properties.
+                    let canEditFretboard = selectedBoard.canEditFretboard
+                    let noteModel = selectedBoard.getFretboardArray()[noteView.viewNumber]
+                    
+                    // If the fretboard is editable.
+                    if canEditFretboard {
                         
                         // Use the noteView.viewNumber to determine which noteModel to update.
                         // Update the noteModel in the FretboardModel to reflect a touch.
-                        // That is, update isGhost and isKept.
-                        
-                        // Code will look like:
-                         selectedBoard.updateSingleNoteModel(modelNumber: noteView.viewNumber, flipIsGhost: true, flipIsKept: true)
+                        // That is, update isGhost and isKept. Color changes are handled in FretboardModel.
+                        selectedBoard.updateSingleNoteModel(modelNumber: noteView.viewNumber, flipIsGhost: true, flipIsKept: true)
                         
                         // Load the specific noteModel data into the fretboardView
                         // Be sure the noteView gets set to needsDisplay()
-                        let isGhost = selectedBoard.getFretboardArray()[noteView.viewNumber].getIsGhost()
-                    fretboardView.updateSingleNoteView(viewNumber: noteView.viewNumber, isGhost: isGhost, color: colorButton.backgroundColor!)
-            
-                        
-                        // play sound if the note was unghosted.
-                    if isGhost == false {
+                        fretboardView.updateSingleNoteView(viewNumber: noteView.viewNumber, isGhost: noteModel.getIsGhost(), color: colorButton.backgroundColor!)
+                    }
+                    // play sound if the note was unghosted or if the fretboard cannot be edited.
+                    // If the canEditFretboard == false, I need to ensure there are no ghosted notes while loading the notes.
+                    if noteModel.getIsGhost() ==  false || canEditFretboard == false {
                         let zeroTo36Number = getZeroTo36Number(noteView)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
                     }
-                    
                 }
             }
+            super.touchesBegan(touches, with: event)
         }
-        super.touchesBegan(touches, with: event)
     }
     
     

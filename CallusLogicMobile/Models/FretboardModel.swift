@@ -41,6 +41,8 @@ class FretboardModel /*: NSObject, NSCoding */ {
     fileprivate var allowsSelectAll = false
     fileprivate var allowsClear = false
     
+    var canEditFretboard = false
+    
     /*
     //##########################################################
     // MARK: - Encoding
@@ -170,7 +172,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
      3 = intervalsArray
     */
     // Function takes an array of tone arrays and updates the appropriate noteModels.
-    func updateNotKeptNoteModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
+    func updateNoteModelsThatAreNotKept(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
         
         // Internal function to prevent duplicate code.
         func updateSingleModel(noteModel: NoteModel, index: Int) {
@@ -210,7 +212,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
         }
     }
     
-    func showNotesOnFretboard( _ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
+    func showNotesOnFretboard(_ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
             let noteModel = arrayOfNoteModels[index]
             
@@ -231,14 +233,14 @@ class FretboardModel /*: NSObject, NSCoding */ {
         }
     }
     
-    func keepOrUnkeepSelectedNotes(_ doKeep: Bool) {
+    func keepOrUnkeepSelectedNotes(doKeep: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
             let noteModel = arrayOfNoteModels[index]
             // If ghosted, don't keep
             if noteModel.getIsGhost() == true {
                 noteModel.setIsKept(false)
             }
-                // If unghosted (selected), keep or unkeep depending on the value of 'doKeep
+                // If unghosted (selected), keep or unkeep depending on the value of doKeep
             else {
                 noteModel.setIsKept(doKeep)
                 // If we've unSelected the note via unselectAll
@@ -356,6 +358,9 @@ class FretboardModel /*: NSObject, NSCoding */ {
     
     func getAllowsClear()-> Bool {
         return allowsClear
+    }
+    func flipCanEditFretboard(){
+        canEditFretboard = !canEditFretboard
     }
 }
 
