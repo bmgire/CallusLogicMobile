@@ -71,26 +71,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var addNotes: UIButton!
     @IBOutlet weak var displayModePickerView: UIPickerView!
-    
     @IBOutlet weak var fretboardView: FretboardView!
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var addFretboardButton: UIButton!
-    
     @IBOutlet weak var fretboardTitleTextField: UITextField!
-    
     @IBOutlet var scalesButton: UIButton!
-    
     @IBOutlet var colorButton: UIButton!
-    
     @IBOutlet var LockedStatusLabel: UILabel!
-    
     @IBOutlet var modeLabel: UILabel!
-    
     @IBOutlet var backgroundView: UIView!
+    @IBOutlet var allowsCustomizationButton: UIButton!
     
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
+
+    var flashAnimator: UIViewPropertyAnimator!
     
     //###################################
     // Actions
@@ -186,6 +181,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     @IBAction func lockOrUnlockFretboard(_ sender: UISwitch) {
+        
+        
+            let isLocked = sender.isOn
+        
+            // Show or hide fretboard editing controls based on swtich's isOn bool.
+            rootPickerView.isHidden = isLocked
+            accidentalPickerView.isHidden = isLocked
+            scalesButton.isHidden = isLocked
+            allowsCustomizationButton.isHidden = isLocked
+            
+            // I will keep the displaymode picker available.
+            
         
     }
     
@@ -493,7 +500,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     if noteModel.getIsGhost() ==  false || allowsCustomizations == false {
                         let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
-                        
+                        // Only flash when you can't customize the fretboard.
+                        if allowsCustomizations == false {
+                            noteView.flash()
+                        }
                     }
                 }
             }
@@ -615,6 +625,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
         if noteModel.getIsGhost() == false || allowsCustomizations == false {
             sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
+            // only flash if allowsCustomizations == false.
+            if allowsCustomizations == false {
+                noteView.flash()
+            }
         } else {
             sixTonesController.rampDownStop(stringNumber)
         }
@@ -641,6 +655,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         colorButton.backgroundColor = color
         selectedBoard.setUserColor(color)
     }
+    
+   
     
     
  }
