@@ -491,7 +491,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     // play sound if the note was unghosted or if the fretboard cannot be edited.
                     // If the canEditFretboard == false, I need to ensure there are no ghosted notes while loading the notes.
                     if noteModel.getIsGhost() ==  false || allowsCustomizations == false {
-                        let zeroTo36Number = getZeroTo36Number(noteView)
+                        let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
                     }
                 }
@@ -528,20 +528,24 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         // for all sent touches (probably only one touch.
         for touch in touches {
-            // Search for location hits in NoteViews, handle ass approriate.
+            // Search for location hits in NoteViews, handle as approriate.
             for noteView in fretboardView.arrayOfNoteViews {
                 if noteView.isDisplayed {
+                 //   let allowsCustomizations = selectedBoard.allowsCustomizations
+                    let noteModel = selectedBoard.getFretboardArray()[noteView.viewNumber]
+                    
                     let (noteViewNumber, pointIsInNoteView) = getKeyTestPointHit(noteView, touch: touch)
+                    
                     if pointIsInNoteView {
                         // Check the dictionary for the key,
                         if let canTouchView = dictOfTouchedNoteViewNumbers[noteViewNumber] {
                             // respond to canUse value
                             if canTouchView {
-                            playOrStopTouchAndUpdateDictionary(noteView)
+                            playOrStopTouchAndUpdateDictionary(noteView, noteModel: noteModel)
                             }
                             // Else there is no entry for the key Dictionary record,
                         } else {
-                            playOrStopTouchAndUpdateDictionary(noteView)
+                            playOrStopTouchAndUpdateDictionary(noteView, noteModel: noteModel)
                         }
                         //Else, the NoteView DOES NOT contain the point
                         // so stop playing a note.
@@ -593,19 +597,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     //########################################
     
-    func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView) {
-    
-        // Update the noteModel
-        let viewNumber = noteView.viewNumber
-        selectedBoard.updateSingleNoteModel(modelNumber: viewNumber, flipIsGhost: true, flipIsKept: true)
-        // Update the noteView
-        let isGhost = selectedBoard.getFretboardArray()[viewNumber].getIsGhost()
-        fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: isGhost, color: colorButton.backgroundColor!)
+    func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView, noteModel: NoteModel) {
+        let allowsCustomizations = selectedBoard.allowsCustomizations
+        
+        if allowsCustomizations {
+            
+            // Update the noteModel
+            let viewNumber = noteView.viewNumber
+            selectedBoard.updateSingleNoteModel(modelNumber: viewNumber, flipIsGhost: true, flipIsKept: true)
+            // Update the noteView
+            fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: noteModel.getIsGhost(), color: colorButton.backgroundColor!)
+        }
         
         // Rampup or rampdown note.
         let stringNumber = noteView.stringNumber
-        let zeroTo36Number = getZeroTo36Number(noteView)
-        if isGhost == false {
+        let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
+        if noteModel.getIsGhost() == false || allowsCustomizations == false {
             sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
         } else {
             sixTonesController.rampDownStop(stringNumber)
@@ -614,9 +621,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false
     }
     
-    func getZeroTo36Number(_ noteView: NoteView)->Int {
+    func getZeroTo36Number(_ viewNumber: Int)->Int {
         // Get zeroTo46Number
-        let viewNumber = noteView.viewNumber
+        
         return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
     }
     
