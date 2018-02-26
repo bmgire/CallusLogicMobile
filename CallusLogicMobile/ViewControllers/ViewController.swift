@@ -493,6 +493,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     if noteModel.getIsGhost() ==  false || allowsCustomizations == false {
                         let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
+                        
                     }
                 }
             }
