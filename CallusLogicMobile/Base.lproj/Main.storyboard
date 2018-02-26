@@ -84,7 +84,7 @@
                                 <rect key="frame" x="38" y="107" width="546" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="45"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <action selector="changeFretboardTitle:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="a0T-fx-cS0"/>
@@ -107,24 +107,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHP-Ln-vuJ">
-                                <rect key="frame" x="300" y="52" width="284" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Allow Customizations"/>
-                                <connections>
-                                    <action selector="switchToCustomMode:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rRk-yU-fI1"/>
-                                </connections>
-                            </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GjG-p4-G2R">
-                                <rect key="frame" x="38" y="167" width="49" height="31"/>
+                                <rect key="frame" x="38" y="156" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <action selector="lockOrUnlockFretboard:" destination="BYZ-38-t0r" eventType="valueChanged" id="tbp-XO-uJV"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Locked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c9E-Hw-J81">
-                                <rect key="frame" x="96" y="167" width="68" height="31"/>
+                                <rect key="frame" x="97" y="156" width="68" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -167,10 +158,19 @@
                                     <action selector="selectScale:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uPx-2q-lUF"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default Mode" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0U-O1-bkH">
-                                <rect key="frame" x="38" y="54" width="150" height="45"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHP-Ln-vuJ">
+                                <rect key="frame" x="301" y="62" width="284" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Allow Customizations"/>
+                                <connections>
+                                    <action selector="allowCustomizations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fWb-ZF-Slw"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default Mode" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0U-O1-bkH">
+                                <rect key="frame" x="38" y="64" width="244" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -187,6 +187,7 @@
                         <outlet property="accidentalPickerView" destination="MZd-ye-ZjK" id="708-qD-s9V"/>
                         <outlet property="addFretboardButton" destination="fbX-UF-hne" id="CDd-8G-2tz"/>
                         <outlet property="addNotes" destination="bcn-Q8-7yy" id="ph0-zK-MrS"/>
+                        <outlet property="backgroundView" destination="8bC-Xf-vdC" id="5wT-8o-aml"/>
                         <outlet property="colorButton" destination="GJ4-Lk-Ti4" id="ZWj-oM-agb"/>
                         <outlet property="displayModePickerView" destination="fo2-ol-wXK" id="hVS-tx-Ps1"/>
                         <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>

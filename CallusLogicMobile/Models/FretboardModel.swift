@@ -41,7 +41,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     fileprivate var allowsSelectAll = false
     fileprivate var allowsClear = false
     
-    var canEditFretboard = false
+    var allowsCustomizations = false
     
     /*
     //##########################################################
@@ -359,8 +359,8 @@ class FretboardModel /*: NSObject, NSCoding */ {
     func getAllowsClear()-> Bool {
         return allowsClear
     }
-    func flipCanEditFretboard(){
-        canEditFretboard = !canEditFretboard
+    func flipAllowsCustomizations() {
+        allowsCustomizations = !allowsCustomizations
     }
 }
 

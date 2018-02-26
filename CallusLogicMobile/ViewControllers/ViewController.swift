@@ -87,6 +87,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet var modeLabel: UILabel!
     
+    @IBOutlet var backgroundView: UIView!
     
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
@@ -118,7 +119,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let row = indexPath.row + 1
             arrayOfFretboardModels.insert(FretboardModel(), at: row)
             tableView?.insertRows(at: [indexPath], with: .none)
-            viewSelectedFretboard(row: row)
+            viewSelectedFretboard(index: row)
             
         } else {
             print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
@@ -139,7 +140,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let lastRow = arrayOfFretboardModels.endIndex - 1
             tableView.selectRow(at: IndexPath(row: lastRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
             
-            viewSelectedFretboard(row: lastRow)
+            viewSelectedFretboard(index: lastRow)
         }
         
     }
@@ -189,16 +190,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
 
-    @IBAction func switchToCustomMode(_ sender: UIButton) {
-        selectedBoard.flipCanEditFretboard()
-        if selectedBoard.canEditFretboard == true {
+    @IBAction func allowCustomizations(_ sender: UIButton) {
+        selectedBoard.flipAllowsCustomizations()
+        if selectedBoard.allowsCustomizations == true {
             selectedBoard.keepOrUnkeepSelectedNotes(doKeep: true)
-            modeLabel.text = "Custom Mode"
-            sender.setTitle("The Fretboard Can Be Customized", for: .normal)
+            modeLabel.text = "Custom Mode Enabled"
+            sender.isHidden = true
         }
         else {
             modeLabel.text = "Default Mode"
-            sender.setTitle("Switch to Edit Fretboard", for: .normal)
+            sender.setTitle("Allow Customizations", for: .normal)
         }
         
         
@@ -281,24 +282,30 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // change the displayed fretboard to match the selection.
         
         let myRow = indexPath.row
-        viewSelectedFretboard(row: myRow)
+        viewSelectedFretboard(index: myRow)
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
     }
  
     
+    //###################################
+    // Custom Functions
     
     //############
-    // Custom function called by UITableView delegate methods
-    // updates the selectedBoard and displays it.
-    fileprivate func viewSelectedFretboard(row: Int){
-        modelIndex = row
+    // Updates the selectedBoard and calls for it to be displayed.
+    fileprivate func viewSelectedFretboard(index: Int){
+        modelIndex = index
         updateFretboardView()
     }
     
-    
-    
-    //###################################
-    // Custom Functions
+    //############
+    func updateFretboardView() {
+        // get the displayMode
+        let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
+        let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
+        // Update View
+        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode!)
+    }
+ 
     
     //############
     // Load scale info into toneArraysCreator
@@ -339,7 +346,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             // Fill with chromatic even if canEdit is false, just in case you ever want to edit.
             fillSpacesWithChromatic()
         // If canEdit. ghost notes.
-        if selectedBoard.canEditFretboard {
+        if selectedBoard.allowsCustomizations {
             selectedBoard.showNotesOnFretboard(true, _isDisplayed: true, _isGhosted: true)
         }
         // Else cannot edit, do not ghost the notes.
@@ -349,15 +356,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         updateFretboardView()
     }
 
-    //############
-    func updateFretboardView() {
-        // get the displayMode
-        let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
-        let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
-        // Update View
-        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode!)
-        
-    }
+  
    
     //############
     // Fills notes not in the scale with chromatic notes.
@@ -474,11 +473,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     addViewIdToDictionary(noteView)
                     
                     // Get needed properties.
-                    let canEditFretboard = selectedBoard.canEditFretboard
+                    let allowsCustomizations = selectedBoard.allowsCustomizations
                     let noteModel = selectedBoard.getFretboardArray()[noteView.viewNumber]
                     
                     // If the fretboard is editable.
-                    if canEditFretboard {
+                    if allowsCustomizations {
                         
                         // Use the noteView.viewNumber to determine which noteModel to update.
                         // Update the noteModel in the FretboardModel to reflect a touch.
@@ -491,7 +490,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     }
                     // play sound if the note was unghosted or if the fretboard cannot be edited.
                     // If the canEditFretboard == false, I need to ensure there are no ghosted notes while loading the notes.
-                    if noteModel.getIsGhost() ==  false || canEditFretboard == false {
+                    if noteModel.getIsGhost() ==  false || allowsCustomizations == false {
                         let zeroTo36Number = getZeroTo36Number(noteView)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
                     }
