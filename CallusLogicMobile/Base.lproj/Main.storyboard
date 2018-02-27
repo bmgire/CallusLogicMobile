@@ -129,15 +129,6 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="RNl-to-lNg"/>
                                 </connections>
                             </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcn-Q8-7yy">
-                                <rect key="frame" x="466" y="239" width="118" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <state key="normal" title="Add Notes"/>
-                                <connections>
-                                    <action selector="addNotesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FwG-vD-Wwh"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QFc-aO-JJC">
                                 <rect key="frame" x="196" y="245" width="258" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -186,13 +177,13 @@
                         <outlet property="LockedStatusLabel" destination="c9E-Hw-J81" id="b2r-HL-Y50"/>
                         <outlet property="accidentalPickerView" destination="MZd-ye-ZjK" id="708-qD-s9V"/>
                         <outlet property="addFretboardButton" destination="fbX-UF-hne" id="CDd-8G-2tz"/>
-                        <outlet property="addNotes" destination="bcn-Q8-7yy" id="ph0-zK-MrS"/>
                         <outlet property="allowsCustomizationButton" destination="lHP-Ln-vuJ" id="T3s-rI-r4I"/>
                         <outlet property="backgroundView" destination="8bC-Xf-vdC" id="5wT-8o-aml"/>
                         <outlet property="colorButton" destination="GJ4-Lk-Ti4" id="ZWj-oM-agb"/>
                         <outlet property="displayModePickerView" destination="fo2-ol-wXK" id="hVS-tx-Ps1"/>
                         <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
+                        <outlet property="lockSwitch" destination="GjG-p4-G2R" id="RlM-z1-hhW"/>
                         <outlet property="modeLabel" destination="R0U-O1-bkH" id="fxz-9r-HUm"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
                         <outlet property="scalesButton" destination="QFc-aO-JJC" id="AF6-gT-zV8"/>

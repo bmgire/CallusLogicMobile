@@ -69,7 +69,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var accidentalPickerView: UIPickerView!
   //  @IBOutlet weak var scalePickerView: UIPickerView!
     
-    @IBOutlet weak var addNotes: UIButton!
+
     @IBOutlet weak var displayModePickerView: UIPickerView!
     @IBOutlet weak var fretboardView: FretboardView!
     @IBOutlet weak var tableView: UITableView!
@@ -77,6 +77,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var fretboardTitleTextField: UITextField!
     @IBOutlet var scalesButton: UIButton!
     @IBOutlet var colorButton: UIButton!
+    @IBOutlet var lockSwitch: UISwitch!
     @IBOutlet var LockedStatusLabel: UILabel!
     @IBOutlet var modeLabel: UILabel!
     @IBOutlet var backgroundView: UIView!
@@ -129,9 +130,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let index = tableView!.indexPathForSelectedRow!.row - 1
             arrayOfFretboardModels.remove(at: index)
             arrayOfTableViewCells.remove(at: index)
-            
             tableView.reloadData()
-            
             let lastRow = arrayOfFretboardModels.endIndex - 1
             tableView.selectRow(at: IndexPath(row: lastRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
             
@@ -142,7 +141,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     //############
     // add notes to the currentBoard
-    @IBAction func addNotesAction(_ sender: UIButton) {
+    func addNotesAction() {
         updateToneArraysCreator()
         loadToneArraysIntoSelectedBoard()
     }
@@ -251,7 +250,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         scalesButton.setTitle(scalesTVC.selectedScale, for: .normal)
         
         colorSelectorTVC.delegate = self
-        colorChanged(color: UIColor.yellow)
     }
     
     //############
@@ -261,7 +259,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         fretboardView.buildNoteRects()
         fretboardView.buildNoteViews()
         fretboardView.addSubviews()
-        addNotesAction(addNotes)
+        colorChanged(color: UIColor.yellow)
+       
     }
     
     //###################################
@@ -450,6 +449,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             // update fretboardview with that display setting.
             updateFretboardView()
         }
+        else {
+            addNotesAction()
+        }
+        
+        
     }
 
 
@@ -483,8 +487,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     let allowsCustomizations = selectedBoard.allowsCustomizations
                     let noteModel = selectedBoard.getFretboardArray()[noteView.viewNumber]
                     
-                    // If the fretboard is editable.
-                    if allowsCustomizations {
+                    // If the board allows customizations and is not locked. Customize.
+                    if allowsCustomizations && lockSwitch.isOn == false {
                         
                         // Use the noteView.viewNumber to determine which noteModel to update.
                         // Update the noteModel in the FretboardModel to reflect a touch.
@@ -501,7 +505,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                         let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
                         sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number)
                         // Only flash when you can't customize the fretboard.
-                        if allowsCustomizations == false {
+                        if allowsCustomizations == false || lockSwitch.isOn == true {
                             noteView.flash()
                         }
                     }
@@ -542,7 +546,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             // Search for location hits in NoteViews, handle as approriate.
             for noteView in fretboardView.arrayOfNoteViews {
                 if noteView.isDisplayed {
-                 //   let allowsCustomizations = selectedBoard.allowsCustomizations
+                 
                     let noteModel = selectedBoard.getFretboardArray()[noteView.viewNumber]
                     
                     let (noteViewNumber, pointIsInNoteView) = getKeyTestPointHit(noteView, touch: touch)
@@ -610,8 +614,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView, noteModel: NoteModel) {
         let allowsCustomizations = selectedBoard.allowsCustomizations
-        
-        if allowsCustomizations {
+        // If allows customizations and the fretboard is not locked.
+        if allowsCustomizations && lockSwitch.isOn == false {
             
             // Update the noteModel
             let viewNumber = noteView.viewNumber
@@ -626,7 +630,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         if noteModel.getIsGhost() == false || allowsCustomizations == false {
             sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
             // only flash if allowsCustomizations == false.
-            if allowsCustomizations == false {
+            if allowsCustomizations == false || lockSwitch.isOn == true {
                 noteView.flash()
             }
         } else {
@@ -647,6 +651,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func scaleChanged(text: String) {
         scalesButton.setTitle(text, for: .normal)
         scalesButton.setNeedsDisplay()
+        addNotesAction()
     }
     //###########################
     // colorSelectorTVCDelegate Method
@@ -654,6 +659,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func colorChanged(color: UIColor) {
         colorButton.backgroundColor = color
         selectedBoard.setUserColor(color)
+        addNotesAction()
     }
     
    
