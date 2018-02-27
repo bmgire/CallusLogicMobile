@@ -378,16 +378,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
             // Update all  note models that are not kept. Should initially be zero.
-            selectedBoard.updateNoteModelsThatAreGhosted(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
+            selectedBoard.loadToneArrayModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
             // Fill with chromatic even if canEdit is false, just in case you ever want to edit.
             fillSpacesWithChromatic()
         // If canEdit. ghost notes.
         if selectedBoard.allowsCustomizations {
-            selectedBoard.showNotesOnFretboard(true, _isDisplayed: true, _isGhosted: true)
+            selectedBoard.updateAllFretboardModels(true, _isDisplayed: true, _isGhosted: true)
         }
         // Else cannot edit, do not ghost the notes.
         else {
-            selectedBoard.showNotesOnFretboard(true, _isDisplayed: true, _isGhosted: false)
+            selectedBoard.updateAllFretboardModels(true, _isDisplayed: true, _isGhosted: false)
         }
         updateFretboardView()
     }
@@ -402,7 +402,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
                                            scaleName: "Chromatic Scale")
-       selectedBoard.updateNoteModelsThatAreGhosted(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
+       selectedBoard.loadToneArrayModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
     
     //##############################################

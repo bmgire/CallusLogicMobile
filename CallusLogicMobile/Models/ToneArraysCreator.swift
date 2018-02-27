@@ -10,7 +10,7 @@ import Foundation
 
 class ToneArraysCreator {
     
-    // The goal is to make this class work to update the views instead of ZeroTo46Calculator Tone Arrays.
+    // The goal is to make this class work to update the views instead of ZeroTo36Calculator Tone Arrays.
     
     
     //################### Constants ########################
@@ -72,6 +72,7 @@ class ToneArraysCreator {
     }
     
     func getArrayOfToneArrays()->[[String]] {
+     //   print(arrayOfToneArrays)
         return arrayOfToneArrays
     }
     

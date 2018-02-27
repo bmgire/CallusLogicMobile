@@ -172,7 +172,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
      3 = intervalsArray
     */
     // Function takes an array of tone arrays and updates the appropriate noteModels.
-    func updateNoteModelsThatAreGhosted(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
+    func loadToneArrayModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
         
         // Internal function to prevent duplicate code.
         func updateSingleModel(noteModel: NoteModel, index: Int) {
@@ -212,7 +212,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
         }
     }
     
-    func showNotesOnFretboard(_ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
+    func updateAllFretboardModels(_ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
         for model in arrayOfNoteModels {
             if model.getIsInScale() == _isInScale {
                 if model.getIsGhost() == true || allowsCustomizations == false {
