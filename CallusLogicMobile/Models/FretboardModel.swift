@@ -233,10 +233,21 @@ class FretboardModel /*: NSObject, NSCoding */ {
         }
     }
     
-    func keepOrUnkeepSelectedNotes(doKeep: Bool) {
+    // mark selected notes as kept or NOT KEPT: depending on the value of doKeep.
+    func updateGhostAndSelectedNotesIsKeptValue(isKept: Bool) {
+        for model in arrayOfNoteModels {
+            if model.getIsDisplayed() {
+                model.setIsKept(isKept)
+            }
+        }
+    }
+    
+    /*
+    // Don't Keep ghosted Notes, also if selected, keep or do not keep depending on the value of doKeep. 
+    func clearGhostsAndKeepOrDiscardSelectedNotes(doKeep: Bool) {
         for index in 0...NOTES_ON_FRETBOARD - 1 {
             let noteModel = arrayOfNoteModels[index]
-            // If ghosted, don't keep
+            // If ghosted, mark as not kept.
             if noteModel.getIsGhost() == true {
                 noteModel.setIsKept(false)
             }
@@ -250,7 +261,28 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 }
             }
         }
+    } */
+    
+    func setIsGhostForAllDisplayedNoteModels(isGhost: Bool) {
+        for model in arrayOfNoteModels {
+            if model.getIsDisplayed() {
+                model.setIsGhost(isGhost)
+                // 
+                model.setIsKept(!isGhost)
+            }
+        }
     }
+    
+    func clearGhostedNotes(){
+        for model in arrayOfNoteModels {
+            if model.getIsGhost() {
+                model.setIsDisplayed(false)
+                model.setIsKept(false)
+            }
+        }
+    }
+    
+    
     
     func lockOrUnlockFretboard(yesOrNo: Bool){
         for noteModel in arrayOfNoteModels {

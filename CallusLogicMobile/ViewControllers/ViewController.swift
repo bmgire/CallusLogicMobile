@@ -83,6 +83,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var backgroundView: UIView!
     @IBOutlet var allowsCustomizationButton: UIButton!
     
+    @IBOutlet var selectAllButton: UIButton!
+    @IBOutlet var ghostAllButton: UIButton!
+    @IBOutlet var clearGhostedNotesButton: UIButton!
+    
+    
+    
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
 
@@ -182,16 +188,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func lockOrUnlockFretboard(_ sender: UISwitch) {
         
         
-            let isLocked = sender.isOn
+        let isLocked = sender.isOn
         
-            // Show or hide fretboard editing controls based on swtich's isOn bool.
-            rootPickerView.isHidden = isLocked
-            accidentalPickerView.isHidden = isLocked
-            scalesButton.isHidden = isLocked
+        // Show or hide fretboard editing controls based on swtich's isOn bool.
+        rootPickerView.isHidden = isLocked
+        accidentalPickerView.isHidden = isLocked
+        scalesButton.isHidden = isLocked
+        if selectedBoard.allowsCustomizations == false {
             allowsCustomizationButton.isHidden = isLocked
-            
-            // I will keep the displaymode picker available.
-            
+        }
+        
+        selectAllButton.isHidden = isLocked
+        ghostAllButton.isHidden = isLocked
+        clearGhostedNotesButton.isHidden = isLocked
+        // I will keep the displaymode picker available.
+        // Mark ghosted notes as isDisplayed = false. 
+        
         
     }
     
@@ -199,18 +211,36 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func allowCustomizations(_ sender: UIButton) {
         selectedBoard.flipAllowsCustomizations()
         if selectedBoard.allowsCustomizations == true {
-            selectedBoard.keepOrUnkeepSelectedNotes(doKeep: true)
+            selectedBoard.updateGhostAndSelectedNotesIsKeptValue(isKept: true)
             modeLabel.text = "Custom Mode Enabled"
             sender.isHidden = true
+            selectAllButton.isHidden = false
+            ghostAllButton.isHidden = false
+            clearGhostedNotesButton.isHidden = false
         }
         else {
             modeLabel.text = "Default Mode"
             sender.setTitle("Allow Customizations", for: .normal)
         }
-        
+    }
+    
+    
+    @IBAction func selectAllNotesAction(_ sender: UIButton) {
+      /* // setting bool to false marks the item as selected.
+        selectedBoard.setIsGhostForAllDisplayedNoteModels(isGhost: false)
+        updateFretboardView()  */
         
     }
     
+    @IBAction func ghostAllNotesAction(_ sender: UIButton) {
+        selectedBoard.setIsGhostForAllDisplayedNoteModels(isGhost: true)
+        updateFretboardView()
+    }
+    
+    @IBAction func clearGhostedNotesAction(_ sender: UIButton) {
+    /*   selectedBoard.clearGhostedNotes()
+        updateFretboardView() */
+    }
     
     
     //###################################
@@ -368,7 +398,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Fills notes not in the scale with chromatic notes.
     func fillSpacesWithChromatic()
     {
-        
           let arrayOfPickerStrings = getPickerValues()
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
