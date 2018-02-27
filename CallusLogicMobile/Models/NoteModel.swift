@@ -17,7 +17,6 @@ class NoteModel /*: NSObject, NSCoding */ {
     
     /// var attributedNote = NSMutableAttributedString()
     fileprivate var isGhost = true
-    fileprivate var isInScale = false
     fileprivate var isDisplayed = false
     fileprivate var isPassingNote = false
     
@@ -122,14 +121,6 @@ class NoteModel /*: NSObject, NSCoding */ {
         isGhost = bool
     }
     
-    func getIsInScale()-> Bool {
-        return isInScale
-    }
-    
-    func setIsInScale(_ bool: Bool) {
-        isInScale = bool
-    }
-    
     func getIsDisplayed()-> Bool {
         return isDisplayed
     }
@@ -209,7 +200,6 @@ class NoteModel /*: NSObject, NSCoding */ {
           fretNumber = newModel.getFretNumber()
         }
         isGhost = newModel.getIsGhost()
-        isInScale = newModel.getIsInScale()
         isDisplayed = newModel.getIsDisplayed()
         isPassingNote = newModel.getIsPassingNote()
         myColor = newModel.getMyColor()

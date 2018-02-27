@@ -172,24 +172,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
      3 = intervalsArray
     */
     // Function takes an array of tone arrays and updates the appropriate noteModels.
-    func loadToneArrayModels(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
-        
-        // Internal function to prevent duplicate code.
-        func updateSingleModel(noteModel: NoteModel, index: Int) {
-            noteModel.setNumber0to11(anArrayOfToneArrays[0][index])
-            noteModel.setNumber0to46(anArrayOfToneArrays[1][index])
-            noteModel.setNote(anArrayOfToneArrays[2][index])
-            noteModel.setInterval(anArrayOfToneArrays[3][index])
-            noteModel.setIsInScale(isInScale)
-            noteModel.setIsDisplayed(isInScale)
-            if isInScale == false {
-                noteModel.setMyColor(UIColor.red)
-            }
-            else {
-                noteModel.setMyColor(userColor)
-            }
-        }
-        
+    func loadNewNotesNumbersAndIntervals(_ anArrayOfToneArrays: [[String]]) {
         // For each string
         for stringIndex in 0...5 {
             // For each fret along the string. Total frets = 23 counting 0 as 1.
@@ -198,27 +181,37 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
                 let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
-                    
-                    
-                    if noteModel.getIsGhost() == true && isInScale {
-                        updateSingleModel(noteModel: noteModel, index: toneIndex)
-                    }
-                    else if isInScale == false && noteModel.getNote() == "" {
-                        updateSingleModel(noteModel: noteModel, index: toneIndex)
-                    }
-                        
-                //}
+                // If the noteModel isGhost update fretboard.
+                if noteModel.getIsGhost() || allowsCustomizations == false {
+                    noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
+                    noteModel.setNumber0to46(anArrayOfToneArrays[1][toneIndex])
+                    noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
+                    noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
+                }
             }
         }
     }
     
-    func updateAllFretboardModels(_ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
+    
+    func updateNoteModelDisplaySettings() {
         for model in arrayOfNoteModels {
-            if model.getIsInScale() == _isInScale {
-                if model.getIsGhost() == true || allowsCustomizations == false {
-                    model.setIsDisplayed(_isDisplayed)
-                    model.setIsGhost(_isGhosted)
+            // If the note is an empty string, don't display and set to ghost.
+            // Setting isGhost = true is precautionary.
+            if model.getNote() == "" {
+                model.setIsDisplayed(false)
+                model.setIsGhost(true)
+            }
+                // Otherwise the note has a value.
+            else {
+                model.setIsDisplayed(true)
+                // If the note is ghosted, update the color.
+                if model.getIsGhost() == true {
                     model.setMyColor(userColor)
+                }
+                
+                // If customizations are not allowed, set isGhost to false (the note is selected)
+                if allowsCustomizations == false  {
+                  model.setIsGhost(false)
                 }
             }
         }

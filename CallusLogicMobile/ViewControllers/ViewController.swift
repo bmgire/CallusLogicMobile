@@ -377,34 +377,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
-            // Update all  note models that are not kept. Should initially be zero.
-            selectedBoard.loadToneArrayModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
-            // Fill with chromatic even if canEdit is false, just in case you ever want to edit.
-            fillSpacesWithChromatic()
-        // If canEdit. ghost notes.
-        if selectedBoard.allowsCustomizations {
-            selectedBoard.updateAllFretboardModels(true, _isDisplayed: true, _isGhosted: true)
-        }
-        // Else cannot edit, do not ghost the notes.
-        else {
-            selectedBoard.updateAllFretboardModels(true, _isDisplayed: true, _isGhosted: false)
-        }
+        // Update all  note models that are not kept. Should initially be zero.
+        selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
+        selectedBoard.updateNoteModelDisplaySettings()
         updateFretboardView()
     }
 
   
    
     //############
-    // Fills notes not in the scale with chromatic notes.
-    func fillSpacesWithChromatic()
-    {
-          let arrayOfPickerStrings = getPickerValues()
-        toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
-                                           accidental: arrayOfPickerStrings[1],
-                                           scaleName: "Chromatic Scale")
-       selectedBoard.loadToneArrayModels(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
-    }
-    
     //##############################################
     // UIPickerView DataSource functions
     
