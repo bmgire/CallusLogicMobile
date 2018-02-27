@@ -23,9 +23,6 @@ class NoteModel /*: NSObject, NSCoding */ {
     
     var isLocked = false 
     
-    // Indicates the note should be kept.
-    fileprivate var isKept = false
-    
     // FontSize
     //fileprivate var noteFontSize: CGFloat = 16
     
@@ -148,16 +145,7 @@ class NoteModel /*: NSObject, NSCoding */ {
     func setIsPassingNote(_ bool: Bool) {
         isPassingNote = bool
     }
-    
-    /*
-    func getDisplayMode() -> String {
-        return displayMode
-    }
-    
-    func setDisplayMode(_ newMode: String){
-        displayMode = newMode
-    }
-    */
+
     func getMyColor() -> UIColor {
         return myColor
     }
@@ -165,23 +153,11 @@ class NoteModel /*: NSObject, NSCoding */ {
     func setMyColor(_ newColor: UIColor){
         myColor = newColor
     }
-    
-    func getIsKept() -> Bool {
-        return isKept
-    }
-    
-    func setIsKept(_ bool: Bool){
-        isKept = bool
-    }
-    
+
     func flipIsGhost(){
         isGhost = !isGhost
     }
-    
-    func flipIsKept() {
-        isKept = !isKept
-    }
-    
+
     func makePassingNote(_ bool: Bool) {
         if bool {
             note = addParentheses(note)
@@ -237,7 +213,6 @@ class NoteModel /*: NSObject, NSCoding */ {
         isDisplayed = newModel.getIsDisplayed()
         isPassingNote = newModel.getIsPassingNote()
         myColor = newModel.getMyColor()
-        isKept = newModel.isKept
     }
     
 

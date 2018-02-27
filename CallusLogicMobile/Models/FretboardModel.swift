@@ -172,7 +172,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
      3 = intervalsArray
     */
     // Function takes an array of tone arrays and updates the appropriate noteModels.
-    func updateNoteModelsThatAreNotKept(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
+    func updateNoteModelsThatAreGhosted(_ anArrayOfToneArrays: [[String]], isInScale: Bool) {
         
         // Internal function to prevent duplicate code.
         func updateSingleModel(noteModel: NoteModel, index: Int) {
@@ -200,7 +200,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
                     
                     
-                    if noteModel.getIsKept() == false && isInScale {
+                    if noteModel.getIsGhost() == true && isInScale {
                         updateSingleModel(noteModel: noteModel, index: toneIndex)
                     }
                     else if isInScale == false && noteModel.getNote() == "" {
@@ -213,62 +213,22 @@ class FretboardModel /*: NSObject, NSCoding */ {
     }
     
     func showNotesOnFretboard(_ _isInScale: Bool, _isDisplayed: Bool, _isGhosted: Bool) {
-        for index in 0...NOTES_ON_FRETBOARD - 1 {
-            let noteModel = arrayOfNoteModels[index]
-            
-            // if note is kept
-            if noteModel.getIsKept() != true {
-                // if the noteModels isInScale bool value equals the passed value.
-                // Allows me to update notes in the scale(if bool is true), or additional notes (if bool is false).
-                if noteModel.getIsInScale() == _isInScale {
-                    // pass isDisplayed and isGhosted,
-                    noteModel.setIsDisplayed(_isDisplayed)
-                    noteModel.setIsGhost(_isGhosted)
-                    // futhermore, if isInScale == true, set the user color.
-                    if _isInScale == true {
-                        noteModel.setMyColor(userColor)
-                    }
-                }
-            }
-        }
-    }
-    
-    // mark selected notes as kept or NOT KEPT: depending on the value of doKeep.
-    func updateGhostAndSelectedNotesIsKeptValue(isKept: Bool) {
         for model in arrayOfNoteModels {
-            if model.getIsDisplayed() {
-                model.setIsKept(isKept)
+            if model.getIsInScale() == _isInScale {
+                if model.getIsGhost() == true || allowsCustomizations == false {
+                    model.setIsDisplayed(_isDisplayed)
+                    model.setIsGhost(_isGhosted)
+                    model.setMyColor(userColor)
+                }
             }
         }
     }
     
-    /*
-    // Don't Keep ghosted Notes, also if selected, keep or do not keep depending on the value of doKeep. 
-    func clearGhostsAndKeepOrDiscardSelectedNotes(doKeep: Bool) {
-        for index in 0...NOTES_ON_FRETBOARD - 1 {
-            let noteModel = arrayOfNoteModels[index]
-            // If ghosted, mark as not kept.
-            if noteModel.getIsGhost() == true {
-                noteModel.setIsKept(false)
-            }
-                // If unghosted (selected), keep or unkeep depending on the value of doKeep
-            else {
-                noteModel.setIsKept(doKeep)
-                // If we've unSelected the note via unselectAll
-                // update the ghost value and display with current value.
-                if doKeep == false {
-                    noteModel.setIsGhost(true)
-                }
-            }
-        }
-    } */
     
     func setIsGhostForAllDisplayedNoteModels(isGhost: Bool) {
         for model in arrayOfNoteModels {
             if model.getIsDisplayed() {
                 model.setIsGhost(isGhost)
-                // 
-                model.setIsKept(!isGhost)
             }
         }
     }
@@ -277,7 +237,6 @@ class FretboardModel /*: NSObject, NSCoding */ {
         for model in arrayOfNoteModels {
             if model.getIsGhost() {
                 model.setIsDisplayed(false)
-                model.setIsKept(false)
             }
         }
     }
@@ -293,7 +252,6 @@ class FretboardModel /*: NSObject, NSCoding */ {
     func updateSingleNoteModel(modelNumber: Int, flipIsGhost: Bool, flipIsKept: Bool) {
         let model = arrayOfNoteModels[modelNumber]
         if flipIsGhost { model.flipIsGhost() }
-        if flipIsKept { model.flipIsKept() }
         model.setMyColor(userColor)
     }
     

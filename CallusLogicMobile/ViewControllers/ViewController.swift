@@ -211,7 +211,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func allowCustomizations(_ sender: UIButton) {
         selectedBoard.flipAllowsCustomizations()
         if selectedBoard.allowsCustomizations == true {
-            selectedBoard.updateGhostAndSelectedNotesIsKeptValue(isKept: true)
+            //selectedBoard.updateGhostAndSelectedNotesIsKeptValue(isKept: true)
             modeLabel.text = "Custom Mode Enabled"
             sender.isHidden = true
             selectAllButton.isHidden = false
@@ -378,7 +378,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
             // Update all  note models that are not kept. Should initially be zero.
-            selectedBoard.updateNoteModelsThatAreNotKept(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
+            selectedBoard.updateNoteModelsThatAreGhosted(toneArraysCreator.getArrayOfToneArrays(), isInScale: true)
             // Fill with chromatic even if canEdit is false, just in case you ever want to edit.
             fillSpacesWithChromatic()
         // If canEdit. ghost notes.
@@ -402,7 +402,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
                                            scaleName: "Chromatic Scale")
-       selectedBoard.updateNoteModelsThatAreNotKept(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
+       selectedBoard.updateNoteModelsThatAreGhosted(toneArraysCreator.getArrayOfToneArrays(), isInScale: false)
     }
     
     //##############################################
@@ -690,9 +690,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         selectedBoard.setUserColor(color)
         addNotesAction()
     }
-    
-   
-    
     
  }
 
