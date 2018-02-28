@@ -201,18 +201,35 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 model.setIsDisplayed(false)
                 model.setIsGhost(true)
             }
-                // Otherwise the note has a value.
+            // Otherwise the note has a value.
             else {
+                // Set that note needs to be displayed.
                 model.setIsDisplayed(true)
-                // If the note is ghosted, update the color.
-                if model.getIsGhost() == true {
+                // If customizations are not allowed,
+                // set isGhost = false (the note is selected)
+                // set the userColor.
+                if allowsCustomizations == false  {
+                    model.setIsGhost(false)
                     model.setMyColor(userColor)
                 }
-                
-                // If customizations are not allowed, set isGhost to false (the note is selected)
-                if allowsCustomizations == false  {
-                  model.setIsGhost(false)
+                // otherwise customizations are allowed
+                else {
+                    
+                    // if isDisplayed = true
+                    if model.getIsDisplayed(){
+                        // and if does isGhost = true, set the color.
+                        if model.getIsGhost() == true {
+                            model.setMyColor(userColor)
+                        }
+                    }
                 }
+                
+                // Otherwise set to isDisplayed for some reason?
+              //  model.setIsDisplayed(true)
+                // If the note is ghosted and has a value, update the color.
+                
+                
+
             }
         }
     }

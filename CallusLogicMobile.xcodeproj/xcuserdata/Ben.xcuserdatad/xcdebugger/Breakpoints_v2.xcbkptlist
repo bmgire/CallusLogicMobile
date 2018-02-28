@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/ViewController.swift"
-            timestampString = "541459742.649036"
+            timestampString = "541480434.766392"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "updateFretboardView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "541459742.649134"
+            timestampString = "541480434.767027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "updateSingleNoteModel(modelNumber:flipIsGhost:flipIsKept:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "541459742.649707"
+            timestampString = "541480434.767113"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"

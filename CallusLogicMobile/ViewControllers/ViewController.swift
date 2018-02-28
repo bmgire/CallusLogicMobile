@@ -77,16 +77,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var fretboardTitleTextField: UITextField!
     @IBOutlet var scalesButton: UIButton!
     @IBOutlet var colorButton: UIButton!
+    
+    @IBOutlet var colorButtonBorderView: UIView!
     @IBOutlet var lockSwitch: UISwitch!
     @IBOutlet var LockedStatusLabel: UILabel!
     @IBOutlet var modeLabel: UILabel!
     @IBOutlet var backgroundView: UIView!
-    @IBOutlet var allowsCustomizationButton: UIButton!
-    
-    @IBOutlet var selectAllButton: UIButton!
-    @IBOutlet var ghostAllButton: UIButton!
     @IBOutlet var clearGhostedNotesButton: UIButton!
-    
+    @IBOutlet var customizationSwitch: UISwitch!
+    @IBOutlet var customizationLabel: UILabel!
     
     
     let scalesTVC = ScalesTVC()
@@ -186,36 +185,39 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     @IBAction func lockOrUnlockFretboard(_ sender: UISwitch) {
-        
-        
         let isLocked = sender.isOn
         
         // Show or hide fretboard editing controls based on swtich's isOn bool.
         rootPickerView.isHidden = isLocked
         accidentalPickerView.isHidden = isLocked
         scalesButton.isHidden = isLocked
-        if selectedBoard.allowsCustomizations == false {
-            allowsCustomizationButton.isHidden = isLocked
-        }
-        
-        selectAllButton.isHidden = isLocked
-        ghostAllButton.isHidden = isLocked
         clearGhostedNotesButton.isHidden = isLocked
+        customizationLabel.isHidden = isLocked
+        customizationSwitch.isHidden = isLocked
+        colorButton.isHidden = isLocked
+        colorButtonBorderView.isHidden = isLocked
         // I will keep the displaymode picker available.
-        // Mark ghosted notes as isDisplayed = false. 
-        
         
     }
     
 
+    @IBAction func enableOrDisableCustomizations(_ sender: UISwitch) {
+      selectedBoard.allowsCustomizations = sender.isOn
+        if sender.isOn {
+            clearGhostedNotesButton.isHidden = false
+        }
+        else {
+            clearGhostedNotesButton.isHidden = true
+        }
+        
+    }
+    
     @IBAction func allowCustomizations(_ sender: UIButton) {
         selectedBoard.flipAllowsCustomizations()
         if selectedBoard.allowsCustomizations == true {
             //selectedBoard.updateGhostAndSelectedNotesIsKeptValue(isKept: true)
             modeLabel.text = "Custom Mode Enabled"
             sender.isHidden = true
-            selectAllButton.isHidden = false
-            ghostAllButton.isHidden = false
             clearGhostedNotesButton.isHidden = false
         }
         else {
@@ -224,22 +226,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    
-    @IBAction func selectAllNotesAction(_ sender: UIButton) {
-      /* // setting bool to false marks the item as selected.
-        selectedBoard.setIsGhostForAllDisplayedNoteModels(isGhost: false)
-        updateFretboardView()  */
-        
-    }
-    
-    @IBAction func ghostAllNotesAction(_ sender: UIButton) {
-        selectedBoard.setIsGhostForAllDisplayedNoteModels(isGhost: true)
-        updateFretboardView()
-    }
-    
     @IBAction func clearGhostedNotesAction(_ sender: UIButton) {
-    /*   selectedBoard.clearGhostedNotes()
-        updateFretboardView() */
+        selectedBoard.clearGhostedNotes()
+        updateFretboardView()
     }
     
     
@@ -251,8 +240,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
     
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-       // buildArrayOfScaleNames()
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
         
         
@@ -271,7 +258,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         do {
             try audioSession.setCategory(AVAudioSessionCategoryAmbient, with: AVAudioSessionCategoryOptions.mixWithOthers)
-            //try audioSession.setCategory(AVAudioSessionCategoryPlayback)
         } catch {
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
@@ -361,9 +347,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         let accidentalRow = accidentalPickerView.selectedRow(inComponent: 0)
         let accidental = pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)!
-        
-        //let scaleRow = scalePickerView.selectedRow(inComponent: 0)
-        //let scale = pickerView(scalePickerView, titleForRow: scaleRow, forComponent: 0)!
  
         let scale = scalesTVC.selectedScale
         
@@ -669,7 +652,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func colorChanged(color: UIColor) {
         colorButton.backgroundColor = color
         selectedBoard.setUserColor(color)
-        addNotesAction()
+        if selectedBoard.allowsCustomizations == false {
+            addNotesAction()
+        }
+        else {
+            selectedBoard.updateNoteModelDisplaySettings()
+            //updateFretboardView()
+        }
     }
     
  }

@@ -141,15 +141,6 @@
                                     <action selector="selectScale:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uPx-2q-lUF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lHP-Ln-vuJ">
-                                <rect key="frame" x="301" y="62" width="284" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="Allow Customizations"/>
-                                <connections>
-                                    <action selector="allowCustomizations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fWb-ZF-Slw"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default Mode" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0U-O1-bkH">
                                 <rect key="frame" x="38" y="64" width="244" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -166,28 +157,27 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="YGJ-wh-cYW"/>
                                 </connections>
                             </pickerView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEa-eO-kCs">
-                                <rect key="frame" x="30" y="369" width="88" height="30"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0om-Qh-8AF">
+                                <rect key="frame" x="38" y="327" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select All"/>
                                 <connections>
-                                    <action selector="selectAllNotesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vSM-vU-i0c"/>
+                                    <action selector="enableOrDisableCustomizations:" destination="BYZ-38-t0r" eventType="valueChanged" id="pvx-Bu-ojQ"/>
                                 </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3o-P0-esF">
-                                <rect key="frame" x="232" y="369" width="143" height="30"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enable Customizations" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVW-IA-5d1">
+                                <rect key="frame" x="93" y="322" width="302" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L3o-P0-esF">
+                                <rect key="frame" x="93" y="361" width="231" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Clear Ghosted Notes"/>
                                 <connections>
                                     <action selector="clearGhostedNotesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TNP-1B-bm9"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sfn-pn-kTL">
-                                <rect key="frame" x="137" y="369" width="73" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Ghost All"/>
-                                <connections>
-                                    <action selector="ghostAllNotesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JOM-NH-A7T"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -201,19 +191,19 @@
                         <outlet property="LockedStatusLabel" destination="c9E-Hw-J81" id="b2r-HL-Y50"/>
                         <outlet property="accidentalPickerView" destination="MZd-ye-ZjK" id="708-qD-s9V"/>
                         <outlet property="addFretboardButton" destination="fbX-UF-hne" id="CDd-8G-2tz"/>
-                        <outlet property="allowsCustomizationButton" destination="lHP-Ln-vuJ" id="T3s-rI-r4I"/>
                         <outlet property="backgroundView" destination="8bC-Xf-vdC" id="5wT-8o-aml"/>
                         <outlet property="clearGhostedNotesButton" destination="L3o-P0-esF" id="KEV-9i-Zye"/>
                         <outlet property="colorButton" destination="GJ4-Lk-Ti4" id="ZWj-oM-agb"/>
+                        <outlet property="colorButtonBorderView" destination="Osr-yk-x6P" id="D58-kd-YTQ"/>
+                        <outlet property="customizationLabel" destination="wVW-IA-5d1" id="e90-Jh-RMa"/>
+                        <outlet property="customizationSwitch" destination="0om-Qh-8AF" id="drq-nl-Iq4"/>
                         <outlet property="displayModePickerView" destination="fo2-ol-wXK" id="hVS-tx-Ps1"/>
                         <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
-                        <outlet property="ghostAllButton" destination="sfn-pn-kTL" id="bgU-Vb-bIC"/>
                         <outlet property="lockSwitch" destination="GjG-p4-G2R" id="RlM-z1-hhW"/>
                         <outlet property="modeLabel" destination="R0U-O1-bkH" id="fxz-9r-HUm"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
                         <outlet property="scalesButton" destination="QFc-aO-JJC" id="AF6-gT-zV8"/>
-                        <outlet property="selectAllButton" destination="TEa-eO-kCs" id="5Gr-Rd-j5X"/>
                         <outlet property="tableView" destination="lWO-ho-zCK" id="a4L-xp-wFv"/>
                     </connections>
                 </viewController>
