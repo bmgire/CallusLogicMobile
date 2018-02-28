@@ -30,6 +30,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     
     //###################################
+    // Other Constants
+    //############
+    
+    let lightYellowColor = UIColor(red: 1, green: 1, blue: 155/255, alpha: 1)
+    let pinkColor = UIColor(red: 1, green: 0.5, blue: 0.5, alpha: 1)
+    let sixTonesController = SixTones()
+    
+    
+    //###################################
     // Array Variables
     //############
     
@@ -45,9 +54,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // if I didn't leave the bounds, I cannot update.
     var dictOfTouchedNoteViewNumbers = [Int: Bool]()
     
- 
-    
-    let sixTonesController = SixTones()
+
     
     fileprivate var arrayOfTableViewCells = [UITableViewCell]()
     
@@ -151,6 +158,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         loadToneArraysIntoSelectedBoard()
     }
     
+    // Gets a readable title from the root, accidental, & scale selections
+    // and updates the fretboard title.
+    func autoSetFretboardTitle(arrayOfStrings: [String]) {
+        let root = arrayOfStrings[0]
+        var accidental = arrayOfStrings[1]
+        if accidental == "Natural" {
+            accidental = ""
+        }
+        let scale = arrayOfStrings[2]
+        
+        let newTitle = "\(root)\(accidental)  \(scale)"
+        fretboardTitleTextField.text = newTitle
+    }
+    
     
     @IBAction func selectScale(_ sender: UIButton) {
        
@@ -203,11 +224,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     @IBAction func enableOrDisableCustomizations(_ sender: UISwitch) {
       selectedBoard.allowsCustomizations = sender.isOn
+        // If switch is enabled (customizations are allowed)
+        // Show the clear ghosted notes button.
+        // Update label to Disable Customizations.
+        // change backgroundViewColor.
         if sender.isOn {
             clearGhostedNotesButton.isHidden = false
+            customizationLabel.text = "Disable Customizations"
+            backgroundView.backgroundColor = pinkColor
+            modeLabel.text = "Mode: Customizable Fretboard"
+            fretboardTitleTextField.textColor = UIColor.blue
+            fretboardTitleTextField.isUserInteractionEnabled = true
         }
         else {
             clearGhostedNotesButton.isHidden = true
+            customizationLabel.text = "Enable Customizations"
+            backgroundView.backgroundColor = lightYellowColor
+            modeLabel.text = "Mode: Default Fretboard Switching"
+            fretboardTitleTextField.textColor = UIColor.black
+            fretboardTitleTextField.isUserInteractionEnabled = false
         }
         
     }
@@ -336,6 +371,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
                                            scaleName: arrayOfPickerStrings[2])
+        if selectedBoard.allowsCustomizations == false {
+            autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+        }
     }
     
     //############
