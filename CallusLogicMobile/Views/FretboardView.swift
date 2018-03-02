@@ -200,7 +200,7 @@ class FretboardView: UIImageView {
     }
 
     // Updates the contents of each noteView.
-    func updateSubviews(_ fretboardArray: [NoteModel], displayMode: String) {
+    func updateSubviews(_ fretboardArray: [NoteModel], displayMode: DisplayMode) {
         for index in 0...NOTES_ON_FRETBOARD - 1  {
             let view = subviews[index] as! NoteView
             let noteModel = fretboardArray[index]
@@ -208,13 +208,13 @@ class FretboardView: UIImageView {
             var displayText = ""
             
             switch displayMode {
-            case "Fret Numbers":
+            case .fretNumbers:
                 displayText = noteModel.getFretNumber()
-            case "Intervals":
+            case .intervals:
                 displayText = noteModel.getInterval()
-            case "Numbers 0-11":
+            case .numbers0to11:
                 displayText = noteModel.getNumber0to11()
-            case "Numbers 0-36":
+            case .numbers0to36:
                 displayText = noteModel.getNumber0to46()
             default:
                 displayText = noteModel.getNote()

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ScalesTVCDelegate: class {
-    func scaleChanged(text: String)
+    func scaleChanged(text: String, indexPath: IndexPath)
 }
 
 class ScalesTVC: UITableViewController {
@@ -103,9 +103,8 @@ class ScalesTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Dissmiss the view after a selection is made.
-        
         selectedScale = arrayOfScaleNames[indexPath.row]
-        delegate?.scaleChanged(text: selectedScale)
+        delegate?.scaleChanged(text: selectedScale, indexPath: indexPath)
         dismiss(animated: true, completion: nil)
     }
 

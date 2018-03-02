@@ -19,29 +19,24 @@ class FretboardModel /*: NSObject, NSCoding */ {
     //##########################################################
     // MARK: - Variables
     //##########################################################
-    
-    // The array of noteModels that make up the fretboard.
-    // why is this an optional
-    fileprivate var arrayOfNoteModels: [NoteModel] = []
-    
-    // The fretboards Title
-    fileprivate var fretboardTitle: String? = "Untitled"
-    
-   
-    // The userColor for note selection.
-    fileprivate var userColor = UIColor.yellow
-    
-    fileprivate var isLocked = true
+
     fileprivate var zoomLevel = 100.0
     fileprivate var showAdditionalNotes = 0
-    
+
+    // Variables that need to loaded whenever a fretboard is loaded.
+    fileprivate var arrayOfNoteModels: [NoteModel] = []
+    var rootNote = 0
+    var accidental = 0
+    var scaleIndexPath = IndexPath()
+    var allowsCustomizations = false
+    fileprivate var isLocked = false
     fileprivate var displayMode = 0
+    fileprivate var userColor = UIColor.yellow
+    fileprivate var fretboardTitle: String? = "Untitled"
     
-    fileprivate var allowsGhostAll = false
-    fileprivate var allowsSelectAll = false
     fileprivate var allowsClear = false
     
-    var allowsCustomizations = false
+  
     
     /*
     //##########################################################
@@ -329,27 +324,11 @@ class FretboardModel /*: NSObject, NSCoding */ {
         return showAdditionalNotes
     }
     
-    func setDisplayMode(_ index: Int) {
+    func setDisplayMode(index: Int) {
         displayMode = index
     }
-    func getDisplayMode()->Int {
+    func getDisplayMode()->(Int) {
         return displayMode
-    }
-
-    func setAllowsGhostAll(_ bool: Bool) {
-        allowsGhostAll = bool
-    }
-    
-    func getAllowsGhostAll()-> Bool {
-        return allowsGhostAll
-    }
-    
-    func setAllowsSelectAll(_ bool: Bool) {
-        allowsSelectAll = bool
-    }
-    
-    func getAllowsSelectAll()-> Bool {
-        return allowsSelectAll
     }
     
     func setAllowsClear(_ bool: Bool) {

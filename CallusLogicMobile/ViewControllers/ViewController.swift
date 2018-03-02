@@ -58,10 +58,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     fileprivate var arrayOfTableViewCells = [UITableViewCell]()
     
-    fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()] /*{
-        // reload tableView if arrayOfFretboardModels is loaded from a saved file.
-        didSet { tableView.reloadData() }
-    } */
+    fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()]
     
     fileprivate var selectedBoard = FretboardModel()
     
@@ -127,7 +124,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             let row = indexPath.row + 1
             arrayOfFretboardModels.insert(FretboardModel(), at: row)
             tableView?.insertRows(at: [indexPath], with: .none)
-            viewSelectedFretboard(index: row)
+            
+            modelIndex = row
+            selectedBoard.scaleIndexPath = IndexPath(row: 0, section: 0)
+            loadSettingsFromSelectedBoard()
+            updateToneArraysCreator()
+            loadToneArraysIntoSelectedBoard()
+            updateFretboardView()
             
         } else {
             print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
@@ -145,8 +148,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             tableView.reloadData()
             let lastRow = arrayOfFretboardModels.endIndex - 1
             tableView.selectRow(at: IndexPath(row: lastRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
-            
-            viewSelectedFretboard(index: lastRow)
+            modelIndex = lastRow
+            updateFretboardView()
         }
         
     }
@@ -156,6 +159,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func addNotesAction() {
         updateToneArraysCreator()
         loadToneArraysIntoSelectedBoard()
+        updateFretboardView()
     }
     
     // Gets a readable title from the root, accidental, & scale selections
@@ -217,6 +221,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         customizationSwitch.isHidden = isLocked
         colorButton.isHidden = isLocked
         colorButtonBorderView.isHidden = isLocked
+        selectedBoard.setIsLocked(isLocked)
         // I will keep the displaymode picker available.
         
     }
@@ -283,8 +288,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         let indexPath = IndexPath(row: modelIndex, section: 0)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-        
-         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
+        selectedBoard.scaleIndexPath = tableView.indexPathForSelectedRow!
+        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
         
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
         AudioKit.start()
@@ -339,7 +344,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // change the displayed fretboard to match the selection.
         
         let myRow = indexPath.row
-        viewSelectedFretboard(index: myRow)
+        modelIndex = myRow
+        updateFretboardView()
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
     }
  
@@ -349,18 +355,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     //############
     // Updates the selectedBoard and calls for it to be displayed.
-    fileprivate func viewSelectedFretboard(index: Int){
-        modelIndex = index
+/*    fileprivate func viewSelectedFretboard() {
+        
         updateFretboardView()
-    }
+    } */
     
     //############
     func updateFretboardView() {
+       // loadSettingsFromSelectedBoard()
+        
         // get the displayMode
-        let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
-        let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
-        // Update View
-        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode!)
+       // let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
+       //  let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
+        
+       let displayMode = DisplayMode(rawValue: selectedBoard.getDisplayMode())!
+        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
+        
     }
  
     
@@ -375,6 +385,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
         }
     }
+    
+    
     
     //############
     // Get Root, Accidental, and Scale in a array of strings
@@ -401,7 +413,34 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Update all  note models that are not kept. Should initially be zero.
         selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
         selectedBoard.updateNoteModelDisplaySettings()
-        updateFretboardView()
+        
+    }
+    //#############
+    // Loads settings from the selected board.
+    func loadSettingsFromSelectedBoard() {
+         // load fretboardTitle
+        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
+        
+        // Update allowsCustomizations switch and action.
+        customizationSwitch.isOn = selectedBoard.allowsCustomizations
+        enableOrDisableCustomizations(customizationSwitch)
+        
+        // update lockSwitch and action settings.
+        lockSwitch.isOn = selectedBoard.getIsLocked()
+        lockOrUnlockFretboard(lockSwitch)
+        
+        // load all pickerView and TVC (scale) selections.
+        rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
+        accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
+        
+        let indexPath = selectedBoard.scaleIndexPath
+        scalesTVC.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
+        scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[indexPath.row]
+        scalesButton.titleLabel?.text = scalesTVC.selectedScale
+        displayModePickerView.selectRow(selectedBoard.getDisplayMode(), inComponent: 0, animated: true)
+        
+        // loadUserColor
+        colorButton.backgroundColor = selectedBoard.getUserColor()
     }
 
   
@@ -477,14 +516,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     inComponent component: Int) {
         
         if pickerView == displayModePickerView {
-            // update fretboardview with that display setting.
+            selectedBoard.setDisplayMode(index: row)
+        
             updateFretboardView()
         }
         else {
+            switch pickerView {
+            case rootPickerView:
+                selectedBoard.rootNote = row
+            case accidentalPickerView:
+                selectedBoard.rootNote = row
+            default:
+                print("\(#function): Error: pickerView selection was not rootPickerView or accidentalPickerView")
+            }
             addNotesAction()
         }
-        
-        
     }
 
 
@@ -679,9 +725,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     //###########################
     // scalesTVCDelegate Method
-    func scaleChanged(text: String) {
+    func scaleChanged(text: String, indexPath: IndexPath) {
         scalesButton.setTitle(text, for: .normal)
         scalesButton.setNeedsDisplay()
+        selectedBoard.scaleIndexPath = indexPath
         addNotesAction()
     }
     //###########################
