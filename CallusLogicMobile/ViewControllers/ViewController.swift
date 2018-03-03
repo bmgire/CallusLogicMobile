@@ -56,7 +56,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
 
     
-    fileprivate var arrayOfTableViewCells = [UITableViewCell]()
+    
     
     fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()]
     
@@ -126,10 +126,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             tableView?.insertRows(at: [indexPath], with: .none)
             
             modelIndex = row
+            // Selects a scale for the newly created row. I might get rid of this have newly created fretboards somehow have valid indexPaths.
             selectedBoard.scaleIndexPath = IndexPath(row: 0, section: 0)
             loadSettingsFromSelectedBoard()
+            
+            // Load settings from the toneArraysCreator only because we're creating a new fretboard.
             updateToneArraysCreator()
             loadToneArraysIntoSelectedBoard()
+            
             updateFretboardView()
             
         } else {
@@ -142,13 +146,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // remove a fretboard from the arrayOfFretbaords and the tableView.
     @IBAction func removeFretboardAction(_ sender: UIButton) {
         if arrayOfFretboardModels.count != 1  {
-            let index = tableView!.indexPathForSelectedRow!.row - 1
-            arrayOfFretboardModels.remove(at: index)
-            arrayOfTableViewCells.remove(at: index)
-            tableView.reloadData()
-            let lastRow = arrayOfFretboardModels.endIndex - 1
-            tableView.selectRow(at: IndexPath(row: lastRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
-            modelIndex = lastRow
+            // Get indexPath of selectedRow and remove data and row.
+            let indexPath = tableView!.indexPathForSelectedRow!
+            arrayOfFretboardModels.remove(at: indexPath.row)
+            tableView?.deleteRows(at: [indexPath], with: .automatic)
+            
+            // Select the previous row and loadSettings for that fretboard.
+            // If the previous row is a negative number, set previousRow = 0. For when the first row is deleted. 
+            var previousRow = indexPath.row - 1
+            if previousRow < 0 {
+                previousRow = 0
+            }
+            tableView.selectRow(at: IndexPath(row: previousRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
+            modelIndex = previousRow
+            loadSettingsFromSelectedBoard()
             updateFretboardView()
         }
         
@@ -345,6 +356,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         let myRow = indexPath.row
         modelIndex = myRow
+        loadSettingsFromSelectedBoard()
         updateFretboardView()
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
     }
