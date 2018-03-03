@@ -405,16 +405,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     fileprivate func getPickerValues()->[String] {
   
         let rootRow = rootPickerView.selectedRow(inComponent: 0)
-        let root = pickerView(rootPickerView, titleForRow: rootRow, forComponent: 0)!
+        let root = pickerView(rootPickerView, attributedTitleForRow: rootRow, forComponent: 0)!
         
         let accidentalRow = accidentalPickerView.selectedRow(inComponent: 0)
-        let accidental = pickerView(accidentalPickerView, titleForRow: accidentalRow, forComponent: 0)!
+        let accidental = pickerView(accidentalPickerView, attributedTitleForRow: accidentalRow, forComponent: 0)!
  
         let scale = scalesTVC.selectedScale
         
         var arrayOfStrings = [String]()
-        arrayOfStrings.append(root)
-        arrayOfStrings.append(accidental)
+        arrayOfStrings.append(root.string)
+        arrayOfStrings.append(accidental.string)
         arrayOfStrings.append(scale)
         return arrayOfStrings
     }
@@ -507,16 +507,26 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Returns the String of each Row.
     func pickerView(_ pickerView: UIPickerView,
-                    titleForRow row: Int,
-                    forComponent component: Int) -> String? {
+                    attributedTitleForRow row: Int,
+                    forComponent component: Int) -> NSAttributedString? {
+        
+        let attributedStringKey = [NSAttributedStringKey.foregroundColor: UIColor.blue]
         
         switch pickerView {
         case rootPickerView:
-            return arrayOfRootNotes[row]
+            let data = arrayOfRootNotes[row]
+            let attributedString = NSAttributedString(string: data, attributes: attributedStringKey)
+            return attributedString
         case accidentalPickerView:
-            return arrayOfAccidentals[row]
+            
+            let data = arrayOfAccidentals[row]
+            let attributedString = NSAttributedString(string: data, attributes: attributedStringKey)
+            return attributedString
+            
         default:
-            return arrrayOfDisplayModes[row]
+            let data = arrrayOfDisplayModes[row]
+            let attributedString = NSAttributedString(string: data, attributes: attributedStringKey)
+            return attributedString
         }
         
     }
