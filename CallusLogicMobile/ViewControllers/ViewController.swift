@@ -42,36 +42,28 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Array Variables
     //############
     
-    // The names of all selectable scales.
-    // Is a variable because of the pointer swap in viewDidLoad()
-  
-     //  var arrayOfScaleNames = [String]()
-    
     // Variable to keep track of views updated during a single view track event.
     // Is a dictionary of view IDs and Bools.
     // Bool: yes = canUpdate.
     // If I exited the views bounds, I can can update it,
     // if I didn't leave the bounds, I cannot update.
     var dictOfTouchedNoteViewNumbers = [Int: Bool]()
-    
 
-    
-    
-    
     fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()]
     
     fileprivate var selectedBoard = FretboardModel()
     
     fileprivate var modelIndex: Int = 0 {
         // switches the selectedBoard. Perhaps consider a better mechanism
-        didSet { selectedBoard = arrayOfFretboardModels[modelIndex] }
+        didSet {
+            selectedBoard = arrayOfFretboardModels[modelIndex]
+        }
     }
     //###################################
     // Outlets
     //############
     @IBOutlet weak var rootPickerView: UIPickerView!
     @IBOutlet weak var accidentalPickerView: UIPickerView!
-  //  @IBOutlet weak var scalePickerView: UIPickerView!
     
 
     @IBOutlet weak var displayModePickerView: UIPickerView!
@@ -79,7 +71,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addFretboardButton: UIButton!
     @IBOutlet weak var fretboardTitleTextField: UITextField!
-    @IBOutlet var scalesButton: UIButton!
+    @IBOutlet var scaleSelectionButton: UIButton!
     @IBOutlet var colorButton: UIButton!
     
     @IBOutlet var colorButtonBorderView: UIView!
@@ -90,6 +82,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var clearGhostedNotesButton: UIButton!
     @IBOutlet var customizationSwitch: UISwitch!
     @IBOutlet var customizationLabel: UILabel!
+    @IBOutlet var removeFretboardButton: UIButton!
     
     
     let scalesTVC = ScalesTVC()
@@ -104,6 +97,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func changeFretboardTitle(_ sender: UITextField) {
+        // print(#function) // Displays function when called.
+        
         selectedBoard.setFretboardTitle(sender.text!)
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.reloadRows(at: [indexPath], with: .none)
@@ -111,12 +106,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         } else {
             print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
         }
-       
     }
     
     
     
     @IBAction func addFretboardAction(_ sender: UIButton) {
+        // print(#function) // Displays function when called.
         // Add a new blank fretboard Model
         
         if let indexPath = tableView.indexPathForSelectedRow {
@@ -126,15 +121,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             tableView?.insertRows(at: [indexPath], with: .none)
             
             modelIndex = row
-            // Selects a scale for the newly created row. I might get rid of this have newly created fretboards somehow have valid indexPaths.
             selectedBoard.scaleIndexPath = IndexPath(row: 0, section: 0)
+            
             loadSettingsFromSelectedBoard()
             
             // Load settings from the toneArraysCreator only because we're creating a new fretboard.
-            updateToneArraysCreator()
-            loadToneArraysIntoSelectedBoard()
+            addNotesAction()
             
-            updateFretboardView()
             
         } else {
             print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
@@ -145,6 +138,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // remove a fretboard from the arrayOfFretbaords and the tableView.
     @IBAction func removeFretboardAction(_ sender: UIButton) {
+        // print(#function) // Displays function when called.
         if arrayOfFretboardModels.count != 1  {
             // Get indexPath of selectedRow and remove data and row.
             let indexPath = tableView!.indexPathForSelectedRow!
@@ -168,6 +162,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // add notes to the currentBoard
     func addNotesAction() {
+        // print(#function) // Displays function when called.
+        
         updateToneArraysCreator()
         loadToneArraysIntoSelectedBoard()
         updateFretboardView()
@@ -176,6 +172,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Gets a readable title from the root, accidental, & scale selections
     // and updates the fretboard title.
     func autoSetFretboardTitle(arrayOfStrings: [String]) {
+        // print(#function) // Displays function when called.
+        
         let root = arrayOfStrings[0]
         var accidental = arrayOfStrings[1]
         if accidental == "Natural" {
@@ -184,12 +182,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let scale = arrayOfStrings[2]
         
         let newTitle = "\(root)\(accidental)  \(scale)"
+        selectedBoard.setFretboardTitle(newTitle)
         fretboardTitleTextField.text = newTitle
+        fretboardTitleTextField.setNeedsDisplay()
+        
+        
+        
+        let indexPath = tableView.indexPathForSelectedRow!
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+ 
     }
     
     
     @IBAction func selectScale(_ sender: UIButton) {
-       
+        // print(#function) // Displays function when called.
+        
         let popoverC = scalesTVC.popoverPresentationController
         popoverC?.sourceView = sender
         popoverC?.sourceRect = sender.bounds
@@ -201,6 +209,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     @IBAction func selectColor(_ sender: UIButton) {
+        
+        // print(#function) // Displays function when called.
         
         // Set height and width for colorSelectorTVC.preferredContentSize
         let width = sender.frame.width
@@ -221,25 +231,28 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     @IBAction func lockOrUnlockFretboard(_ sender: UISwitch) {
+       // print(#function) // Displays function when called.
         let isLocked = sender.isOn
         
         // Show or hide fretboard editing controls based on swtich's isOn bool.
         rootPickerView.isHidden = isLocked
         accidentalPickerView.isHidden = isLocked
-        scalesButton.isHidden = isLocked
+        scaleSelectionButton.isHidden = isLocked
         clearGhostedNotesButton.isHidden = isLocked
         customizationLabel.isHidden = isLocked
         customizationSwitch.isHidden = isLocked
         colorButton.isHidden = isLocked
         colorButtonBorderView.isHidden = isLocked
         selectedBoard.setIsLocked(isLocked)
+        removeFretboardButton.isHidden = isLocked 
         // I will keep the displaymode picker available.
         
     }
     
 
     @IBAction func enableOrDisableCustomizations(_ sender: UISwitch) {
-      selectedBoard.allowsCustomizations = sender.isOn
+        // print(#function) // Displays function when called.
+        selectedBoard.allowsCustomizations = sender.isOn
         // If switch is enabled (customizations are allowed)
         // Show the clear ghosted notes button.
         // Update label to Disable Customizations.
@@ -264,6 +277,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     @IBAction func allowCustomizations(_ sender: UIButton) {
+        // print(#function) // Displays function when called.
         selectedBoard.flipAllowsCustomizations()
         if selectedBoard.allowsCustomizations == true {
             //selectedBoard.updateGhostAndSelectedNotesIsKeptValue(isKept: true)
@@ -278,6 +292,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     @IBAction func clearGhostedNotesAction(_ sender: UIButton) {
+        // print(#function) // Displays function when called.
         selectedBoard.clearGhostedNotes()
         updateFretboardView()
     }
@@ -289,6 +304,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // setup after viewLoads from the main.storyboard in memory
     override func viewDidLoad() {
+        // print(#function) // Displays function when called.
     
         super.viewDidLoad()
         rootPickerView.selectRow(4, inComponent: 0, animated: false)
@@ -299,7 +315,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         let indexPath = IndexPath(row: modelIndex, section: 0)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
-        selectedBoard.scaleIndexPath = tableView.indexPathForSelectedRow!
+        
+        selectedBoard.scaleIndexPath = IndexPath(row: 21, section: 0)
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
         
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
@@ -314,14 +331,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
         scalesTVC.delegate = self
-        scalesButton.setTitle(scalesTVC.selectedScale, for: .normal)
-        
+        scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
+        scaleSelectionButton.setNeedsDisplay()
         colorSelectorTVC.delegate = self
     }
     
     //############
     // Autolayout has been applied and you can draw with bounds information.
     override func viewDidLayoutSubviews() {
+        // print(#function) // Displays function when called.
+        
         // update lengths and heights of noteview drawing.
         fretboardView.buildNoteRects()
         fretboardView.buildNoteViews()
@@ -330,50 +349,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
        
     }
     
-    //###################################
-    // UITableView  DataSource functions
-    
-    //############
-    // Returns the number of rows in the tableview.
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfFretboardModels.count
-    }
-    
-    //############
-    // Returns the UITableCellView for each Row.
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fretboardCell", for: indexPath)
-        cell.textLabel?.text = arrayOfFretboardModels[indexPath.row].getFretboardTitle()
-        return cell
-    }
-  
-    
-    //############
-    // FCN is informed when a new object is selected by the user. Not when a new board is added with the + button.
-    func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
-        // change the displayed fretboard to match the selection.
-        
-        let myRow = indexPath.row
-        modelIndex = myRow
-        loadSettingsFromSelectedBoard()
-        updateFretboardView()
-        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
-    }
+
  
     
     //###################################
     // Custom Functions
-    
-    //############
-    // Updates the selectedBoard and calls for it to be displayed.
-/*    fileprivate func viewSelectedFretboard() {
-        
-        updateFretboardView()
-    } */
+
     
     //############
     func updateFretboardView() {
+        // print(#function) // Displays function when called.
        // loadSettingsFromSelectedBoard()
         
         // get the displayMode
@@ -389,6 +374,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Load scale info into toneArraysCreator
     func updateToneArraysCreator() {
+        // print(#function) // Displays function when called.
+        
         let arrayOfPickerStrings = getPickerValues()
         toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                            accidental: arrayOfPickerStrings[1],
@@ -403,6 +390,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Get Root, Accidental, and Scale in a array of strings
     fileprivate func getPickerValues()->[String] {
+        // print(#function) // Displays function when called.
   
         let rootRow = rootPickerView.selectedRow(inComponent: 0)
         let root = pickerView(rootPickerView, attributedTitleForRow: rootRow, forComponent: 0)!
@@ -422,6 +410,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
+        // print(#function) // Displays function when called.
+        
         // Update all  note models that are not kept. Should initially be zero.
         selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
         selectedBoard.updateNoteModelDisplaySettings()
@@ -430,7 +420,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //#############
     // Loads settings from the selected board.
     func loadSettingsFromSelectedBoard() {
-         // load fretboardTitle
+        // print(#function) // Displays function when called.
+ 
+        // Note at this point the ModelIndex should have been updated elsewhere in the code. .
+        // load fretboardTitle
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
         
         // Update allowsCustomizations switch and action.
@@ -445,16 +438,68 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
         accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
         
-        let indexPath = selectedBoard.scaleIndexPath
-        scalesTVC.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
-        scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[indexPath.row]
-        scalesButton.titleLabel?.text = scalesTVC.selectedScale
-        displayModePickerView.selectRow(selectedBoard.getDisplayMode(), inComponent: 0, animated: true)
+        updateScaleSelectionButton()
+        
+        
+        displayModePickerView.selectRow(selectedBoard.getDisplayMode(), inComponent: 0, animated: false)
         
         // loadUserColor
         colorButton.backgroundColor = selectedBoard.getUserColor()
     }
+    
+    func updateScaleSelectionButton() {
+        // get the indexPath from the selected board which was selected prior to this function being called.
+        let indexPath = selectedBoard.scaleIndexPath
+       
+        // Select the row in the scalesTVC.tableView.
+        scalesTVC.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+        
+        // Set the scalesTVC.selectedScale string to match the indexPath pulled from the selected Board.
+        scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[indexPath.row]
+        
+        // Upate the title.
+        scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
+        scaleSelectionButton.setNeedsDisplay()
+    }
+    
 
+    //###################################
+    // UITableView  DataSource functions
+    
+    //############
+    // Returns the number of rows in the tableview.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // print(#function) // Displays function when called.
+        
+        return arrayOfFretboardModels.count
+    }
+    
+    //############
+    // Returns the UITableCellView for each Row.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // print(#function) // Displays function when called.
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "fretboardCell", for: indexPath)
+        cell.textLabel?.text = arrayOfFretboardModels[indexPath.row].getFretboardTitle()
+        return cell
+    }
+    
+    
+    //############
+    // FCN is informed when a new object is selected by the user. Not when a new board is added with the + button.
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+        // print(#function) // Displays function when called.
+        
+        // change the displayed fretboard to match the selection. Only if selecting a different fretboard.
+          if modelIndex != indexPath.row {
+        let myRow = indexPath.row
+        modelIndex = myRow
+        loadSettingsFromSelectedBoard()
+        updateFretboardView()
+        
+        }
+    }
   
    
     //############
@@ -464,11 +509,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Return the number of componensts
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        // print(#function) // Displays function when called.
         return 1
     }
     //############
     // return the count for each pickerview.
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        // print(#function) // Displays function when called.
         
         switch pickerView {
         case rootPickerView:
@@ -486,12 +533,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Sets the height for each component.
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        // print(#function) // Displays function when called.
         return CGFloat(30)
     }
     
     //############
     // returns the widths for each off the pickerViews
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        // print(#function) // Displays function when called.
+        
         switch pickerView {
             case rootPickerView:
             return CGFloat(ROOT_WIDTH)
@@ -509,6 +559,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView,
                     attributedTitleForRow row: Int,
                     forComponent component: Int) -> NSAttributedString? {
+        // print(#function) // Displays function when called.
         
         let attributedStringKey = [NSAttributedStringKey.foregroundColor: UIColor.blue]
         
@@ -536,6 +587,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView,
                     didSelectRow row: Int,
                     inComponent component: Int) {
+        // print(#function) // Displays function when called.
         
         if pickerView == displayModePickerView {
             selectedBoard.setDisplayMode(index: row)
@@ -563,6 +615,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //############
     // Is called when the return key is hit by the keyboard for the fretboardTitle textField.
    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    // print(#function) // Displays function when called.
+    
         // Update the currentBoard.title field. 
         
         // Close keyboard
@@ -574,6 +628,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // Touches methods
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // print(#function) // Displays function when called.
         
         for touch in touches {
             // If the view is a noteView, and is displayed.
@@ -616,8 +671,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // print(#function) // Displays function when called.
         
-       
         for touch in touches {
             if let noteView = getNoteViewOrNil(touch.view) {
                 if noteView.isDisplayed {
@@ -639,6 +694,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
   
     // I may need to override for playing notes.
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // print(#function) // Displays function when called.
         
         // for all sent touches (probably only one touch.
         for touch in touches {
@@ -679,6 +735,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //########################################
     // return a noteView or nil
     func getNoteViewOrNil(_ view: UIView?)->NoteView? {
+        // print(#function) // Displays function when called.
+        
         if let noteView = view as? NoteView {
             return noteView
         }
@@ -690,6 +748,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //########################################
     // Add key to dictionary if need be
     func addViewIdToDictionary(_ noteView: NoteView){
+        // print(#function) // Displays function when called.
         
             // so create a key and test if it's in the dictionary.
             let number = noteView.viewNumber
@@ -702,6 +761,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //########################################
     // if getKeyIfNoteViewContainsPoint
     func getKeyTestPointHit(_ noteView: NoteView, touch: UITouch)->(Int, Bool) {
+        // print(#function) // Displays function when called.
+        
             // get the point relative to the view, and test for a point hit.
             let point = touch.location(in: noteView)
             let number = noteView.viewNumber
@@ -712,6 +773,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //########################################
     
     func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView, noteModel: NoteModel) {
+        // print(#function) // Displays function when called.
+        
         let allowsCustomizations = selectedBoard.allowsCustomizations
         // If allows customizations and the fretboard is not locked.
         if allowsCustomizations && lockSwitch.isOn == false {
@@ -740,6 +803,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func getZeroTo36Number(_ viewNumber: Int)->Int {
+        // print(#function) // Displays function when called.
         // Get zeroTo46Number
         
         return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
@@ -748,8 +812,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     //###########################
     // scalesTVCDelegate Method
     func scaleChanged(text: String, indexPath: IndexPath) {
-        scalesButton.setTitle(text, for: .normal)
-        scalesButton.setNeedsDisplay()
+        // print(#function) // Displays function when called.
+        
+        scaleSelectionButton.setTitle(text, for: .normal)
+        scaleSelectionButton.setNeedsDisplay()
         selectedBoard.scaleIndexPath = indexPath
         addNotesAction()
     }
@@ -757,6 +823,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // colorSelectorTVCDelegate Method
     // use the color for note selections or additions.
     func colorChanged(color: UIColor) {
+        // print(#function) // Displays function when called.
+        
         colorButton.backgroundColor = color
         selectedBoard.setUserColor(color)
         if selectedBoard.allowsCustomizations == false {
@@ -764,9 +832,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         else {
             selectedBoard.updateNoteModelDisplaySettings()
-            //updateFretboardView()
         }
     }
-    
  }
 

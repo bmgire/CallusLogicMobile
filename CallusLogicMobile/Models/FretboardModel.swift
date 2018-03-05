@@ -27,7 +27,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     fileprivate var arrayOfNoteModels: [NoteModel] = []
     var rootNote = 0
     var accidental = 0
-    var scaleIndexPath = IndexPath()
+    var scaleIndexPath = IndexPath(row: 0, section: 0)
     var allowsCustomizations = false
     fileprivate var isLocked = false
     fileprivate var displayMode = 0

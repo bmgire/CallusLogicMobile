@@ -11,6 +11,11 @@ import AudioKit
 
 class SixTones {
     
+    let square = AKTable(.square, count: 256)
+    // Other default AKTable values that could be used but don't sound as good. 
+    // let sine = AKTable(.sine, count: 256)
+    // let sawtooth = AKTable(.sawtooth, count: 256)
+    
     var arrayOfOscillators = [AKOscillator]()
     
     let arrayOfNoteFrequencies = NoteFrequencies().arrayOfNoteFrequencies
@@ -24,7 +29,7 @@ class SixTones {
     // Create 1 oscillator for each string.
     func createArrayOfOscillators() {
         for _ in 0...5 {
-            let os = AKOscillator()
+            let os = AKOscillator(waveform: square)
             os.amplitude = 0
             //os.frequency = 660 + index * 40
             os.start()
