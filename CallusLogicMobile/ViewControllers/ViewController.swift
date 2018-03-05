@@ -83,6 +83,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet var customizationLabel: UILabel!
     @IBOutlet var removeFretboardButton: UIButton!
     
+    @IBOutlet var playlistTitleTextField: UITextField!
     
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
@@ -633,6 +634,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         // Close keyboard
         fretboardTitleTextField.resignFirstResponder()
+        playlistTitleTextField.resignFirstResponder()
+    
         return true
     }
     

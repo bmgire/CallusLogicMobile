@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/ViewController.swift"
-            timestampString = "541977919.383659"
+            timestampString = "541981254.176339"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "lockOrUnlockFretboard(_:)"
             landmarkType = "7">
          </BreakpointContent>
