@@ -11,7 +11,6 @@ import AudioKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate {
 
-    
     //###################################
     // Integer Constants
     let ROW_HEIGHT = 30
@@ -186,8 +185,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         fretboardTitleTextField.text = newTitle
         fretboardTitleTextField.setNeedsDisplay()
         
-        
-        
         let indexPath = tableView.indexPathForSelectedRow!
         tableView.reloadRows(at: [indexPath], with: .automatic)
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
@@ -238,9 +235,25 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         rootPickerView.isHidden = isLocked
         accidentalPickerView.isHidden = isLocked
         scaleSelectionButton.isHidden = isLocked
-        clearGhostedNotesButton.isHidden = isLocked
+
         customizationLabel.isHidden = isLocked
         customizationSwitch.isHidden = isLocked
+        // if isLocked is true, hide clear ghosted notes button.
+        if isLocked {
+            clearGhostedNotesButton.isHidden = true
+        }
+            // Otherwise if the fretboard is not locked.
+            //  Check to see if the customizationSwitch is on.
+            // If so, show clear Ghosted button
+        else if customizationSwitch.isOn {
+            clearGhostedNotesButton.isHidden = false
+        }
+            // Otherwise the FB is not locked, and the customizationSwitch is off,
+            // so hide the clear ghosted Notes button.
+        else {
+            clearGhostedNotesButton.isHidden = true
+        }
+        
         colorButton.isHidden = isLocked
         colorButtonBorderView.isHidden = isLocked
         selectedBoard.setIsLocked(isLocked)
@@ -273,7 +286,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             fretboardTitleTextField.textColor = UIColor.black
             fretboardTitleTextField.isUserInteractionEnabled = false
         }
-        
     }
     
     @IBAction func allowCustomizations(_ sender: UIButton) {
