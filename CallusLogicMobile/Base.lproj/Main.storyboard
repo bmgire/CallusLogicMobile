@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--FB_SelectionViewController-->
+        <!--FBSelectionViewController-->
         <scene sceneID="uqd-at-guz">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="Zx6-8v-mqY" userLabel="FB_SelectionViewController" customClass="FB_SelectionViewController" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="Zx6-8v-mqY" userLabel="FBSelectionViewController" customClass="FBSelectionVC" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="48g-td-XPr">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,24 +39,19 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Ujm-cW-483" style="IBUITableViewCellStyleDefault" id="bGK-xw-hib">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FBCollectionCell" id="bGK-xw-hib">
                                         <rect key="frame" x="0.0" y="72" width="452" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bGK-xw-hib" id="nGT-eJ-WOL">
                                             <rect key="frame" x="0.0" y="0.0" width="452" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ujm-cW-483">
-                                                    <rect key="frame" x="15" y="0.0" width="422" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Zx6-8v-mqY" id="bKg-qH-Cc7"/>
+                                    <outlet property="delegate" destination="Zx6-8v-mqY" id="HZL-yG-xQp"/>
+                                </connections>
                             </tableView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgs-Ky-fVs">
                                 <rect key="frame" x="491" y="90" width="513" height="316"/>
@@ -69,6 +64,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="View Selected Collection &gt;"/>
                                 <connections>
+                                    <action selector="viewSelectedFBAction:" destination="Zx6-8v-mqY" eventType="touchUpInside" id="uzf-yD-gx8"/>
                                     <segue destination="BYZ-38-t0r" kind="show" id="jFh-5r-yBl"/>
                                 </connections>
                             </button>
@@ -78,15 +74,19 @@
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="collectionTableView" destination="K0q-LH-vij" id="GxY-xZ-Vvg"/>
+                        <outlet property="image" destination="dgs-Ky-fVs" id="q5Z-bo-0mG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ2-LY-cdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-413.0859375" y="129.6875"/>
+            <point key="canvasLocation" x="-862" y="130"/>
         </scene>
-        <!--FB_ViewController-->
+        <!--FBViewController-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="BYZ-38-t0r" userLabel="FB_ViewController" customClass="FB_ViewController" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="BYZ-38-t0r" userLabel="FBViewController" customClass="FBViewController" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -282,8 +282,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="LockedStatusLabel" destination="c9E-Hw-J81" id="b2r-HL-Y50"/>
-                        <outlet property="accidentalPickerView" destination="MZd-ye-ZjK" id="708-qD-s9V"/>
-                        <outlet property="addFretboardButton" destination="fbX-UF-hne" id="CDd-8G-2tz"/>
+                        <outlet property="accidentalPickerView" destination="MZd-ye-ZjK" id="YEv-7V-VN9"/>
+                        <outlet property="addFretboardButton" destination="fbX-UF-hne" id="7Re-kT-rib"/>
                         <outlet property="backgroundView" destination="8bC-Xf-vdC" id="5wT-8o-aml"/>
                         <outlet property="clearGhostedNotesButton" destination="L3o-P0-esF" id="KEV-9i-Zye"/>
                         <outlet property="colorButton" destination="GJ4-Lk-Ti4" id="ZWj-oM-agb"/>
