@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol FBSelectionDelegate: class {
+    func fbCollectionChanged(collection: FBCollectionModel)
+}
+
+
 class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    
     
     // Users will select these to view a fretboard model.
     var arrayOfFBCollectionModels = [FBCollectionModel]()

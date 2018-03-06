@@ -9,7 +9,9 @@
 import UIKit
 import AudioKit
 
-class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate {
+class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate, FBSelectionDelegate {
+
+    
 
     //###################################
     // Integer Constants
@@ -48,6 +50,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // if I didn't leave the bounds, I cannot update.
     var dictOfTouchedNoteViewNumbers = [Int: Bool]()
 
+    // FBCollectionModel needs to be provided by the delegate.
+    var collectionModel: FBCollectionModel!
+    
     fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()]
     
     fileprivate var selectedBoard = FretboardModel()
@@ -834,6 +839,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         selectedBoard.scaleIndexPath = indexPath
         addNotesAction()
     }
+    
+    // FBSelectionVC protocol.
+    // Obtains the FBCollectiomModel from the FVSelectionVC.
+    func fbCollectionChanged(collection: FBCollectionModel) {
+        // redirect a reference to the FBCollectionModel. 
+    }
+    
     //###########################
     // colorSelectorTVCDelegate Method
     // use the color for note selections or additions.
