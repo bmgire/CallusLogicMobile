@@ -11,13 +11,10 @@ import AudioKit
 
 class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate, FBCollectionAndIndexDelegate {
 
+    // FBCollectionAndIndexDelegate method for receiving collection and index from previous VC. 
     func receive(collectionAndIndex: FBCollectionAndIndex) {
-        //
         fbCollectionAndIndex = collectionAndIndex
     }
-    
-
-    
 
     //###################################
     // Integer Constants
@@ -109,6 +106,12 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //
     //############
     
+    @IBAction func changeCollectionTitle(_ sender: UITextField) {
+        let text = sender.text!
+        if text != "" {
+            fbCollectionAndIndex.collection!.title = sender.text!
+        }
+    }
     
     @IBAction func changeFretboardTitle(_ sender: UITextField) {
         // print(#function) // Displays function when called.
