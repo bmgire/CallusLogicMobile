@@ -179,7 +179,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 // If the noteModel isGhost update fretboard.
                 if noteModel.getIsGhost() || allowsCustomizations == false {
                     noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
-                    noteModel.setNumber0to46(anArrayOfToneArrays[1][toneIndex])
+                    noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
                     noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
                     noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
                 }
@@ -243,14 +243,6 @@ class FretboardModel /*: NSObject, NSCoding */ {
             if model.getIsGhost() {
                 model.setIsDisplayed(false)
             }
-        }
-    }
-    
-    
-    
-    func lockOrUnlockFretboard(yesOrNo: Bool){
-        for noteModel in arrayOfNoteModels {
-            noteModel.isLocked = yesOrNo
         }
     }
     
