@@ -849,7 +849,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         // Get zeroTo46Number
         
-        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to46())!
+        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to36())!
     }
     
     //###########################

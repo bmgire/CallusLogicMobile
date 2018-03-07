@@ -215,7 +215,7 @@ class FretboardView: UIImageView {
             case .numbers0to11:
                 displayText = noteModel.getNumber0to11()
             case .numbers0to36:
-                displayText = noteModel.getNumber0to46()
+                displayText = noteModel.getNumber0to36()
             default:
                 displayText = noteModel.getNote()
             }

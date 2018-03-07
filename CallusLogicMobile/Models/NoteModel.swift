@@ -6,43 +6,34 @@
 //  Model for the NoteView. 
 
 import UIKit
-class NoteModel /*: NSObject, NSCoding */ {
+class NoteModel : NSObject, NSCoding {
     
-   // The position of the note on the entire fretboard. 0-137
+   // The position of the note on the entire fretboard. 0-77
     fileprivate var note = ""
     fileprivate var number0to11 = ""
-    fileprivate var number0to46 = ""
+    fileprivate var number0to36 = ""
     fileprivate var interval = ""
     fileprivate var fretNumber = ""
     
-    /// var attributedNote = NSMutableAttributedString()
     fileprivate var isGhost = true
     fileprivate var isDisplayed = false
     fileprivate var isPassingNote = false
     
-    var isLocked = false 
     
-    // FontSize
-    //fileprivate var noteFontSize: CGFloat = 16
-    
-    // A state variable to be set while the mouse is down.
     fileprivate var myColor: UIColor = UIColor.red
-    /*
-    // The display mode is read from the fretboard Calculator, determines which note display mode to use.
- //   fileprivate var displayMode = "Notes"
+
      
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(note, forKey: "note")
         aCoder.encode(number0to11, forKey: "number0to11")
-        aCoder.encode(number0to46, forKey: "number0to46")
+        aCoder.encode(number0to36, forKey: "number0to36")
         aCoder.encode(interval, forKey: "interval")
+        aCoder.encode(fretNumber, forKey: "fretNumber")
         
         aCoder.encode(isGhost, forKey: "isGhost")
-        aCoder.encode(isInScale, forKey: "isInScale")
         aCoder.encode(isDisplayed, forKey: "isDisplayed")
         aCoder.encode(isPassingNote, forKey: "isPassingNote")
-        aCoder.encode(isKept, forKey: "isKept")
     
         aCoder.encode(myColor, forKey: "myColor")
  //       aCoder.encode(displayMode, forKey: "displayMode") // Will be getting rid of this.
@@ -51,16 +42,17 @@ class NoteModel /*: NSObject, NSCoding */ {
     required init?(coder aDecoder: NSCoder) {
         note = aDecoder.decodeObject(forKey: "note") as! String
         number0to11 = aDecoder.decodeObject(forKey: "number0to11") as! String
-        number0to46 = aDecoder.decodeObject(forKey: "number0to46") as! String
+        number0to36 = aDecoder.decodeObject(forKey: "number0to36") as! String
         interval = aDecoder.decodeObject(forKey: "interval") as! String
+        fretNumber = aDecoder.decodeObject(forKey: "interval") as! String
         
         isGhost = aDecoder.decodeBool(forKey: "isGhost")
-        isInScale = aDecoder.decodeBool(forKey: "isInScale")
+      
         isDisplayed = aDecoder.decodeBool(forKey: "isDisplayed")
         isPassingNote = aDecoder.decodeBool(forKey: "isPassingNote")
-        isKept = aDecoder.decodeBool(forKey: "isKept")
+      
     
-        myColor = aDecoder.decodeObject(forKey: "myColor") as! NSColor
+        myColor = aDecoder.decodeObject(forKey: "myColor") as! UIColor
      //   displayMode = aDecoder.decodeObject(forKey: "displayMode") as! String
         super.init()
     }
@@ -68,7 +60,7 @@ class NoteModel /*: NSObject, NSCoding */ {
     override init() {
         super.init()
     }
-    */
+
     //####################################
     // Getters and setters.
     //####################################
@@ -88,12 +80,12 @@ class NoteModel /*: NSObject, NSCoding */ {
         number0to11 = newNumber
     }
     
-    func getNumber0to46()-> String {
-        return number0to46
+    func getNumber0to36()-> String {
+        return number0to36
     }
     
-    func setNumber0to46(_ newNumber: String) {
-        number0to46 = newNumber
+    func setNumber0to36(_ newNumber: String) {
+        number0to36 = newNumber
     }
     
     func getInterval()-> String {
@@ -153,7 +145,7 @@ class NoteModel /*: NSObject, NSCoding */ {
         if bool {
             note = addParentheses(note)
             number0to11 = addParentheses(number0to11)
-            number0to46 = addParentheses(number0to46)
+            number0to36 = addParentheses(number0to36)
             interval = addParentheses(interval)
             if fretNumber != "" {
                 fretNumber = addParentheses(fretNumber)
@@ -162,7 +154,7 @@ class NoteModel /*: NSObject, NSCoding */ {
         else {
             note = removeParentheses(note)
             number0to11 = removeParentheses(number0to11)
-            number0to46 = removeParentheses(number0to46)
+            number0to36 = removeParentheses(number0to36)
             interval = removeParentheses(interval)
             fretNumber = removeParentheses(fretNumber)
             if fretNumber != "" {
@@ -194,7 +186,7 @@ class NoteModel /*: NSObject, NSCoding */ {
     func setNoteModel(_ newModel: NoteModel) {
         note = newModel.getNote()
         number0to11 = newModel.getNumber0to11()
-        number0to46 = newModel.getNumber0to46()
+        number0to36 = newModel.getNumber0to36()
         interval = newModel.getInterval()
         if newModel.fretNumber != ""{
           fretNumber = newModel.getFretNumber()
