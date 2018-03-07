@@ -12,7 +12,7 @@
         <!--FBSelectionViewController-->
         <scene sceneID="uqd-at-guz">
             <objects>
-                <viewController modalTransitionStyle="flipHorizontal" id="Zx6-8v-mqY" userLabel="FBSelectionViewController" customClass="FBSelectionVC" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="FBSelectionVC" modalTransitionStyle="flipHorizontal" id="Zx6-8v-mqY" userLabel="FBSelectionViewController" customClass="FBSelectionVC" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="48g-td-XPr">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -65,7 +65,7 @@
                                 <state key="normal" title="View Selected Collection &gt;"/>
                                 <connections>
                                     <action selector="viewSelectedFBAction:" destination="Zx6-8v-mqY" eventType="touchUpInside" id="uzf-yD-gx8"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="jFh-5r-yBl"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="segueToFBViewController" id="jFh-5r-yBl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -270,7 +270,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="&lt; Back "/>
                                 <connections>
-                                    <segue destination="Zx6-8v-mqY" kind="show" id="qOf-sE-qa5"/>
+                                    <segue destination="Zx6-8v-mqY" kind="show" identifier="segueToFBSelectionVC" id="qOf-sE-qa5"/>
                                 </connections>
                             </button>
                         </subviews>

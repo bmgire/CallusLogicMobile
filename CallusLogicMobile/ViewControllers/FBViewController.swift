@@ -9,7 +9,13 @@
 import UIKit
 import AudioKit
 
-class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate, FBSelectionDelegate {
+class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate, FBCollectionAndIndexDelegate {
+
+    func receive(collectionAndIndex: FBCollectionAndIndex) {
+        //
+        fbCollectionAndIndex = collectionAndIndex
+    }
+    
 
     
 
@@ -51,16 +57,19 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     var dictOfTouchedNoteViewNumbers = [Int: Bool]()
 
     // FBCollectionModel needs to be provided by the delegate.
-    var collectionModel: FBCollectionModel!
+    //var fbCollectionModel: FBCollectionModel!
+    //var fbCollectionToLoadIndex = 0
     
-    fileprivate var arrayOfFretboardModels: [FretboardModel] = [FretboardModel()]
+    var fbCollectionAndIndex = FBCollectionAndIndex()
+    
+    var delegate: FBCollectionAndIndexDelegate?
     
     fileprivate var selectedBoard = FretboardModel()
     
     fileprivate var modelIndex: Int = 0 {
         // switches the selectedBoard. Perhaps consider a better mechanism
         didSet {
-            selectedBoard = arrayOfFretboardModels[modelIndex]
+            selectedBoard = fbCollectionAndIndex.collection!.arrayOfFretboardModels[modelIndex]
         }
     }
     //###################################
@@ -122,7 +131,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         if let indexPath = tableView.indexPathForSelectedRow {
             // Adding 1 to the row to get the row after the selected fretboard.
             let row = indexPath.row + 1
-            arrayOfFretboardModels.insert(FretboardModel(), at: row)
+            fbCollectionAndIndex.collection!.arrayOfFretboardModels.insert(FretboardModel(), at: row)
             tableView?.insertRows(at: [indexPath], with: .none)
             
             modelIndex = row
@@ -144,10 +153,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // remove a fretboard from the arrayOfFretbaords and the tableView.
     @IBAction func removeFretboardAction(_ sender: UIButton) {
         // print(#function) // Displays function when called.
-        if arrayOfFretboardModels.count != 1  {
+        if fbCollectionAndIndex.collection!.arrayOfFretboardModels.count != 1  {
             // Get indexPath of selectedRow and remove data and row.
             let indexPath = tableView!.indexPathForSelectedRow!
-            arrayOfFretboardModels.remove(at: indexPath.row)
+            fbCollectionAndIndex.collection!.arrayOfFretboardModels.remove(at: indexPath.row)
             tableView?.deleteRows(at: [indexPath], with: .automatic)
             
             // Select the previous row and loadSettings for that fretboard.
@@ -367,8 +376,19 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
        
     }
     
-
- 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueToFBSelectionVC" {
+            let vc = segue.destination as! FBSelectionVC
+            
+            // Set delegate and pass index
+            delegate = vc
+            delegate?.receive(collectionAndIndex: fbCollectionAndIndex)
+            } else {
+                print("\(#function): No row is selected, indexPath was nil")
+            }
+    }
+    
+    
     
     //###################################
     // Custom Functions
@@ -489,7 +509,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // print(#function) // Displays function when called.
         
-        return arrayOfFretboardModels.count
+        return fbCollectionAndIndex.collection!.arrayOfFretboardModels.count
     }
     
     //############
@@ -498,7 +518,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "fretboardCell", for: indexPath)
-        cell.textLabel?.text = arrayOfFretboardModels[indexPath.row].getFretboardTitle()
+        cell.textLabel?.text = fbCollectionAndIndex.collection!.arrayOfFretboardModels[indexPath.row].getFretboardTitle()
         return cell
     }
     
@@ -838,12 +858,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         scaleSelectionButton.setNeedsDisplay()
         selectedBoard.scaleIndexPath = indexPath
         addNotesAction()
-    }
-    
-    // FBSelectionVC protocol.
-    // Obtains the FBCollectiomModel from the FVSelectionVC.
-    func fbCollectionChanged(collection: FBCollectionModel) {
-        // redirect a reference to the FBCollectionModel. 
     }
     
     //###########################
