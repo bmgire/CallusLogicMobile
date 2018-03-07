@@ -8,33 +8,20 @@
 
 import UIKit
 
-/*
-protocol FBSelectionDelegate: class {
-    func fbCollectionChanged(collection: FBCollectionModel)
-}
-*/
-
 class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource, FBCollectionAndIndexDelegate {
-
     
+    // FBCollectionAndIndexDelegate method for receiving collection and index from previous VC.
     func receive(collectionAndIndex: FBCollectionAndIndex) {
         //
         fbCollectionAndIndex = collectionAndIndex
     }
     
-  var delegate: FBCollectionAndIndexDelegate?
+    var delegate: FBCollectionAndIndexDelegate?
     
-    
-    //var delegate: FBSelectionDelegate?
-    
-    // Users will select these to view a fretboard model.
     var arrayOfFBCollectionModels = [FBCollectionModel]()
-    //var fbCollectionToLoad: FBCollectionModel?
-    //var fbCollectionToLoadIndex = 0
     
     var fbCollectionAndIndex = FBCollectionAndIndex()
-    
-    
+
     @IBOutlet var collectionTableView: UITableView!
     
     @IBOutlet var image: UIImageView!
@@ -57,27 +44,27 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     // ###########
     // TableView dataSource protocol methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       return arrayOfFBCollectionModels.count
+        return arrayOfFBCollectionModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -103,7 +90,7 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // setup FBCollectionAndIndex
                 fbCollectionAndIndex.collection = arrayOfFBCollectionModels[index]
                 fbCollectionAndIndex.index = index
-                
+              
                 // Set delegate and pass index
                 delegate = vc
                 delegate?.receive(collectionAndIndex: fbCollectionAndIndex)
@@ -112,7 +99,6 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             } else {
                 print("\(#function): No row is selected, indexPath was nil")
             }
-            
         }
     }
     

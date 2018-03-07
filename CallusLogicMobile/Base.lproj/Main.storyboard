@@ -252,6 +252,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
+                                    <action selector="changeCollectionTitle:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="hPb-fj-fgm"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="GAi-yT-KA3"/>
                                 </connections>
                             </textField>
