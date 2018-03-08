@@ -8,7 +8,7 @@
 import UIKit
 
 
-class FretboardModel /*: NSObject, NSCoding */ {
+class FretboardModel: NSObject, NSCoding {
     
     let NOTES_PER_STRING = 13
     let NOTES_ON_FRETBOARD = 78
@@ -20,8 +20,6 @@ class FretboardModel /*: NSObject, NSCoding */ {
     // MARK: - Variables
     //##########################################################
 
-    fileprivate var zoomLevel = 100.0
-    fileprivate var showAdditionalNotes = 0
 
     // Variables that need to loaded whenever a fretboard is loaded.
     fileprivate var arrayOfNoteModels: [NoteModel] = []
@@ -29,51 +27,31 @@ class FretboardModel /*: NSObject, NSCoding */ {
     var accidental = 0
     var scaleIndexPath = IndexPath(row: 0, section: 0)
     var allowsCustomizations = false
+    
     fileprivate var isLocked = false
     fileprivate var displayMode = 0
     fileprivate var userColor = UIColor.yellow
-    fileprivate var fretboardTitle: String? = "Untitled"
+    fileprivate var fretboardTitle: String = "Untitled"
     
-    fileprivate var allowsClear = false
-    
-  
-    
-    /*
     //##########################################################
     // MARK: - Encoding
     //##########################################################
     func encode(with aCoder: NSCoder) {
         
-        // Encode fretboardArray.
-        if let fretboardArray = fretboardArray {
-            for index in 0...137 {
-                aCoder.encode(fretboardArray[index], forKey: "noteModel\(index)")
-            }
+        // Encode arrayOfNoteModels
+        
+        for index in 0...77 {
+            aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
-        // Encode fretboardTitle.
-        if let fretboardTitle = fretboardTitle {
-            aCoder.encode(fretboardTitle, forKey: "fretboardTitle")
-        }
-        // Encode userColor.
-        if let userColor = userColor {
-            aCoder.encode(userColor, forKey: "userColor")
-        }
-        // Encode isLocked.
+        aCoder.encode(rootNote, forKey: "rootNote")
+        aCoder.encode(accidental, forKey: "accidental")
+        aCoder.encode(scaleIndexPath, forKey: "scaleIndexPath")
+        aCoder.encode(allowsCustomizations, forKey: "allowsCustomizations")
+        
         aCoder.encode(isLocked, forKey: "isLocked")
-        
-        //Encode zoomLevel
-        aCoder.encode(zoomLevel, forKey: "zoomLevel")
-        
-        // Encode showAdditionalNotes.
-        aCoder.encode(showAdditionalNotes, forKey: "showAdditionalNotes")
-        
-        
-        // Encode displayMode.
         aCoder.encode(displayMode, forKey: "displayMode")
-    
-        aCoder.encode(allowsGhostAll, forKey: "allowsGhostAll")
-        aCoder.encode(allowsSelectAll, forKey: "allowsSelectAll")
-        aCoder.encode(allowsClear, forKey: "allowsClear")
+        aCoder.encode(userColor, forKey: "userColor")
+        aCoder.encode(fretboardTitle, forKey: "fretboardTitle")
     }
     
     
@@ -83,32 +61,21 @@ class FretboardModel /*: NSObject, NSCoding */ {
     required init?(coder aDecoder: NSCoder) {
         
         // Decode fretboardArray
-        for index in 0...137 {
+        for index in 0...77 {
             if let noteModel = aDecoder.decodeObject(forKey: "noteModel\(index)"){
-                fretboardArray!.append(noteModel as! NoteModel)
+                arrayOfNoteModels.append(noteModel as! NoteModel)
             }
         }
         
-        // Decode fretboardTitle
-        fretboardTitle = aDecoder.decodeObject(forKey: "fretboardTitle") as! String?
-        
-        userColor = aDecoder.decodeObject(forKey: "userColor") as! NSColor?
-        
-        // Decode isLocked.
-        isLocked = aDecoder.decodeInteger(forKey: "isLocked")
-        
-        // Decode zoomLevel
-        // Check for the coded value, if available, decode... else it's set to 100.
-        if aDecoder.containsValue(forKey: "zoomLevel") {
-            zoomLevel = aDecoder.decodeDouble(forKey: "zoomLevel")
-        }
-
-        showAdditionalNotes = aDecoder.decodeInteger(forKey: "showAdditionalNotes")
+        rootNote = aDecoder.decodeInteger(forKey: "rootNote")
+        accidental = aDecoder.decodeInteger(forKey: "accidental")
+        scaleIndexPath = aDecoder.decodeObject(forKey: "scaleIndexPath") as! IndexPath
+        allowsCustomizations = aDecoder.decodeBool(forKey: "allowsCustomization")
+            
+        isLocked = aDecoder.decodeBool(forKey: "isLocked")
         displayMode = aDecoder.decodeInteger(forKey: "displayMode")
-        
-        allowsGhostAll = aDecoder.decodeBool(forKey: "allowsGhostAll")
-        allowsSelectAll = aDecoder.decodeBool(forKey: "allowsSelectAll")
-        allowsClear = aDecoder.decodeBool(forKey: "allowsClear")
+        userColor = aDecoder.decodeObject(forKey: "userColor") as! UIColor
+        fretboardTitle = aDecoder.decodeObject(forKey: "fretboardTitle") as! String
         
         super.init()
         // Set fret numbers when decoding, don't bother checking anything.
@@ -121,33 +88,16 @@ class FretboardModel /*: NSObject, NSCoding */ {
         super.init()
         
         // If no encoded fretboardModel was loaded, build a fretboard model.
-        if fretboardArray!.count == 0 {
+        if arrayOfNoteModels.count == 0 {
             // Build 138 item array of NoteModels.
             var temp : [NoteModel] = []
             for _ in 0...137 {
                 temp.append(NoteModel())
             }
-            fretboardArray = temp
+            swap(&arrayOfNoteModels, &temp)
         }
         setFretNumbers()
     }
-    */
-    
-    init() {
-        // If no encoded fretboardModel was loaded, build a fretboard model.
-       
-        if arrayOfNoteModels.count == 0 {
-            // Build 138 item array of NoteModels.
-            var temp : [NoteModel] = []
-            for _ in 0...NOTES_ON_FRETBOARD - 1 {
-                temp.append(NoteModel())
-            }
-            arrayOfNoteModels = temp
-        }
-        setFretNumbers()
-        
-    }
-    
     
     fileprivate func setFretNumbers() {
     
@@ -209,7 +159,6 @@ class FretboardModel /*: NSObject, NSCoding */ {
                 }
                 // otherwise customizations are allowed
                 else {
-                    
                     // if isDisplayed = true
                     if model.getIsDisplayed(){
                         // and if does isGhost = true, set the color.
@@ -218,13 +167,6 @@ class FretboardModel /*: NSObject, NSCoding */ {
                         }
                     }
                 }
-                
-                // Otherwise set to isDisplayed for some reason?
-              //  model.setIsDisplayed(true)
-                // If the note is ghosted and has a value, update the color.
-                
-                
-
             }
         }
     }
@@ -279,7 +221,7 @@ class FretboardModel /*: NSObject, NSCoding */ {
     }
     
     func getFretboardTitle()-> String {
-        return fretboardTitle!
+        return fretboardTitle
     }
     
     func setFretboardTitle(_ newTitle: String) {
@@ -300,36 +242,14 @@ class FretboardModel /*: NSObject, NSCoding */ {
     func getIsLocked()->Bool {
         return isLocked
     }
-    
-    func setZoomLevel(_ level: Double) {
-        zoomLevel = level
-    }
-    
-    func getZoomLevel()-> Double {
-        return zoomLevel
-    }
-    
-    func setShowAdditionalNotes(_ int: Int) {
-        showAdditionalNotes = int
-    }
-    func getShowAdditionalNotes()->Int {
-        return showAdditionalNotes
-    }
-    
+
     func setDisplayMode(index: Int) {
         displayMode = index
     }
     func getDisplayMode()->(Int) {
         return displayMode
     }
-    
-    func setAllowsClear(_ bool: Bool) {
-        allowsClear = bool
-    }
-    
-    func getAllowsClear()-> Bool {
-        return allowsClear
-    }
+
     func flipAllowsCustomizations() {
         allowsCustomizations = !allowsCustomizations
     }

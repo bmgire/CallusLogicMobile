@@ -19,7 +19,6 @@ class NoteModel : NSObject, NSCoding {
     fileprivate var isDisplayed = false
     fileprivate var isPassingNote = false
     
-    
     fileprivate var myColor: UIColor = UIColor.red
 
      
@@ -34,9 +33,7 @@ class NoteModel : NSObject, NSCoding {
         aCoder.encode(isGhost, forKey: "isGhost")
         aCoder.encode(isDisplayed, forKey: "isDisplayed")
         aCoder.encode(isPassingNote, forKey: "isPassingNote")
-    
         aCoder.encode(myColor, forKey: "myColor")
- //       aCoder.encode(displayMode, forKey: "displayMode") // Will be getting rid of this.
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,13 +44,10 @@ class NoteModel : NSObject, NSCoding {
         fretNumber = aDecoder.decodeObject(forKey: "interval") as! String
         
         isGhost = aDecoder.decodeBool(forKey: "isGhost")
-      
         isDisplayed = aDecoder.decodeBool(forKey: "isDisplayed")
         isPassingNote = aDecoder.decodeBool(forKey: "isPassingNote")
-      
-    
         myColor = aDecoder.decodeObject(forKey: "myColor") as! UIColor
-     //   displayMode = aDecoder.decodeObject(forKey: "displayMode") as! String
+        
         super.init()
     }
     
@@ -196,6 +190,4 @@ class NoteModel : NSObject, NSCoding {
         isPassingNote = newModel.getIsPassingNote()
         myColor = newModel.getMyColor()
     }
-    
-
 }
