@@ -8,11 +8,10 @@
 
 import UIKit
 
-class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource /* FBCollectionAndIndexDelegate */ {
+class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var fbCollectionStore: FBCollectionStore!
     var delegate: FBCollectionAndIndexDelegate?
-    var arrayOfFBCollectionModels = [FBCollectionModel]()
     var fbCollectionAndIndex = FBCollectionAndIndex()
 
     @IBOutlet var collectionTableView: UITableView!
@@ -35,16 +34,21 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         collectionTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
         // Do any additional setup after loading the view.
         
-        /*
-        // Load the fbCollection passed to this VC.
-        if let newCollection = fbCollectionAndIndex.collection {
-            arrayOfFBCollectionModels[fbCollectionAndIndex.index] = newCollection
-        }
- */
-        
-        
     }
     
+    @IBAction func addFretboard(_ sender: UIButton) {
+        // if let indexPath = collectionTableView.indexPathForSelectedRow {
+        // Adding 1 to the row to get the row after the selected fretboard.
+        
+        let lastRow = fbCollectionStore.arrayOfFBCollections.count
+        let lastIndexPath = IndexPath(row: lastRow, section: 0)
+        fbCollectionStore.appendCollection()
+        
+        // Insert into
+        collectionTableView?.insertRows(at: [lastIndexPath], with: .automatic)
+        collectionTableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
+    }
+        
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         // This programmatically adds an edit item bar button because there is no way to add in the interface builder.
@@ -109,10 +113,11 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    // FBCollectionAndIndexDelegate method for receiving collection and index from previous VC.
- /*   func receive(collectionAndIndex: FBCollectionAndIndex) {
-        //
-        fbCollectionAndIndex = collectionAndIndex
-    } */
+    override func viewWillAppear(_ animated: Bool) {
+        let indexPath = collectionTableView.indexPathForSelectedRow!
+        collectionTableView.reloadRows(at: [indexPath], with: .automatic)
+        collectionTableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+    }
+    
     
 }

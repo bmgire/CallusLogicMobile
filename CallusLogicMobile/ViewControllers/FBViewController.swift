@@ -136,7 +136,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             // Adding 1 to the row to get the row after the selected fretboard.
             let row = indexPath.row + 1
             fbCollectionAndIndex.collection!.arrayOfFretboardModels.insert(FretboardModel(), at: row)
-            tableView?.insertRows(at: [indexPath], with: .none)
+            tableView?.insertRows(at: [indexPath], with: .automatic)
             
             modelIndex = row
             selectedBoard.scaleIndexPath = IndexPath(row: 0, section: 0)
@@ -338,27 +338,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
     
         super.viewDidLoad()
-       // rootPickerView.selectRow(4, inComponent: 0, animated: false)
-        
-        
+
         //Sets the model to the 0 index in arrayOfFretboardModels.
         modelIndex = fbCollectionAndIndex.collection!.modelIndex
-        
-        
+        // Select in tableView and load settings.
         let indexPath = IndexPath(row: modelIndex, section: 0)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         loadSettingsFromSelectedBoard()
-        
-        /*
-        fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
-        rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: false)
-        accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: false)
-        
-        scalesTVC.tableView!.selectRow(at: selectedBoard.scaleIndexPath, animated: false, scrollPosition: .top)
-        scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[selectedBoard.scaleIndexPath.row]
-        scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
-        scaleSelectionButton.setNeedsDisplay()
-        colorButton.backgroundColor = selectedBoard.getUserColor() */
         
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
         AudioKit.start()
@@ -388,18 +374,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
        
     }
   
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToFBSelectionVC" {
-            let vc = segue.destination as! FBSelectionVC
-            
-            // Set delegate and pass index
-            delegate = vc
-            delegate?.receive(collectionAndIndex: fbCollectionAndIndex)
-            } else {
-                print("\(#function): No row is selected, indexPath was nil")
-            }
-    } */
+    
+
     
     
     
