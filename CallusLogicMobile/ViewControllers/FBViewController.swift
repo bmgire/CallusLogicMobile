@@ -93,8 +93,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     @IBOutlet var clearGhostedNotesButton: UIButton!
     @IBOutlet var customizationSwitch: UISwitch!
     @IBOutlet var customizationLabel: UILabel!
-    @IBOutlet var removeFretboardButton: UIButton!
+ 
     
+    @IBOutlet var editTableViewButton: UIButton!
     @IBOutlet var collectionTitleTextField: UITextField!
     
     let scalesTVC = ScalesTVC()
@@ -106,6 +107,54 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // Actions
     //
     //############
+    
+    
+    func hideOrDisplayAllControls(doHide: Bool) {
+        fretboardTitleTextField.isHidden = doHide
+        lockSwitch.isHidden = doHide
+        LockedStatusLabel.isHidden = doHide
+        rootPickerView.isHidden = doHide
+        accidentalPickerView.isHidden = doHide
+        scaleSelectionButton.isHidden = doHide
+        colorButtonBorderView.isHidden = doHide
+        colorButton.isHidden = doHide
+        customizationSwitch.isHidden = doHide
+        customizationLabel.isHidden = doHide
+        displayModePickerView.isHidden = doHide
+    }
+
+    @IBAction func editTableView(_ sender: UIButton) {
+      // toggle edit mode.
+        if tableView.isEditing == false {
+            tableView.isEditing = true
+            sender.setTitle("Done", for: .normal)
+        } else {
+            tableView.isEditing = false
+            sender.setTitle("Edit", for: .normal)
+            // If there are any fretboards left select the top fretboard.
+            if fbCollectionAndIndex.collection!.arrayOfFretboardModels.count != 0 {
+                tableView.selectRow(at: IndexPath(row: 0, section: 0),
+                                    animated: true, scrollPosition: .top)
+            } else {
+                // hide all editing controls except for the + add freboard button.
+                
+                hideOrDisplayAllControls(doHide: true) /*
+                fretboardTitleTextField.isHidden = true
+                lockSwitch.isHidden = true
+                LockedStatusLabel.isHidden = true
+                rootPickerView.isHidden = true
+                accidentalPickerView.isHidden = true
+                scaleSelectionButton.isHidden = true
+                colorButtonBorderView.isHidden = true
+                colorButton.isHidden = true
+                customizationSwitch.isHidden = true
+                customizationLabel.isHidden = true
+                displayModePickerView.isHidden = true */
+                
+            }
+        }
+        
+    }
     
     @IBAction func changeCollectionTitle(_ sender: UITextField) {
         let text = sender.text!
@@ -132,6 +181,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         // Add a new blank fretboard Model
         
+        if fbCollectionAndIndex.collection!.arrayOfFretboardModels.count == 0 {
+            hideOrDisplayAllControls(doHide: false)
+        }
+        
+        
         //     if let indexPath = tableView.indexPathForSelectedRow {
         // Adding 1 to the row to get the row after the selected fretboard.
         let row = fbCollectionAndIndex.collection!.arrayOfFretboardModels.count
@@ -155,7 +209,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
          } */
         
     }
-    
+    /*
     //############
     // remove a fretboard from the arrayOfFretbaords and the tableView.
     @IBAction func removeFretboardAction(_ sender: UIButton) {
@@ -178,7 +232,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             updateFretboardView()
         }
         
-    }
+    } */
     
     //############
     // add notes to the currentBoard
@@ -279,7 +333,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         colorButton.isHidden = isLocked
         colorButtonBorderView.isHidden = isLocked
         selectedBoard.setIsLocked(isLocked)
-        removeFretboardButton.isHidden = isLocked 
+      
         // I will keep the displaymode picker available.
         
     }
@@ -530,6 +584,55 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         updateFretboardView()
         
         }
+    }
+    
+    // Presents editing alerts.
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCellEditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        // Presents editing alerts.
+        if editingStyle == .delete {
+            // get an instance of the model
+            let fbModel = fbCollectionAndIndex.collection!.arrayOfFretboardModels[indexPath.row]
+            
+            let title = "Delete \(fbModel.getFretboardTitle())?"
+            let message = "Are you sure you want to delete this fretboard?"
+            
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            
+            if let popoverController = ac.popoverPresentationController {
+                
+                 let sourceView = tableView.cellForRow(at: indexPath)!.contentView
+                 //let
+                popoverController.sourceView = sourceView
+                popoverController.sourceRect = sourceView.bounds
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.right
+            }
+            
+           
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            ac.addAction(cancelAction)
+            
+            let deleteAction = UIAlertAction(title: "Delete",
+                                             style: .destructive,
+                                             handler: { (action)-> Void in
+                                                
+                                                self.fbCollectionAndIndex.collection?.arrayOfFretboardModels.remove(at: indexPath.row)
+                                                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                                                
+                                                if self.fbCollectionAndIndex.collection!.arrayOfFretboardModels.count == 0 {
+                                                    
+                                                    self.editTableView(self.editTableViewButton)
+                                                }
+                                                
+                                                
+            })
+                                                
+             ac.addAction(deleteAction)
+            present(ac, animated: true, completion: nil)
+        }
+        
     }
   
    
@@ -869,4 +972,5 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
     }
  }
+
 
