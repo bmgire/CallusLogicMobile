@@ -67,6 +67,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // switches the selectedBoard. Perhaps consider a better mechanism
         didSet {
             selectedBoard = fbCollectionAndIndex.collection!.arrayOfFretboardModels[modelIndex]
+            fbCollectionAndIndex.collection!.modelIndex = modelIndex
         }
     }
     //###################################
@@ -337,17 +338,27 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
     
         super.viewDidLoad()
-        rootPickerView.selectRow(4, inComponent: 0, animated: false)
+       // rootPickerView.selectRow(4, inComponent: 0, animated: false)
         
         
         //Sets the model to the 0 index in arrayOfFretboardModels.
-        modelIndex = 0
+        modelIndex = fbCollectionAndIndex.collection!.modelIndex
+        
         
         let indexPath = IndexPath(row: modelIndex, section: 0)
-        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        loadSettingsFromSelectedBoard()
         
-        selectedBoard.scaleIndexPath = IndexPath(row: 21, section: 0)
+        /*
         fretboardTitleTextField.text = selectedBoard.getFretboardTitle()
+        rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: false)
+        accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: false)
+        
+        scalesTVC.tableView!.selectRow(at: selectedBoard.scaleIndexPath, animated: false, scrollPosition: .top)
+        scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[selectedBoard.scaleIndexPath.row]
+        scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
+        scaleSelectionButton.setNeedsDisplay()
+        colorButton.backgroundColor = selectedBoard.getUserColor() */
         
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
         AudioKit.start()
@@ -361,8 +372,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         scalesTVC.delegate = self
-        scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
-        scaleSelectionButton.setNeedsDisplay()
         colorSelectorTVC.delegate = self
     }
     
@@ -375,10 +384,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         fretboardView.buildNoteRects()
         fretboardView.buildNoteViews()
         fretboardView.addSubviews()
-        colorChanged(color: UIColor.yellow)
+        updateFretboardView()
        
     }
-    
+  
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToFBSelectionVC" {
             let vc = segue.destination as! FBSelectionVC
@@ -389,7 +399,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             } else {
                 print("\(#function): No row is selected, indexPath was nil")
             }
-    }
+    } */
     
     
     

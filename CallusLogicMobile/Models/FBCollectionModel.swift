@@ -24,7 +24,7 @@ class FBCollectionModel: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         title = aDecoder.decodeObject(forKey: "collectionTitle") as! String
         modelIndex = aDecoder.decodeInteger(forKey: "collectionModelIndex")
-        image = aDecoder.decodeObject(forKey: "collectionImage") as! UIImageView
+        //image = aDecoder.decodeObject(forKey: "collectionImage") as! UIImageView
         count = aDecoder.decodeInteger(forKey: "collectionCount")
         
         // Decode the arrayOfNoteModels. 
@@ -45,6 +45,4 @@ class FBCollectionModel: NSObject, NSCoding {
     var image: UIImageView!
     // Specifies which Model in the arrayOfFretboardModels is currently being shown.
     var modelIndex = 0
-    
-    
 }
