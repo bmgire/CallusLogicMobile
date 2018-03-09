@@ -95,7 +95,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     @IBOutlet var customizationLabel: UILabel!
     @IBOutlet var removeFretboardButton: UIButton!
     
-    @IBOutlet var playlistTitleTextField: UITextField!
+    @IBOutlet var collectionTitleTextField: UITextField!
     
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
@@ -339,9 +339,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // setup after viewLoads from the main.storyboard in memory
     override func viewDidLoad() {
         // print(#function) // Displays function when called.
-    
         super.viewDidLoad()
 
+        collectionTitleTextField.text = fbCollectionAndIndex.collection?.title
+        
         //Sets the model to the 0 index in arrayOfFretboardModels.
         modelIndex = fbCollectionAndIndex.collection!.modelIndex
         // Select in tableView and load settings.
@@ -651,7 +652,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         // Close keyboard
         fretboardTitleTextField.resignFirstResponder()
-        playlistTitleTextField.resignFirstResponder()
+        collectionTitleTextField.resignFirstResponder()
     
         return true
     }
