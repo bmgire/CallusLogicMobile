@@ -12,12 +12,19 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    let fbCollectionStore = FBCollectionStore()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
+        let navController = window!.rootViewController as! UINavigationController
+         let fbSelectionVC = navController.topViewController as! FBSelectionVC
+       
+        
+        // Access the ItemsViewController and set its item store.
+        fbSelectionVC.fbCollectionStore = fbCollectionStore
         return true
     }
 
@@ -31,6 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         // Save all data.
+        let success = fbCollectionStore.saveChanges()
+        if (success) {
+            print("Saved all of the Items")
+        } else {
+            print("Could not save any of the Items")
+        }
+        
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -44,9 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
-        // Save data. 
+        // Save data.
+        // Save all data.
+        let success = fbCollectionStore.saveChanges()
+        if (success) {
+            print("Saved all of the Items")
+        } else {
+            print("Could not save any of the Items")
+        }
     }
-
-
+    
+    
 }
 

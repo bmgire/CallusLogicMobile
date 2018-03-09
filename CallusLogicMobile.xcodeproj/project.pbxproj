@@ -32,6 +32,7 @@
 		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
 		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
 		B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED81FE32D3D00174544 /* NoteModel.swift */; };
+		B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */; };
 		B5C8172C2048911900C95F26 /* DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8172B2048911900C95F26 /* DisplayMode.swift */; };
 		B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */; };
 /* End PBXBuildFile section */
@@ -98,6 +99,7 @@
 		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
 		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
 		B5786ED81FE32D3D00174544 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCollectionStore.swift; sourceTree = "<group>"; };
 		B5C8172B2048911900C95F26 /* DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMode.swift; sourceTree = "<group>"; };
 		B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorTVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +173,7 @@
 				B57926E22034C4D500272C74 /* ViewControllers */,
 				B52DD17C204E097F00C7D9B3 /* TVCs */,
 				B55D51F91FE1F22600CB5F11 /* Models */,
+				B5C4CDF32050D68D0006B560 /* Data */,
 				B55D51FD1FE1FC1800CB5F11 /* Views */,
 				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
 			);
@@ -228,6 +231,14 @@
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		B5C4CDF32050D68D0006B560 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */,
 				B569E3542050619200EEB533 /* FBCollectionAndIndex.swift in Sources */,
 				B536C3651FDF855300FD886E /* FBViewController.swift in Sources */,
 				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,

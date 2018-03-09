@@ -8,18 +8,11 @@
 
 import UIKit
 
-class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource, FBCollectionAndIndexDelegate {
+class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource /* FBCollectionAndIndexDelegate */ {
     
-    // FBCollectionAndIndexDelegate method for receiving collection and index from previous VC.
-    func receive(collectionAndIndex: FBCollectionAndIndex) {
-        //
-        fbCollectionAndIndex = collectionAndIndex
-    }
-    
+    var fbCollectionStore: FBCollectionStore!
     var delegate: FBCollectionAndIndexDelegate?
-    
     var arrayOfFBCollectionModels = [FBCollectionModel]()
-    
     var fbCollectionAndIndex = FBCollectionAndIndex()
 
     @IBOutlet var collectionTableView: UITableView!
@@ -31,19 +24,33 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        arrayOfFBCollectionModels.append(FBCollectionModel())
-        arrayOfFBCollectionModels[0].arrayOfFretboardModels.append(FretboardModel())
+        // If the viewLoads and there are no collectionModels, create one.
+        if fbCollectionStore.arrayOfFBCollections.count == 0 {
+            fbCollectionStore.appendCollection()
+            fbCollectionStore.arrayOfFBCollections[0].arrayOfFretboardModels.append(FretboardModel())
+        }
+        // Select the first path - right now my code only has the one fretboard anyways.
+        // Will likely not need this once I set the NSCoding protocol.
         let indexPath = IndexPath(row: 0, section: 0)
         collectionTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
         // Do any additional setup after loading the view.
         
+        /*
         // Load the fbCollection passed to this VC.
         if let newCollection = fbCollectionAndIndex.collection {
             arrayOfFBCollectionModels[fbCollectionAndIndex.index] = newCollection
         }
+ */
         
         
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        // This programmatically adds an edit item bar button because there is no way to add in the interface builder.
+
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -64,12 +71,12 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     // ###########
     // TableView dataSource protocol methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfFBCollectionModels.count
+        return fbCollectionStore.arrayOfFBCollections.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: "FBCollectionCell", for: indexPath)
-        cell.textLabel?.text = arrayOfFBCollectionModels[indexPath.row].title
+        cell.textLabel?.text = fbCollectionStore.arrayOfFBCollections[indexPath.row].title
         return cell
     }
     
@@ -88,7 +95,7 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // update after I setup the tableView did select row
             if let index = collectionTableView?.indexPathForSelectedRow?.row {
                 // setup FBCollectionAndIndex
-                fbCollectionAndIndex.collection = arrayOfFBCollectionModels[index]
+                fbCollectionAndIndex.collection = fbCollectionStore.arrayOfFBCollections[index]
                 fbCollectionAndIndex.index = index
               
                 // Set delegate and pass index
@@ -101,5 +108,11 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
         }
     }
+    
+    // FBCollectionAndIndexDelegate method for receiving collection and index from previous VC.
+ /*   func receive(collectionAndIndex: FBCollectionAndIndex) {
+        //
+        fbCollectionAndIndex = collectionAndIndex
+    } */
     
 }
