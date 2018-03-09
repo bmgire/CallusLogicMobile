@@ -36,10 +36,16 @@ class FBCollectionStore {
     
     // The @discarableResult annotation means the caller of this function is free to ignore the result.
     // The compiler will not care if the user uses the result.
-    @discardableResult func appendCollection() -> FBCollectionModel {
+   func appendCollection(){
         let newModel = FBCollectionModel()
+        newModel.arrayOfFretboardModels.append(FretboardModel())
         arrayOfFBCollections.append(newModel)
-        return newModel
+    }
+    
+    func insertNewCollection(index: Int ){
+        let newModel = FBCollectionModel()
+        newModel.arrayOfFretboardModels.append(FretboardModel())
+        arrayOfFBCollections.insert(newModel, at: index)
     }
     
     func removeCollection(collection: FBCollectionModel) {
