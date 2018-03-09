@@ -275,6 +275,7 @@
                         <outlet property="addFretboardButton" destination="fbX-UF-hne" id="7Re-kT-rib"/>
                         <outlet property="backgroundView" destination="8bC-Xf-vdC" id="5wT-8o-aml"/>
                         <outlet property="clearGhostedNotesButton" destination="L3o-P0-esF" id="KEV-9i-Zye"/>
+                        <outlet property="collectionTitleTextField" destination="9zZ-aC-Oi2" id="oPE-oa-GeM"/>
                         <outlet property="colorButton" destination="GJ4-Lk-Ti4" id="ZWj-oM-agb"/>
                         <outlet property="colorButtonBorderView" destination="Osr-yk-x6P" id="D58-kd-YTQ"/>
                         <outlet property="customizationLabel" destination="wVW-IA-5d1" id="e90-Jh-RMa"/>
@@ -284,7 +285,6 @@
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>
                         <outlet property="lockSwitch" destination="GjG-p4-G2R" id="RlM-z1-hhW"/>
                         <outlet property="modeLabel" destination="R0U-O1-bkH" id="fxz-9r-HUm"/>
-                        <outlet property="playlistTitleTextField" destination="9zZ-aC-Oi2" id="7Nk-DR-edq"/>
                         <outlet property="removeFretboardButton" destination="uSZ-pv-1h5" id="piM-vZ-RMf"/>
                         <outlet property="rootPickerView" destination="7gO-8t-WgQ" id="fzJ-Uc-2A8"/>
                         <outlet property="scaleSelectionButton" destination="QFc-aO-JJC" id="yuK-ZJ-dVT"/>

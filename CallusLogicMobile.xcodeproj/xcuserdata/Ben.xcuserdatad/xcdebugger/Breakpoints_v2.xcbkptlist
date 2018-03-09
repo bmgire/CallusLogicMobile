@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "542311013.271939"
+            timestampString = "542312233.9233021"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "addFretboardAction(_:)"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
