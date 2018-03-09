@@ -39,7 +39,8 @@ class FBCollectionModel: NSObject, NSCoding {
         // I'll have to provide the imageView in here, or set it to a default value maybe.
     }
     
-    var count = 0
+    // Count is specifically only used during decoding.
+    private var count = 0
     var title = "Untitled Collection"
     var arrayOfFretboardModels = [FretboardModel]()
     var image: UIImageView!

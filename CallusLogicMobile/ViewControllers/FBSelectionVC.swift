@@ -37,14 +37,11 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     @IBAction func addFretboard(_ sender: UIButton) {
-        // if let indexPath = collectionTableView.indexPathForSelectedRow {
-        // Adding 1 to the row to get the row after the selected fretboard.
-        
+       
         let lastRow = fbCollectionStore.arrayOfFBCollections.count
         let lastIndexPath = IndexPath(row: lastRow, section: 0)
         fbCollectionStore.appendCollection()
         
-        // Insert into
         collectionTableView?.insertRows(at: [lastIndexPath], with: .automatic)
         collectionTableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
     }

@@ -132,24 +132,27 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         // Add a new blank fretboard Model
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            // Adding 1 to the row to get the row after the selected fretboard.
-            let row = indexPath.row + 1
-            fbCollectionAndIndex.collection!.arrayOfFretboardModels.insert(FretboardModel(), at: row)
-            tableView?.insertRows(at: [indexPath], with: .automatic)
-            
-            modelIndex = row
-            selectedBoard.scaleIndexPath = IndexPath(row: 0, section: 0)
-            
-            loadSettingsFromSelectedBoard()
-            
-            // Load settings from the toneArraysCreator only because we're creating a new fretboard.
-            addNotesAction()
-            
-            
-        } else {
-            print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
-        }
+        //     if let indexPath = tableView.indexPathForSelectedRow {
+        // Adding 1 to the row to get the row after the selected fretboard.
+        let row = fbCollectionAndIndex.collection!.arrayOfFretboardModels.count
+        let lastIndexPath = IndexPath(row: row, section: 0)
+        fbCollectionAndIndex.collection?.arrayOfFretboardModels.append(FretboardModel())
+        tableView.insertRows(at: [lastIndexPath], with: .automatic)
+        tableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
+        
+        // Adding one because row was set before fretboard was appended.
+        modelIndex = row
+        selectedBoard.scaleIndexPath = IndexPath(row: 0, section: 0)
+        
+        loadSettingsFromSelectedBoard()
+        
+        // Load settings from the toneArraysCreator only because we're creating a new fretboard.
+        addNotesAction()
+        
+        
+        /*      } else {
+         print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
+         } */
         
     }
     
