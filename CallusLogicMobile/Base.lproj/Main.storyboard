@@ -36,25 +36,22 @@
                                     <outlet property="delegate" destination="Zx6-8v-mqY" id="HZL-yG-xQp"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgs-Ky-fVs">
-                                <rect key="frame" x="491" y="90" width="513" height="316"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.23318809700000001" green="0.997454226" blue="0.29733112890000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="13p-Pu-m9L">
-                                <rect key="frame" x="704" y="409" width="300" height="41"/>
+                                <rect key="frame" x="697" y="651" width="300" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="View Selected Collection &gt;"/>
                                 <connections>
-                                    <action selector="viewSelectedFBAction:" destination="Zx6-8v-mqY" eventType="touchUpInside" id="uzf-yD-gx8"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="segueToFBViewController" id="jFh-5r-yBl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ke-Qo-TEJ">
-                                <rect key="frame" x="20" y="97" width="30" height="30"/>
+                                <rect key="frame" x="20" y="97" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editTableView:" destination="Zx6-8v-mqY" eventType="touchUpInside" id="tze-iC-Fn3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUj-KM-DSb">
                                 <rect key="frame" x="373" y="97" width="99" height="30"/>
@@ -64,6 +61,17 @@
                                     <action selector="addFretboard:" destination="Zx6-8v-mqY" eventType="touchUpInside" id="omp-nu-ypC"/>
                                 </connections>
                             </button>
+                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgs-Ky-fVs">
+                                <rect key="frame" x="481" y="244" width="516" height="335"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preview:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YxQ-P6-v6B">
+                                <rect key="frame" x="480" y="215" width="96" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="KS6-9a-VRH"/>
@@ -73,7 +81,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionTableView" destination="K0q-LH-vij" id="GxY-xZ-Vvg"/>
-                        <outlet property="image" destination="dgs-Ky-fVs" id="q5Z-bo-0mG"/>
+                        <outlet property="editTableViewButton" destination="7ke-Qo-TEJ" id="BFj-Ct-dJ6"/>
+                        <outlet property="imageView" destination="dgs-Ky-fVs" id="5ng-N6-DXK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ2-LY-cdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -177,7 +186,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
-                                <rect key="frame" x="465" y="285" width="180" height="124"/>
+                                <rect key="frame" x="465" y="294" width="180" height="115"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="evT-5U-Tvo"/>
@@ -267,7 +276,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="jkj-lT-ffA"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="LockedStatusLabel" destination="c9E-Hw-J81" id="b2r-HL-Y50"/>

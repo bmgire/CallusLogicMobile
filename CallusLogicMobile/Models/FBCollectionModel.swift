@@ -43,7 +43,7 @@ class FBCollectionModel: NSObject, NSCoding {
     private var count = 0
     var title = "Untitled Collection"
     var arrayOfFretboardModels = [FretboardModel]()
-    var image: UIImageView!
+    var image = UIImage() 
     // Specifies which Model in the arrayOfFretboardModels is currently being shown.
     var modelIndex = 0
 }
