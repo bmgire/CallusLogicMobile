@@ -133,24 +133,15 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             sender.setTitle("Edit", for: .normal)
             // If there are any fretboards left select the top fretboard.
             if fbCollectionAndIndex.collection!.arrayOfFretboardModels.count != 0 {
+                modelIndex = 0
+                
                 tableView.selectRow(at: IndexPath(row: 0, section: 0),
                                     animated: true, scrollPosition: .top)
+                loadSettingsFromSelectedBoard()
+                updateFretboardView()
             } else {
                 // hide all editing controls except for the + add freboard button.
-                
-                hideOrDisplayAllControls(doHide: true) /*
-                fretboardTitleTextField.isHidden = true
-                lockSwitch.isHidden = true
-                LockedStatusLabel.isHidden = true
-                rootPickerView.isHidden = true
-                accidentalPickerView.isHidden = true
-                scaleSelectionButton.isHidden = true
-                colorButtonBorderView.isHidden = true
-                colorButton.isHidden = true
-                customizationSwitch.isHidden = true
-                customizationLabel.isHidden = true
-                displayModePickerView.isHidden = true */
-                
+                hideOrDisplayAllControls(doHide: true)
             }
         }
         
@@ -566,6 +557,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "fretboardCell", for: indexPath)
         cell.textLabel?.text = fbCollectionAndIndex.collection!.arrayOfFretboardModels[indexPath.row].getFretboardTitle()
+        cell.showsReorderControl = true
         return cell
     }
     
@@ -625,17 +617,20 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                                                     
                                                     self.editTableView(self.editTableViewButton)
                                                 }
-                                                
-                                                
             })
-                                                
              ac.addAction(deleteAction)
             present(ac, animated: true, completion: nil)
         }
-        
     }
   
-   
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+
+        // update the FBCollectionStore - I also likely need to update tableView(... commit: )
+        let model = fbCollectionAndIndex.collection!.arrayOfFretboardModels[sourceIndexPath.row]
+        fbCollectionAndIndex.collection!.arrayOfFretboardModels.remove(at: sourceIndexPath.row)
+        fbCollectionAndIndex.collection!.arrayOfFretboardModels.insert(model, at: destinationIndexPath.row)
+    }
+    
     //############
     //##############################################
     // UIPickerView DataSource functions
