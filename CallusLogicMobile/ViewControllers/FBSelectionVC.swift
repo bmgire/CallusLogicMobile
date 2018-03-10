@@ -13,14 +13,41 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var fbCollectionStore: FBCollectionStore!
     var delegate: FBCollectionAndIndexDelegate?
     var fbCollectionAndIndex = FBCollectionAndIndex()
-
+    
+    
     @IBOutlet var collectionTableView: UITableView!
     
-    @IBOutlet var image: UIImageView!
+    @IBOutlet var imageView: UIImageView!
     
-    @IBAction func viewSelectedFBAction(_ sender: UIButton) {
+    @IBOutlet var editTableViewButton : UIButton!
+    
+    
+    
+    @IBAction func editTableView(_ sender: UIButton) {
+        // toggle edit mode.
+        if collectionTableView.isEditing == false {
+            collectionTableView.isEditing = true
+            sender.setTitle("Done", for: .normal)
+        } else {
+            collectionTableView.isEditing = false
+            sender.setTitle("Edit", for: .normal)
+            // If there are any fretboards left select the top fretboard.
+            if fbCollectionStore.arrayOfFBCollections.count != 0 {
+               // modelIndex = 0
+                
+                collectionTableView.selectRow(at: IndexPath(row: 0, section: 0),
+                                    animated: true, scrollPosition: .top)
+               // loadSettingsFromSelectedBoard()
+               // updateFretboardView()
+            } else {
+                // hide all editing controls except for the + add freboard button.
+              //  hideOrDisplayAllControls(doHide: true)
+            }
+        }
         
+    
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // If the viewLoads and there are no collectionModels, create one.
@@ -78,17 +105,76 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = collectionTableView.dequeueReusableCell(withIdentifier: "FBCollectionCell", for: indexPath)
         cell.textLabel?.text = fbCollectionStore.arrayOfFBCollections[indexPath.row].title
+        cell.showsReorderControl = true
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: add code to show image and edit buttons
-        
-        // update collectionIndex
-        
+        imageView.image = fbCollectionStore.arrayOfFBCollections[indexPath.row].image
+        imageView.setNeedsDisplay()
     }
-    // TableView Delegate Methods.
-    // These methods prompt the image and options to edit the fretboardCollectionTitle.
+    
+    // Presents editing alerts.
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCellEditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        // Presents editing alerts.
+        if editingStyle == .delete {
+            // get an instance of the model
+            let collection = fbCollectionStore.arrayOfFBCollections[indexPath.row]
+            
+            let title = "Delete \"\(collection.title)\"?"
+            let message = "Are you sure you want to delete this collection of fretboards?"
+            
+            let ac = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            
+            if let popoverController = ac.popoverPresentationController {
+                
+                let sourceView = tableView.cellForRow(at: indexPath)!.contentView
+                //let
+                popoverController.sourceView = sourceView
+                popoverController.sourceRect = sourceView.frame
+                popoverController.permittedArrowDirections = UIPopoverArrowDirection.left
+            }
+            
+            
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            ac.addAction(cancelAction)
+            
+            let deleteAction = UIAlertAction(title: "Delete",
+                                             style: .destructive,
+                                             handler: { (action)-> Void in
+                                                
+                                                self.fbCollectionStore.removeCollection(collection: collection)
+                                                self.collectionTableView.deleteRows(at: [indexPath], with: .automatic)
+                                                
+                                                if self.fbCollectionStore.arrayOfFBCollections.count == 0 {
+                                                    
+                                                    self.editTableView(self.editTableViewButton)
+                                                }
+            })
+            ac.addAction(deleteAction)
+            present(ac, animated: true, completion: nil)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        // update the FBCollectionStore - I also likely need to update tableView(... commit: )
+        let collection = fbCollectionStore.arrayOfFBCollections[sourceIndexPath.row]
+        
+        fbCollectionStore.removeCollection(collection: collection)
+        fbCollectionStore.arrayOfFBCollections.insert(collection, at: destinationIndexPath.row)
+        
+        
+        //fbCollectionAndIndex.collection!.arrayOfFretboardModels.remove(at: sourceIndexPath.row)
+        //fbCollectionAndIndex.collection!.arrayOfFretboardModels.insert(model, at: destinationIndexPath.row)
+    }
+    
+    
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToFBViewController" {

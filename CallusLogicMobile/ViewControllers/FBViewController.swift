@@ -966,6 +966,12 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             selectedBoard.updateNoteModelDisplaySettings()
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //djfhkhjsd
+        fbCollectionAndIndex.collection!.image = backgroundView.asImage()
+        
+    }
  }
 
 

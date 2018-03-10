@@ -13,6 +13,8 @@ import Foundation
 class FBCollectionStore {
     var arrayOfFBCollections = [FBCollectionModel]()
     
+    
+    
     // the return value is a URL
     let collectionArchiveURL: URL = {
         // searchy for  the URL for the .documentDirectory in the .userDomainMask location
@@ -40,12 +42,6 @@ class FBCollectionStore {
         let newModel = FBCollectionModel()
         newModel.arrayOfFretboardModels.append(FretboardModel())
         arrayOfFBCollections.append(newModel)
-    }
-    
-    func insertNewCollection(index: Int ){
-        let newModel = FBCollectionModel()
-        newModel.arrayOfFretboardModels.append(FretboardModel())
-        arrayOfFBCollections.insert(newModel, at: index)
     }
     
     func removeCollection(collection: FBCollectionModel) {
