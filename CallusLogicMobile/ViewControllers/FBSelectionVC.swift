@@ -21,31 +21,34 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet var editTableViewButton : UIButton!
     
+    @IBOutlet var noPreviewAvailableLabel: UILabel!
     
+    @IBOutlet var viewSelectedCollection: UIButton!
     
     @IBAction func editTableView(_ sender: UIButton) {
         // toggle edit mode.
         if collectionTableView.isEditing == false {
             collectionTableView.isEditing = true
             sender.setTitle("Done", for: .normal)
-        } else {
+        } // Else, end edit mode.
+          else {
             collectionTableView.isEditing = false
             sender.setTitle("Edit", for: .normal)
             // If there are any fretboards left select the top fretboard.
             if fbCollectionStore.arrayOfFBCollections.count != 0 {
                // modelIndex = 0
                 
-                collectionTableView.selectRow(at: IndexPath(row: 0, section: 0),
-                                    animated: true, scrollPosition: .top)
-               // loadSettingsFromSelectedBoard()
-               // updateFretboardView()
+                collectionTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .top)
+                updateImage(row: 0)
+              // Else there are no fretboardCollections. Set imageView to nil and display no preview label.
             } else {
                 // hide all editing controls except for the + add freboard button.
-              //  hideOrDisplayAllControls(doHide: true)
+                imageView.image = nil
+                viewSelectedCollection.isHidden = true
+                noPreviewAvailableLabel.isHidden = false
+                
             }
         }
-        
-    
     }
     
     override func viewDidLoad() {
@@ -59,6 +62,7 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // Will likely not need this once I set the NSCoding protocol.
         let indexPath = IndexPath(row: 0, section: 0)
         collectionTableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+        updateImage(row: indexPath.row)
         // Do any additional setup after loading the view.
         
     }
@@ -68,9 +72,11 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let lastRow = fbCollectionStore.arrayOfFBCollections.count
         let lastIndexPath = IndexPath(row: lastRow, section: 0)
         fbCollectionStore.appendCollection()
+        viewSelectedCollection.isHidden = false
         
         collectionTableView?.insertRows(at: [lastIndexPath], with: .automatic)
         collectionTableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
+        updateImage(row: lastIndexPath.row)
     }
         
     required init?(coder aDecoder: NSCoder) {
@@ -111,9 +117,25 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: add code to show image and edit buttons
-        imageView.image = fbCollectionStore.arrayOfFBCollections[indexPath.row].image
-        imageView.setNeedsDisplay()
+        updateImage(row: indexPath.row)
     }
+    
+    func updateImage(row: Int) {
+        // TODO: add code to show image and edit buttons
+        if let image = fbCollectionStore.arrayOfFBCollections[row].image {
+            imageView.image = image
+            if noPreviewAvailableLabel.isHidden == false {
+                noPreviewAvailableLabel.isHidden = true
+            }
+        } else {
+            // The image is nil, Display no preview available message.
+            imageView.image = nil
+            noPreviewAvailableLabel.isHidden = false
+        }
+    }
+    
+    
+    
     
     // Presents editing alerts.
     func tableView(_ tableView: UITableView,
@@ -160,17 +182,13 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    // Update the FBCollectionStore to reflect the reorder
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        // update the FBCollectionStore - I also likely need to update tableView(... commit: )
         let collection = fbCollectionStore.arrayOfFBCollections[sourceIndexPath.row]
-        
+        // Remove and insert the collection.
         fbCollectionStore.removeCollection(collection: collection)
         fbCollectionStore.arrayOfFBCollections.insert(collection, at: destinationIndexPath.row)
-        
-        
-        //fbCollectionAndIndex.collection!.arrayOfFretboardModels.remove(at: sourceIndexPath.row)
-        //fbCollectionAndIndex.collection!.arrayOfFretboardModels.insert(model, at: destinationIndexPath.row)
     }
     
     
@@ -200,6 +218,7 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         let indexPath = collectionTableView.indexPathForSelectedRow!
         collectionTableView.reloadRows(at: [indexPath], with: .automatic)
         collectionTableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        updateImage(row: indexPath.row)
     }
     
     

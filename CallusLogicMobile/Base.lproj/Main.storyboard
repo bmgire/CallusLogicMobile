@@ -61,14 +61,22 @@
                                     <action selector="addFretboard:" destination="Zx6-8v-mqY" eventType="touchUpInside" id="omp-nu-ypC"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgs-Ky-fVs">
-                                <rect key="frame" x="481" y="244" width="516" height="335"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgs-Ky-fVs">
+                                <rect key="frame" x="481" y="211" width="523" height="368"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Preview:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YxQ-P6-v6B">
-                                <rect key="frame" x="480" y="215" width="96" height="30"/>
+                                <rect key="frame" x="480" y="180" width="96" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Preview Available" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EM3-15-s32">
+                                <rect key="frame" x="621" y="338" width="252" height="92"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -83,6 +91,8 @@
                         <outlet property="collectionTableView" destination="K0q-LH-vij" id="GxY-xZ-Vvg"/>
                         <outlet property="editTableViewButton" destination="7ke-Qo-TEJ" id="BFj-Ct-dJ6"/>
                         <outlet property="imageView" destination="dgs-Ky-fVs" id="5ng-N6-DXK"/>
+                        <outlet property="noPreviewAvailableLabel" destination="EM3-15-s32" id="n89-la-BQC"/>
+                        <outlet property="viewSelectedCollection" destination="13p-Pu-m9L" id="gOs-Ud-253"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ2-LY-cdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -93,7 +103,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController modalTransitionStyle="flipHorizontal" id="BYZ-38-t0r" userLabel="FBViewController" customClass="FBViewController" customModule="CallusLogicMobile" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleAspectFit" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -161,17 +171,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZd-ye-ZjK">
-                                <rect key="frame" x="78" y="195" width="100" height="149"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Xup-ML-NbW"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="SdB-cF-LPk"/>
-                                </connections>
-                            </pickerView>
-                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-8t-WgQ">
+                            <pickerView alpha="0.94999999999999996" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7gO-8t-WgQ">
                                 <rect key="frame" x="20" y="195" width="50" height="149"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="aHx-ll-HkI"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="RNl-to-lNg"/>
@@ -185,9 +188,10 @@
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
-                            <pickerView clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
+                            <pickerView alpha="0.94999999999999996" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fo2-ol-wXK">
                                 <rect key="frame" x="465" y="294" width="180" height="115"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="evT-5U-Tvo"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="YGJ-wh-cYW"/>
@@ -270,6 +274,15 @@
                                     <action selector="editTableView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="smB-Us-mHQ"/>
                                 </connections>
                             </button>
+                            <pickerView alpha="0.94999999999999996" contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MZd-ye-ZjK">
+                                <rect key="frame" x="78" y="195" width="100" height="149"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Xup-ML-NbW"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="SdB-cF-LPk"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>

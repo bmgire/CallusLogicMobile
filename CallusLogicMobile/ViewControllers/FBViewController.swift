@@ -341,6 +341,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             clearGhostedNotesButton.isHidden = false
             customizationLabel.text = "Disable Customizations"
             backgroundView.backgroundColor = pinkColor
+            rootPickerView.backgroundColor = pinkColor
+            accidentalPickerView.backgroundColor = pinkColor
+            displayModePickerView.backgroundColor = pinkColor
             modeLabel.text = "Mode: Customizable Fretboard"
             fretboardTitleTextField.textColor = UIColor.blue
             fretboardTitleTextField.isUserInteractionEnabled = true
@@ -349,6 +352,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             clearGhostedNotesButton.isHidden = true
             customizationLabel.text = "Enable Customizations"
             backgroundView.backgroundColor = lightYellowColor
+            rootPickerView.backgroundColor = lightYellowColor
+            accidentalPickerView.backgroundColor = lightYellowColor
+            displayModePickerView.backgroundColor = lightYellowColor
             modeLabel.text = "Mode: Default Fretboard Switching"
             fretboardTitleTextField.textColor = UIColor.black
             fretboardTitleTextField.isUserInteractionEnabled = false
@@ -968,7 +974,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //djfhkhjsd
+        //djfhkhjsdTest
         fbCollectionAndIndex.collection!.image = backgroundView.asImage()
         
     }
