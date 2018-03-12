@@ -28,7 +28,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9hp-gZ-wdi" userLabel="Stack View - Horizontal--outerMost Layer">
                                 <rect key="frame" x="20" y="74" width="984" height="581"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zZe-zq-jqq" userLabel="Stack View - View and TV">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zZe-zq-jqq" userLabel="Stack View - tableView">
                                         <rect key="frame" x="0.0" y="0.0" width="487" height="581"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OU8-Ki-PCQ" userLabel="View - Empty for edit and Add Fretboard">
@@ -229,13 +229,15 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Yae-JM-n1p"/>
                                 </connections>
                             </tableView>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="RightHandedFretboard" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc1-9a-Ltk" customClass="FretboardView" customModule="CallusLogicMobile" customModuleProvider="target">
+                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightHandedFretboard" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc1-9a-Ltk" customClass="FretboardView" customModule="CallusLogicMobile" customModuleProvider="target">
                                 <rect key="frame" x="20" y="417" width="984" height="307"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES" image="YES" updatesFrequently="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="lc1-9a-Ltk" secondAttribute="height" multiplier="984:307" id="J2u-zv-69v"/>
+                                </constraints>
                             </imageView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="FretboardTitle" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUl-vB-oyC">
                                 <rect key="frame" x="38" y="107" width="546" height="52"/>
@@ -379,6 +381,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="lc1-9a-Ltk" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0iu-K2-1Ow"/>
+                            <constraint firstItem="lc1-9a-Ltk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="PCW-9n-tWP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lc1-9a-Ltk" secondAttribute="trailing" constant="20" id="vZS-Pr-XC2"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems/>
