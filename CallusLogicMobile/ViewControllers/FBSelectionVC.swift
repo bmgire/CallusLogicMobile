@@ -21,8 +21,6 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet var editTableViewButton : UIButton!
     
-    @IBOutlet var noPreviewAvailableLabel: UILabel!
-    
     @IBOutlet var viewSelectedCollection: UIButton!
     
     @IBAction func editTableView(_ sender: UIButton) {
@@ -45,8 +43,6 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 // hide all editing controls except for the + add freboard button.
                 imageView.image = nil
                 viewSelectedCollection.isHidden = true
-                noPreviewAvailableLabel.isHidden = false
-                
             }
         }
     }
@@ -56,7 +52,7 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // If the viewLoads and there are no collectionModels, create one.
         if fbCollectionStore.arrayOfFBCollections.count == 0 {
             fbCollectionStore.appendCollection()
-            fbCollectionStore.arrayOfFBCollections[0].arrayOfFretboardModels.append(FretboardModel())
+            // fbCollectionStore.arrayOfFBCollections[0].arrayOfFretboardModels.append(FretboardModel())
         }
         // Select the first path - right now my code only has the one fretboard anyways.
         // Will likely not need this once I set the NSCoding protocol.
@@ -124,13 +120,9 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // TODO: add code to show image and edit buttons
         if let image = fbCollectionStore.arrayOfFBCollections[row].image {
             imageView.image = image
-            if noPreviewAvailableLabel.isHidden == false {
-                noPreviewAvailableLabel.isHidden = true
-            }
         } else {
             // The image is nil, Display no preview available message.
             imageView.image = #imageLiteral(resourceName: "nil_FB_Preview")
-            noPreviewAvailableLabel.isHidden = false
         }
     }
     

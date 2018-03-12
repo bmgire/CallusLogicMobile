@@ -23,9 +23,9 @@ class FretboardModel: NSObject, NSCoding {
 
     // Variables that need to loaded whenever a fretboard is loaded.
     fileprivate var arrayOfNoteModels: [NoteModel] = []
-    var rootNote = 0
-    var accidental = 0
-    var scaleIndexPath = IndexPath(row: 0, section: 0)
+    var rootNote = 4  // E
+    var accidental = 0 // Natural
+    var scaleIndexPath = IndexPath(row: 0, section: 0) // Minor Pentatonic.
     var allowsCustomizations = false
     
     fileprivate var isLocked = false
