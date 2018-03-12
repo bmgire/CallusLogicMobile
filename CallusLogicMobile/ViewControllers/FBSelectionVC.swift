@@ -129,7 +129,7 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
         } else {
             // The image is nil, Display no preview available message.
-            imageView.image = nil
+            imageView.image = #imageLiteral(resourceName: "nil_FB_Preview")
             noPreviewAvailableLabel.isHidden = false
         }
     }
