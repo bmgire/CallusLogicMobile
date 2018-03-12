@@ -19,13 +19,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Preview Available" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EM3-15-s32">
-                                <rect key="frame" x="621" y="100" width="252" height="92"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9hp-gZ-wdi" userLabel="Stack View - Horizontal--outerMost Layer">
                                 <rect key="frame" x="20" y="74" width="984" height="581"/>
                                 <subviews>
@@ -185,7 +178,6 @@
                         <outlet property="collectionTableView" destination="K0q-LH-vij" id="GxY-xZ-Vvg"/>
                         <outlet property="editTableViewButton" destination="7ke-Qo-TEJ" id="BFj-Ct-dJ6"/>
                         <outlet property="imageView" destination="dgs-Ky-fVs" id="5ng-N6-DXK"/>
-                        <outlet property="noPreviewAvailableLabel" destination="EM3-15-s32" id="n89-la-BQC"/>
                         <outlet property="viewSelectedCollection" destination="13p-Pu-m9L" id="gOs-Ud-253"/>
                     </connections>
                 </viewController>
@@ -411,7 +403,7 @@
                                     <constraint firstAttribute="width" constant="120" id="hOn-rL-jbD"/>
                                 </constraints>
                             </view>
-                            <imageView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightHandedFretboard" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc1-9a-Ltk" customClass="FretboardView" customModule="CallusLogicMobile" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RightHandedFretboard" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lc1-9a-Ltk" customClass="FretboardView" customModule="CallusLogicMobile" customModuleProvider="target">
                                 <rect key="frame" x="20" y="417" width="984" height="307"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" button="YES" image="YES" updatesFrequently="YES"/>
@@ -452,6 +444,7 @@
                             <constraint firstItem="lc1-9a-Ltk" firstAttribute="top" secondItem="L3o-P0-esF" secondAttribute="bottom" constant="3" id="FOr-kb-xSW"/>
                             <constraint firstItem="lc1-9a-Ltk" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="H9o-zh-fnu"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wVW-IA-5d1" secondAttribute="trailing" constant="20" symbolic="YES" id="K1I-DN-C1E"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lc1-9a-Ltk" secondAttribute="trailing" constant="20" id="LWL-wL-BDJ"/>
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="LnU-Wt-9Jn"/>
                             <constraint firstItem="fo2-ol-wXK" firstAttribute="top" secondItem="Osr-yk-x6P" secondAttribute="bottom" constant="8" id="LwT-An-fkh"/>
                             <constraint firstItem="s46-9p-biO" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="NRy-cy-1IF"/>
@@ -460,6 +453,7 @@
                             <constraint firstItem="s46-9p-biO" firstAttribute="trailing" secondItem="lc1-9a-Ltk" secondAttribute="trailing" id="S8I-IG-EIf"/>
                             <constraint firstItem="R0U-O1-bkH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="38" id="SyJ-r7-pnv"/>
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="leading" secondItem="0om-Qh-8AF" secondAttribute="leading" id="UcV-ga-FZu"/>
+                            <constraint firstItem="lc1-9a-Ltk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="WtP-l5-gbE"/>
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="top" secondItem="R0U-O1-bkH" secondAttribute="bottom" constant="52" id="YFz-NU-6hq"/>
                             <constraint firstItem="7gO-8t-WgQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="YT0-kh-jyS"/>
                             <constraint firstItem="7gO-8t-WgQ" firstAttribute="bottom" secondItem="MZd-ye-ZjK" secondAttribute="bottom" id="Ybp-0H-wxi"/>

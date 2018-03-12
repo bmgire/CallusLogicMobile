@@ -194,36 +194,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // Load settings from the toneArraysCreator only because we're creating a new fretboard.
         addNotesAction()
         
-        
-        /*      } else {
-         print("indexPath in method \(#function) was nil. No selection was made in the tableView.")
-         } */
-        
     }
-    /*
-    //############
-    // remove a fretboard from the arrayOfFretbaords and the tableView.
-    @IBAction func removeFretboardAction(_ sender: UIButton) {
-        // print(#function) // Displays function when called.
-        if fbCollectionAndIndex.collection!.arrayOfFretboardModels.count != 1  {
-            // Get indexPath of selectedRow and remove data and row.
-            let indexPath = tableView!.indexPathForSelectedRow!
-            fbCollectionAndIndex.collection!.arrayOfFretboardModels.remove(at: indexPath.row)
-            tableView?.deleteRows(at: [indexPath], with: .automatic)
-            
-            // Select the previous row and loadSettings for that fretboard.
-            // If the previous row is a negative number, set previousRow = 0. For when the first row is deleted. 
-            var previousRow = indexPath.row - 1
-            if previousRow < 0 {
-                previousRow = 0
-            }
-            tableView.selectRow(at: IndexPath(row: previousRow , section: 0 ), animated: false, scrollPosition: UITableViewScrollPosition.none)
-            modelIndex = previousRow
-            loadSettingsFromSelectedBoard()
-            updateFretboardView()
-        }
-        
-    } */
+
     
     //############
     // add notes to the currentBoard
@@ -425,6 +397,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         fretboardView.buildNoteRects()
         fretboardView.buildNoteViews()
         fretboardView.addSubviews()
+        if fbCollectionAndIndex.collection!.image == nil {
+            updateToneArraysCreator()
+            loadToneArraysIntoSelectedBoard()
+            
+        }
         updateFretboardView()
        
     }
@@ -765,7 +742,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // Touches methods
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        // print(#function) // Displays function when called.
+         print(#function) // Displays function when called.
         
         for touch in touches {
             // If the view is a noteView, and is displayed.

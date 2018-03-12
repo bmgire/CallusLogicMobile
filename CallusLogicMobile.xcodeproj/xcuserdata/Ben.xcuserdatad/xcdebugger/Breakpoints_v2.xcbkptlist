@@ -18,44 +18,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "542438620.540261"
+            timestampString = "542589622.17933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
-            landmarkName = "tableView(_:moveRowAt:to:)"
+            startingLineNumber = "744"
+            endingLineNumber = "744"
+            landmarkName = "touchesBegan(_:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "542438620.540328"
+            timestampString = "542589622.1794029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "588"
-            endingLineNumber = "588"
-            landmarkName = "tableView(_:commit:forRowAt:)"
+            startingLineNumber = "854"
+            endingLineNumber = "854"
+            landmarkName = "getNoteViewOrNil(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CallusLogicMobile/ViewControllers/FBSelectionVC.swift"
-            timestampString = "542519506.953594"
+            filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
+            timestampString = "542589622.179451"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "858"
+            endingLineNumber = "858"
+            landmarkName = "getNoteViewOrNil(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
