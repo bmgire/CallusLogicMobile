@@ -17,45 +17,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "542589622.17933"
+            filePath = "CallusLogicMobile/Models/FretboardModel.swift"
+            timestampString = "542613396.67562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "744"
-            endingLineNumber = "744"
-            landmarkName = "touchesBegan(_:with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "542589622.1794029"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "854"
-            endingLineNumber = "854"
-            landmarkName = "getNoteViewOrNil(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "542589622.179451"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "858"
-            endingLineNumber = "858"
-            landmarkName = "getNoteViewOrNil(_:)"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "updateNoteModelDisplaySettings()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
