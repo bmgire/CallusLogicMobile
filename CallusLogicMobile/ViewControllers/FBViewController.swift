@@ -388,23 +388,31 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         colorSelectorTVC.delegate = self
     }
     
+    // Variable specifying if noteViews need to be built.
+    var doBuildNoteViews = true
     //############
     // Autolayout has been applied and you can draw with bounds information.
     override func viewDidLayoutSubviews() {
         // print(#function) // Displays function when called.
         
-        // update lengths and heights of noteview drawing.
-        fretboardView.buildNoteRects()
-        fretboardView.buildNoteViews()
-        fretboardView.addSubviews()
-        if fbCollectionAndIndex.collection!.image == nil {
-            updateToneArraysCreator()
-            loadToneArraysIntoSelectedBoard()
-            
+        
+        if doBuildNoteViews {
+            // update lengths and heights of noteView drawing after the viewDidLoad.
+            // Since using autolayout calls this function a number of times,
+            // I need to make sure I only create these noteViews once.
+            fretboardView.buildNoteRects()
+            fretboardView.buildNoteViews()
+            fretboardView.addSubviews()
+            if fbCollectionAndIndex.collection!.image == nil {
+                updateToneArraysCreator()
+                loadToneArraysIntoSelectedBoard()
+                
+            }
+            updateFretboardView()
+            doBuildNoteViews = false
         }
-        updateFretboardView()
-       
     }
+
   
     
 
@@ -742,7 +750,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // Touches methods
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-         print(#function) // Displays function when called.
+        // print(#function) // Displays function when called.
         
         for touch in touches {
             // If the view is a noteView, and is displayed.
@@ -952,8 +960,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     override func viewWillDisappear(_ animated: Bool) {
         //djfhkhjsdTest
-        fbCollectionAndIndex.collection!.image = backgroundView.asImage()
-        
+        fbCollectionAndIndex.collection!.image = backgroundView.asImage() 
     }
  }
 
