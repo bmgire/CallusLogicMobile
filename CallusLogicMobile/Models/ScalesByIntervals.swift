@@ -30,6 +30,8 @@ class ScalesByIntervals {
         
         // Call to private member function that builds a scale and key.
         
+        buildAndAddScale(aScale: Scale(name:  "Chromatic Scale", formula:  [ "root", "m2", "M2", "m3",  "M3",  "P4",  "D5",  "P5",    "m6",    "M6",  "m7",    "M7",  "offset"], thePassingInterval: "" ))
+        
         buildAndAddScale(aScale: Scale(name: "Minor Pentatonic Scale", formula: ["root", "", "", "m3", "", "P4", "D5", "P5","","", "m7", "", "offset"], thePassingInterval: "D5"))
         
         buildAndAddScale(aScale: Scale(name: "Major Pentatonic Scale", formula: [ "root",  "",   "M2", "m3", "M3", "",   "", "P5",  "", "M6",  "",  "",  "offset"], thePassingInterval: "m3"))
@@ -59,8 +61,6 @@ class ScalesByIntervals {
         buildAndAddScale(aScale: Scale(name:  "Phrygian Dominant Scale", formula:  [ "root",   "m2",  "",     "",    "M3",  "P4",  "",     "P5",    "m6",    "",  "m7",    "",  "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name:  "Persian Scale", formula:  [ "root",   "m2",  "",     "",    "M3",  "P4",  "D5",     "",    "m6",    "",  "",    "M7",  "offset"], thePassingInterval: "" ))
-        
-        buildAndAddScale(aScale: Scale(name:  "Chromatic Scale", formula:  [ "root", "m2", "M2", "m3",  "M3",  "P4",  "D5",  "P5",    "m6",    "M6",  "m7",    "M7",  "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name:  "Major Arpeggio", formula: [ "root",   "",    "",         "",    "M3",  "",    "",     "P5",  "",      "",    "",    "",    "offset"], thePassingInterval: "" ))
         

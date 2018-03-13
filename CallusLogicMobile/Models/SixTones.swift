@@ -39,7 +39,7 @@ class SixTones {
     
     func rampUpStart(_ index: Int, zeroTo36Number: Int) {
         let os = arrayOfOscillators[index]
-        os.rampTime = 0.02
+        os.rampTime = 0.01
         os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
         os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
        

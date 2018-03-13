@@ -25,7 +25,7 @@ class FretboardModel: NSObject, NSCoding {
     fileprivate var arrayOfNoteModels: [NoteModel] = []
     var rootNote = 4  // E
     var accidental = 0 // Natural
-    var scaleIndexPath = IndexPath(row: 0, section: 0) // Minor Pentatonic.
+    var scaleIndexPath = IndexPath(row: 1, section: 0) // Minor Pentatonic.
     var allowsCustomizations = false
     
     fileprivate var isLocked = false
