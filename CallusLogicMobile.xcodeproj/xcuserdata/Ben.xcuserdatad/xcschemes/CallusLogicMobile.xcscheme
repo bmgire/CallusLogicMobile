@@ -20,6 +20,34 @@
                ReferencedContainer = "container:CallusLogicMobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B536C3721FDF855300FD886E"
+               BuildableName = "CallusLogicMobileTests.xctest"
+               BlueprintName = "CallusLogicMobileTests"
+               ReferencedContainer = "container:CallusLogicMobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B536C37D1FDF855300FD886E"
+               BuildableName = "CallusLogicMobileUITests.xctest"
+               BlueprintName = "CallusLogicMobileUITests"
+               ReferencedContainer = "container:CallusLogicMobile.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,26 +57,6 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B536C3721FDF855300FD886E"
-               BuildableName = "CallusLogicMobileTests.xctest"
-               BlueprintName = "CallusLogicMobileTests"
-               ReferencedContainer = "container:CallusLogicMobile.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B536C37D1FDF855300FD886E"
-               BuildableName = "CallusLogicMobileUITests.xctest"
-               BlueprintName = "CallusLogicMobileUITests"
-               ReferencedContainer = "container:CallusLogicMobile.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -63,7 +71,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""

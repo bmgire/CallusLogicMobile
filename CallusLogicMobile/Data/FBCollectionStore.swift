@@ -32,7 +32,7 @@ class FBCollectionStore {
     }
     
     func saveChanges()-> Bool {
-        print("Saving collections to: \(collectionArchiveURL.path)")
+        //print("Saving collections to: \(collectionArchiveURL.path)")
         return NSKeyedArchiver.archiveRootObject(arrayOfFBCollections, toFile: collectionArchiveURL.path)
     }
     
