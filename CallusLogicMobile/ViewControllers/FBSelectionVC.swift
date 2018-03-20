@@ -11,8 +11,8 @@ import UIKit
 class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var fbCollectionStore: FBCollectionStore!
-    var delegate: FBCollectionAndIndexDelegate?
-    var fbCollectionAndIndex = FBCollectionAndIndex()
+   // var delegate: FBCollectionAndIndexDelegate?
+  //  var fbCollectionAndIndex = FBCollectionAndIndex()
     
     
     @IBOutlet var collectionTableView: UITableView!
@@ -192,12 +192,12 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             // update after I setup the tableView did select row
             if let index = collectionTableView?.indexPathForSelectedRow?.row {
                 // setup FBCollectionAndIndex
-                fbCollectionAndIndex.collection = fbCollectionStore.arrayOfFBCollections[index]
-                fbCollectionAndIndex.index = index
+           //     fbCollectionAndIndex.collection = fbCollectionStore.arrayOfFBCollections[index]
+           //     fbCollectionAndIndex.index = index
               
                 // Set delegate and pass index
-                delegate = vc
-                delegate?.receive(collectionAndIndex: fbCollectionAndIndex)
+      /*          delegate = vc
+                delegate?.receive(collectionAndIndex: fbCollectionAndIndex) */
                 
                 
             } else {
@@ -215,3 +215,5 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
 }
+ 
+
