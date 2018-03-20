@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iJ2-LY-cdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-738.28125" y="129.6875"/>
+            <point key="canvasLocation" x="785" y="130"/>
         </scene>
         <!--FBViewController-->
         <scene sceneID="tne-QT-ifu">
@@ -496,7 +496,7 @@
                             <constraint firstItem="XRL-Ey-J3u" firstAttribute="trailing" secondItem="s46-9p-biO" secondAttribute="trailing" id="Usw-4S-sEd"/>
                             <constraint firstItem="XRL-Ey-J3u" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Vgz-MT-nVa"/>
                             <constraint firstItem="s46-9p-biO" firstAttribute="trailing" secondItem="lc1-9a-Ltk" secondAttribute="trailing" id="VoW-Ob-d29"/>
-                            <constraint firstItem="Osr-yk-x6P" firstAttribute="top" secondItem="UUl-vB-oyC" secondAttribute="bottom" constant="71" id="Wqo-2w-8fh"/>
+                            <constraint firstItem="Osr-yk-x6P" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UUl-vB-oyC" secondAttribute="bottom" constant="71" id="Wqo-2w-8fh"/>
                             <constraint firstItem="0om-Qh-8AF" firstAttribute="top" secondItem="7gO-8t-WgQ" secondAttribute="bottom" constant="8" symbolic="YES" id="XL9-dW-11c"/>
                             <constraint firstItem="L3o-P0-esF" firstAttribute="top" secondItem="wVW-IA-5d1" secondAttribute="bottom" constant="8" symbolic="YES" id="ZN7-3b-A04"/>
                             <constraint firstItem="nBV-li-yZ1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="aHI-Xu-LwM"/>
@@ -516,6 +516,7 @@
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="leading" secondItem="0om-Qh-8AF" secondAttribute="leading" id="r8L-cC-SXB"/>
                             <constraint firstItem="UUl-vB-oyC" firstAttribute="leading" secondItem="7gO-8t-WgQ" secondAttribute="leading" id="rsc-VG-v5X"/>
                             <constraint firstItem="L3o-P0-esF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="93" id="t1h-hR-Pg4"/>
+                            <constraint firstItem="fo2-ol-wXK" firstAttribute="top" secondItem="Osr-yk-x6P" secondAttribute="bottom" constant="8" symbolic="YES" id="uni-zy-pvs"/>
                             <constraint firstItem="s46-9p-biO" firstAttribute="leading" secondItem="UUl-vB-oyC" secondAttribute="trailing" constant="79" id="vOm-Xq-8nV"/>
                             <constraint firstItem="wVW-IA-5d1" firstAttribute="top" secondItem="MZd-ye-ZjK" secondAttribute="bottom" constant="3" id="vyy-9k-YXH"/>
                             <constraint firstItem="fo2-ol-wXK" firstAttribute="leading" secondItem="wVW-IA-5d1" secondAttribute="trailing" constant="84" id="x2u-Si-VRd"/>
