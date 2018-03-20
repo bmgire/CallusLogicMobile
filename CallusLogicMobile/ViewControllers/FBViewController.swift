@@ -103,9 +103,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     @IBOutlet var editTableViewButton: UIButton!
     @IBOutlet var collectionTitleTextField: UITextField!
     
+    @IBOutlet var otherCollectionsButton: UIButton!
+    
+    
+    
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
-
+    let collectionsTVC = CollectionsTVC()
+    
     var flashAnimator: UIViewPropertyAnimator!
     
     //###################################
@@ -128,6 +133,38 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         displayModePickerView.isHidden = doHide
     }
 
+    
+    @IBAction func otherCollectionsAction(_ sender: UIButton) {
+        // print(#function) // Displays function when called.
+        
+        
+     //   collectionsTVC.modalPresentationStyle = .popover
+       // collectionsTVC.preferredContentSize = CGSize(width: 300, height: 500) */
+     //   collectionsTVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "collectionCellReuseID")
+        
+        // Set height and width for colorSelectorTVC.preferredContentSize
+  /*      let width = sender.frame.width
+        let cellHeight = UITableViewCell().contentView.frame.height
+        let numberOfCollections = CGFloat(fbCollectionStore.arrayOfFBCollections.count)
+        let popoverHeight =  cellHeight * numberOfCollections
+        collectionsTVC.preferredContentSize = CGSize(width: width, height: popoverHeight) */
+        
+        // setup popoverPrestationController
+        let popC = collectionsTVC.popoverPresentationController
+        popC?.sourceView = sender
+        popC?.sourceRect = sender.bounds
+        popC?.permittedArrowDirections = UIPopoverArrowDirection.right
+        popC?.delegate = self
+        popC?.adaptivePresentationStyle 
+        
+        // Present
+        present(collectionsTVC, animated: true, completion: nil)
+    
+    
+    }
+    
+    
+    
     @IBAction func editTableView(_ sender: UIButton) {
       // toggle edit mode.
         if tableView.isEditing == false {
@@ -397,6 +434,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         scalesTVC.delegate = self
         colorSelectorTVC.delegate = self
+        
+        collectionsTVC.collectionStore = fbCollectionStore
     }
     
     // Variable specifying if noteViews need to be built.

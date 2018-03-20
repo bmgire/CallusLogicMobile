@@ -22,6 +22,7 @@
 		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
 		B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3901FDF86A700FD886E /* FretboardView.swift */; };
 		B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */; };
+		B552894B2061869800A27290 /* CollectionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552894A2061869800A27290 /* CollectionsTVC.swift */; };
 		B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F31FE1EE8E00CB5F11 /* Scale.swift */; };
 		B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */; };
 		B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */; };
@@ -77,6 +78,7 @@
 		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B536C3901FDF86A700FD886E /* FretboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardView.swift; sourceTree = "<group>"; };
 		B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesTVC.swift; sourceTree = "<group>"; };
+		B552894A2061869800A27290 /* CollectionsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTVC.swift; sourceTree = "<group>"; };
 		B55D51F31FE1EE8E00CB5F11 /* Scale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesByIntervals.swift; sourceTree = "<group>"; };
 		B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootToIntervalNotes.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */,
 				B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */,
+				B552894A2061869800A27290 /* CollectionsTVC.swift */,
 			);
 			path = TVCs;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				B52DD17E204E0A6900C7D9B3 /* FBSelectionVC.swift in Sources */,
 				B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */,
 				B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */,
+				B552894B2061869800A27290 /* CollectionsTVC.swift in Sources */,
 				B53147202030BEF30022AAC5 /* SixTones.swift in Sources */,
 				B55D51F61FE1EE8F00CB5F11 /* Scale.swift in Sources */,
 				B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */,
