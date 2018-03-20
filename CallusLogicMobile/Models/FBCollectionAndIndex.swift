@@ -6,6 +6,7 @@
 //  Copyright © 2018 Gire. All rights reserved.
 //
 
+/*
 import Foundation
 
 class FBCollectionAndIndex{
@@ -17,3 +18,5 @@ class FBCollectionAndIndex{
 protocol FBCollectionAndIndexDelegate: class {
     func receive(collectionAndIndex: FBCollectionAndIndex)
 }
+
+ */

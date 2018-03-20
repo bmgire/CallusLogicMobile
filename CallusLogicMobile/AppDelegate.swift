@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
-        let navController = window!.rootViewController as! UINavigationController
-         let fbSelectionVC = navController.topViewController as! FBSelectionVC
+        let fbViewController = window!.rootViewController as! FBViewController
+        // let fbSelectionVC = navController.topViewController as! FBSelectionVC
        
         
         // Access the ItemsViewController and set its item store.
-        fbSelectionVC.fbCollectionStore = fbCollectionStore
+        fbViewController.fbCollectionStore = fbCollectionStore
         return true
     }
 
