@@ -277,6 +277,7 @@
                                     <constraint firstAttribute="width" secondItem="Osr-yk-x6P" secondAttribute="height" multiplier="1:1" id="1VQ-AX-1iY"/>
                                     <constraint firstItem="GJ4-Lk-Ti4" firstAttribute="centerY" secondItem="Osr-yk-x6P" secondAttribute="centerY" id="33P-xn-mga"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="5rc-8v-BA9"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="9SO-vm-mpE"/>
                                     <constraint firstItem="GJ4-Lk-Ti4" firstAttribute="top" secondItem="Osr-yk-x6P" secondAttribute="top" constant="5" id="Iag-rr-d4m"/>
                                     <constraint firstItem="GJ4-Lk-Ti4" firstAttribute="centerX" secondItem="Osr-yk-x6P" secondAttribute="centerX" id="lGE-g4-dWD"/>
                                     <constraint firstItem="GJ4-Lk-Ti4" firstAttribute="leading" secondItem="Osr-yk-x6P" secondAttribute="leading" constant="5" id="nKs-xH-PYC"/>
