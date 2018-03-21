@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Load saved array of FBCollectionModels.
         
         let fbViewController = window!.rootViewController as! FBViewController
-        // let fbSelectionVC = navController.topViewController as! FBSelectionVC
        
         
         // Access the ItemsViewController and set its item store.
