@@ -50,6 +50,8 @@ class CollectionsTVC: UITableViewController {
         tableView?.insertRows(at: [lastIndexPath], with: .automatic)
         tableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
         
+        
+        editButton = tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
         if (editButton?.isHidden)! && collectionStore.arrayOfFBCollections.count > 1 {
             editButton?.isHidden = false
         }
@@ -184,16 +186,18 @@ class CollectionsTVC: UITableViewController {
                                              style: .destructive,
                                              handler: { (action)-> Void in
                                                 
+                                                
                                                 self.collectionStore.removeCollection(collection: collection)
                                                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                                                 
                                                 if self.collectionStore.arrayOfFBCollections.count < 2 {
+                                                    
+                                                    // Set the edit button as a precaution.
+                                                    self.editButton = self.tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
                                                     self.editButton?.isHidden = true
                                                     if self.tableView.isEditing {
                                                         self.editCollection(self.editButton!)
-                                            
                                                     }
-                                                    
                                                 }
                                               
             })
@@ -218,7 +222,6 @@ class CollectionsTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // signal FBCViewController to update the fretboardView with the selected Collection.
         delegate?.collectionWasSelected(index: indexPath.row)
-        print(indexPath.row)
         dismiss(animated: true, completion: nil)
     }
     

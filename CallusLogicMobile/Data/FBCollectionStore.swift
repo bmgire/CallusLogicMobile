@@ -12,7 +12,7 @@ import Foundation
 // This class is almost completely copied from BNR Homepwner. 
 class FBCollectionStore {
     var arrayOfFBCollections = [FBCollectionModel]()
-    
+    var savedCollectionIndex = 0
     
     
     // the return value is a URL
@@ -25,15 +25,36 @@ class FBCollectionStore {
         return documentDirectory.appendingPathComponent("fbCollections.archive")
     }()
     
+    let savedCollectionIndexURL: URL = {
+        // searchy for  the URL for the .documentDirectory in the .userDomainMask location
+        // Note, in ios: the 2nd argument .userDomainMask is always the same. always use .userDomainMask.
+        let documentsDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = documentsDirectories.first!
+        // append "items.archive" and return the documentDirectory.
+        return documentDirectory.appendingPathComponent("fbCollections.savedCollectionIndex")
+    }()
+    
+    
     init() {
         if let archivedCollections = NSKeyedUnarchiver.unarchiveObject(withFile: collectionArchiveURL.path) as? [FBCollectionModel] {
             arrayOfFBCollections = archivedCollections
+        }
+        
+        if let savedIndex = NSKeyedUnarchiver.unarchiveObject(withFile: savedCollectionIndexURL.path) as? Int {
+            savedCollectionIndex = savedIndex
         }
     }
     
     func saveChanges()-> Bool {
         //print("Saving collections to: \(collectionArchiveURL.path)")
-        return NSKeyedArchiver.archiveRootObject(arrayOfFBCollections, toFile: collectionArchiveURL.path)
+        let saveCollections  = NSKeyedArchiver.archiveRootObject(arrayOfFBCollections, toFile: collectionArchiveURL.path)
+        let saveIndex = NSKeyedArchiver.archiveRootObject(savedCollectionIndex, toFile: savedCollectionIndexURL.path)
+        
+        if saveCollections && saveIndex {
+            return true
+        } else {
+            return false
+        }
     }
     
     // The @discarableResult annotation means the caller of this function is free to ignore the result.
