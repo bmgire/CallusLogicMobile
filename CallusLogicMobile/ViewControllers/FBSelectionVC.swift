@@ -146,7 +146,6 @@ class FBSelectionVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             if let popoverController = ac.popoverPresentationController {
                 
                 let sourceView = tableView.cellForRow(at: indexPath)!.contentView
-                //let
                 popoverController.sourceView = sourceView
                 popoverController.sourceRect = sourceView.frame
                 popoverController.permittedArrowDirections = UIPopoverArrowDirection.left
