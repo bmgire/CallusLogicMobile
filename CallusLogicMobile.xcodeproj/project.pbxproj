@@ -10,7 +10,6 @@
 		8FA0E987038AACA68F9F8953 /* libPods-CallusLogicMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F40DF3CFC032444B0E09A96 /* libPods-CallusLogicMobile.a */; };
 		B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5196C9220324101005A018E /* NoteFrequencies.swift */; };
 		B524E2B7205481C000219C5A /* ViewToImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524E2B6205481C000219C5A /* ViewToImageExtension.swift */; };
-		B52DD17E204E0A6900C7D9B3 /* FBSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD17D204E0A6900C7D9B3 /* FBSelectionVC.swift */; };
 		B52DD180204E127A00C7D9B3 /* FBCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */; };
 		B53147202030BEF30022AAC5 /* SixTones.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531471F2030BEF30022AAC5 /* SixTones.swift */; };
 		B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3621FDF855300FD886E /* AppDelegate.swift */; };
@@ -29,7 +28,6 @@
 		B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */; };
 		B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */; };
 		B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51FE1FE2176D00CB5F11 /* testView.swift */; };
-		B569E3542050619200EEB533 /* FBCollectionAndIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B569E3532050619200EEB533 /* FBCollectionAndIndex.swift */; };
 		B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED31FE324DE00174544 /* NSString+drawing.swift */; };
 		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
 		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
@@ -61,7 +59,6 @@
 		7DAF80C7F230D15484CCB005 /* Pods-CallusLogicMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		B5196C9220324101005A018E /* NoteFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFrequencies.swift; sourceTree = "<group>"; };
 		B524E2B6205481C000219C5A /* ViewToImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewToImageExtension.swift; sourceTree = "<group>"; };
-		B52DD17D204E0A6900C7D9B3 /* FBSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBSelectionVC.swift; sourceTree = "<group>"; };
 		B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCollectionModel.swift; sourceTree = "<group>"; };
 		B531471F2030BEF30022AAC5 /* SixTones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixTones.swift; sourceTree = "<group>"; };
 		B536C35F1FDF855300FD886E /* CallusLogicMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CallusLogicMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,7 +83,6 @@
 		B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootToIntervalNotes.swift; sourceTree = "<group>"; };
 		B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		B55D51FE1FE2176D00CB5F11 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
-		B569E3532050619200EEB533 /* FBCollectionAndIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCollectionAndIndex.swift; sourceTree = "<group>"; };
 		B5786ED31FE324DE00174544 /* NSString+drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+drawing.swift"; sourceTree = "<group>"; };
 		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
 		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
@@ -223,7 +219,6 @@
 		B55D51F91FE1F22600CB5F11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B569E3532050619200EEB533 /* FBCollectionAndIndex.swift */,
 				B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */,
 				B5786ED71FE32D3D00174544 /* FretboardModel.swift */,
 				B5786ED81FE32D3D00174544 /* NoteModel.swift */,
@@ -249,7 +244,6 @@
 		B57926E22034C4D500272C74 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				B52DD17D204E0A6900C7D9B3 /* FBSelectionVC.swift */,
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
 			);
 			path = ViewControllers;
@@ -458,7 +452,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */,
-				B569E3542050619200EEB533 /* FBCollectionAndIndex.swift in Sources */,
 				B536C3651FDF855300FD886E /* FBViewController.swift in Sources */,
 				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,
 				B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */,
@@ -468,7 +461,6 @@
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
 				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
 				B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */,
-				B52DD17E204E0A6900C7D9B3 /* FBSelectionVC.swift in Sources */,
 				B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */,
 				B55D51FF1FE2176D00CB5F11 /* testView.swift in Sources */,
 				B552894B2061869800A27290 /* CollectionsTVC.swift in Sources */,

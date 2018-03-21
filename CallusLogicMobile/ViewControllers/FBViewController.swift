@@ -74,7 +74,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         didSet {
             selectedBoard = selectedCollection.arrayOfFretboardModels[modelIndex]
             // Saves which fretboard was selected in the collection.
-            // fbCollectionAndIndex.collection!.modelIndex = modelIndex
+             selectedCollection.modelIndex = modelIndex
         }
     }
     //###################################
@@ -115,6 +115,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     var flashAnimator: UIViewPropertyAnimator!
     
+
     //###################################
     // Actions
     //
@@ -188,7 +189,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 hideOrDisplayAllControls(doHide: true)
             }
         }
-        
+
     }
     
     @IBAction func changeCollectionTitle(_ sender: UITextField) {
@@ -216,9 +217,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         // Add a new blank fretboard Model
         
-        if selectedCollection.arrayOfFretboardModels.count == 0 {
+       
+        
+       /* if selectedCollection.arrayOfFretboardModels.count == 0 {
             hideOrDisplayAllControls(doHide: false)
-        }
+        }*/
         
         
         //     if let indexPath = tableView.indexPathForSelectedRow {
@@ -234,6 +237,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         loadSettingsFromSelectedBoard()
         updateFretboardView()
+        
+        hideOrShowEditTableViewButton()
+      /*  if editTableViewButton.isHidden && selectedCollection.arrayOfFretboardModels.count > 1 {
+            editTableViewButton.isHidden = false
+        } */
         
         // Load settings from the toneArraysCreator only because we're creating a new fretboard.
        // addNotesAction()
@@ -413,15 +421,17 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             // fbCollectionStore.arrayOfFBCollections[0].arrayOfFretboardModels.append(FretboardModel())
         }
         
-        selectedCollection = fbCollectionStore.arrayOfFBCollections[0]
+        selectedCollection = fbCollectionStore.arrayOfFBCollections[fbCollectionStore.savedCollectionIndex]
         collectionTitleTextField.text = selectedCollection.title
         
-        //Sets the model to the 0 index in arrayOfFretboardModels.
+        //Setting the modelIndex updates the SelectedIndex as well. 
         modelIndex = selectedCollection.modelIndex
         // Select in tableView and load settings.
         let indexPath = IndexPath(row: modelIndex, section: 0)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         loadSettingsFromSelectedBoard()
+        
+        hideOrShowEditTableViewButton()
         
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
         AudioKit.start()
@@ -439,6 +449,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         collectionsTVC.collectionStore = fbCollectionStore
         collectionsTVC.delegate = self
+    }
+    
+    func hideOrShowEditTableViewButton() {
+        if  selectedCollection.arrayOfFretboardModels.count < 2 {
+            editTableViewButton.isHidden = true
+        } else {
+            editTableViewButton.isHidden = false
+        }
     }
     
     // Variable specifying if noteViews need to be built.
@@ -818,6 +836,12 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         return true
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == collectionTitleTextField {
+            textField.selectedTextRange = textField.textRange(from: textField.beginningOfDocument, to: textField.endOfDocument)
+        }
+    }
+    
     // ###############################
     // Touches methods
     
@@ -1039,6 +1063,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // Select the collection corresponding to the index and update the fretboard view.
     func collectionWasSelected(index: Int) {
         
+        fbCollectionStore.savedCollectionIndex = index
         selectedCollection = fbCollectionStore.arrayOfFBCollections[index]
         // Setting the model index automatically sets the selectedBoard.
         modelIndex = selectedCollection.modelIndex
@@ -1047,6 +1072,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         loadSettingsFromSelectedBoard()
         updateFretboardView()
+        hideOrShowEditTableViewButton()
         
         // Update tableView
         tableView.reloadData()

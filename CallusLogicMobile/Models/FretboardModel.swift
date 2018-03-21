@@ -70,7 +70,7 @@ class FretboardModel: NSObject, NSCoding {
         rootNote = aDecoder.decodeInteger(forKey: "rootNote")
         accidental = aDecoder.decodeInteger(forKey: "accidental")
         scaleIndexPath = aDecoder.decodeObject(forKey: "scaleIndexPath") as! IndexPath
-        allowsCustomizations = aDecoder.decodeBool(forKey: "allowsCustomization")
+        allowsCustomizations = aDecoder.decodeBool(forKey: "allowsCustomizations")
             
         isLocked = aDecoder.decodeBool(forKey: "isLocked")
         displayMode = aDecoder.decodeInteger(forKey: "displayMode")
