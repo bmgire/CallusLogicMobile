@@ -699,11 +699,33 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
   
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
+        
+        
         // update the FBCollectionStore -
         let model = selectedCollection.arrayOfFretboardModels[sourceIndexPath.row]
         selectedCollection.arrayOfFretboardModels.remove(at: sourceIndexPath.row)
         selectedCollection.arrayOfFretboardModels.insert(model, at: destinationIndexPath.row)
+       
+        // Update model index.
+        // If the selectedFretboard was moved, update the modelIndex
+        if sourceIndexPath.row == modelIndex {
+            modelIndex = destinationIndexPath.row
+        }
+        // If the source.row is greater than the model index,
+        // && the destination.row is less than or equal to the modelIndex,
+        // add 1 to the modelIndex
+        else if sourceIndexPath.row > modelIndex && destinationIndexPath.row <= modelIndex  {
+            
+            modelIndex += 1
+        }
+        // If the source.row is less than the modelIndex,
+        // && the destination.row is greater than or to the model index,
+        // decrement the modelIndex.
+        else if sourceIndexPath.row < modelIndex && destinationIndexPath.row >= modelIndex {
+            modelIndex -= 1
+        }
+        
+        // I might need reselect. 
     }
     
     // Disables Swipe to delete if there are less than 2 collections
