@@ -41,6 +41,7 @@ class ScalesTVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
      /*   buildArrayOfScaleNames()
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "scale")
@@ -108,7 +109,11 @@ class ScalesTVC: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
 
-
+    override func viewDidAppear(_ animated: Bool) {
+        if let row = arrayOfScaleNames.index(of: selectedScale) {
+            tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
