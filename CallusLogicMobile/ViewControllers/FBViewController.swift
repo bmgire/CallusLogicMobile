@@ -173,21 +173,23 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         if tableView.isEditing == false {
             tableView.isEditing = true
             sender.setTitle("Done", for: .normal)
+            // When done editing.
         } else {
             tableView.isEditing = false
             sender.setTitle("Edit", for: .normal)
             // If there are any fretboards left select the top fretboard.
-            if selectedCollection.arrayOfFretboardModels.count != 0 {
-                modelIndex = 0
-                
-                tableView.selectRow(at: IndexPath(row: 0, section: 0),
-                                    animated: true, scrollPosition: .top)
+            //  if selectedCollection.arrayOfFretboardModels.count != 0 {
+            
+            // FYI: All updates to the model index are done in the moveRow and commit editing tableView functions.
+            let indexPath = IndexPath(row: modelIndex, section: 0)
+            
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
                 loadSettingsFromSelectedBoard()
                 updateFretboardView()
-            } else {
+           /* } else {
                 // hide all editing controls except for the + add freboard button.
                 hideOrDisplayAllControls(doHide: true)
-            }
+            } */
         }
 
     }
@@ -447,8 +449,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         scalesTVC.delegate = self
         colorSelectorTVC.delegate = self
         
+        // This assigns references to the modelIndex and the collectionStore in the CollectionsTVC. 
         collectionsTVC.collectionStore = fbCollectionStore
         collectionsTVC.delegate = self
+
+        
     }
     
     func hideOrShowEditTableViewButton() {
@@ -630,13 +635,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         
         // change the displayed fretboard to match the selection. Only if selecting a different fretboard.
-          if modelIndex != indexPath.row {
+       //   if modelIndex != indexPath.row {
         let myRow = indexPath.row
         modelIndex = myRow
         loadSettingsFromSelectedBoard()
         updateFretboardView()
         
-        }
+        //}
     }
     
     // Presents editing alerts.
@@ -674,16 +679,18 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                                                 self.selectedCollection.arrayOfFretboardModels.remove(at: indexPath.row)
                                                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                                                 
+                                                // select either the model index or the last element of the arrayOfFretboards. 
+                                                let last = self.selectedCollection.arrayOfFretboardModels.count - 1
+                                                self.modelIndex = self.modelIndex <= last ? self.modelIndex : last
+                                                let indexPath = IndexPath(row: self.modelIndex, section: 0)
+                                                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                                                
                                                 if self.selectedCollection.arrayOfFretboardModels.count < 2 {
                                                     
                                                     self.editTableViewButton.isHidden = true
                                                     if self.tableView.isEditing {
                                                         self.editTableView(self.editTableViewButton)
-                                                        
                                                     }
-
-                                                    
-                                                    //self.editTableView(self.editTableViewButton)
                                                 }
             })
              ac.addAction(deleteAction)
@@ -703,11 +710,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
      func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if tableView.isEditing {
             return .delete
-        }
-        else if selectedCollection.arrayOfFretboardModels.count < 2 {
-            return .none
         } else {
-            return .delete
+            return .none
         }
     }
     

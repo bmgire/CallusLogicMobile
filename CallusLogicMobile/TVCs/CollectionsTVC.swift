@@ -68,13 +68,17 @@ class CollectionsTVC: UITableViewController {
             tableView.isEditing = false
             sender.setTitle("Edit", for: .normal)
             // If there are any fretboards left select the top fretboard.
-            if collectionStore.arrayOfFBCollections.count != 0 {
-                tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: true, scrollPosition: .top)
+            //if collectionStore.arrayOfFBCollections.count != 0 {
+            
+            // collectionStore.savedIndexPath is updated in moveRow and editing the tableView.
+            let indexPath = IndexPath(row: collectionStore.savedCollectionIndex, section: 0)
+            print(collectionStore.savedCollectionIndex)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
                 // Else there are no fretboardCollections. Set imageView to nil and display no preview label.
-            } else {
+           /* } else {
                 // Create a tableView and select it. 
                 
-            }
+            } */
         }
         
     }
@@ -122,7 +126,8 @@ class CollectionsTVC: UITableViewController {
    
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
-        
+        let indexPath = IndexPath(row: self.collectionStore.savedCollectionIndex, section: 0)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -131,6 +136,9 @@ class CollectionsTVC: UITableViewController {
             editButton = tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
             editButton?.isHidden = true
         }
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.collectionWasSelected(index: collectionStore.savedCollectionIndex)
     }
     
     override  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -190,9 +198,21 @@ class CollectionsTVC: UITableViewController {
                                                 self.collectionStore.removeCollection(collection: collection)
                                                 self.tableView.deleteRows(at: [indexPath], with: .automatic)
                                                 
+                                                // select either the model index or the last element of the arrayOfFretboards.
+                                                let last = self.collectionStore.arrayOfFBCollections.count - 1
+                                                
+                                                if self.collectionStore.savedCollectionIndex > last {
+                                                   self.collectionStore.savedCollectionIndex = last
+                                                }
+                                                
+                                                //self.collectionStore.savedCollectionIndex = self.collectionIndex <= last ? collectionIndex : last
+                                                let indexPath = IndexPath(row: self.collectionStore.savedCollectionIndex, section: 0)
+                                                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                                                
+                                                
                                                 if self.collectionStore.arrayOfFBCollections.count < 2 {
                                                     
-                                                    // Set the edit button as a precaution.
+                                                    // Set the edit button as a precaution. My outlet kept causing a crash.
                                                     self.editButton = self.tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
                                                     self.editButton?.isHidden = true
                                                     if self.tableView.isEditing {
@@ -211,10 +231,8 @@ class CollectionsTVC: UITableViewController {
         if tableView.isEditing {
             return .delete
         }
-        else if collectionStore.arrayOfFBCollections.count < 2 {
+        else {
             return .none
-        } else {
-            return .delete
         }
     }
 
