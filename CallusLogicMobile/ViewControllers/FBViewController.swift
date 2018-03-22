@@ -725,7 +725,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             modelIndex -= 1
         }
         
-        // I might need reselect. 
+        
     }
     
     // Disables Swipe to delete if there are less than 2 collections
