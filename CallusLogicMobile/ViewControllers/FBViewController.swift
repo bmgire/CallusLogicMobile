@@ -173,10 +173,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         if tableView.isEditing == false {
             tableView.isEditing = true
             sender.setTitle("Done", for: .normal)
+            tableView.selectRow(at: IndexPath(row: modelIndex, section: 0), animated: true, scrollPosition: .top)
             // When done editing.
         } else {
             tableView.isEditing = false
-            sender.setTitle("Edit", for: .normal)
+            sender.setTitle("Edit Collection", for: .normal)
             // If there are any fretboards left select the top fretboard.
             //  if selectedCollection.arrayOfFretboardModels.count != 0 {
             
@@ -624,6 +625,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "fretboardCell", for: indexPath)
         cell.textLabel?.text = selectedCollection.arrayOfFretboardModels[indexPath.row].getFretboardTitle()
         cell.showsReorderControl = true
+        
+        // Set color of selected cell.
+        let bgColorView = UIView()
+        let color = UIColor(red: 0, green: 0.6, blue: 1.0, alpha: 0.5)
+        bgColorView.backgroundColor = color
+        cell.selectedBackgroundView = bgColorView
+        
         return cell
     }
     

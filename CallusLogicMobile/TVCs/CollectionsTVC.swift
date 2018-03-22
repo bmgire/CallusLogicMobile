@@ -32,7 +32,7 @@ class CollectionsTVC: UITableViewController {
         
         let xib = UINib(nibName: "headerView", bundle: nil)
         tableView.register(xib, forHeaderFooterViewReuseIdentifier: "headerView")
-        
+        tableView.allowsSelectionDuringEditing = true
         modalPresentationStyle = .popover
         preferredContentSize = CGSize(width: 300, height: 500)
     }
@@ -50,8 +50,10 @@ class CollectionsTVC: UITableViewController {
         
         tableView?.insertRows(at: [lastIndexPath], with: .automatic)
         tableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
+        collectionStore.savedCollectionIndex = lastRow
+        delegate?.collectionWasSelected(index: lastRow)
         
-        
+        // Make edit button visibile if it's hidden. 
         editButton = tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
         if (editButton?.isHidden)! && collectionStore.arrayOfFBCollections.count > 1 {
             editButton?.isHidden = false
@@ -64,6 +66,9 @@ class CollectionsTVC: UITableViewController {
         if tableView.isEditing == false {
             tableView.isEditing = true
             sender.setTitle("Done", for: .normal)
+            tableView.selectRow(at: IndexPath(row: collectionStore.savedCollectionIndex,
+                                              section: 0),
+                                animated: true, scrollPosition: .top)
         } // Else, end edit mode.
         else {
             tableView.isEditing = false
@@ -90,13 +95,13 @@ class CollectionsTVC: UITableViewController {
         super.viewDidLoad()
         
         editButton = tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         //self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -122,6 +127,12 @@ class CollectionsTVC: UITableViewController {
         cell.textLabel?.text = collectionStore.arrayOfFBCollections[indexPath.row].title
         // Configure the cell...
 
+        // Set color of selected cell. 
+        let bgColorView = UIView()
+        let color = UIColor(red: 0, green: 0.6, blue: 1.0, alpha: 0.5)
+        bgColorView.backgroundColor = color
+        cell.selectedBackgroundView = bgColorView
+        
         return cell
     }
    
@@ -129,6 +140,8 @@ class CollectionsTVC: UITableViewController {
         tableView.reloadData()
         let indexPath = IndexPath(row: self.collectionStore.savedCollectionIndex, section: 0)
         self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,14 +152,31 @@ class CollectionsTVC: UITableViewController {
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
+        // If the tableView is still in editing mode when the viewDissapears, 
+        if (tableView?.isEditing)! {
+            // Update edit button. The edit collection button updates tableView?.isEditing automatically.
+            editButton = tableView.headerView(forSection: 0)?.subviews[1] as? UIButton
+            editCollection(editButton!)
+        }
+        
         delegate?.collectionWasSelected(index: collectionStore.savedCollectionIndex)
     }
     
+    
+    
     override  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerView")
-      //  cell?.textLabel?.text = "Test"
-        return cell
+        //let cell = self.tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerView")
+        //cell?.backgroundColor = UIColor.green
+        
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "headerView")
+        view?.backgroundColor = UIColor.red
+        
+        return view
     }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+     return 50   }
     
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -218,10 +248,9 @@ class CollectionsTVC: UITableViewController {
                                                    self.collectionStore.savedCollectionIndex = last
                                                 }
                                                 
-                                                //self.collectionStore.savedCollectionIndex = self.collectionIndex <= last ? collectionIndex : last
                                                 let indexPath = IndexPath(row: self.collectionStore.savedCollectionIndex, section: 0)
                                                 self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-                                                
+                                                self.delegate?.collectionWasSelected(index: indexPath.row)
                                                 
                                                 if self.collectionStore.arrayOfFBCollections.count < 2 {
                                                     
@@ -253,7 +282,9 @@ class CollectionsTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // signal FBCViewController to update the fretboardView with the selected Collection.
         delegate?.collectionWasSelected(index: indexPath.row)
-        dismiss(animated: true, completion: nil)
+     /*   if tableView.isEditing == false {
+            dismiss(animated: true, completion: nil)
+        } */
     }
     
     
