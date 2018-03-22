@@ -44,6 +44,7 @@ class CollectionsTVC: UITableViewController {
     @IBAction func addCollection(_ sender: UIButton) {
         
         let lastRow = collectionStore.arrayOfFBCollections.count
+        print(lastRow)
         let lastIndexPath = IndexPath(row: lastRow, section: 0)
         collectionStore.appendCollection()
         
@@ -149,15 +150,27 @@ class CollectionsTVC: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // this if statement makes sure users don't move rows, when there is only one row.
-        // Ideally I'd like to prevent users from being able to click on the edit button when this happens, but 
-        if collectionStore.arrayOfFBCollections.count > 1 {
-            // update the FBCollectionStore -
-            var array = collectionStore.arrayOfFBCollections
-            
-            let collection = array[sourceIndexPath.row]
+
+            // update the FBCollectionStore.
+            let collection = collectionStore.arrayOfFBCollections[sourceIndexPath.row]
             collectionStore.removeCollection(collection: collection)
-            array.insert(collection, at: destinationIndexPath.row)
+            collectionStore.arrayOfFBCollections.insert(collection, at: destinationIndexPath.row)
+        
+        if sourceIndexPath.row == collectionStore.savedCollectionIndex {
+            collectionStore.savedCollectionIndex = destinationIndexPath.row
+        }
+            // If the source.row is greater than the collectionIndex,
+            // && the destination.row is less than or equal to the collectionIndex,
+            // add 1 to the collectionIndex
+        else if sourceIndexPath.row > collectionStore.savedCollectionIndex && destinationIndexPath.row <= collectionStore.savedCollectionIndex {
+            
+            collectionStore.savedCollectionIndex += 1
+        }
+            // If the source.row is less than the collectionIndex,
+            // && the destination.row is greater than or to the collectionIndex,
+            // decrement the collectionIndex.
+        else if sourceIndexPath.row < collectionStore.savedCollectionIndex && destinationIndexPath.row >= collectionStore.savedCollectionIndex {
+            collectionStore.savedCollectionIndex -= 1
         }
     }
     
