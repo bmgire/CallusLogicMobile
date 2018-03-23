@@ -295,6 +295,19 @@
                                     <constraint firstItem="GJ4-Lk-Ti4" firstAttribute="leading" secondItem="Osr-yk-x6P" secondAttribute="leading" constant="5" id="nKs-xH-PYC"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WeI-cM-8sb">
+                                <rect key="frame" x="20" y="195" width="191" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="zmn-QK-hBo"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Scales"/>
+                                    <segment title="Basic Chords"/>
+                                </segments>
+                                <connections>
+                                    <action selector="showScalesOrChords:" destination="BYZ-38-t0r" eventType="valueChanged" id="psy-bS-SJ0"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -320,6 +333,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="R0U-O1-bkH" secondAttribute="trailing" constant="505" id="QWs-Kb-omD"/>
                             <constraint firstItem="lc1-9a-Ltk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Rg1-R4-DoS"/>
                             <constraint firstItem="s46-9p-biO" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="SgM-3H-kIB"/>
+                            <constraint firstItem="7gO-8t-WgQ" firstAttribute="top" secondItem="WeI-cM-8sb" secondAttribute="bottom" constant="17" id="Srm-hE-MrS"/>
                             <constraint firstItem="QFc-aO-JJC" firstAttribute="leading" secondItem="MZd-ye-ZjK" secondAttribute="trailing" constant="12" id="TUI-2W-yi8"/>
                             <constraint firstItem="c9E-Hw-J81" firstAttribute="leading" secondItem="GjG-p4-G2R" secondAttribute="trailing" constant="6" id="TY9-1z-KXy"/>
                             <constraint firstItem="XRL-Ey-J3u" firstAttribute="trailing" secondItem="s46-9p-biO" secondAttribute="trailing" id="Usw-4S-sEd"/>
@@ -344,6 +358,8 @@
                             <constraint firstItem="0om-Qh-8AF" firstAttribute="top" secondItem="MZd-ye-ZjK" secondAttribute="bottom" constant="8" symbolic="YES" id="oX9-fN-9Gx"/>
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="top" secondItem="UUl-vB-oyC" secondAttribute="bottom" constant="5" id="ptZ-Ai-oaz"/>
                             <constraint firstItem="lc1-9a-Ltk" firstAttribute="top" secondItem="fo2-ol-wXK" secondAttribute="bottom" constant="8" symbolic="YES" id="qWx-rI-nfR"/>
+                            <constraint firstItem="WeI-cM-8sb" firstAttribute="leading" secondItem="nBV-li-yZ1" secondAttribute="leading" id="quM-Mc-UOu"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WeI-cM-8sb" secondAttribute="trailing" constant="20" symbolic="YES" id="r62-yN-Clo"/>
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="leading" secondItem="0om-Qh-8AF" secondAttribute="leading" id="r8L-cC-SXB"/>
                             <constraint firstItem="c9E-Hw-J81" firstAttribute="top" secondItem="UUl-vB-oyC" secondAttribute="bottom" constant="5" id="rKG-tv-fmu"/>
                             <constraint firstItem="UUl-vB-oyC" firstAttribute="leading" secondItem="7gO-8t-WgQ" secondAttribute="leading" id="rsc-VG-v5X"/>
