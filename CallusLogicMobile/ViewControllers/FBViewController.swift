@@ -35,6 +35,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
+    let chordFormulas = ChordFormulas()
     
     //###################################
     // Other Constants
@@ -113,7 +114,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let colorSelectorTVC = ColorSelectorTVC()
     let collectionsTVC = CollectionsTVC()
     
-    var flashAnimator: UIViewPropertyAnimator!
+    
     
 
     //###################################
@@ -136,6 +137,22 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         displayModePickerView.isHidden = doHide
     }
 
+    @IBAction func showScalesOrChords(_ sender: UISegmentedControl) {
+        
+        if sender.selectedSegmentIndex == 0 {
+            scalesTVC.doShowScales = true
+            scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
+        }
+        else {
+            scalesTVC.doShowScales = false
+            scaleSelectionButton.setTitle(scalesTVC.selectedChord, for: .normal)
+        }
+        
+        // I need to reload the data based on that value.
+        scalesTVC.selectSavedRow()
+        addNotesAction()
+        
+    }
     
     @IBAction func allCollectionsAction(_ sender: UIButton) {
         // print(#function) // Displays function when called.
@@ -272,7 +289,15 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         if accidental == "Natural" {
             accidental = ""
         }
-        let scale = arrayOfStrings[2]
+        
+        var scale = ""
+        
+        if scalesTVC.doShowScales {
+            scale = arrayOfStrings[2]
+        }
+        else {
+            scale = scalesTVC.selectedChord
+        }
         
         let newTitle = "\(root)\(accidental)  \(scale)"
         selectedBoard.setFretboardTitle(newTitle)
@@ -520,11 +545,25 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         
         let arrayOfPickerStrings = getPickerValues()
-        toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
-                                           accidental: arrayOfPickerStrings[1],
-                                           scaleName: arrayOfPickerStrings[2])
-        if selectedBoard.allowsCustomizations == false {
-            autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+
+        if scalesTVC.doShowScales {
+            toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
+                                               accidental: arrayOfPickerStrings[1],
+                                               scaleName: arrayOfPickerStrings[2])
+            
+            
+            if selectedBoard.allowsCustomizations == false {
+                autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+            }
+        }
+        else {
+            toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
+                                               accidental: arrayOfPickerStrings[1],
+                                               scaleName: "Minor Arpeggio")
+                                               //chordFormula: chordFormulas.dictOfChordNamesAndFormulas["minor_OnLowE"])
+            if selectedBoard.allowsCustomizations == false {
+                autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+            }
         }
     }
     
@@ -558,6 +597,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // Update all  note models that are not kept. Should initially be zero.
         selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
         selectedBoard.updateNoteModelDisplaySettings()
+        if scalesTVC.doShowScales == false {
+            if let formula = chordFormulas.dictOfChordNamesAndFormulas["minor_OnLowE"] {
+                selectedBoard.removeNotesNotInChord(chordFormula: formula)
+            }
+        }
         
     }
     //#############
@@ -1064,8 +1108,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //###########################
     // scalesTVCDelegate Method
     func scaleChanged(text: String, indexPath: IndexPath) {
-        // print(#function) // Displays function when called.
         
+        // print(#function) // Displays function when called.
         scaleSelectionButton.setTitle(text, for: .normal)
         scaleSelectionButton.setNeedsDisplay()
         selectedBoard.scaleIndexPath = indexPath

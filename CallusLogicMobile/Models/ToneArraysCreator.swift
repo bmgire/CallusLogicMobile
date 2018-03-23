@@ -169,7 +169,5 @@ class ToneArraysCreator {
         
         arrayOfToneArrays = temp
     }
-    
-    
 }
 

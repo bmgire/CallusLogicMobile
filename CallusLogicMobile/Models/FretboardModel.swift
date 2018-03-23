@@ -120,7 +120,7 @@ class FretboardModel: NSObject, NSCoding {
     func loadNewNotesNumbersAndIntervals(_ anArrayOfToneArrays: [[String]]) {
         // For each string
         for stringIndex in 0...5 {
-            // For each fret along the string. Total frets = 23 counting 0 as 1.
+            // For each fret along the string.
             for fretIndex in 0...NOTES_PER_STRING - 1 {
                 //get the array values and plug update the fretboard model.
                 
@@ -136,7 +136,6 @@ class FretboardModel: NSObject, NSCoding {
             }
         }
     }
-    
     
     func updateNoteModelDisplaySettings() {
         for model in arrayOfNoteModels {
@@ -171,6 +170,44 @@ class FretboardModel: NSObject, NSCoding {
         }
     }
     
+    
+    func removeNotesNotInChord(chordFormula: [String]) {
+        // This function will be called after all noteModels (78 on a 12 fret 6 string guitar) have been created.
+        
+        // For each string
+        for stringIndex in 0...5 {
+            // If there is a note for the chord along that string.
+            if chordFormula[stringIndex] != "" {
+                // Search all the frets for the interval.
+                
+                var noteHasNotBeenFound = true
+                
+                for fretIndex in 0..<NOTES_PER_STRING  {
+                    
+                    let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING]
+                    // only check notes that are displayed.
+                    if noteModel.getIsDisplayed() {
+                        
+                        // if the note hasn't been found yet.
+                        if noteHasNotBeenFound {
+                            
+                            if chordFormula[stringIndex] != noteModel.getInterval() {
+                                noteModel.setIsDisplayed(false)
+                            }
+                            // Else the interval matches.
+                            else {
+                                noteHasNotBeenFound = false
+                            }
+                        }
+                        // Else the note has been found, just set isDisplayed to false without checking.
+                        else {
+                            noteModel.setIsDisplayed(false)
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     func setIsGhostForAllDisplayedNoteModels(isGhost: Bool) {
         for model in arrayOfNoteModels {

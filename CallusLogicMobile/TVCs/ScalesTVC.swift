@@ -15,9 +15,13 @@ protocol ScalesTVCDelegate: class {
 class ScalesTVC: UITableViewController {
 
     
-    var selectedScale = ""
+    var selectedScale = "Minor Pentatonic Scale"
+    var selectedChord = "Minor Chord"
     
     var arrayOfScaleNames = [String]()
+    var arrayOfChordNames = ["Minor Chord"]
+    
+    var doShowScales  = true
     
     weak var delegate: ScalesTVCDelegate?
     
@@ -79,7 +83,12 @@ class ScalesTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arrayOfScaleNames.count
+        if doShowScales {
+            return arrayOfScaleNames.count
+        }
+        else {
+            return arrayOfChordNames.count
+        }
     }
 
     // Note the withIdentifier needs to be set to the correct rootNote if for this to work.
@@ -96,24 +105,67 @@ class ScalesTVC: UITableViewController {
         
 
         // Configure the cell...
-        cell.textLabel?.text = arrayOfScaleNames[indexPath.row]
-
+        if doShowScales {
+            cell.textLabel?.text = arrayOfScaleNames[indexPath.row]
+        }
+        else {
+            cell.textLabel?.text = arrayOfChordNames[indexPath.row]
+        }
         return cell
         
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Dissmiss the view after a selection is made.
-        selectedScale = arrayOfScaleNames[indexPath.row]
-        delegate?.scaleChanged(text: selectedScale, indexPath: indexPath)
+        
+        if doShowScales {
+           selectedScale = arrayOfScaleNames[indexPath.row]
+        }
+        else {
+            selectedChord = arrayOfChordNames[indexPath.row]
+        }
+        // selectedScale = doShowScales ? arrayOfScaleNames[indexPath.row] : arrayOfChordNames[indexPath.row]
+        let text = doShowScales ? selectedScale : selectedChord
+        delegate?.scaleChanged(text: text, indexPath: indexPath)
         dismiss(animated: true, completion: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if let row = arrayOfScaleNames.index(of: selectedScale) {
-            tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+        if doShowScales {
+            if let row = arrayOfScaleNames.index(of: selectedScale) {
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+            }
+        }
+        else {
+            // This should probably go in viewWillAppear. 
+            tableView.reloadData()
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         }
     }
+    
+    func selectSavedRow() {
+        tableView.reloadData()
+        if doShowScales {
+            if let row = arrayOfScaleNames.index(of: selectedScale) {
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+            }
+            else {
+                let row = 1
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+            }
+        }
+        else {
+            if let row = arrayOfChordNames.index(of: selectedChord) {
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+            }
+            else {
+                let row = 0
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
