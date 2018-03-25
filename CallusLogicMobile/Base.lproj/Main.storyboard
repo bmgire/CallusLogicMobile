@@ -387,6 +387,7 @@
                         <outlet property="customizationLabel" destination="wVW-IA-5d1" id="e90-Jh-RMa"/>
                         <outlet property="customizationSwitch" destination="0om-Qh-8AF" id="drq-nl-Iq4"/>
                         <outlet property="displayModePickerView" destination="fo2-ol-wXK" id="hVS-tx-Ps1"/>
+                        <outlet property="doShowScalesControl" destination="WeI-cM-8sb" id="uYO-Nc-l4O"/>
                         <outlet property="editTableViewButton" destination="KIC-pe-S9i" id="LL8-mZ-khb"/>
                         <outlet property="fretboardTitleTextField" destination="UUl-vB-oyC" id="e5j-hz-le3"/>
                         <outlet property="fretboardView" destination="lc1-9a-Ltk" id="voc-zu-sYk"/>

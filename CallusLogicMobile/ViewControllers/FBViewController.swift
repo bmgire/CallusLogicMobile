@@ -108,6 +108,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     @IBOutlet var allCollectionsButton: UIButton!
     
+    @IBOutlet var doShowScalesControl: UISegmentedControl!
     
     
     let scalesTVC = ScalesTVC()
@@ -142,15 +143,19 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         if sender.selectedSegmentIndex == 0 {
             scalesTVC.doShowScales = true
             scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
+            selectedBoard.doShowScales = true
         }
         else {
             scalesTVC.doShowScales = false
             scaleSelectionButton.setTitle(scalesTVC.selectedChord, for: .normal)
+            selectedBoard.doShowScales = false
         }
         
         // I need to reload the data based on that value.
         scalesTVC.selectSavedRow()
+        if selectedBoard.allowsCustomizations == false {
         addNotesAction()
+        }
         
     }
     
@@ -253,7 +258,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         tableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
         
         modelIndex = row
-       // selectedBoard.scaleIndexPath = IndexPath(row: 1, section: 0)
+       
         
         loadSettingsFromSelectedBoard()
         updateFretboardView()
@@ -625,6 +630,15 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
         accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
         
+        // loads doShowScalesSettings.
+        if selectedBoard.doShowScales {
+            doShowScalesControl.selectedSegmentIndex = 0
+            scalesTVC.doShowScales = true
+        } else {
+            doShowScalesControl.selectedSegmentIndex = 1
+            scalesTVC.doShowScales = false
+        }
+        
         updateScaleSelectionButton()
         
         
@@ -636,16 +650,16 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     func updateScaleSelectionButton() {
         // get the indexPath from the selected board which was selected prior to this function being called.
-        let indexPath = selectedBoard.scaleIndexPath
-       
+        let indexPath = selectedBoard.doShowScales ? selectedBoard.scaleIndexPath : selectedBoard.chordIndexPath
+        print(indexPath)
         // Select the row in the scalesTVC.tableView.
-        scalesTVC.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
-        
+        //scalesTVC.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+        scalesTVC.selectSavedRow()
         // Set the scalesTVC.selectedScale string to match the indexPath pulled from the selected Board.
-        scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[indexPath.row]
-        
+       // scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[indexPath.row]
+        scalesTVC.updateSelectedScaleOrChord(index: indexPath.row)
         // Upate the title.
-        scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
+        scaleSelectionButton.setTitle(scalesTVC.getTitleOfSelection(), for: .normal)
         scaleSelectionButton.setNeedsDisplay()
     }
     
@@ -1112,7 +1126,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         scaleSelectionButton.setTitle(text, for: .normal)
         scaleSelectionButton.setNeedsDisplay()
-        selectedBoard.scaleIndexPath = indexPath
+        if selectedBoard.doShowScales {
+            selectedBoard.scaleIndexPath = indexPath
+        } else {
+            selectedBoard.chordIndexPath = indexPath
+        }
         addNotesAction()
     }
     

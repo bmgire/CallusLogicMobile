@@ -25,6 +25,22 @@ class ScalesTVC: UITableViewController {
     
     weak var delegate: ScalesTVCDelegate?
     
+    func updateSelectedScaleOrChord(index: Int) {
+        if doShowScales {
+            selectedScale = arrayOfScaleNames[index]
+        } else {
+            selectedChord = arrayOfChordNames[index]
+        }
+    }
+    
+    func getTitleOfSelection()-> String {
+        if doShowScales {
+            return selectedScale
+        } else {
+            return selectedChord
+        }
+    }
+    
     init(){
         super.init(style: .plain)
         buildArrayOfScaleNames()
@@ -150,17 +166,9 @@ class ScalesTVC: UITableViewController {
             if let row = arrayOfScaleNames.index(of: selectedScale) {
                 tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
             }
-            else {
-                let row = 1
-                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
-            }
         }
         else {
             if let row = arrayOfChordNames.index(of: selectedChord) {
-                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
-            }
-            else {
-                let row = 0
                 tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
             }
         }
