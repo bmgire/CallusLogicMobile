@@ -80,11 +80,6 @@ class CollectionsTVC: UITableViewController {
             let indexPath = IndexPath(row: collectionStore.savedCollectionIndex, section: 0)
             print(collectionStore.savedCollectionIndex)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-                // Else there are no fretboardCollections. Set imageView to nil and display no preview label.
-           /* } else {
-                // Create a tableView and select it. 
-                
-            } */
         }
         
     }

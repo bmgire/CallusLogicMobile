@@ -26,7 +26,10 @@ class FretboardModel: NSObject, NSCoding {
     var rootNote = 4  // E
     var accidental = 0 // Natural
     var scaleIndexPath = IndexPath(row: 1, section: 0) // Minor Pentatonic.
+    var chordIndexPath = IndexPath(row: 0, section: 0)
+    
     var allowsCustomizations = false
+    var doShowScales = true
     
     fileprivate var isLocked = false
     fileprivate var displayMode = 0
@@ -46,7 +49,10 @@ class FretboardModel: NSObject, NSCoding {
         aCoder.encode(rootNote, forKey: "rootNote")
         aCoder.encode(accidental, forKey: "accidental")
         aCoder.encode(scaleIndexPath, forKey: "scaleIndexPath")
+        aCoder.encode(chordIndexPath, forKey: "chordIndexPath")
+        
         aCoder.encode(allowsCustomizations, forKey: "allowsCustomizations")
+        aCoder.encode(doShowScales, forKey: "showsScales")
         
         aCoder.encode(isLocked, forKey: "isLocked")
         aCoder.encode(displayMode, forKey: "displayMode")
@@ -70,8 +76,10 @@ class FretboardModel: NSObject, NSCoding {
         rootNote = aDecoder.decodeInteger(forKey: "rootNote")
         accidental = aDecoder.decodeInteger(forKey: "accidental")
         scaleIndexPath = aDecoder.decodeObject(forKey: "scaleIndexPath") as! IndexPath
+        chordIndexPath = aDecoder.decodeObject(forKey: "chordIndexPath") as! IndexPath
         allowsCustomizations = aDecoder.decodeBool(forKey: "allowsCustomizations")
-            
+        doShowScales = aDecoder.decodeBool(forKey: "showsScales")
+        
         isLocked = aDecoder.decodeBool(forKey: "isLocked")
         displayMode = aDecoder.decodeInteger(forKey: "displayMode")
         userColor = aDecoder.decodeObject(forKey: "userColor") as! UIColor
