@@ -28,6 +28,7 @@
 		B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */; };
 		B55D51F81FE1EE8F00CB5F11 /* RootToIntervalNotes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */; };
 		B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */; };
+		B56EF3F92069636B000AAAAD /* ChordCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56EF3F82069636B000AAAAD /* ChordCreator.swift */; };
 		B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED31FE324DE00174544 /* NSString+drawing.swift */; };
 		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
 		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
@@ -84,6 +85,7 @@
 		B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesByIntervals.swift; sourceTree = "<group>"; };
 		B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootToIntervalNotes.swift; sourceTree = "<group>"; };
 		B55D51FA1FE1FBF800CB5F11 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
+		B56EF3F82069636B000AAAAD /* ChordCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordCreator.swift; sourceTree = "<group>"; };
 		B5786ED31FE324DE00174544 /* NSString+drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSString+drawing.swift"; sourceTree = "<group>"; };
 		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
 		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 				B5956CD92065930C00B658A5 /* ChordFormulas.swift */,
+				B56EF3F82069636B000AAAAD /* ChordCreator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				B55D51F71FE1EE8F00CB5F11 /* ScalesByIntervals.swift in Sources */,
 				B5C8172C2048911900C95F26 /* DisplayMode.swift in Sources */,
 				B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */,
+				B56EF3F92069636B000AAAAD /* ChordCreator.swift in Sources */,
 				B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */,
 				B524E2B7205481C000219C5A /* ViewToImageExtension.swift in Sources */,
 			);

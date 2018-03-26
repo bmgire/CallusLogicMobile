@@ -97,7 +97,7 @@ class ScalesByIntervals {
                                        formula: [ "root",   "",    "",     "m3",  "",         "",    "D5",   "",     "",    "D7",  "",    "",    "offset"],
                                        thePassingInterval: "" ))
         
-        buildAndAddScale(aScale: Scale(name:  "7th Arpeggio",
+        buildAndAddScale(aScale: Scale(name:  "Dominant 7th Arpeggio",
                                        formula: [ "root",   "",    "",     "",    "M3",     "",     "",     "P5",  "",    "",    "m7",  "",    "offset"],
                                        thePassingInterval: "" ))
         

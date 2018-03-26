@@ -18,7 +18,8 @@ class ChordFormulas {
     init() {
         let minor_OnLowE = [ "root", "P5", "root", "m3", "P5", "root"]
         arrayOfArraysOfChordFormulas.append(minor_OnLowE)
-        arrayOfChordNames.append("minor_OnLowE")
+        //arrayOfChordNames.append("Minor_OnLowE")
+        arrayOfChordNames.append("Minor Chord (Root: Low E String)")
         dictOfChordNamesAndFormulas[arrayOfChordNames[0]] = arrayOfArraysOfChordFormulas[0]
     }
     
