@@ -162,18 +162,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     @IBAction func allCollectionsAction(_ sender: UIButton) {
         // print(#function) // Displays function when called.
         
-        
-     //   collectionsTVC.modalPresentationStyle = .popover
-       // collectionsTVC.preferredContentSize = CGSize(width: 300, height: 500) */
-     //   collectionsTVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "collectionCellReuseID")
-        
-        // Set height and width for colorSelectorTVC.preferredContentSize
-  /*      let width = sender.frame.width
-        let cellHeight = UITableViewCell().contentView.frame.height
-        let numberOfCollections = CGFloat(fbCollectionStore.arrayOfFBCollections.count)
-        let popoverHeight =  cellHeight * numberOfCollections
-        collectionsTVC.preferredContentSize = CGSize(width: width, height: popoverHeight) */
-        
         // setup popoverPrestationController
         let popC = collectionsTVC.popoverPresentationController
         popC?.sourceView = sender
@@ -184,8 +172,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         // Present
         present(collectionsTVC, animated: true, completion: nil)
-    
-    
     }
     
     
@@ -201,7 +187,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             tableView.isEditing = false
             sender.setTitle("Edit Collection", for: .normal)
             // If there are any fretboards left select the top fretboard.
-            //  if selectedCollection.arrayOfFretboardModels.count != 0 {
             
             // FYI: All updates to the model index are done in the moveRow and commit editing tableView functions.
             let indexPath = IndexPath(row: modelIndex, section: 0)
@@ -209,10 +194,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
                 loadSettingsFromSelectedBoard()
                 updateFretboardView()
-           /* } else {
-                // hide all editing controls except for the + add freboard button.
-                hideOrDisplayAllControls(doHide: true)
-            } */
         }
 
     }
@@ -257,20 +238,25 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         tableView.insertRows(at: [lastIndexPath], with: .automatic)
         tableView.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
         
-        modelIndex = row
-       
+        // save whether showing scales or chords. Also save copy.
+        let doShowScalesCopy = selectedBoard.doShowScales
+        let colorCopy = selectedBoard.getUserColor()
         
+        // Updates seletedBoard.
+        modelIndex = row
+   
+        // Load saved values into selected Board
+        selectedBoard.doShowScales = doShowScalesCopy
+        selectedBoard.setUserColor(colorCopy)
+        scalesTVC.doShowScales = doShowScalesCopy
+        
+        // Load all settings from selected board.
+        // add notes and update FBView.
         loadSettingsFromSelectedBoard()
+        addNotesAction()
         updateFretboardView()
         
         hideOrShowEditTableViewButton()
-      /*  if editTableViewButton.isHidden && selectedCollection.arrayOfFretboardModels.count > 1 {
-            editTableViewButton.isHidden = false
-        } */
-        
-        // Load settings from the toneArraysCreator only because we're creating a new fretboard.
-       // addNotesAction()
-        
     }
 
     
@@ -603,7 +589,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
         selectedBoard.updateNoteModelDisplaySettings()
         if scalesTVC.doShowScales == false {
-            if let formula = chordFormulas.dictOfChordNamesAndFormulas["minor_OnLowE"] {
+            if let formula = chordFormulas.dictOfChordNamesAndFormulas["Minor Chord (Root: Low E String)"] {
                 selectedBoard.removeNotesNotInChord(chordFormula: formula)
             }
         }
@@ -641,7 +627,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         updateScaleSelectionButton()
         
-        
         displayModePickerView.selectRow(selectedBoard.getDisplayMode(), inComponent: 0, animated: false)
         
         // loadUserColor
@@ -651,12 +636,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     func updateScaleSelectionButton() {
         // get the indexPath from the selected board which was selected prior to this function being called.
         let indexPath = selectedBoard.doShowScales ? selectedBoard.scaleIndexPath : selectedBoard.chordIndexPath
-        print(indexPath)
+       
         // Select the row in the scalesTVC.tableView.
-        //scalesTVC.tableView.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
         scalesTVC.selectSavedRow()
         // Set the scalesTVC.selectedScale string to match the indexPath pulled from the selected Board.
-       // scalesTVC.selectedScale = scalesTVC.arrayOfScaleNames[indexPath.row]
         scalesTVC.updateSelectedScaleOrChord(index: indexPath.row)
         // Upate the title.
         scaleSelectionButton.setTitle(scalesTVC.getTitleOfSelection(), for: .normal)
@@ -750,6 +733,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                                                 self.modelIndex = self.modelIndex <= last ? self.modelIndex : last
                                                 let indexPath = IndexPath(row: self.modelIndex, section: 0)
                                                 self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                                                
+                                                // Load setting of the newly seleected row. 
+                                                self.loadSettingsFromSelectedBoard()
+                                                self.updateFretboardView()
                                                 
                                                 if self.selectedCollection.arrayOfFretboardModels.count < 2 {
                                                     
@@ -1157,25 +1144,32 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     // Delegate function for CollectionsTVCDelegate
     // Select the collection corresponding to the index and update the fretboard view.
-    func collectionWasSelected(index: Int) {
+    func collectionWasSelected(index: Int, isNewCollection: Bool) {
         
         fbCollectionStore.savedCollectionIndex = index
         selectedCollection = fbCollectionStore.arrayOfFBCollections[index]
         // Setting the model index automatically sets the selectedBoard.
         modelIndex = selectedCollection.modelIndex
         collectionTitleTextField.text = selectedCollection.title 
-        
+       
         
         loadSettingsFromSelectedBoard()
-        updateFretboardView()
-        hideOrShowEditTableViewButton()
+        
+        // If the collection is new add notes,
+        if isNewCollection {
+            addNotesAction()
+        }
+        else {
+            // Otherwise, just load the settings.
+            updateFretboardView()
+            hideOrShowEditTableViewButton()
+        }
         
         // Update tableView
         tableView.reloadData()
         let indexPath = IndexPath(row: modelIndex, section: 0)
         tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         // Select the correct board and load the fretboard view.
-        
         
     }
     

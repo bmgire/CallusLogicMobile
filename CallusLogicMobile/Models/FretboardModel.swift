@@ -134,7 +134,7 @@ class FretboardModel: NSObject, NSCoding {
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
                 let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
-                // If the noteModel isGhost update fretboard.
+                // If the noteModel isGhost, or allows customizations = false, then update fretboard.
                 if noteModel.getIsGhost() || allowsCustomizations == false {
                     noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
                     noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
@@ -145,6 +145,45 @@ class FretboardModel: NSObject, NSCoding {
         }
     }
     
+    // Used to add notes from chords. 
+    func addNoteModels(newArray: [NoteModel]){
+        for index in 0..<newArray.count {
+            /* Find each newArray Model that is displayed
+             and copy the values over. */
+            
+            let importModel = newArray[index]
+            let modelToUpdate = arrayOfNoteModels[index]
+            
+            // Check for allows customization.
+            // If allows customizations == true, only update the notes that are not displayed or ghosted.
+            if allowsCustomizations {
+                // if the newModel isDisplayed
+                if importModel.getIsDisplayed() {
+                    // and if the modelToUpdate is not displayed or is a ghost,
+                    if modelToUpdate.getIsDisplayed() == false || modelToUpdate.getIsGhost() {
+                        copyModelData(sourceModel: importModel, destinationModel: modelToUpdate)
+                    }
+                }
+            }
+            // Otherwise, allowsCustomizations == false, update all fretboardModels. 
+            else {
+                copyModelData(sourceModel: importModel, destinationModel: modelToUpdate)
+            }
+        }
+    }
+
+
+    
+    func copyModelData(sourceModel: NoteModel, destinationModel: NoteModel) {
+        destinationModel.setNumber0to11(sourceModel.getNumber0to11())
+        destinationModel.setNumber0to36(sourceModel.getNumber0to36())
+        destinationModel.setNote(sourceModel.getNote())
+        destinationModel.setInterval(sourceModel.getInterval())
+    }
+    
+    // Handles updating the display of notes on the fretboard
+    // Displays only notes that have a value.
+    // Also ghosts notes if allowsCustomizations = true. 
     func updateNoteModelDisplaySettings() {
         for model in arrayOfNoteModels {
             // If the note is an empty string, don't display and set to ghost.
@@ -168,7 +207,7 @@ class FretboardModel: NSObject, NSCoding {
                 else {
                     // if isDisplayed = true
                     if model.getIsDisplayed(){
-                        // and if does isGhost = true, set the color.
+                        // and if isGhost = true, set the color.
                         if model.getIsGhost() == true {
                             model.setMyColor(userColor)
                         }
