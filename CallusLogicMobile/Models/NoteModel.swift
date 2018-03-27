@@ -15,7 +15,7 @@ class NoteModel : NSObject, NSCoding {
     fileprivate var interval = ""
     fileprivate var fretNumber = ""
     
-    fileprivate var isGhost = true
+    fileprivate var isGhost = false
     fileprivate var isDisplayed = false
     fileprivate var isPassingNote = false
     

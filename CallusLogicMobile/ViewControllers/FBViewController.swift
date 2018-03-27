@@ -32,6 +32,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //############
     
     let toneArraysCreator = ToneArraysCreator()
+    let chordCreator = ChordCreator()
+    
     let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
@@ -515,48 +517,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // Custom Functions
 
     
-    //############
-    func updateFretboardView() {
-        // print(#function) // Displays function when called.
-       // loadSettingsFromSelectedBoard()
-        
-        // get the displayMode
-       // let displayModeRow = displayModePickerView.selectedRow(inComponent: 0)
-       //  let displayMode = pickerView(displayModePickerView, titleForRow: displayModeRow, forComponent: 0)
-        
-       let displayMode = DisplayMode(rawValue: selectedBoard.getDisplayMode())!
-        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
-        
-    }
+
  
     
-    //############
-    // Load scale info into toneArraysCreator
-    func updateToneArraysCreator() {
-        // print(#function) // Displays function when called.
-        
-        let arrayOfPickerStrings = getPickerValues()
 
-        if scalesTVC.doShowScales {
-            toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
-                                               accidental: arrayOfPickerStrings[1],
-                                               scaleName: arrayOfPickerStrings[2])
-            
-            
-            if selectedBoard.allowsCustomizations == false {
-                autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
-            }
-        }
-        else {
-            toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
-                                               accidental: arrayOfPickerStrings[1],
-                                               scaleName: "Minor Arpeggio")
-                                               //chordFormula: chordFormulas.dictOfChordNamesAndFormulas["minor_OnLowE"])
-            if selectedBoard.allowsCustomizations == false {
-                autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
-            }
-        }
-    }
     
     
     
@@ -571,7 +535,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let accidentalRow = accidentalPickerView.selectedRow(inComponent: 0)
         let accidental = pickerView(accidentalPickerView, attributedTitleForRow: accidentalRow, forComponent: 0)!
  
-        let scale = scalesTVC.selectedScale
+        
+        var scale = scalesTVC.selectedScale
+        if scalesTVC.doShowScales == false {
+            scale = scalesTVC.selectedChord
+        }
         
         var arrayOfStrings = [String]()
         arrayOfStrings.append(root.string)
@@ -580,21 +548,84 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         return arrayOfStrings
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //############
+    // Load scale info into toneArraysCreator
+    func updateToneArraysCreator() {
+        // print(#function) // Displays function when called.
+        
+        let arrayOfPickerStrings = getPickerValues()
+        
+        if scalesTVC.doShowScales {
+            toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
+                                               accidental: arrayOfPickerStrings[1],
+                                               scaleName: arrayOfPickerStrings[2])
+            
+            
+            if selectedBoard.allowsCustomizations == false {
+                autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+            }
+        }
+            // Otherwise load chords.
+        else {
+            chordCreator.buildChord(root: arrayOfPickerStrings[0], accidental: arrayOfPickerStrings[1], chord: arrayOfPickerStrings[2])
+            
+            if selectedBoard.allowsCustomizations == false {
+                autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+            }
+        }
+    }
+    
+    
     //############
     // Loads ToneArrays into the selectedBoard and updates the view.
     func loadToneArraysIntoSelectedBoard() {
         // print(#function) // Displays function when called.
         
-        // Update all  note models that are not kept. Should initially be zero.
-        selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
-        selectedBoard.updateNoteModelDisplaySettings()
-        if scalesTVC.doShowScales == false {
-            if let formula = chordFormulas.dictOfChordNamesAndFormulas["Minor Chord (Root: Low E String)"] {
-                selectedBoard.removeNotesNotInChord(chordFormula: formula)
-            }
+        // I've showing scales, load from the toneArrays Creator.
+        if scalesTVC.doShowScales {
+        
+            // Update all  note models that are not kept. Should initially be zero.
+            selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
+        }
+        // Otherwise, load from chordCreator
+        else {
+             selectedBoard.addNoteModels(newArray: chordCreator.fretboardModel.getFretboardArray())
         }
         
+        /* Why the fuck would updateNoteModeDisplaySettings fuck up adding chords. */
     }
+    
+    //############
+    func updateFretboardView() {
+        // print(#function) // Displays function when called.
+        
+        let displayMode = DisplayMode(rawValue: selectedBoard.getDisplayMode())!
+        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //#############
     // Loads settings from the selected board.
     func loadSettingsFromSelectedBoard() {
@@ -1131,9 +1162,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         selectedBoard.setUserColor(color)
         if selectedBoard.allowsCustomizations == false {
             addNotesAction()
-        }
-        else {
-            selectedBoard.updateNoteModelDisplaySettings()
         }
     }
     
