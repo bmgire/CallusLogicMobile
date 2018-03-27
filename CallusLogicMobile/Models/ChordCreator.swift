@@ -13,40 +13,28 @@ class ChordCreator {
     let fretboardModel = FretboardModel()
     let chordFormulas = ChordFormulas()
     
-    let major = "Major Arpeggio"
-    let minor = "Minor Arpeggio"
-    let dominant_7th = "Dominant 7th Arpeggio"
-    
     func buildChord(root: String, accidental: String, chord: String) {
-        var arpeggio = ""
         
-        // Determine the correct arrpegio to build the scale from
-        // Minor, Major, or Dominant 7th Arpeggio
-        switch chord {
-        case "Major Chord":
-            arpeggio = major
-        case "Minor Chord (I)":
-            arpeggio = minor
-        case "Dominant 7th Chord":
-            arpeggio = dominant_7th
-        default:
-            arpeggio = "Major"
-            print("Error in \(#function): chord type has no associated shape.")
+        // Find the correct arpeggio
+        if let arpeggio = chordFormulas.dictOfChordNamesAndShapes[chord]?.arpeggioToBuildChordFrom {
+            
+            // create tone arrays of arpeggio
+            toneArraysCreator.updateWithValues(root, accidental: accidental, scaleName: arpeggio)
+            
+            // Load the arpeggio into the fretboard
+            fretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
+            
+            // Obtain chordShape from ChordFormulas
+            // For now, just use minor since that's all we have.
+            let formula = chordFormulas.dictOfChordNamesAndShapes[chord]
+            
+            // remove all notes but the chord.
+            fretboardModel.removeNotesNotInChord(chordFormula: formula!.arrayOfIntervals)
+            // Otherwise the arpeggio was not found.
+            // Print an error statement.
+        }   else {
+                print("Error in \(#function): arpeggio not found in chordFormulas.dictOfChordNamesAndShapes")
         }
         
-        // Build the scale in the toneArraysCreator.
-        toneArraysCreator.updateWithValues(root, accidental: accidental, scaleName: arpeggio)
-        
-        // Load the scale into the fretboard
-        fretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
-        
-        // Obtain chordShape from ChordFormulas
-        // For now, just use minor since that's all we have.
-        
-        let formula = chordFormulas.dictOfChordNamesAndFormulas["Minor Chord (I)"]
-
-        // remove all notes but the chord.
-        fretboardModel.removeNotesNotInChord(chordFormula: formula!)
-
     }
 }

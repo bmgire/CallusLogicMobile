@@ -205,15 +205,22 @@ class FretboardModel: NSObject, NSCoding {
         
         // For each string
         for stringIndex in 0...5 {
-            // If there is a note for the chord along that string.
-            if chordFormula[stringIndex] != "" {
-                // Search all the frets for the interval.
+            // Search all the frets for the interval.
+            
+            var noteHasNotBeenFound = true
+            
+            for fretIndex in 0..<NOTES_PER_STRING  {
                 
-                var noteHasNotBeenFound = true
-                
-                for fretIndex in 0..<NOTES_PER_STRING  {
+                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING]
+                // If there is a note for the chord along that string.
+                if chordFormula[stringIndex] == "" {
                     
-                    let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING]
+                    noteModel.setIsDisplayed(false)
+                    // Otherwise there is a note.
+                    // Find the note and delete it.
+                }   else {
+                    
+                    
                     
                     // only check notes that are displayed.
                     
@@ -225,16 +232,16 @@ class FretboardModel: NSObject, NSCoding {
                             // Check for the interval.
                             // If the intervals don't match. set noteModel to not display.
                             if chordFormula[stringIndex] != noteModel.getInterval() {
-                               // print("match has not been found")
+                                // print("match has not been found")
                                 noteModel.setIsDisplayed(false)
                             }
-                            // Else the interval matches.
+                                // Else the interval matches.
                             else {
                                 noteHasNotBeenFound = false
-                              //  print("note has been found")
+                                //  print("note has been found")
                             }
                         }
-                        // Else the note has been found, just set isDisplayed to false without checking.
+                            // Else the note has been found, just set isDisplayed to false without checking.
                         else {
                             
                             noteModel.setIsDisplayed(false)

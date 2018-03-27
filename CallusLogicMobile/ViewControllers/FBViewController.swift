@@ -440,10 +440,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         super.viewDidLoad()
 
+        // Gaurantee there's always 1 collection if something is screwed up.
+        // This call might not be necessary since I don't allow all the collections to be deleted.
         if fbCollectionStore.arrayOfFBCollections.count == 0 {
             fbCollectionStore.appendCollection()
-            // fbCollectionStore.arrayOfFBCollections[0].arrayOfFretboardModels.append(FretboardModel())
         }
+        
+        // Injecting chordNames into scalesTVC
+        scalesTVC.arrayOfChordNames = chordFormulas.arrayOfShapeNames
         
         selectedCollection = fbCollectionStore.arrayOfFBCollections[fbCollectionStore.savedCollectionIndex]
         collectionTitleTextField.text = selectedCollection.title
