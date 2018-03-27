@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8FA0E987038AACA68F9F8953 /* libPods-CallusLogicMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F40DF3CFC032444B0E09A96 /* libPods-CallusLogicMobile.a */; };
+		B5124F20206AC47600E2F814 /* ChordShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */; };
 		B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5196C9220324101005A018E /* NoteFrequencies.swift */; };
 		B524E2B7205481C000219C5A /* ViewToImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524E2B6205481C000219C5A /* ViewToImageExtension.swift */; };
 		B52A97B42064538A00E056C3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A97B32064538A00E056C3 /* HeaderView.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		4F40DF3CFC032444B0E09A96 /* libPods-CallusLogicMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CallusLogicMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DAF80C7F230D15484CCB005 /* Pods-CallusLogicMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.debug.xcconfig"; sourceTree = "<group>"; };
+		B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordShapeModel.swift; sourceTree = "<group>"; };
 		B5196C9220324101005A018E /* NoteFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFrequencies.swift; sourceTree = "<group>"; };
 		B524E2B6205481C000219C5A /* ViewToImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewToImageExtension.swift; sourceTree = "<group>"; };
 		B52A97B32064538A00E056C3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 				B5956CD92065930C00B658A5 /* ChordFormulas.swift */,
+				B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */,
 				B56EF3F82069636B000AAAAD /* ChordCreator.swift */,
 			);
 			path = Models;
@@ -457,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5124F20206AC47600E2F814 /* ChordShapeModel.swift in Sources */,
 				B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */,
 				B536C3651FDF855300FD886E /* FBViewController.swift in Sources */,
 				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,
