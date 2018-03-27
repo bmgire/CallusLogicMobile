@@ -251,7 +251,46 @@ class FretboardModel: NSObject, NSCoding {
                 }
             }
         }
+        fixChordNoteSpacingIssues()
     }
+    
+    func fixChordNoteSpacingIssues() {
+        
+        var arrayOfFretNumbers = [Int]()
+        
+        // Obtain all noteModels in chord.
+        for model in arrayOfNoteModels {
+            if model.getIsDisplayed() {
+                if let number = Int(model.getFretNumber()) {
+                    arrayOfFretNumbers.append(number)
+                }   else {
+                    print("Error in \(#function): failed to convert fretnumber to Int")
+                }
+            }
+        }
+        
+        // Get the different in numbers.
+        // Confirm no distance is greater than 4.
+        arrayOfFretNumbers.sort()
+        let difference = arrayOfFretNumbers.first! - arrayOfFretNumbers.last!
+        
+        // If the difference between the notes is
+        if abs(difference) > 4 {
+            // fix the spacing.
+        // Find the notes on the zero fret and move to the 12th.
+            for index in 0..<arrayOfNoteModels.count {
+                let noteModel = arrayOfNoteModels[index]
+                // If the noteModel is displayed and the fretnumber value is "0"
+                if noteModel.getIsDisplayed() && noteModel.getFretNumber() == "0" {
+                    // Do note display noteModel
+                    noteModel.setIsDisplayed(false)
+                    // Do display the model 1 octave up.
+                    arrayOfNoteModels[index + 12].setIsDisplayed(true)
+                }
+            }
+        }
+    }
+    
     
     func setIsGhostForAllDisplayedNoteModels(isGhost: Bool) {
         for model in arrayOfNoteModels {
