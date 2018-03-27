@@ -71,6 +71,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // The index of the selected Collection.
     var selectedCollection: FBCollectionModel!
     fileprivate var selectedBoard = FretboardModel()
+    var extraFretboardModel = FretboardModel()
     
     fileprivate var modelIndex: Int = 0 {
         // switches the selectedBoard. Perhaps consider a better mechanism
@@ -266,7 +267,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // add notes to the currentBoard
     func addNotesAction() {
         // print(#function) // Displays function when called.
-        
+        if selectedBoard.allowsCustomizations {
+            selectedBoard.clearGhostedNotes()
+        }
         updateToneArraysCreator()
         loadToneArraysIntoSelectedBoard()
         updateFretboardView()
@@ -567,12 +570,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let arrayOfPickerStrings = getPickerValues()
         
         if scalesTVC.doShowScales {
-            toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
-                                               accidental: arrayOfPickerStrings[1],
-                                               scaleName: arrayOfPickerStrings[2])
             
-            
-            if selectedBoard.allowsCustomizations == false {
+                toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
+                                                   accidental: arrayOfPickerStrings[1],
+                                                   scaleName: arrayOfPickerStrings[2])
+               if selectedBoard.allowsCustomizations == false {
                 autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
             }
         }
@@ -594,13 +596,20 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         // I've showing scales, load from the toneArrays Creator.
         if scalesTVC.doShowScales {
-        
+            if selectedBoard.allowsCustomizations == false {
             // Update all  note models that are not kept. Should initially be zero.
             selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
+            }
+            // otherwise customizations are allowed. Load notes into the extra fretboard.
+            else {
+                extraFretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
+                selectedBoard.addNoteModels(newArray: extraFretboardModel.getFretboardArray())
+            }
         }
         // Otherwise, load from chordCreator
         else {
              selectedBoard.addNoteModels(newArray: chordCreator.fretboardModel.getFretboardArray())
+            
         }
         
         /* Why the fuck would updateNoteModeDisplaySettings fuck up adding chords. */
@@ -611,7 +620,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         
         let displayMode = DisplayMode(rawValue: selectedBoard.getDisplayMode())!
+        
         fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
+      
+        // Otherwise customizations are allowed, add from extraFretboardModel
+
         
     }
     
@@ -1160,9 +1173,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         colorButton.backgroundColor = color
         selectedBoard.setUserColor(color)
-        if selectedBoard.allowsCustomizations == false {
+      //  if selectedBoard.allowsCustomizations == false {
             addNotesAction()
-        }
+       // }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

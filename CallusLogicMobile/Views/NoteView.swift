@@ -134,7 +134,7 @@ class NoteView: UIView {
             
             // If appropriate, set alpha to ghosting transparency
             if isGhost {
-                myColor = myColor.withAlphaComponent(CGFloat(0.4))
+                myColor = myColor.withAlphaComponent(CGFloat(0.3))
             }
             else {
                 myColor = myColor.withAlphaComponent(CGFloat(1))
