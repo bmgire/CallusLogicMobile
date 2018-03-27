@@ -17,7 +17,7 @@ class ChordCreator {
     let minor = "Minor Arpeggio"
     let dominant_7th = "Dominant 7th Arpeggio"
     
-    func buildChord(root: String, accidental: String, chord: String, allowsCustomizations: Bool) {
+    func buildChord(root: String, accidental: String, chord: String) {
         var arpeggio = ""
         
         // Determine the correct arrpegio to build the scale from
@@ -25,7 +25,7 @@ class ChordCreator {
         switch chord {
         case "Major Chord":
             arpeggio = major
-        case "Minor Chord":
+        case "Minor Chord (I)":
             arpeggio = minor
         case "Dominant 7th Chord":
             arpeggio = dominant_7th
@@ -39,15 +39,14 @@ class ChordCreator {
         
         // Load the scale into the fretboard
         fretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
+        
         // Obtain chordShape from ChordFormulas
         // For now, just use minor since that's all we have.
-        let chordFormula = chordFormulas.dictOfChordNamesAndFormulas["Minor Chord (Root: Low E String)"]
         
+        let formula = chordFormulas.dictOfChordNamesAndFormulas["Minor Chord (I)"]
+
         // remove all notes but the chord.
-        fretboardModel.removeNotesNotInChord(chordFormula: chordFormula!) 
-    }
-    
-    func getArrayOfNoteModels()-> [NoteModel] {
-        return fretboardModel.getFretboardArray()
+        fretboardModel.removeNotesNotInChord(chordFormula: formula!)
+
     }
 }

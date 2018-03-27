@@ -97,9 +97,9 @@ class FretboardModel: NSObject, NSCoding {
         
         // If no encoded fretboardModel was loaded, build a fretboard model.
         if arrayOfNoteModels.count == 0 {
-            // Build 138 item array of NoteModels.
+            // Build 77 item array of NoteModels.
             var temp : [NoteModel] = []
-            for _ in 0...137 {
+            for _ in 0...77 {
                 temp.append(NoteModel())
             }
             swap(&arrayOfNoteModels, &temp)
@@ -140,17 +140,28 @@ class FretboardModel: NSObject, NSCoding {
                     noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
                     noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
                     noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
+                    if noteModel.getNote() != "" {
+                        noteModel.setIsDisplayed(true)
+                        noteModel.setMyColor(userColor)
+                    } else {
+                        noteModel.setIsDisplayed(false)
+                    }
                 }
             }
         }
     }
     
+    //var count = 0
+    
     // Used to add notes from chords. 
     func addNoteModels(newArray: [NoteModel]){
         for index in 0..<newArray.count {
-            /* Find each newArray Model that is displayed
-             and copy the values over. */
             
+            // self.arrayOfNoteModels = newArray
+            
+            /*Find each newArray Model that is displayed
+             and copy the values over. */
+        
             let importModel = newArray[index]
             let modelToUpdate = arrayOfNoteModels[index]
             
@@ -161,62 +172,33 @@ class FretboardModel: NSObject, NSCoding {
                 if importModel.getIsDisplayed() {
                     // and if the modelToUpdate is not displayed or is a ghost,
                     if modelToUpdate.getIsDisplayed() == false || modelToUpdate.getIsGhost() {
-                        copyModelData(sourceModel: importModel, destinationModel: modelToUpdate)
+                        copyModelData(importModel: importModel, modelToUpdate: modelToUpdate)
+                        
                     }
                 }
             }
-            // Otherwise, allowsCustomizations == false, update all fretboardModels. 
+            // Otherwise, allowsCustomizations == false, update all fretboardModels.
             else {
-                copyModelData(sourceModel: importModel, destinationModel: modelToUpdate)
+                copyModelData(importModel: importModel, modelToUpdate: modelToUpdate)
             }
-        }
+       }
+
+        
     }
 
 
     
-    func copyModelData(sourceModel: NoteModel, destinationModel: NoteModel) {
-        destinationModel.setNumber0to11(sourceModel.getNumber0to11())
-        destinationModel.setNumber0to36(sourceModel.getNumber0to36())
-        destinationModel.setNote(sourceModel.getNote())
-        destinationModel.setInterval(sourceModel.getInterval())
+    func copyModelData(importModel: NoteModel, modelToUpdate: NoteModel) {
+        modelToUpdate.setNumber0to11(importModel.getNumber0to11())
+        modelToUpdate.setNumber0to36(importModel.getNumber0to36())
+        modelToUpdate.setNote(importModel.getNote())
+        modelToUpdate.setInterval(importModel.getInterval())
+        modelToUpdate.setMyColor(userColor)
+        modelToUpdate.setIsDisplayed(importModel.getIsDisplayed())
     }
     
-    // Handles updating the display of notes on the fretboard
-    // Displays only notes that have a value.
-    // Also ghosts notes if allowsCustomizations = true. 
-    func updateNoteModelDisplaySettings() {
-        for model in arrayOfNoteModels {
-            // If the note is an empty string, don't display and set to ghost.
-            // Setting isGhost = true is precautionary.
-            if model.getNote() == "" {
-                model.setIsDisplayed(false)
-                model.setIsGhost(true)
-            }
-            // Otherwise the note has a value.
-            else {
-                // Set that note needs to be displayed.
-                model.setIsDisplayed(true)
-                // If customizations are not allowed,
-                // set isGhost = false (the note is selected)
-                // set the userColor.
-                if allowsCustomizations == false  {
-                    model.setIsGhost(false)
-                    model.setMyColor(userColor)
-                }
-                // otherwise customizations are allowed
-                else {
-                    // if isDisplayed = true
-                    if model.getIsDisplayed(){
-                        // and if isGhost = true, set the color.
-                        if model.getIsGhost() == true {
-                            model.setMyColor(userColor)
-                        }
-                    }
-                }
-            }
-        }
-    }
     
+    //var count = 0
     
     func removeNotesNotInChord(chordFormula: [String]) {
         // This function will be called after all noteModels (78 on a 12 fret 6 string guitar) have been created.
@@ -232,28 +214,37 @@ class FretboardModel: NSObject, NSCoding {
                 for fretIndex in 0..<NOTES_PER_STRING  {
                     
                     let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING]
+                    
                     // only check notes that are displayed.
+                    
                     if noteModel.getIsDisplayed() {
                         
                         // if the note hasn't been found yet.
                         if noteHasNotBeenFound {
                             
+                            // Check for the interval.
+                            
+                            //print(" Does \(chordFormula[stringIndex]) == \(noteModel.getInterval())" )
+                            
                             if chordFormula[stringIndex] != noteModel.getInterval() {
+                               // print("match has not been found")
                                 noteModel.setIsDisplayed(false)
                             }
                             // Else the interval matches.
                             else {
                                 noteHasNotBeenFound = false
+                              //  print("note has been found")
                             }
                         }
                         // Else the note has been found, just set isDisplayed to false without checking.
                         else {
+                           // print(count)
+                           //  count += 1
+                            
                             noteModel.setIsDisplayed(false)
-                        }
-                    }
-                }
-            }
-        }
+                            //print("match has not been found")
+                        }}}}}
+        
     }
     
     func setIsGhostForAllDisplayedNoteModels(isGhost: Bool) {
