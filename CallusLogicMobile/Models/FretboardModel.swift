@@ -134,30 +134,27 @@ class FretboardModel: NSObject, NSCoding {
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
                 let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
-                // If the noteModel isGhost, or allows customizations = false, then update fretboard.
-                if noteModel.getIsGhost() || allowsCustomizations == false {
-                    noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
-                    noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
-                    noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
-                    noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
-                    if noteModel.getNote() != "" {
-                        noteModel.setIsDisplayed(true)
-                        noteModel.setMyColor(userColor)
-                    } else {
-                        noteModel.setIsDisplayed(false)
-                    }
+                
+                noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
+                noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
+                noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
+                noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
+                noteModel.setIsGhost(false)
+                if noteModel.getNote() != "" {
+                    noteModel.setIsDisplayed(true)
+                    noteModel.setMyColor(userColor)
+                } else {
+                    noteModel.setIsDisplayed(false)
                 }
             }
         }
     }
     
-    //var count = 0
+
     
     // Used to add notes from chords. 
     func addNoteModels(newArray: [NoteModel]){
         for index in 0..<newArray.count {
-            
-            // self.arrayOfNoteModels = newArray
             
             /*Find each newArray Model that is displayed
              and copy the values over. */
@@ -166,14 +163,14 @@ class FretboardModel: NSObject, NSCoding {
             let modelToUpdate = arrayOfNoteModels[index]
             
             // Check for allows customization.
-            // If allows customizations == true, only update the notes that are not displayed or ghosted.
+            // If allows customizations == true
             if allowsCustomizations {
                 // if the newModel isDisplayed
                 if importModel.getIsDisplayed() {
+                    
                     // and if the modelToUpdate is not displayed or is a ghost,
                     if modelToUpdate.getIsDisplayed() == false || modelToUpdate.getIsGhost() {
                         copyModelData(importModel: importModel, modelToUpdate: modelToUpdate)
-                        
                     }
                 }
             }
@@ -182,8 +179,6 @@ class FretboardModel: NSObject, NSCoding {
                 copyModelData(importModel: importModel, modelToUpdate: modelToUpdate)
             }
        }
-
-        
     }
 
 
@@ -195,6 +190,11 @@ class FretboardModel: NSObject, NSCoding {
         modelToUpdate.setInterval(importModel.getInterval())
         modelToUpdate.setMyColor(userColor)
         modelToUpdate.setIsDisplayed(importModel.getIsDisplayed())
+        if allowsCustomizations {
+            modelToUpdate.setIsGhost(true)
+        } else {
+            modelToUpdate.setIsGhost(false)
+        }
     }
     
     
@@ -223,9 +223,7 @@ class FretboardModel: NSObject, NSCoding {
                         if noteHasNotBeenFound {
                             
                             // Check for the interval.
-                            
-                            //print(" Does \(chordFormula[stringIndex]) == \(noteModel.getInterval())" )
-                            
+                            // If the intervals don't match. set noteModel to not display.
                             if chordFormula[stringIndex] != noteModel.getInterval() {
                                // print("match has not been found")
                                 noteModel.setIsDisplayed(false)
@@ -238,13 +236,14 @@ class FretboardModel: NSObject, NSCoding {
                         }
                         // Else the note has been found, just set isDisplayed to false without checking.
                         else {
-                           // print(count)
-                           //  count += 1
                             
                             noteModel.setIsDisplayed(false)
                             //print("match has not been found")
-                        }}}}}
-        
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func setIsGhostForAllDisplayedNoteModels(isGhost: Bool) {
@@ -255,6 +254,7 @@ class FretboardModel: NSObject, NSCoding {
         }
     }
     
+
     func clearGhostedNotes(){
         for model in arrayOfNoteModels {
             if model.getIsGhost() {

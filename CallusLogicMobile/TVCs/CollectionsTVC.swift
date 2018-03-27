@@ -45,7 +45,6 @@ class CollectionsTVC: UITableViewController {
     @IBAction func addCollection(_ sender: UIButton) {
         
         let lastRow = collectionStore.arrayOfFBCollections.count
-        print(lastRow)
         let lastIndexPath = IndexPath(row: lastRow, section: 0)
         collectionStore.appendCollection()
         
