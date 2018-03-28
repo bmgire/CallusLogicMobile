@@ -17,22 +17,22 @@ class ChordFormulas {
     init() {
        
         
-        createChordShapeModel(shapeName: "Minor Chord (shape 1)",
+        createChordShapeModel(shapeName: "Minor Chord (v1)",
                               arrayOfIntervals: ["root", "P5", "root", "m3", "P5", "root"],
                               arrayOfInvalidRootNotes: ["D#", "Eb"],
-                              alternateChordShapeName: "Minor Chord (shape 2)",
+                              alternateChordShapeName: "Minor Chord (v2)",
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
-        createChordShapeModel(shapeName: "Minor Chord (shape 2)",
+        createChordShapeModel(shapeName: "Minor Chord (v2)",
                               arrayOfIntervals: ["", "root", "P5", "root", "m3", "P5"],
                               arrayOfInvalidRootNotes: ["G#", "Ab"],
-                              alternateChordShapeName: "Minor Chord (shape 1)",
+                              alternateChordShapeName: "Minor Chord (v1)",
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
-        createChordShapeModel(shapeName: "Minor Chord (shape 3)",
+        createChordShapeModel(shapeName: "Minor Chord (v3)",
                               arrayOfIntervals: ["", "", "root", "P5", "root", "m3"],
                               arrayOfInvalidRootNotes: ["C", "C#", "Db"],
-                              alternateChordShapeName: "Minor Chord (shape 2)",
+                              alternateChordShapeName: "Minor Chord (v2)",
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
     }
@@ -55,6 +55,8 @@ class ChordFormulas {
         arrayOfShapeNames.append(shapeName)
     }
     
+    
+    // This funct might not be needed. 
     func getInvalidChordNamesForRoot(fullRoot: String)-> [String] {
         var arrayOfInvalidChordNamesForRoot = [String]()
         

@@ -15,8 +15,20 @@ class ChordCreator {
     
     func buildChord(root: String, accidental: String, chord: String) {
         
-        // Find the correct arpeggio
-        if let arpeggio = chordFormulas.dictOfChordNamesAndShapes[chord]?.arpeggioToBuildChordFrom {
+        // Combine root and accidental
+        var fullRoot = root
+        if accidental != "Natural" {
+            fullRoot.append(accidental)
+        }
+        
+        // Attempt to get the chord shape model from the dictionary
+        if let chordShapeModel = chordFormulas.dictOfChordNamesAndShapes[chord] {
+            
+            let arpeggio = chordShapeModel.arpeggioToBuildChordFrom
+            
+            if arpeggio == "" {
+                print("Error in \(#function): no arpeggio string found in ChordShapeModel")
+            }
             
             // create tone arrays of arpeggio
             toneArraysCreator.updateWithValues(root, accidental: accidental, scaleName: arpeggio)
@@ -25,16 +37,30 @@ class ChordCreator {
             fretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
             
             // Obtain chordShape from ChordFormulas
-            // For now, just use minor since that's all we have.
-            let formula = chordFormulas.dictOfChordNamesAndShapes[chord]
+            var altChordShapeName = ""
+            
+            if chordShapeModel.arrayOfInvalidRootNotes.contains(fullRoot) {
+                altChordShapeName = chordShapeModel.alternateChordShapeName
+                
+            }
+            
+            var formula = [String]()
+            
+            // If there is an altChordShapeName, get its formula.
+            if altChordShapeName != "" {
+                formula = (chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]?.arrayOfIntervals)!
+                // Otherwise get the normal formula
+            }   else {
+                formula = (chordFormulas.dictOfChordNamesAndShapes[chord]?.arrayOfIntervals)!
+            }
             
             // remove all notes but the chord.
-            fretboardModel.removeNotesNotInChord(chordFormula: formula!.arrayOfIntervals)
-            // Otherwise the arpeggio was not found.
+            fretboardModel.removeNotesNotInChord(chordFormula: formula)
+            
+            // Otherwise the chordShapeModel was not found.
             // Print an error statement.
         }   else {
-                print("Error in \(#function): arpeggio not found in chordFormulas.dictOfChordNamesAndShapes")
+            print("Error in \(#function): chordShapeModel not found in chordFormulas.dictOfChordNamesAndShapes[chord]")
         }
-        
     }
 }
