@@ -19,7 +19,7 @@ class ChordFormulas {
         
         createChordShapeModel(shapeName: "Minor Chord (shape 1)",
                               arrayOfIntervals: ["root", "P5", "root", "m3", "P5", "root"],
-                              arrayOfInvalidRootNotes: ["D", "D#", "Eb"],
+                              arrayOfInvalidRootNotes: ["D#", "Eb"],
                               alternateChordShapeName: "Minor Chord (shape 2)",
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
@@ -31,8 +31,8 @@ class ChordFormulas {
         
         createChordShapeModel(shapeName: "Minor Chord (shape 3)",
                               arrayOfIntervals: ["", "", "root", "P5", "root", "m3"],
-                              arrayOfInvalidRootNotes: ["G#", "Ab"],
-                              alternateChordShapeName: "Minor Chord (shape 1)",
+                              arrayOfInvalidRootNotes: ["C", "C#", "Db"],
+                              alternateChordShapeName: "Minor Chord (shape 2)",
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
     }
@@ -55,7 +55,14 @@ class ChordFormulas {
         arrayOfShapeNames.append(shapeName)
     }
     
- /*   func getChordNames()-> [String] {
-
-    } */
+    func getInvalidChordNamesForRoot(fullRoot: String)-> [String] {
+        var arrayOfInvalidChordNamesForRoot = [String]()
+        
+        for (shapeName, chordShapeModel) in dictOfChordNamesAndShapes {
+            if chordShapeModel.arrayOfInvalidRootNotes.contains(fullRoot) {
+                arrayOfInvalidChordNamesForRoot.append(shapeName)
+            }
+        }
+        return arrayOfInvalidChordNamesForRoot
+    }
 }

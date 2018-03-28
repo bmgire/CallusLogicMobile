@@ -447,7 +447,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         // Injecting chordNames into scalesTVC
-        scalesTVC.arrayOfChordNames = chordFormulas.arrayOfShapeNames
+        scalesTVC.editedArrayOfChordNames = chordFormulas.arrayOfShapeNames
+        scalesTVC.chordFormulas = chordFormulas 
         
         selectedCollection = fbCollectionStore.arrayOfFBCollections[fbCollectionStore.savedCollectionIndex]
         collectionTitleTextField.text = selectedCollection.title
@@ -936,14 +937,18 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             case rootPickerView:
                 selectedBoard.rootNote = row
             case accidentalPickerView:
-                selectedBoard.rootNote = row
+                selectedBoard.accidental = row
             default:
                 print("\(#function): Error: pickerView selection was not rootPickerView or accidentalPickerView")
             }
-            addNotesAction()
+            if scalesTVC.doShowScales == false {
+                let values = getPickerValues()
+                scalesTVC.updateArrayOfChordNames(root: values[0], accidental: values[1])
+                scaleSelectionButton.setTitle(scalesTVC.getTitleOfSelection(), for: .normal)
+                addNotesAction()
+            }
         }
     }
-
 
     
     //###################################

@@ -19,17 +19,82 @@ class ScalesTVC: UITableViewController {
     var selectedChord = "Minor Chord (shape 1)"
     
     var arrayOfScaleNames = [String]()
-    var arrayOfChordNames: [String]! // = ["Minor Chord (shape 1)", "Minor Chord (shape 2)"]
+    var editedArrayOfChordNames: [String]!
+    
+    var chordFormulas: ChordFormulas!
     
     var doShowScales  = true
     
     weak var delegate: ScalesTVCDelegate?
     
+    func updateArrayOfChordNames(root: String, accidental: String) {
+        // Obtain full root.
+        var fullRoot = root
+        if accidental != "Natural" {
+            fullRoot.append(accidental)
+        }
+        
+        // save current chord name to see if it's still there after editing the arrayOfChordNames.
+        let selectedChordCopy = selectedChord
+        //let savedRow = tableView.indexPathForSelectedRow?.row
+        
+        // Find all chords that are invalid for the full root. Somehow
+        let arrayOfInvalidChords = chordFormulas.getInvalidChordNamesForRoot(fullRoot: fullRoot)
+        var arrayOfChordNamesCopy = chordFormulas.arrayOfShapeNames
+        
+        // For each chordName in the arrayOfInvalidChords
+        for chordName in arrayOfInvalidChords {
+            
+            // Find the index and remove from the copy.
+            if let index = arrayOfChordNamesCopy.index(of: chordName) {
+                arrayOfChordNamesCopy.remove(at: index)
+            }
+        }
+        
+        editedArrayOfChordNames = arrayOfChordNamesCopy
+        tableView.reloadData()
+        
+        var indexPath = IndexPath()
+        // Check if the previously selected position was removed from arrayOfChordNamesCopy.
+        if let row =  arrayOfChordNamesCopy.index(of: selectedChordCopy) {
+            indexPath = IndexPath(row: row, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+            selectedChord = editedArrayOfChordNames[row]
+            
+            // Otherwise, find a similar or close postion and select that one.
+        }   else {
+            //remove all text from the parentheses
+            var editedChordName = selectedChordCopy
+            for _ in 1...9 {
+                editedChordName.removeLast()
+            }
+
+            
+            // search the arrayOfChordNamesCopy for the substring.
+            for index in 0..<arrayOfChordNamesCopy.count {
+                // If you find a valid row, select that row
+                if arrayOfChordNamesCopy[index].contains(editedChordName) {
+                    indexPath = IndexPath(row: index, section: 0)
+                    tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                    selectedChord = editedArrayOfChordNames[index]
+                    // Otherwise, no match was found set a default and print an error message.
+                }   else {
+                    indexPath = IndexPath(row: 0, section: 0)
+                    tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                    selectedChord = editedArrayOfChordNames[0]
+                    print("Error in \(#function): no valid row selection found. Row set to default value.")
+                }
+            }
+        }
+    }
+    
+
+    
     func updateSelectedScaleOrChord(index: Int) {
         if doShowScales {
             selectedScale = arrayOfScaleNames[index]
         } else {
-            selectedChord = arrayOfChordNames[index]
+            selectedChord = editedArrayOfChordNames[index]
         }
     }
     
@@ -51,6 +116,8 @@ class ScalesTVC: UITableViewController {
         modalPresentationStyle = .popover
         preferredContentSize = CGSize(width: 300, height: 500)
     
+        // Copies the array
+       // editedArrayOfChordNames = chordFormulas.arrayOfShapeNames
         
     }
     
@@ -103,7 +170,7 @@ class ScalesTVC: UITableViewController {
             return arrayOfScaleNames.count
         }
         else {
-            return arrayOfChordNames.count
+            return editedArrayOfChordNames.count
         }
     }
 
@@ -125,7 +192,7 @@ class ScalesTVC: UITableViewController {
             cell.textLabel?.text = arrayOfScaleNames[indexPath.row]
         }
         else {
-            cell.textLabel?.text = arrayOfChordNames[indexPath.row]
+            cell.textLabel?.text = editedArrayOfChordNames[indexPath.row]
         }
         return cell
         
@@ -138,7 +205,7 @@ class ScalesTVC: UITableViewController {
            selectedScale = arrayOfScaleNames[indexPath.row]
         }
         else {
-            selectedChord = arrayOfChordNames[indexPath.row]
+            selectedChord = editedArrayOfChordNames[indexPath.row]
         }
         // selectedScale = doShowScales ? arrayOfScaleNames[indexPath.row] : arrayOfChordNames[indexPath.row]
         let text = doShowScales ? selectedScale : selectedChord
@@ -168,7 +235,7 @@ class ScalesTVC: UITableViewController {
             }
         }
         else {
-            if let row = arrayOfChordNames.index(of: selectedChord) {
+            if let row = editedArrayOfChordNames.index(of: selectedChord) {
                 tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
             }
         }
