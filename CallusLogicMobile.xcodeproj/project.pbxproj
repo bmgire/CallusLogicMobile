@@ -199,7 +199,6 @@
 				B5C4CDF32050D68D0006B560 /* Data */,
 				B55D51F91FE1F22600CB5F11 /* Models */,
 				B55D51FD1FE1FC1800CB5F11 /* Views */,
-				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
 			);
 			path = CallusLogicMobile;
 			sourceTree = "<group>";
@@ -225,6 +224,7 @@
 		B55D51F91FE1F22600CB5F11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
 				B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */,
 				B5786ED71FE32D3D00174544 /* FretboardModel.swift */,
 				B5786ED81FE32D3D00174544 /* NoteModel.swift */,
