@@ -169,12 +169,12 @@ class ScalesTVC: UITableViewController {
         tableView.reloadData()
         if doShowScales {
             if let row = arrayOfScaleNames.index(of: selectedScale) {
-                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
             }
         }
         else {
             if let row = arrayOfChordNames.index(of: selectedChord) {
-                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .top)
+                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
             }
         }
     }

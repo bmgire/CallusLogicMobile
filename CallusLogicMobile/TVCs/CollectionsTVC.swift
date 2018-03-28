@@ -49,7 +49,7 @@ class CollectionsTVC: UITableViewController {
         collectionStore.appendCollection()
         
         tableView?.insertRows(at: [lastIndexPath], with: .automatic)
-        tableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .top)
+        tableView?.selectRow(at: lastIndexPath, animated: true, scrollPosition: .middle)
         collectionStore.savedCollectionIndex = lastRow
         delegate?.collectionWasSelected(index: lastRow, isNewCollection: true)
         
@@ -66,22 +66,16 @@ class CollectionsTVC: UITableViewController {
         if tableView.isEditing == false {
             tableView.isEditing = true
             sender.setTitle("Done", for: .normal)
-            tableView.selectRow(at: IndexPath(row: collectionStore.savedCollectionIndex,
-                                              section: 0),
-                                animated: true, scrollPosition: .top)
+
         } // Else, end edit mode.
         else {
             tableView.isEditing = false
             sender.setTitle("Edit", for: .normal)
-            // If there are any fretboards left select the top fretboard.
-            //if collectionStore.arrayOfFBCollections.count != 0 {
             
-            // collectionStore.savedIndexPath is updated in moveRow and editing the tableView.
-            let indexPath = IndexPath(row: collectionStore.savedCollectionIndex, section: 0)
-            print(collectionStore.savedCollectionIndex)
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
         }
-        
+        // Select SavedCollectionIndex
+        let indexPath = IndexPath(row: collectionStore.savedCollectionIndex, section: 0)
+        tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
     }
     
     
@@ -134,7 +128,7 @@ class CollectionsTVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         let indexPath = IndexPath(row: self.collectionStore.savedCollectionIndex, section: 0)
-        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+        self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
         
         
     }
@@ -244,7 +238,7 @@ class CollectionsTVC: UITableViewController {
                                                 }
                                                 
                                                 let indexPath = IndexPath(row: self.collectionStore.savedCollectionIndex, section: 0)
-                                                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                                                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .middle)
                                                 self.delegate?.collectionWasSelected(index: indexPath.row, isNewCollection: false)
                                                 
                                                 if self.collectionStore.arrayOfFBCollections.count < 2 {

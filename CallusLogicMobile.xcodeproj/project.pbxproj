@@ -10,7 +10,6 @@
 		8FA0E987038AACA68F9F8953 /* libPods-CallusLogicMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F40DF3CFC032444B0E09A96 /* libPods-CallusLogicMobile.a */; };
 		B5124F20206AC47600E2F814 /* ChordShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */; };
 		B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5196C9220324101005A018E /* NoteFrequencies.swift */; };
-		B524E2B7205481C000219C5A /* ViewToImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B524E2B6205481C000219C5A /* ViewToImageExtension.swift */; };
 		B52A97B42064538A00E056C3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A97B32064538A00E056C3 /* HeaderView.swift */; };
 		B52DD180204E127A00C7D9B3 /* FBCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */; };
 		B53147202030BEF30022AAC5 /* SixTones.swift in Sources */ = {isa = PBXBuildFile; fileRef = B531471F2030BEF30022AAC5 /* SixTones.swift */; };
@@ -62,7 +61,6 @@
 		7DAF80C7F230D15484CCB005 /* Pods-CallusLogicMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordShapeModel.swift; sourceTree = "<group>"; };
 		B5196C9220324101005A018E /* NoteFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFrequencies.swift; sourceTree = "<group>"; };
-		B524E2B6205481C000219C5A /* ViewToImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewToImageExtension.swift; sourceTree = "<group>"; };
 		B52A97B32064538A00E056C3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCollectionModel.swift; sourceTree = "<group>"; };
 		B531471F2030BEF30022AAC5 /* SixTones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SixTones.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				B5786ED31FE324DE00174544 /* NSString+drawing.swift */,
-				B524E2B6205481C000219C5A /* ViewToImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -483,7 +480,6 @@
 				B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */,
 				B56EF3F92069636B000AAAAD /* ChordCreator.swift in Sources */,
 				B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */,
-				B524E2B7205481C000219C5A /* ViewToImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
