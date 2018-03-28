@@ -13,10 +13,6 @@ class FBCollectionModel: NSObject, NSCoding {
         aCoder.encode(title, forKey: "collectionTitle")
         aCoder.encode(modelIndex, forKey: "collectionModelIndex")
         
-        if let image = image {
-            aCoder.encode(image, forKey: "collectionImage")
-        }
-        
         count = arrayOfFretboardModels.count
         aCoder.encode(count, forKey: "collectionCount")
         for index in 0...count - 1 {
@@ -27,7 +23,6 @@ class FBCollectionModel: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         title = aDecoder.decodeObject(forKey: "collectionTitle") as! String
         modelIndex = aDecoder.decodeInteger(forKey: "collectionModelIndex")
-        image = aDecoder.decodeObject(forKey: "collectionImage") as? UIImage
         count = aDecoder.decodeInteger(forKey: "collectionCount")
         
         // Decode the arrayOfNoteModels. 
@@ -46,7 +41,6 @@ class FBCollectionModel: NSObject, NSCoding {
     private var count = 0
     var title = "Untitled Collection"
     var arrayOfFretboardModels = [FretboardModel]()
-    var image: UIImage?
     // Specifies which Model in the arrayOfFretboardModels is currently being shown.
     var modelIndex = 0
 }
