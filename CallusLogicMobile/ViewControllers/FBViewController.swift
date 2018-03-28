@@ -447,8 +447,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         // Injecting chordNames into scalesTVC
-        scalesTVC.editedArrayOfChordNames = chordFormulas.arrayOfShapeNames
-        scalesTVC.chordFormulas = chordFormulas 
+        scalesTVC.arrayOfChordNames = chordFormulas.arrayOfShapeNames
         
         selectedCollection = fbCollectionStore.arrayOfFBCollections[fbCollectionStore.savedCollectionIndex]
         collectionTitleTextField.text = selectedCollection.title
@@ -479,8 +478,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // This assigns references to the modelIndex and the collectionStore in the CollectionsTVC. 
         collectionsTVC.collectionStore = fbCollectionStore
         collectionsTVC.delegate = self
-
-        
     }
     
     func hideOrShowEditTableViewButton() {
@@ -941,12 +938,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             default:
                 print("\(#function): Error: pickerView selection was not rootPickerView or accidentalPickerView")
             }
-            if scalesTVC.doShowScales == false {
-                let values = getPickerValues()
-                scalesTVC.updateArrayOfChordNames(root: values[0], accidental: values[1])
-                scaleSelectionButton.setTitle(scalesTVC.getTitleOfSelection(), for: .normal)
                 addNotesAction()
-            }
+ 
         }
     }
 
