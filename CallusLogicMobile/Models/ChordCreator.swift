@@ -14,7 +14,7 @@ class ChordCreator {
     let chordFormulas = ChordFormulas()
     
     func buildChord(root: String, accidental: String, chord: String) {
-        
+      
         // Combine root and accidental
         var fullRoot = root
         if accidental != "Natural" {

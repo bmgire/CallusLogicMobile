@@ -273,6 +273,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         updateToneArraysCreator()
         loadToneArraysIntoSelectedBoard()
         updateFretboardView()
+        
+        
     }
     
     // Gets a readable title from the root, accidental, & scale selections
@@ -502,11 +504,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             fretboardView.buildNoteRects()
             fretboardView.buildNoteViews()
             fretboardView.addSubviews()
-            if selectedCollection.image == nil {
-                updateToneArraysCreator()
-                loadToneArraysIntoSelectedBoard()
-                
-            }
             updateFretboardView()
             doBuildNoteViews = false
         }
@@ -568,7 +565,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // Load scale info into toneArraysCreator
     func updateToneArraysCreator() {
         // print(#function) // Displays function when called.
-        
+       
         let arrayOfPickerStrings = getPickerValues()
         
         if scalesTVC.doShowScales {
