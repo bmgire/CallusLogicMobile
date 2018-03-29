@@ -17,29 +17,37 @@ class ScalesTVC: UITableViewController {
     
     var selectedScale = "Minor Pentatonic Scale"
     var selectedChord = "Minor Chord (v1)"
+    var selectedBasicChord = "E Major Chord"
     
     var arrayOfScaleNames = [String]()
     var arrayOfChordNames: [String]!
+    var arrayOfBasicChordNames: [String]!
     
     //var chordFormulas: ChordFormulas!
     
-    var doShowScales  = true
+    var doShowScales  = 0
     
     weak var delegate: ScalesTVCDelegate?
     
     func updateSelectedScaleOrChord(index: Int) {
-        if doShowScales {
+        if doShowScales == 0 {
             selectedScale = arrayOfScaleNames[index]
-        } else {
-            selectedChord = arrayOfChordNames[index]
+        }   else if doShowScales == 1 {
+                selectedChord = arrayOfChordNames[index]
+        }   else {
+                selectedBasicChord = arrayOfBasicChordNames[index]
         }
     }
     
     func getTitleOfSelection()-> String {
-        if doShowScales {
+        if doShowScales == 0 {
             return selectedScale
-        } else {
-            return selectedChord
+        
+        }   else if doShowScales == 1 {
+                return selectedChord
+        
+        }   else {
+            return selectedBasicChord
         }
     }
     
@@ -100,11 +108,14 @@ class ScalesTVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if doShowScales {
+        if doShowScales == 0 {
             return arrayOfScaleNames.count
-        }
-        else {
+        
+        }   else if doShowScales == 1 {
             return arrayOfChordNames.count
+            
+        }   else {
+            return arrayOfBasicChordNames.count
         }
     }
 
@@ -122,11 +133,14 @@ class ScalesTVC: UITableViewController {
         
 
         // Configure the cell...
-        if doShowScales {
+        if doShowScales == 0 {
             cell.textLabel?.text = arrayOfScaleNames[indexPath.row]
-        }
-        else {
+            
+        }   else if doShowScales == 1 {
             cell.textLabel?.text = arrayOfChordNames[indexPath.row]
+            
+        }   else {
+            cell.textLabel?.text = arrayOfBasicChordNames[indexPath.row]
         }
         return cell
         
@@ -135,14 +149,28 @@ class ScalesTVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Dissmiss the view after a selection is made.
         
-        if doShowScales {
+        if doShowScales == 0 {
            selectedScale = arrayOfScaleNames[indexPath.row]
-        }
-        else {
+        
+        }   else if doShowScales == 1 {
             selectedChord = arrayOfChordNames[indexPath.row]
+            
+        }   else {
+            selectedBasicChord = arrayOfBasicChordNames[indexPath.row]
+            
         }
         // selectedScale = doShowScales ? arrayOfScaleNames[indexPath.row] : arrayOfChordNames[indexPath.row]
-        let text = doShowScales ? selectedScale : selectedChord
+        
+       var text = ""
+        if doShowScales == 0 {
+            text = selectedScale
+        }
+        else if doShowScales == 1 {
+            text = selectedChord
+        }
+        else  {
+            text = selectedBasicChord
+        }
         delegate?.scaleChanged(text: text, indexPath: indexPath)
         dismiss(animated: true, completion: nil)
     }
@@ -150,33 +178,49 @@ class ScalesTVC: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         
         var row = 0
-        if doShowScales {
+        if doShowScales == 0 {
             // get row of selected scale
             if let testRow = arrayOfScaleNames.index(of: selectedScale) {
                 row = testRow
             }
-            // Otherwise, get row from arrayOfChordNames.
-        }   else {
+            
+        }   else if doShowScales == 1 {
             // Get row of selected Chord.
-            if let testRow = arrayOfChordNames.index(of: selectedChord) {
-                row = testRow
-            }
+                if let testRow = arrayOfChordNames.index(of: selectedChord) {
+                    row = testRow
+                }
+            // Get the row of the selected basic chord.
+        }   else {
+                if let testRow = arrayOfBasicChordNames.index(of: selectedBasicChord) {
+                    row = testRow
+                }
+            tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
         }
-        tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
     }
     
     func selectSavedRow() {
         tableView.reloadData()
-        if doShowScales {
-            if let row = arrayOfScaleNames.index(of: selectedScale) {
-                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
+        
+        var row = 0
+        if doShowScales == 0 {
+            if let testRow = arrayOfScaleNames.index(of: selectedScale) {
+                row = testRow
             }
-        }
-        else {
-            if let row = arrayOfChordNames.index(of: selectedChord) {
-                tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
+            
+        }   else if doShowScales == 1 {
+            if let testRow = arrayOfChordNames.index(of: selectedChord) {
+                row = testRow
             }
+        
+        }   else {
+            if let testRow = arrayOfBasicChordNames.index(of: selectedBasicChord) {
+                row = testRow
+            }
+            
+            tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
         }
+        
+        
     }
     
     /*

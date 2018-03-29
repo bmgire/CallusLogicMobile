@@ -31,6 +31,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     let chordFormulas = ChordFormulas()
+    let basicChordFormulas = BasicChordFormulas()
     
     //###################################
     // Other Constants
@@ -122,18 +123,40 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
 
     @IBAction func showScalesOrChords(_ sender: UISegmentedControl) {
         
-        if sender.selectedSegmentIndex == 0 {
-            scalesTVC.doShowScales = true
+        let index = sender.selectedSegmentIndex
+        
+        // Show Scales
+        if index == 0 {
+            scalesTVC.doShowScales = 0
             scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
-            selectedBoard.doShowScales = true
-        }
-        else {
-            scalesTVC.doShowScales = false
+            selectedBoard.doShowScales = 0
+            
+            rootPickerView.isHidden = false
+            accidentalPickerView.isHidden = false
+            
+            // Otherwise show chords
+        }   else if index == 1 {
+            scalesTVC.doShowScales = 1
             scaleSelectionButton.setTitle(scalesTVC.selectedChord, for: .normal)
-            selectedBoard.doShowScales = false
+            selectedBoard.doShowScales = 1
+            
+            rootPickerView.isHidden = false
+            accidentalPickerView.isHidden = false
+        
+            // Otherwise, show basic chords
+        }   else {
+            
+            // Only have 1 control that users can use to select the basic chords.
+            // Use scalesTVC to show full chord names. 
+            scalesTVC.doShowScales = 2
+            scaleSelectionButton.setTitle(scalesTVC.selectedBasicChord, for: .normal)
+            selectedBoard.doShowScales = 2
+            
+            rootPickerView.isHidden = true
+            accidentalPickerView.isHidden = true
         }
         
-        // I need to reload the data based on that value.
+        // I need to reload the data based selected saved row.
         scalesTVC.selectSavedRow()
         if selectedBoard.allowsCustomizations == false {
         addNotesAction()
@@ -266,14 +289,25 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         var scale = ""
         
-        if scalesTVC.doShowScales {
+        if scalesTVC.doShowScales == 0 {
             scale = arrayOfStrings[2]
+            
+        }   else if scalesTVC.doShowScales == 1 {
+                scale = scalesTVC.selectedChord
+        
+        }   else {
+            scale = scalesTVC.selectedBasicChord
+        }
+        var newTitle = ""
+        
+        if scalesTVC.doShowScales != 2{
+            newTitle = "\(root)\(accidental)  \(scale)"
         }
         else {
-            scale = scalesTVC.selectedChord
+            newTitle = scale
         }
         
-        let newTitle = "\(root)\(accidental)  \(scale)"
+        //let newTitle = "\(root)\(accidental)  \(scale)"
         selectedBoard.setFretboardTitle(newTitle)
         fretboardTitleTextField.text = newTitle
         fretboardTitleTextField.setNeedsDisplay()
@@ -282,6 +316,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             tableView.reloadRows(at: [indexPath], with: .automatic)
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
         } else {
+            // I should probably provide a default if the above if let statement fails.
             
         }
         
@@ -431,6 +466,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         // Injecting chordNames into scalesTVC
         scalesTVC.arrayOfChordNames = chordFormulas.arrayOfShapeNames
+        scalesTVC.arrayOfBasicChordNames = basicChordFormulas.arrayOfBasicChordNames
         
         selectedCollection = fbCollectionStore.arrayOfFBCollections[fbCollectionStore.savedCollectionIndex]
         collectionTitleTextField.text = selectedCollection.title
@@ -525,10 +561,18 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let accidental = pickerView(accidentalPickerView, attributedTitleForRow: accidentalRow, forComponent: 0)!
  
         
-        var scale = scalesTVC.selectedScale
+        var scale = ""
         
-        if scalesTVC.doShowScales == false {
+        if scalesTVC.doShowScales == 0 {
+            scale = scalesTVC.selectedScale
+            
+        }
+        
+        else if scalesTVC.doShowScales == 1 {
             scale = scalesTVC.selectedChord
+        
+        }   else {
+            scale = scalesTVC.selectedBasicChord
         }
         
         var arrayOfStrings = [String]()
@@ -556,7 +600,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
        
         let arrayOfPickerStrings = getPickerValues()
         
-        if scalesTVC.doShowScales {
+        if scalesTVC.doShowScales == 0 {
             
                 toneArraysCreator.updateWithValues(arrayOfPickerStrings[0],
                                                    accidental: arrayOfPickerStrings[1],
@@ -568,12 +612,26 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             }
         }
             // Otherwise load chords.
-        else {
-            chordCreator.buildChord(root: arrayOfPickerStrings[0], accidental: arrayOfPickerStrings[1], chord: arrayOfPickerStrings[2])
+        else if scalesTVC.doShowScales == 1 {
+            chordCreator.buildChord(root: arrayOfPickerStrings[0],
+                                    accidental: arrayOfPickerStrings[1],
+                                    chord: arrayOfPickerStrings[2],
+                                    isBasicChord: false)
             
             if selectedBoard.allowsCustomizations == false {
                 autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
             }
+            
+            // Load the basic chord.
+        }   else {
+            let basicChord = basicChordFormulas.dictOfBasicChordNamesAndShapes[arrayOfPickerStrings[2]]
+            chordCreator.buildChord(root: (basicChord?.fullRoot)!,
+                                    accidental: "Natural",
+                                    chord: arrayOfPickerStrings[2],
+                                    isBasicChord: true)
+            
+            autoSetFretboardTitle(arrayOfStrings: arrayOfPickerStrings)
+            
         }
        
     }
@@ -585,7 +643,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         
         // I've showing scales, load from the toneArrays Creator.
-        if scalesTVC.doShowScales {
+        if scalesTVC.doShowScales == 0 {
             if selectedBoard.allowsCustomizations == false {
             // Update all  note models that are not kept. Should initially be zero.
             selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
@@ -596,11 +654,12 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 selectedBoard.addNoteModels(newArray: extraFretboardModel.getFretboardArray())
             }
         }
-        // Otherwise, load from chordCreator
-        else {
+        // Otherwise, load from chordCreator - this will load either regular chords or basic chords.
+        else  {
              selectedBoard.addNoteModels(newArray: chordCreator.fretboardModel.getFretboardArray())
             
         }
+        
         
         /* Why the fuck would updateNoteModeDisplaySettings fuck up adding chords. */
     }
@@ -650,13 +709,27 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
         
         // loads doShowScalesSettings.
-        if selectedBoard.doShowScales {
+        if selectedBoard.doShowScales == 0 {
             doShowScalesControl.selectedSegmentIndex = 0
-            scalesTVC.doShowScales = true
-        } else {
+            scalesTVC.doShowScales = 0
+            
+            rootPickerView.isHidden = false
+            accidentalPickerView.isHidden = false
+        } else  if selectedBoard.doShowScales == 1 {
             doShowScalesControl.selectedSegmentIndex = 1
-            scalesTVC.doShowScales = false
+            scalesTVC.doShowScales = 1
+            
+            rootPickerView.isHidden = false
+            accidentalPickerView.isHidden = false
+        } else {
+            doShowScalesControl.selectedSegmentIndex = 2
+            scalesTVC.doShowScales = 2
+            
+            rootPickerView.isHidden = true
+            accidentalPickerView.isHidden = true
         }
+        
+        
         
         updateScaleSelectionButton()
         
@@ -668,8 +741,21 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     func updateScaleSelectionButton() {
         // get the indexPath from the selected board which was selected prior to this function being called.
-        let indexPath = selectedBoard.doShowScales ? selectedBoard.scaleIndexPath : selectedBoard.chordIndexPath
+        //let indexPath = selectedBoard.doShowScales == 0 ? selectedBoard.scaleIndexPath : selectedBoard.chordIndexPath
        
+        var indexPath = IndexPath()
+        
+        if selectedBoard.doShowScales == 0 {
+            indexPath = selectedBoard.scaleIndexPath
+        }
+        else if selectedBoard.doShowScales == 1 {
+            indexPath = selectedBoard.chordIndexPath
+        }
+        else {
+            indexPath = selectedBoard.basicChordIndexPath
+        }
+        
+        
         // Select the row in the scalesTVC.tableView.
         scalesTVC.selectSavedRow()
         // Set the scalesTVC.selectedScale string to match the indexPath pulled from the selected Board.
@@ -1146,10 +1232,16 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         scaleSelectionButton.setTitle(text, for: .normal)
         scaleSelectionButton.setNeedsDisplay()
-        if selectedBoard.doShowScales {
+        if scalesTVC.doShowScales == 0 {
             selectedBoard.scaleIndexPath = indexPath
-        } else {
+        }
+            
+        else if scalesTVC.doShowScales == 1 {
             selectedBoard.chordIndexPath = indexPath
+        }
+            
+        else {
+            selectedBoard.basicChordIndexPath = indexPath
         }
         addNotesAction()
     }
