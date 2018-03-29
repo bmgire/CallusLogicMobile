@@ -45,7 +45,7 @@ class ScalesByIntervals {
         
         buildAndAddScale(aScale: Scale(name:  "Lydian Mode", formula:  [ "root",   "",    "M2",     "",    "M3",  "",    "A4",   "P5",  "",    "M6",  "",    "M7",  "offset"], thePassingInterval: "" ))
         
-        buildAndAddScale(aScale: Scale(name:  "MixoLydian Mode", formula:  [ "root",   "",    "M2",     "",    "M3",  "P4",  "",     "P5",  "",    "M6",  "m7",  "",    "offset"], thePassingInterval: "" ))
+        buildAndAddScale(aScale: Scale(name:  "Mixolydian Mode", formula:  [ "root",   "",    "M2",     "",    "M3",  "P4",  "",     "P5",  "",    "M6",  "m7",  "",    "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name:  "Aeolian Mode", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "m6",  "",    "m7",  "",    "offset"], thePassingInterval: "" ))
         
@@ -100,6 +100,8 @@ class ScalesByIntervals {
         buildAndAddScale(aScale: Scale(name:  "Dominant 7th Arpeggio",
                                        formula: [ "root",   "",    "",     "",    "M3",     "",     "",     "P5",  "",    "",    "m7",  "",    "offset"],
                                        thePassingInterval: "" ))
+        
+        
         
         
         buildAndAddScale(aScale: Scale(name:  "Root",
