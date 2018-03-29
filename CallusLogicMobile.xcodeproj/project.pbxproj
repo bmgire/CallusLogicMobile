@@ -33,6 +33,8 @@
 		B5786ED61FE324DE00174544 /* ToneArraysCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */; };
 		B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED71FE32D3D00174544 /* FretboardModel.swift */; };
 		B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5786ED81FE32D3D00174544 /* NoteModel.swift */; };
+		B57E51EE206D688300615DD6 /* BasicChordFormulas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E51ED206D688300615DD6 /* BasicChordFormulas.swift */; };
+		B57E51F0206D6A3900615DD6 /* BasicChordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57E51EF206D6A3900615DD6 /* BasicChordModel.swift */; };
 		B5956CDA2065930C00B658A5 /* ChordFormulas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5956CD92065930C00B658A5 /* ChordFormulas.swift */; };
 		B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */; };
 		B5C8172C2048911900C95F26 /* DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8172B2048911900C95F26 /* DisplayMode.swift */; };
@@ -90,6 +92,8 @@
 		B5786ED41FE324DE00174544 /* ToneArraysCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneArraysCreator.swift; sourceTree = "<group>"; };
 		B5786ED71FE32D3D00174544 /* FretboardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FretboardModel.swift; sourceTree = "<group>"; };
 		B5786ED81FE32D3D00174544 /* NoteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		B57E51ED206D688300615DD6 /* BasicChordFormulas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicChordFormulas.swift; sourceTree = "<group>"; };
+		B57E51EF206D6A3900615DD6 /* BasicChordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicChordModel.swift; sourceTree = "<group>"; };
 		B5956CD92065930C00B658A5 /* ChordFormulas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordFormulas.swift; sourceTree = "<group>"; };
 		B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCollectionStore.swift; sourceTree = "<group>"; };
 		B5C8172B2048911900C95F26 /* DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMode.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 				B5956CD92065930C00B658A5 /* ChordFormulas.swift */,
 				B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */,
 				B56EF3F82069636B000AAAAD /* ChordCreator.swift */,
+				B57E51ED206D688300615DD6 /* BasicChordFormulas.swift */,
+				B57E51EF206D6A3900615DD6 /* BasicChordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -463,8 +469,10 @@
 				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,
 				B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */,
 				B52DD180204E127A00C7D9B3 /* FBCollectionModel.swift in Sources */,
+				B57E51EE206D688300615DD6 /* BasicChordFormulas.swift in Sources */,
 				B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */,
 				B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */,
+				B57E51F0206D6A3900615DD6 /* BasicChordModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
 				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
 				B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */,
