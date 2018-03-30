@@ -309,6 +309,19 @@
                                     <action selector="showScalesOrChords:" destination="BYZ-38-t0r" eventType="valueChanged" id="psy-bS-SJ0"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VZv-0U-pK4">
+                                <rect key="frame" x="407" y="192" width="51" height="30"/>
+                                <color key="backgroundColor" red="0.015883801135248416" green="0.6645185596446701" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="51" id="fSh-Ay-Qso"/>
+                                </constraints>
+                                <state key="normal" title="Strum">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="strumAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SzJ-rY-Wu8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99728972810000005" green="1" blue="0.60368305850000004" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -328,6 +341,7 @@
                             <constraint firstItem="MZd-ye-ZjK" firstAttribute="centerY" secondItem="QFc-aO-JJC" secondAttribute="centerY" id="FC1-8E-NsN"/>
                             <constraint firstItem="c9E-Hw-J81" firstAttribute="leading" secondItem="wVW-IA-5d1" secondAttribute="leading" id="GdU-S7-veR"/>
                             <constraint firstItem="XRL-Ey-J3u" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" symbolic="YES" id="Okt-D2-CNe"/>
+                            <constraint firstItem="VZv-0U-pK4" firstAttribute="top" secondItem="WeI-cM-8sb" secondAttribute="top" constant="-3" id="PkW-VP-BYT"/>
                             <constraint firstItem="wVW-IA-5d1" firstAttribute="leading" secondItem="L3o-P0-esF" secondAttribute="leading" id="Ppo-G1-EOF"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nBV-li-yZ1" secondAttribute="trailing" constant="20" symbolic="YES" id="Pru-eq-nmN"/>
                             <constraint firstItem="lc1-9a-Ltk" firstAttribute="leading" secondItem="R0U-O1-bkH" secondAttribute="leading" id="Pzg-ML-ISc"/>
@@ -345,6 +359,7 @@
                             <constraint firstItem="7gO-8t-WgQ" firstAttribute="top" secondItem="GjG-p4-G2R" secondAttribute="bottom" constant="83" id="ZFm-J7-8Uz"/>
                             <constraint firstItem="L3o-P0-esF" firstAttribute="top" secondItem="wVW-IA-5d1" secondAttribute="bottom" constant="8" symbolic="YES" id="ZN7-3b-A04"/>
                             <constraint firstItem="nBV-li-yZ1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="aHI-Xu-LwM"/>
+                            <constraint firstItem="VZv-0U-pK4" firstAttribute="leading" secondItem="WeI-cM-8sb" secondAttribute="trailing" constant="100" id="be2-yE-lOs"/>
                             <constraint firstItem="nBV-li-yZ1" firstAttribute="leading" secondItem="lc1-9a-Ltk" secondAttribute="leading" id="d8c-ba-G9N"/>
                             <constraint firstItem="s46-9p-biO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="45" id="dKO-h1-gEd"/>
                             <constraint firstItem="GjG-p4-G2R" firstAttribute="top" secondItem="c9E-Hw-J81" secondAttribute="top" id="eyd-pm-OdU"/>

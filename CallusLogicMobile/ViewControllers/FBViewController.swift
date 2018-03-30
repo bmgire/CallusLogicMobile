@@ -120,7 +120,30 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //
     //############
     
-
+    @IBAction func strumAction(_ sender: UIButton) {
+        // Locate the highest notes allong each string and strum them.
+        let (arrayOfViewNumbers, arrayOfStringIndexes) = fretboardView.getViewNumbersForStrumming()
+        for index in 0..<arrayOfViewNumbers.count {
+            // strum the NoteView.
+            // Try calling touchesBegan explicitly.
+            let viewNumber = arrayOfViewNumbers[index]
+            let zeroTo36Number = getZeroTo36Number(viewNumber)
+            let stringIndex = arrayOfStringIndexes[index]
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(stringIndex * 50), execute: {
+                self.sixTonesController.limitedDurationPlay(stringIndex, zeroTo36Number: zeroTo36Number)
+                let view = self.fretboardView.arrayOfNoteViews[viewNumber]
+                view.flash()
+            })
+            //sixTonesController.limitedDurationPlay(stringIndex, zeroTo36Number: zeroTo36Number)
+            //sixTonesController.rampUpStart(stringIndex, zeroTo36Number: zeroTo36Number)
+           // let view = fretboardView.arrayOfNoteViews[viewNumber]
+            //view.flash()
+            //sixTonesController.rampDownStop(stringIndex)
+        }
+    
+    }
+    
     @IBAction func showScalesOrChords(_ sender: UISegmentedControl) {
         
         let index = sender.selectedSegmentIndex
