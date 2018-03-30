@@ -187,7 +187,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         // I need to reload the data based selected saved row.
-        //scalesTVC.selectSavedRow()
+        scalesTVC.selectSavedRow()
        
         
         if selectedBoard.allowsCustomizations == false {
@@ -791,10 +791,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         // Select the row in the scalesTVC.tableView.
         
-        // scalesTVC.selectSavedRow()
+        //
         
         // Set the scalesTVC.selectedScale string to match the indexPath pulled from the selected Board.
         scalesTVC.updateSelectedScaleOrChord(index: row)
+        scalesTVC.selectSavedRow()
         // Upate the title.
         scaleSelectionButton.setTitle(scalesTVC.getTitleOfSelection(), for: .normal)
         scaleSelectionButton.setNeedsDisplay()
