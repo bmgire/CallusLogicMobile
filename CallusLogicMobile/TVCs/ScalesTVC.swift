@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ScalesTVCDelegate: class {
-    func scaleChanged(text: String, indexPath: IndexPath)
+    func scaleChanged(text: String, row: Int)
 }
 
 class ScalesTVC: UITableViewController {
@@ -28,6 +28,29 @@ class ScalesTVC: UITableViewController {
     var doShowScales  = 0
     
     weak var delegate: ScalesTVCDelegate?
+    
+    func selectSavedRow() {
+        tableView.reloadData()
+        
+        var row = 0
+        if doShowScales == 0 {
+            if let testRow = arrayOfScaleNames.index(of: selectedScale) {
+                row = testRow
+            }
+            
+        }   else if doShowScales == 1 {
+            if let testRow = arrayOfChordNames.index(of: selectedChord) {
+                row = testRow
+            }
+            
+        }   else {
+            if let testRow = arrayOfBasicChordNames.index(of: selectedBasicChord) {
+                row = testRow
+            }
+        }
+        
+        tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
+    }
     
     func updateSelectedScaleOrChord(index: Int) {
         if doShowScales == 0 {
@@ -159,7 +182,6 @@ class ScalesTVC: UITableViewController {
             selectedBasicChord = arrayOfBasicChordNames[indexPath.row]
             
         }
-        // selectedScale = doShowScales ? arrayOfScaleNames[indexPath.row] : arrayOfChordNames[indexPath.row]
         
        var text = ""
         if doShowScales == 0 {
@@ -171,7 +193,7 @@ class ScalesTVC: UITableViewController {
         else  {
             text = selectedBasicChord
         }
-        delegate?.scaleChanged(text: text, indexPath: indexPath)
+        delegate?.scaleChanged(text: text, row: indexPath.row)
         dismiss(animated: true, completion: nil)
     }
 
@@ -194,34 +216,12 @@ class ScalesTVC: UITableViewController {
                 if let testRow = arrayOfBasicChordNames.index(of: selectedBasicChord) {
                     row = testRow
                 }
-            tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
+           
         }
+         tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
     }
     
-    func selectSavedRow() {
-        tableView.reloadData()
-        
-        var row = 0
-        if doShowScales == 0 {
-            if let testRow = arrayOfScaleNames.index(of: selectedScale) {
-                row = testRow
-            }
-            
-        }   else if doShowScales == 1 {
-            if let testRow = arrayOfChordNames.index(of: selectedChord) {
-                row = testRow
-            }
-        
-        }   else {
-            if let testRow = arrayOfBasicChordNames.index(of: selectedBasicChord) {
-                row = testRow
-            }
-            
-            tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
-        }
-        
-        
-    }
+
     
     /*
     // Override to support conditional editing of the table view.
