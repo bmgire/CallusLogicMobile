@@ -82,7 +82,7 @@ class SixTones {
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
-            os.amplitude = amplitude
+            os.amplitude = amplitude * 0.5
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
