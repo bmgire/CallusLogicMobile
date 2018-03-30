@@ -17,7 +17,7 @@ class ScalesTVC: UITableViewController {
     
     var selectedScale = "Minor Pentatonic Scale"
     var selectedChord = "Minor Chord (v1)"
-    var selectedBasicChord = "E Major Chord"
+    var selectedBasicChord = "E Chord"
     
     var arrayOfScaleNames = [String]()
     var arrayOfChordNames: [String]!
