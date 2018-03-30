@@ -32,9 +32,9 @@ class FretboardModel: NSObject, NSCoding {
             }
         }
     }
-    var scaleIndexPath = IndexPath(row: 1, section: 0) // Minor Pentatonic.
-    var chordIndexPath = IndexPath(row: 0, section: 0)
-    var basicChordIndexPath = IndexPath(row: 0, section: 0)
+    var scaleSelectedRow = 1 // Minor Pentatonic.
+    var chordSelectedRow = 0
+    var basicChordSelectedRow = 0
     
     var allowsCustomizations = false
     var doShowScales = 0
@@ -54,19 +54,21 @@ class FretboardModel: NSObject, NSCoding {
         for index in 0...77 {
             aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
-        aCoder.encode(rootNote, forKey: "rootNote")
-        aCoder.encode(accidental, forKey: "accidental")
-        aCoder.encode(scaleIndexPath, forKey: "scaleIndexPath")
-        aCoder.encode(chordIndexPath, forKey: "chordIndexPath")
-        aCoder.encode(basicChordIndexPath, forKey: "basicChordIndexPath")
+        aCoder.encode(rootNote as Int?, forKey: "rootNote")
+        aCoder.encode(accidental as Int?, forKey: "accidental")
+        aCoder.encode(scaleSelectedRow as Int?, forKey: "scaleSelectedRow")
+        aCoder.encode(chordSelectedRow as Int?, forKey: "chordSelectedRow")
+        aCoder.encode(basicChordSelectedRow as Int?, forKey: "basicChordSelectedRow")
         
-        aCoder.encode(allowsCustomizations, forKey: "allowsCustomizations")
-        aCoder.encode(doShowScales, forKey: "showsScales")
+        aCoder.encode(allowsCustomizations as Bool?, forKey: "allowsCustomizations")
+        aCoder.encode(doShowScales as Int?, forKey: "showsScales")
         
-        aCoder.encode(isLocked, forKey: "isLocked")
-        aCoder.encode(displayMode, forKey: "displayMode")
-        aCoder.encode(userColor, forKey: "userColor")
-        aCoder.encode(fretboardTitle, forKey: "fretboardTitle")
+        //aCoder.encode(doShowScales as Int?, forKey: "test")
+        
+        aCoder.encode(isLocked as Bool?, forKey: "isLocked")
+        aCoder.encode(displayMode as Int?, forKey: "displayMode")
+        aCoder.encode(userColor as UIColor?, forKey: "userColor")
+        aCoder.encode(fretboardTitle as String?, forKey: "fretboardTitle")
     }
     
     
@@ -82,16 +84,63 @@ class FretboardModel: NSObject, NSCoding {
             }
         }
         
+
+        if let rootNote = aDecoder.decodeObject(forKey: "rootNote") as? Int {
+            self.rootNote = rootNote
+        }
+        
+        if let accidental = aDecoder.decodeObject(forKey: "accidental") as? Int {
+            self.accidental = accidental
+        }
+        
+        if let scaleSelectedRow = aDecoder.decodeObject(forKey: "scaleSelectedRow") as? Int {
+            self.scaleSelectedRow = scaleSelectedRow
+        }
+        
+        if let chordSelectedRow = aDecoder.decodeObject(forKey: "chordSelectedRow") as? Int {
+            self.chordSelectedRow = chordSelectedRow
+        }
+        
+        if let basicChordSelectedRow = aDecoder.decodeObject(forKey: "basicChordSelectedRow") as? Int {
+            self.basicChordSelectedRow = basicChordSelectedRow
+        }
+        
+        if let allowsCustomizations = aDecoder.decodeObject(forKey: "allowsCustomizations") as? Bool {
+            self.allowsCustomizations = allowsCustomizations
+        }
+        
+        if let doShowScales = aDecoder.decodeObject(forKey: "showsScales") as? Int {
+            self.doShowScales = doShowScales
+        }
+
+        
+        if let isLocked = aDecoder.decodeObject(forKey: "isLocked") as? Bool {
+            self.isLocked = isLocked
+        }
+        
+        if let displayMode = aDecoder.decodeObject(forKey: "displayMode") as? Int {
+            self.displayMode = displayMode
+        }
+        
+        if let userColor = aDecoder.decodeObject(forKey: "userColor") as? UIColor  {
+            self.userColor = userColor
+        }
+        
+        if let fretboardTitle = aDecoder.decodeObject(forKey: "fretboardTitle") as? String {
+            self.fretboardTitle = fretboardTitle
+        }
+        
+        /*
         rootNote = aDecoder.decodeInteger(forKey: "rootNote")
         accidental = aDecoder.decodeInteger(forKey: "accidental")
         scaleIndexPath = aDecoder.decodeObject(forKey: "scaleIndexPath") as! IndexPath
         chordIndexPath = aDecoder.decodeObject(forKey: "chordIndexPath") as! IndexPath
-        //basicChordIndexPath = aDecoder.decodeObject(forKey: "basiChordIndexPath") as! IndexPath
+        
         
         
         // test idea for how to
-        if let basicChordIndexPath = aDecoder.decodeObject(forKey: "basicChordIndexPath") as? IndexPath {
-            self.basicChordIndexPath = basicChordIndexPath
+        if let basicChordIP = aDecoder.decodeObject(forKey: "basicChordIndexPath") as? IndexPath {
+            self.basicChordIndexPath = basicChordIP
         } else {
             self.basicChordIndexPath = IndexPath(row: 0, section: 0)
         }
@@ -103,7 +152,7 @@ class FretboardModel: NSObject, NSCoding {
         displayMode = aDecoder.decodeInteger(forKey: "displayMode")
         userColor = aDecoder.decodeObject(forKey: "userColor") as! UIColor
         fretboardTitle = aDecoder.decodeObject(forKey: "fretboardTitle") as! String
-        
+        */
         super.init()
         // Set fret numbers when decoding, don't bother checking anything.
         setFretNumbers()
