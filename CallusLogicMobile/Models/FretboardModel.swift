@@ -34,7 +34,7 @@ class FretboardModel: NSObject, NSCoding {
     }
     var scaleSelectedRow = 1 // Minor Pentatonic.
     var chordSelectedRow = 0
-    var basicChordSelectedRow = 0
+    var basicChordSelectedRow = 6
     
     var allowsCustomizations = false
     var doShowScales = 0
