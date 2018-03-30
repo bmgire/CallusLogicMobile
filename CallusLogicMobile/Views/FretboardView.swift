@@ -12,6 +12,10 @@ class FretboardView: UIImageView {
     
     let NOTES_PER_STRING = 13
     let NOTES_ON_FRETBOARD =  78
+    let NUMBER_OF_STRINGS = 6
+    
+    let offsets = [0, 13, 26, 39, 52, 65]
+    
    // let noteView = NoteView()
     //#####################################
     // right handed fretboardView dimensions. 1092 * 307
@@ -234,4 +238,24 @@ class FretboardView: UIImageView {
       //  view.drawNote()
         view.setNeedsDisplay()
     }
+    
+    func getViewNumbersForStrumming()->([Int],[Int])  {
+        
+        var arrayOfViewNumbers = [Int]()
+        var arrayOfStringIndexes = [Int]()
+        for stringIndex in 0..<NUMBER_OF_STRINGS {
+            for fretIndex in stride(from: (NOTES_PER_STRING - 1), through: 0, by: -1) {
+                
+                let view =  arrayOfNoteViews[offsets[stringIndex] + fretIndex]
+                if view.isDisplayed {
+                    arrayOfViewNumbers.append(view.viewNumber)
+                    arrayOfStringIndexes.append(stringIndex)
+                    break
+                }
+            }
+        }
+        return (arrayOfViewNumbers, arrayOfStringIndexes)
+    }
+    
+    
 }
