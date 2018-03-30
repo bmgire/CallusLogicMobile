@@ -84,7 +84,6 @@ class FretboardModel: NSObject, NSCoding {
             }
         }
         
-
         if let rootNote = aDecoder.decodeObject(forKey: "rootNote") as? Int {
             self.rootNote = rootNote
         }
