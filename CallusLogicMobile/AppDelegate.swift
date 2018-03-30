@@ -11,6 +11,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var fbViewController = FBViewController()
+    
     var window: UIWindow?
     
     let fbCollectionStore = FBCollectionStore()
@@ -19,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
-        let fbViewController = window!.rootViewController as! FBViewController
+        fbViewController = window!.rootViewController as! FBViewController
        
         
         // Access the ItemsViewController and set its item store.
@@ -30,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+        fbViewController.sixTonesController.stopPlayingAllNotes()
+        print("DidResignActive")
+        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -44,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error in \(#function): Could not save any of the Items")
         }
         
+        fbViewController.sixTonesController.stopPlayingAllNotes()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -52,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        fbViewController.sixTonesController.startPlayingAllNotes()
+
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
