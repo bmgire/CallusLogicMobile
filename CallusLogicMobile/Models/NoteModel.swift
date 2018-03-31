@@ -14,6 +14,7 @@ class NoteModel : NSObject, NSCoding {
     fileprivate var number0to36 = ""
     fileprivate var interval = ""
     fileprivate var fretNumber = ""
+    fileprivate var chordFinger = ""
     
     fileprivate var isGhost = false
     fileprivate var isDisplayed = false
@@ -24,29 +25,55 @@ class NoteModel : NSObject, NSCoding {
      
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(note, forKey: "note")
-        aCoder.encode(number0to11, forKey: "number0to11")
-        aCoder.encode(number0to36, forKey: "number0to36")
-        aCoder.encode(interval, forKey: "interval")
-        aCoder.encode(fretNumber, forKey: "fretNumber")
+        aCoder.encode(note as String?, forKey: "note")
+        aCoder.encode(number0to11 as String?, forKey: "number0to11")
+        aCoder.encode(number0to36 as String?, forKey: "number0to36")
+        aCoder.encode(interval as String?, forKey: "interval")
+        aCoder.encode(fretNumber as String?, forKey: "fretNumber")
+        aCoder.encode(chordFinger as String?, forKey: "chordFinger")
         
-        aCoder.encode(isGhost, forKey: "isGhost")
-        aCoder.encode(isDisplayed, forKey: "isDisplayed")
-        aCoder.encode(isPassingNote, forKey: "isPassingNote")
-        aCoder.encode(myColor, forKey: "myColor")
+        aCoder.encode(isGhost as Bool?, forKey: "isGhost")
+        aCoder.encode(isDisplayed as Bool?, forKey: "isDisplayed")
+        aCoder.encode(isPassingNote as Bool?, forKey: "isPassingNote")
+        aCoder.encode(myColor as UIColor?, forKey: "myColor")
     }
     
     required init?(coder aDecoder: NSCoder) {
-        note = aDecoder.decodeObject(forKey: "note") as! String
-        number0to11 = aDecoder.decodeObject(forKey: "number0to11") as! String
-        number0to36 = aDecoder.decodeObject(forKey: "number0to36") as! String
-        interval = aDecoder.decodeObject(forKey: "interval") as! String
-        fretNumber = aDecoder.decodeObject(forKey: "interval") as! String
+        if let note = aDecoder.decodeObject(forKey: "note") as? String {
+            self.note = note
+        }
         
-        isGhost = aDecoder.decodeBool(forKey: "isGhost")
-        isDisplayed = aDecoder.decodeBool(forKey: "isDisplayed")
-        isPassingNote = aDecoder.decodeBool(forKey: "isPassingNote")
-        myColor = aDecoder.decodeObject(forKey: "myColor") as! UIColor
+        if let number0to11 = aDecoder.decodeObject(forKey: "number0to11") as? String {
+            self.number0to11 = number0to11
+        }
+        
+        if let number0to36 = aDecoder.decodeObject(forKey: "number0to36") as? String {
+            self.number0to36 = number0to36
+        }
+        if let interval = aDecoder.decodeObject(forKey: "interval") as? String {
+            self.interval = interval
+        }
+        if let fretNumber = aDecoder.decodeObject(forKey: "fretNumber") as? String {
+            self.fretNumber = fretNumber
+        }
+        
+        if let chordFinger = aDecoder.decodeObject(forKey: "chordFinger") as? String {
+            self.chordFinger = chordFinger
+        }
+        
+        if let isGhost = aDecoder.decodeObject(forKey: "isGhost") as? Bool {
+            self.isGhost = isGhost
+        }
+        
+        if let isDisplayed = aDecoder.decodeObject(forKey: "isDisplayed") as? Bool {
+            self.isDisplayed = isDisplayed
+        }
+        if let isPassingNote = aDecoder.decodeObject(forKey: "isPassingNote") as? Bool {
+            self.isPassingNote = isPassingNote
+        }
+        if let myColor = aDecoder.decodeObject(forKey: "myColor") as? UIColor {
+            self.myColor = myColor
+        }
         
         super.init()
     }
@@ -98,6 +125,13 @@ class NoteModel : NSObject, NSCoding {
         fretNumber = newFretNumber
     }
     
+    func getChordFinger()-> String {
+        return chordFinger
+    }
+    
+    func setChordFinger(_ newFinger: String) {
+        chordFinger = newFinger
+    }
     
     func getIsGhost()-> Bool {
         return isGhost
@@ -114,14 +148,6 @@ class NoteModel : NSObject, NSCoding {
     func setIsDisplayed(_ bool: Bool) {
         isDisplayed = bool
     }
-    
-    func getIsPassingNote()-> Bool {
-        return isPassingNote
-    }
-    
-    func setIsPassingNote(_ bool: Bool) {
-        isPassingNote = bool
-    }
 
     func getMyColor() -> UIColor {
         return myColor
@@ -134,48 +160,8 @@ class NoteModel : NSObject, NSCoding {
     func flipIsGhost(){
         isGhost = !isGhost
     }
-
-    func makePassingNote(_ bool: Bool) {
-        if bool {
-            note = addParentheses(note)
-            number0to11 = addParentheses(number0to11)
-            number0to36 = addParentheses(number0to36)
-            interval = addParentheses(interval)
-            if fretNumber != "" {
-                fretNumber = addParentheses(fretNumber)
-            }
-        }
-        else {
-            note = removeParentheses(note)
-            number0to11 = removeParentheses(number0to11)
-            number0to36 = removeParentheses(number0to36)
-            interval = removeParentheses(interval)
-            fretNumber = removeParentheses(fretNumber)
-            if fretNumber != "" {
-                fretNumber = removeParentheses(fretNumber)
-           }
-        }
-    }
     
-    fileprivate func addParentheses(_ theNote: String)-> String {
-        var temp = "("
-        temp = temp + theNote
-        temp = temp + ")"
-        print(temp)
-        return temp
-    }
     
-    // note being used yet.
-    fileprivate func removeParentheses(_ theString: String)->String {
-        var temp = theString
-        
-        let begin = temp.startIndex
-        let end = temp.endIndex
-        
-        temp.remove(at: end)
-        temp.remove(at: begin)
-        return temp
-    }
     
     func setNoteModel(_ newModel: NoteModel) {
         note = newModel.getNote()
@@ -187,7 +173,6 @@ class NoteModel : NSObject, NSCoding {
         }
         isGhost = newModel.getIsGhost()
         isDisplayed = newModel.getIsDisplayed()
-        isPassingNote = newModel.getIsPassingNote()
         myColor = newModel.getMyColor()
     }
 }

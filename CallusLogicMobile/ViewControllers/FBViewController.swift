@@ -27,7 +27,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let toneArraysCreator = ToneArraysCreator()
     let chordCreator = ChordCreator()
     
-    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
+    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     let chordFormulas = ChordFormulas()
