@@ -12,6 +12,7 @@ enum DisplayMode: Int {
     case notes = 0
     case fretNumbers
     case intervals
+    case chordFingers
     case numbers0to11
     case numbers0to36
 }

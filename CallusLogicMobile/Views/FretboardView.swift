@@ -220,6 +220,8 @@ class FretboardView: UIImageView {
                 displayText = noteModel.getNumber0to11()
             case .numbers0to36:
                 displayText = noteModel.getNumber0to36()
+            case .chordFingers:
+                displayText = noteModel.getChordFinger()
             default:
                 displayText = noteModel.getNote()
             }
