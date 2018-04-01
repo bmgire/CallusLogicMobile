@@ -17,6 +17,7 @@ class ChordCreator {
     func buildChord(root: String, accidental: String, chord: String, isBasicChord: Bool) {
         
         var formula = [String]()
+        var fingerings = [String]()
         var scaleToBuildFrom = ""
         
         // Combine root and accidental
@@ -28,6 +29,7 @@ class ChordCreator {
         if isBasicChord {
             let chordModel = basicChordFormulas.dictOfBasicChordNamesAndShapes[chord]
             formula = (chordModel?.shapeModel.arrayOfIntervals)!
+            fingerings = (chordModel?.shapeModel.arrayOfFingers)!
             scaleToBuildFrom = (chordModel?.shapeModel.arpeggioToBuildChordFrom)!
                 
                 
@@ -60,13 +62,16 @@ class ChordCreator {
                     altChordShapeName = chordShapeModel.alternateChordShapeName
                 }
                 
+                // If there is an alternate chord shape, load those settings.
                 if altChordShapeName != "" {
                     formula = (chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]?.arrayOfIntervals)!
+                    fingerings = (chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]?.arrayOfFingers)!
                     // Otherwise get the normal formula
                 }
                 // Otherwise, no alternate chordShape is needed. use the regular one.
                 else {
                     formula = (chordFormulas.dictOfChordNamesAndShapes[chord]?.arrayOfIntervals)!
+                    fingerings = (chordFormulas.dictOfChordNamesAndShapes[chord]?.arrayOfFingers)!
                 }
                 
                 
@@ -81,6 +86,6 @@ class ChordCreator {
         fretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
         
         // remove all notes but the chord.
-        fretboardModel.removeNotesNotInChord(chordFormula: formula)
+        fretboardModel.removeNotesNotInChord(chordFormula: formula, chordFingering: fingerings)
     }
 }

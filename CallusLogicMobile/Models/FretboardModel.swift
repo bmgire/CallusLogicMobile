@@ -255,6 +255,7 @@ class FretboardModel: NSObject, NSCoding {
         modelToUpdate.setNumber0to36(importModel.getNumber0to36())
         modelToUpdate.setNote(importModel.getNote())
         modelToUpdate.setInterval(importModel.getInterval())
+        modelToUpdate.setChordFinger(importModel.getChordFinger())
         modelToUpdate.setMyColor(userColor)
         modelToUpdate.setIsDisplayed(importModel.getIsDisplayed())
         if allowsCustomizations {
@@ -265,15 +266,23 @@ class FretboardModel: NSObject, NSCoding {
     }
     
     
-    //var count = 0
+
     
-    func removeNotesNotInChord(chordFormula: [String]) {
+    
+    
+    
+    
+    
+    
+    
+   // ##################################################
+    
+    func removeNotesNotInChord(chordFormula: [String], chordFingering: [String]) {
         // This function will be called after all noteModels (78 on a 12 fret 6 string guitar) have been created.
         
         // For each string
         for stringIndex in 0...5 {
             // Search all the frets for the interval.
-            
             var noteHasNotBeenFound = true
             
             for fretIndex in 0..<NOTES_PER_STRING  {
@@ -286,9 +295,7 @@ class FretboardModel: NSObject, NSCoding {
                     // Otherwise there is a note.
                     // Find the note and delete it.
                 }   else {
-                    
-                    
-                    
+
                     // only check notes that are displayed.
                     
                     if noteModel.getIsDisplayed() {
@@ -305,7 +312,7 @@ class FretboardModel: NSObject, NSCoding {
                                 // Else the interval matches.
                             else {
                                 noteHasNotBeenFound = false
-                                //  print("note has been found")
+                                noteModel.setChordFinger(chordFingering[stringIndex])
                             }
                         }
                             // Else the note has been found, just set isDisplayed to false without checking.
@@ -321,11 +328,14 @@ class FretboardModel: NSObject, NSCoding {
         fixChordNoteSpacingIssues()
     }
     
+    
+    // ##################################################
     func fixChordNoteSpacingIssues() {
         
         var arrayOfFretNumbers = [Int]()
         
         // Obtain all noteModels in chord.
+        // Create arrayOfFretNumbers
         for model in arrayOfNoteModels {
             if model.getIsDisplayed() {
                 if let number = Int(model.getFretNumber()) {
@@ -352,7 +362,10 @@ class FretboardModel: NSObject, NSCoding {
                     // Do note display noteModel
                     noteModel.setIsDisplayed(false)
                     // Do display the model 1 octave up.
-                    arrayOfNoteModels[index + 12].setIsDisplayed(true)
+                    let modelToDisplay = arrayOfNoteModels[index + 12]
+                    modelToDisplay.setIsDisplayed(true)
+                    modelToDisplay.setChordFinger(noteModel.getChordFinger())
+                    
                 }
             }
         }

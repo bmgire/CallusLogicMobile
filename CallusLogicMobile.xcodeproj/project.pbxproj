@@ -222,6 +222,18 @@
 			path = CallusLogicMobileUITests;
 			sourceTree = "<group>";
 		};
+		B542E6CE2070675300EE0BE2 /* Chord_Formulas_and_Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5956CD92065930C00B658A5 /* ChordFormulas.swift */,
+				B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */,
+				B56EF3F82069636B000AAAAD /* ChordCreator.swift */,
+				B57E51ED206D688300615DD6 /* BasicChordFormulas.swift */,
+				B57E51EF206D6A3900615DD6 /* BasicChordModel.swift */,
+			);
+			path = Chord_Formulas_and_Models;
+			sourceTree = "<group>";
+		};
 		B55D51F91FE1F22600CB5F11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,11 +247,7 @@
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
 				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B5196C9220324101005A018E /* NoteFrequencies.swift */,
-				B5956CD92065930C00B658A5 /* ChordFormulas.swift */,
-				B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */,
-				B56EF3F82069636B000AAAAD /* ChordCreator.swift */,
-				B57E51ED206D688300615DD6 /* BasicChordFormulas.swift */,
-				B57E51EF206D6A3900615DD6 /* BasicChordModel.swift */,
+				B542E6CE2070675300EE0BE2 /* Chord_Formulas_and_Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";
