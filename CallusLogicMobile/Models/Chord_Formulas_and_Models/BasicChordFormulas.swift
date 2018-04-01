@@ -20,6 +20,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "A",
                               chordName: " Chord",
                               arrayOfIntervals: ["", "root", "P5", "root", "M3", "P5"],
+                              arrayOfChordFingerings: ["", "O", "I", "M", "R", "O"],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Major Arpeggio")
@@ -27,6 +28,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "A",
                               chordName: "m Chord",
                               arrayOfIntervals: ["", "root", "P5", "root", "m3", "P5"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
@@ -35,6 +37,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "A",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["", "root", "P5", "m7", "M3", "P5"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Dominant 7th Arpeggio")
@@ -44,6 +47,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "B",
                               chordName: " Chord",
                               arrayOfIntervals: ["", "root", "P5", "root", "M3", ""],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -51,6 +55,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "B",
                               chordName: "m Chord",
                               arrayOfIntervals: ["", "root", "P5", "root", "m3", "P5"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -58,6 +63,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "B",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["", "root", "M3", "m7", "root", "P5"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -67,6 +73,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "C",
                               chordName: " Chord",
                               arrayOfIntervals: ["", "root", "M3", "P5", "root", "M3"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -74,6 +81,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "C",
                               chordName: "m Chord",
                               arrayOfIntervals: ["", "root", "P5", "root", "m3", "P5"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -81,6 +89,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "C",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["", "root", "M3", "m7", "root", "M3"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -90,6 +99,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "D",
                               chordName: " Chord",
                               arrayOfIntervals: ["", "", "root", "P5", "root", "M3"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -97,6 +107,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "D",
                               chordName: "m Chord",
                               arrayOfIntervals: ["", "", "root", "P5", "root", "m3"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -104,6 +115,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "D",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["", "", "root", "P5", "m7", "M3"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -114,6 +126,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "E",
                               chordName: " Chord",
                               arrayOfIntervals: ["root", "P5", "root", "M3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -122,6 +135,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "E",
                               chordName: "m Chord",
                               arrayOfIntervals: ["root", "P5", "root", "m3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -130,6 +144,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "E",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["root", "P5", "m7", "M3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -139,6 +154,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "F",
                               chordName: " Chord",
                               arrayOfIntervals: ["", "", "root", "M3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -146,6 +162,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "F",
                               chordName: "m Chord",
                               arrayOfIntervals: ["", "", "root", "m3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -153,6 +170,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "F",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["root", "P5", "m7", "M3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -161,6 +179,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "G",
                               chordName: " Chord",
                               arrayOfIntervals: ["root", "M3", "P5", "root", "M3", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -168,6 +187,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "G",
                               chordName: "m Chord",
                               arrayOfIntervals: ["", "", "root", "m3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -175,6 +195,7 @@ class BasicChordFormulas {
         createChordShapeModel(fullRoot: "G",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["root", "P5", "m7", "M3", "P5", "root"],
+                              arrayOfChordFingerings: ["", "", "", "", "", ""],
                               arrayOfInvalidRootNotes: ["NA"],
                               alternateChordShapeName: "NA",
                               arpeggioToBuildChordFrom: "Chromatic Scale")
@@ -184,6 +205,7 @@ class BasicChordFormulas {
     func createChordShapeModel(fullRoot: String,
                                chordName: String,
                                arrayOfIntervals: [String],
+                               arrayOfChordFingerings: [String],
                                arrayOfInvalidRootNotes: [String],
                                alternateChordShapeName: String,
                                arpeggioToBuildChordFrom: String) {
@@ -191,6 +213,7 @@ class BasicChordFormulas {
         let model = BasicChordModel()
         model.fullRoot = fullRoot
         model.shapeModel.arrayOfIntervals = arrayOfIntervals
+        model.shapeModel.arrayOfFingers = arrayOfChordFingerings
         model.shapeModel.arrayOfInvalidRootNotes = arrayOfInvalidRootNotes
         model.shapeModel.alternateChordShapeName = alternateChordShapeName
         model.shapeModel.arpeggioToBuildChordFrom = arpeggioToBuildChordFrom

@@ -615,16 +615,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //############
     // Load scale info into toneArraysCreator
     func updateToneArraysCreator() {
@@ -674,8 +664,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     func loadToneArraysIntoSelectedBoard() {
         // print(#function) // Displays function when called.
         
-        // I've showing scales, load from the toneArrays Creator.
+        // If showing scales, load from the toneArrays Creator.
         if scalesTVC.doShowScales == 0 {
+            // If customizations are allowed.
             if selectedBoard.allowsCustomizations == false {
             // Update all  note models that are not kept. Should initially be zero.
             selectedBoard.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
@@ -686,14 +677,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 selectedBoard.addNoteModels(newArray: extraFretboardModel.getFretboardArray())
             }
         }
-        // Otherwise, load from chordCreator - this will load either regular chords or basic chords.
+        // Otherwise chords are being shown.
+        // load from chordCreator - this will load either regular chords or basic chords.
         else  {
              selectedBoard.addNoteModels(newArray: chordCreator.fretboardModel.getFretboardArray())
             
         }
         
-        
-        /* Why the fuck would updateNoteModeDisplaySettings fuck up adding chords. */
     }
     
     //############
@@ -703,22 +693,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let displayMode = DisplayMode(rawValue: selectedBoard.getDisplayMode())!
         
         fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
-      
-        // Otherwise customizations are allowed, add from extraFretboardModel
-
-        
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     //#############
     // Loads settings from the selected board.

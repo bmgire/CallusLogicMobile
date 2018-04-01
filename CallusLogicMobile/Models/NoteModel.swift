@@ -58,7 +58,12 @@ class NoteModel : NSObject, NSCoding {
         }
         
         if let chordFinger = aDecoder.decodeObject(forKey: "chordFinger") as? String {
-            self.chordFinger = chordFinger
+            /*if chordFinger == "" {
+                self.chordFinger = "NA"
+            }
+            else { */
+                self.chordFinger = chordFinger
+           // }
         }
         
         if let isGhost = aDecoder.decodeObject(forKey: "isGhost") as? Bool {
@@ -126,6 +131,7 @@ class NoteModel : NSObject, NSCoding {
     }
     
     func getChordFinger()-> String {
+        
         return chordFinger
     }
     
