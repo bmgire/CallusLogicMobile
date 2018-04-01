@@ -13,6 +13,8 @@ class ChordShapeModel {
     var arrayOfIntervals = [String]()
     var arrayOfInvalidRootNotes = [String]()
     var arrayOfFingers = ["", "", "", "", "", ""]
+    var arrayOfOpenStringFingers = ["", "", "", "", "", ""]
+    var arrayOfRootNotesForOpenStringFingers = [String]()
     var alternateChordShapeName = ""
     var arpeggioToBuildChordFrom = ""
 }

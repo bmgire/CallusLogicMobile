@@ -206,6 +206,7 @@ class FretboardModel: NSObject, NSCoding {
                 noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
                 noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
                 noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
+                noteModel.setChordFinger("")
                 noteModel.setIsGhost(false)
                 if noteModel.getNote() != "" {
                     noteModel.setIsDisplayed(true)
