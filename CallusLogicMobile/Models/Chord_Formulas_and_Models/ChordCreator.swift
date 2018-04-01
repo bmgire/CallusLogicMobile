@@ -64,14 +64,20 @@ class ChordCreator {
                 
                 // If there is an alternate chord shape, load those settings.
                 if altChordShapeName != "" {
-                    formula = (chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]?.arrayOfIntervals)!
-                    fingerings = (chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]?.arrayOfFingers)!
-                    // Otherwise get the normal formula
+                    if let altChordShapeModel = chordFormulas.dictOfChordNamesAndShapes[altChordShapeName] {
+                        formula = altChordShapeModel.arrayOfIntervals
+                        fingerings = altChordShapeModel.arrayOfFingers
+                    
+                        // Otherwise, could not locate altChordShape in dictionary: print an error statement.
+                    }
+                    else {
+                        print("Error in \(#function): unable to obtain altChordShapeModel from chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]")
+                    }
                 }
                 // Otherwise, no alternate chordShape is needed. use the regular one.
                 else {
                     formula = (chordFormulas.dictOfChordNamesAndShapes[chord]?.arrayOfIntervals)!
-                    fingerings = (chordFormulas.dictOfChordNamesAndShapes[chord]?.arrayOfFingers)!
+                    fingerings = setFingering(chordShapeModel: chordShapeModel, fullRoot: fullRoot)
                 }
                 
                 
@@ -87,5 +93,14 @@ class ChordCreator {
         
         // remove all notes but the chord.
         fretboardModel.removeNotesNotInChord(chordFormula: formula, chordFingering: fingerings)
+    }
+    
+    func setFingering(chordShapeModel: ChordShapeModel, fullRoot: String)->[String] {
+        if chordShapeModel.arrayOfRootNotesForOpenStringFingers.contains(fullRoot) {
+            return chordShapeModel.arrayOfOpenStringFingers
+        }
+        else {
+           return chordShapeModel.arrayOfFingers
+        }
     }
 }
