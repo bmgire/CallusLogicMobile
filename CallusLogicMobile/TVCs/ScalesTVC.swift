@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ScalesTVCDelegate: class {
-    func scaleChanged(text: String, row: Int)
+    func scaleChanged(scaleOrChord: String)
 }
 
 class ScalesTVC: UITableViewController {
@@ -52,13 +52,29 @@ class ScalesTVC: UITableViewController {
         tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
     }
     
-    func updateSelectedScaleOrChord(index: Int) {
+    func updateSelectedScaleOrChord(scaleOrChord: String) {
         if doShowScales == 0 {
-            selectedScale = arrayOfScaleNames[index]
-        }   else if doShowScales == 1 {
-                selectedChord = arrayOfChordNames[index]
-        }   else {
-                selectedBasicChord = arrayOfBasicChordNames[index]
+            if arrayOfScaleNames.contains(scaleOrChord) {
+                selectedScale = scaleOrChord
+            } else {
+                selectedScale = arrayOfScaleNames[1]
+            }
+        }
+            
+        else if doShowScales == 1 {
+            if arrayOfChordNames.contains(scaleOrChord) {
+                selectedChord = scaleOrChord
+            } else {
+                selectedScale = arrayOfChordNames[0]
+            }
+        }
+            
+        else {
+            if arrayOfBasicChordNames.contains(scaleOrChord) {
+                selectedBasicChord = scaleOrChord
+            } else {
+                selectedBasicChord = arrayOfBasicChordNames[0]
+            }
         }
     }
     
@@ -183,17 +199,17 @@ class ScalesTVC: UITableViewController {
             
         }
         
-       var text = ""
+       var scaleOrChord = ""
         if doShowScales == 0 {
-            text = selectedScale
+            scaleOrChord = selectedScale
         }
         else if doShowScales == 1 {
-            text = selectedChord
+            scaleOrChord = selectedChord
         }
         else  {
-            text = selectedBasicChord
+            scaleOrChord = selectedBasicChord
         }
-        delegate?.scaleChanged(text: text, row: indexPath.row)
+        delegate?.scaleChanged(scaleOrChord: scaleOrChord)
         dismiss(animated: true, completion: nil)
     }
 

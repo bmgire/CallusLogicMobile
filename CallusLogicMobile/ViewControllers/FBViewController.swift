@@ -27,7 +27,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let toneArraysCreator = ToneArraysCreator()
     let chordCreator = ChordCreator()
     
-    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
+    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers?", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     let chordFormulas = ChordFormulas()
@@ -152,7 +152,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         if index == 0 {
             scalesTVC.doShowScales = 0
             selectedBoard.doShowScales = 0
-            scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.scaleSelectedRow)
+            //scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.scaleSelectedRow)
+            scalesTVC.updateSelectedScaleOrChord(scaleOrChord: selectedBoard.scaleSettings.scaleOrChord)
+            
             scaleSelectionButton.setTitle(scalesTVC.selectedScale, for: .normal)
             
             
@@ -164,7 +166,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }   else if index == 1 {
             scalesTVC.doShowScales = 1
             selectedBoard.doShowScales = 1
-            scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.chordSelectedRow)
+            scalesTVC.updateSelectedScaleOrChord(scaleOrChord: selectedBoard.chordSettings.scaleOrChord)
+            //scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.chordSelectedRow)
             scaleSelectionButton.setTitle(scalesTVC.selectedChord, for: .normal)
             
             
@@ -178,7 +181,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             // Use scalesTVC to show full chord names. 
             scalesTVC.doShowScales = 2
             selectedBoard.doShowScales = 2
-            scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.basicChordSelectedRow)
+            scalesTVC.updateSelectedScaleOrChord(scaleOrChord: selectedBoard.basicChordSettings.scaleOrChord)
+            //scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.basicChordSelectedRow)
             scaleSelectionButton.setTitle(scalesTVC.selectedBasicChord, for: .normal)
             
             
@@ -189,9 +193,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // I need to reload the data based selected saved row.
         scalesTVC.selectSavedRow()
        
+        loadPickerViewSelections(doShowScalesIndex: scalesTVC.doShowScales)
         
         if selectedBoard.allowsCustomizations == false {
-        addNotesAction()
+            addNotesAction()
         }
         
     }
@@ -689,8 +694,18 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //############
     func updateFretboardView() {
         // print(#function) // Displays function when called.
+       
+        var displayMode = DisplayMode.notes
+        if selectedBoard.doShowScales == 0 {
+            displayMode = selectedBoard.scaleSettings.displayMode
+        }
+        else if selectedBoard.doShowScales == 1 {
+            displayMode = selectedBoard.chordSettings.displayMode
+        }
+        else {
+            displayMode = selectedBoard.basicChordSettings.displayMode
+        }
         
-        let displayMode = DisplayMode(rawValue: selectedBoard.getDisplayMode())!
         
         fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
     }
@@ -714,8 +729,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         lockSwitch.isOn = selectedBoard.getIsLocked()
         lockOrUnlockFretboard(lockSwitch)
         
-        rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
-        accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
+        
+        //rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
+        //accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
         
         // loads doShowScalesSettings.
         if selectedBoard.doShowScales == 0 {
@@ -740,29 +756,63 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         
-        
+        loadPickerViewSelections(doShowScalesIndex: scalesTVC.doShowScales)
         updateScaleSelectionButton()
         
-        displayModePickerView.selectRow(selectedBoard.getDisplayMode(), inComponent: 0, animated: false)
+
         
         // loadUserColor
         colorButton.backgroundColor = selectedBoard.getUserColor()
+    }
+    
+    // This method must be called after a new board has been selected.
+    func loadPickerViewSelections(doShowScalesIndex: Int) {
+       
+        var scaleOrChordSelections = RootScaleAndDisplaySelections()
+        
+        switch doShowScalesIndex {
+        case 0:
+            scaleOrChordSelections = selectedBoard.scaleSettings
+        case 1:
+            scaleOrChordSelections = selectedBoard.chordSettings
+        default:
+            scaleOrChordSelections = selectedBoard.basicChordSettings
+        }
+    
+        if let rootRow = arrayOfRootNotes.index(of: scaleOrChordSelections.root) {
+            // adding 7 to not be in at the top of the root pickerview.
+            // There are several levels of selection notes.
+            rootPickerView.selectRow(rootRow + 7, inComponent: 0, animated: true)
+        } else {
+            // 11 corresponds to E
+            rootPickerView.selectRow(11, inComponent: 0, animated: true)
+        }
+        
+        if let accidentalRow = arrayOfAccidentals.index(of: scaleOrChordSelections.accidental) {
+            accidentalPickerView.selectRow(accidentalRow, inComponent: 0, animated: true)
+        } else {
+            accidentalPickerView.selectRow(0, inComponent: 0, animated: true)
+        }
+        
+        displayModePickerView.selectRow(scaleOrChordSelections.displayMode.rawValue, inComponent: 0, animated: true)
+        
+
     }
     
     func updateScaleSelectionButton() {
         // get the indexPath from the selected board which was selected prior to this function being called.
         //let indexPath = selectedBoard.doShowScales == 0 ? selectedBoard.scaleIndexPath : selectedBoard.chordIndexPath
        
-        var row = 0
+        var scaleOrChord = ""
         
         if selectedBoard.doShowScales == 0 {
-            row = selectedBoard.scaleSelectedRow
+            scaleOrChord = selectedBoard.scaleSettings.scaleOrChord
         }
         else if selectedBoard.doShowScales == 1 {
-            row = selectedBoard.chordSelectedRow
+            scaleOrChord = selectedBoard.chordSettings.scaleOrChord
         }
         else {
-            row = selectedBoard.basicChordSelectedRow
+            scaleOrChord = selectedBoard.basicChordSettings.scaleOrChord
         }
         
         
@@ -771,7 +821,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         //
         
         // Set the scalesTVC.selectedScale string to match the indexPath pulled from the selected Board.
-        scalesTVC.updateSelectedScaleOrChord(index: row)
+        scalesTVC.updateSelectedScaleOrChord(scaleOrChord: scaleOrChord)
         scalesTVC.selectSavedRow()
         // Upate the title.
         scaleSelectionButton.setTitle(scalesTVC.getTitleOfSelection(), for: .normal)
@@ -1011,23 +1061,48 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         
         if pickerView == displayModePickerView {
-            selectedBoard.setDisplayMode(index: row)
+            if scalesTVC.doShowScales == 0 {
+                selectedBoard.scaleSettings.displayMode = DisplayMode(rawValue: row)!
+            }
+            else if scalesTVC.doShowScales == 1 {
+                selectedBoard.chordSettings.displayMode = DisplayMode(rawValue: row)!
+            }
         
             updateFretboardView()
         }
         else {
             switch pickerView {
             case rootPickerView:
-                selectedBoard.rootNote = row
+                // If showing scales
+                if scalesTVC.doShowScales == 0 {
+                    selectedBoard.scaleSettings.root = arrayOfRootNotes[row]
+                }
+                
+                // If showing chords,
+                else if scalesTVC.doShowScales == 1 {
+                    selectedBoard.chordSettings.root = arrayOfRootNotes[row]
+                }
+                    
+                // If showing basic chords, this function is never called.
+                
+                
             case accidentalPickerView:
-                selectedBoard.accidental = row
+                if scalesTVC.doShowScales == 0 {
+                    selectedBoard.scaleSettings.accidental = arrayOfAccidentals[row]
+                }
+                else if scalesTVC.doShowScales == 1 {
+                    selectedBoard.chordSettings.accidental = arrayOfAccidentals[row]
+                }
             default:
                 print("\(#function): Error: pickerView selection was not rootPickerView or accidentalPickerView")
             }
                 addNotesAction()
- 
         }
+        
+        // updated SelectedBoard scale, chord, or basicChord settings.
+        
     }
+    
 
     
     //###################################
@@ -1240,22 +1315,22 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     //###########################
     // scalesTVCDelegate Method
-    func scaleChanged(text: String, row: Int) {
+    func scaleChanged(scaleOrChord: String) {
         
         // print(#function) // Displays function when called.
-        scaleSelectionButton.setTitle(text, for: .normal)
+        scaleSelectionButton.setTitle(scaleOrChord, for: .normal)
         scaleSelectionButton.setNeedsDisplay()
         
         if scalesTVC.doShowScales == 0 {
-            selectedBoard.scaleSelectedRow = row
+            selectedBoard.scaleSettings.scaleOrChord = scaleOrChord
         }
             
         else if scalesTVC.doShowScales == 1 {
-            selectedBoard.chordSelectedRow = row
+            selectedBoard.chordSettings.scaleOrChord = scaleOrChord
         }
             
         else {
-            selectedBoard.basicChordSelectedRow = row
+            selectedBoard.basicChordSettings.scaleOrChord = scaleOrChord
         }
         addNotesAction()
     }
