@@ -6,9 +6,38 @@
 //  Copyright © 2018 Gire. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class RootScaleAndDisplaySelections {
+class RootScaleAndDisplaySelections: NSObject, NSCoding {
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(root as String? , forKey: "root")
+        aCoder.encode(accidental as String? , forKey: "accidental")
+        aCoder.encode(scaleOrChord as String?, forKey: "scaleOrChord")
+        
+        let rawDisplayMode = displayMode.rawValue
+        aCoder.encode(rawDisplayMode as Int?, forKey: "rawDisplayMode")
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        if let root = aDecoder.decodeObject(forKey: "root") as? String {
+            self.root = root
+        }
+        if let accidental = aDecoder.decodeObject(forKey: "accidental") as? String {
+            self.accidental = accidental
+        } 
+        if let scaleOrChord = aDecoder.decodeObject(forKey: "scaleOrChord") as? String {
+            self.scaleOrChord = scaleOrChord
+        }
+        
+        if let rawDisplayMode = aDecoder.decodeObject(forKey: "rawDisplayMode") as? Int {
+            if let displayMode = DisplayMode(rawValue: rawDisplayMode) {
+                self.displayMode = displayMode
+            }
+        }
+    }
+    
     var root = ""
     var accidental = ""
     var scaleOrChord = ""
@@ -21,7 +50,8 @@ class RootScaleAndDisplaySelections {
         self.scaleOrChord = scaleOrChord
         self.displayMode = displayMode
     }
-    init() {
-        
+   
+    override convenience init() {
+        self.init(root: "", accidental: "", scaleOrChord: "", displayMode: DisplayMode.notes)
     }
 }

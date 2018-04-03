@@ -1066,6 +1066,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             }
             else if scalesTVC.doShowScales == 1 {
                 selectedBoard.chordSettings.displayMode = DisplayMode(rawValue: row)!
+            } else if scalesTVC.doShowScales == 2 {
+                selectedBoard.basicChordSettings.displayMode = DisplayMode(rawValue: row)!
             }
         
             updateFretboardView()

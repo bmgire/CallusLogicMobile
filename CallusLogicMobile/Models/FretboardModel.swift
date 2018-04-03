@@ -46,11 +46,10 @@ class FretboardModel: NSObject, NSCoding {
         for index in 0...77 {
             aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
-    /* aCoder.encode(rootNote as Int?, forKey: "rootNote")
-        aCoder.encode(accidental as Int?, forKey: "accidental")
-        aCoder.encode(scaleSelectedRow as Int?, forKey: "scaleSelectedRow")
-        aCoder.encode(chordSelectedRow as Int?, forKey: "chordSelectedRow")
-        aCoder.encode(basicChordSelectedRow as Int?, forKey: "basicChordSelectedRow") */
+        
+        aCoder.encode(scaleSettings, forKey: "scaleSettings")
+        aCoder.encode(chordSettings, forKey: "chordSettings")
+        aCoder.encode(basicChordSettings, forKey: "basicChordSettings")
         
         aCoder.encode(allowsCustomizations as Bool?, forKey: "allowsCustomizations")
         aCoder.encode(doShowScales as Int?, forKey: "showsScales")
@@ -76,6 +75,16 @@ class FretboardModel: NSObject, NSCoding {
             }
         }
 
+        if let scaleSettings = aDecoder.decodeObject(forKey: "scaleSettings") as? RootScaleAndDisplaySelections {
+            self.scaleSettings = scaleSettings
+        }
+        if let chordSettings = aDecoder.decodeObject(forKey: "chordSettings") as? RootScaleAndDisplaySelections {
+            self.chordSettings = chordSettings
+        }
+        
+        if let basicChordSettings = aDecoder.decodeObject(forKey: "basicChordSettings") as? RootScaleAndDisplaySelections {
+            self.basicChordSettings = basicChordSettings
+        }
         
         if let allowsCustomizations = aDecoder.decodeObject(forKey: "allowsCustomizations") as? Bool {
             self.allowsCustomizations = allowsCustomizations
