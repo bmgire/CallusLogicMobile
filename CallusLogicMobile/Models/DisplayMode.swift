@@ -8,11 +8,14 @@
 
 import Foundation
 
-enum DisplayMode: Int {
-    case notes = 0
-    case fretNumbers
-    case intervals
-    case chordFingers
-    case numbers0to11
-    case numbers0to36
+enum DisplayMode: String {
+    case notes = "Notes" //
+    case fretNumbers = "Fret Numbers"
+    case intervals = "Intervals"
+    case chordFingers = "Chord Fingers"
+    case numbers0to11 = "Numbers 0-11"
+    case numbers0to36 = "Numbers 0-36"
 }
+
+
+//["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]

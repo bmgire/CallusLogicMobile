@@ -27,7 +27,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let toneArraysCreator = ToneArraysCreator()
     let chordCreator = ChordCreator()
     
-    let arrrayOfDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers?", "Numbers 0-11", "Numbers 0-36"]
+    let arrayOfScaleDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
+    let arrayOfChordDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     let chordFormulas = ChordFormulas()
@@ -193,10 +194,16 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // I need to reload the data based selected saved row.
         scalesTVC.selectSavedRow()
        
+        
         loadPickerViewSelections(doShowScalesIndex: scalesTVC.doShowScales)
         
         if selectedBoard.allowsCustomizations == false {
             addNotesAction()
+            
+            // Otherwise, Customizations are allowed.
+            // Only update the fretboardView to reflect the displayMode change
+        }   else {
+            updateFretboardView()
         }
         
     }
@@ -767,7 +774,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     // This method must be called after a new board has been selected.
     func loadPickerViewSelections(doShowScalesIndex: Int) {
-       
+        
+        // This reloads the data for the pickerView,
+        // the scalesTVC.doShowScales must be called for this to work.
+        displayModePickerView.reloadComponent(0)
+        
         var scaleOrChordSelections = RootScaleAndDisplaySelections()
         
         switch doShowScalesIndex {
@@ -779,6 +790,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             scaleOrChordSelections = selectedBoard.basicChordSettings
         }
     
+        
         if let rootRow = arrayOfRootNotes.index(of: scaleOrChordSelections.root) {
             // adding 7 to not be in at the top of the root pickerview.
             // There are several levels of selection notes.
@@ -793,10 +805,21 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         } else {
             accidentalPickerView.selectRow(0, inComponent: 0, animated: true)
         }
-        
-        displayModePickerView.selectRow(scaleOrChordSelections.displayMode.rawValue, inComponent: 0, animated: true)
-        
-
+        let doShowScales = scalesTVC.doShowScales
+        if doShowScales == 0 {
+            if let row = arrayOfScaleDisplayModes.index(of: selectedBoard.scaleSettings.displayMode.rawValue) {
+                displayModePickerView.selectRow(row, inComponent: 0, animated: true)
+            }
+            
+        } else  if doShowScales == 1 {
+            if let row = arrayOfChordDisplayModes.index(of: selectedBoard.chordSettings.displayMode.rawValue) {
+                displayModePickerView.selectRow(row, inComponent: 0, animated: true)
+            }
+        } else {
+            if let row = arrayOfChordDisplayModes.index(of: selectedBoard.basicChordSettings.displayMode.rawValue) {
+                displayModePickerView.selectRow(row, inComponent: 0, animated: true)
+            }
+        }
     }
     
     func updateScaleSelectionButton() {
@@ -994,7 +1017,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         case accidentalPickerView:
             return arrayOfAccidentals.count
         default:
-            return arrrayOfDisplayModes.count
+            if scalesTVC.doShowScales == 0 {
+                return arrayOfScaleDisplayModes.count
+            } else {
+                return arrayOfChordDisplayModes.count
+            }
         }
     }
     
@@ -1046,7 +1073,20 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             return attributedString
             
         default:
-            let data = arrrayOfDisplayModes[row]
+            var data = ""
+            
+
+            var rowToUse = row
+            if scalesTVC.doShowScales == 0 {
+                
+                    if rowToUse > 4 {
+                        rowToUse = 4
+                    }
+                
+                data = arrayOfScaleDisplayModes[rowToUse]
+            } else {
+                data = arrayOfChordDisplayModes[row]
+            }
             let attributedString = NSAttributedString(string: data, attributes: attributedStringKey)
             return attributedString
         }
@@ -1062,14 +1102,19 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         if pickerView == displayModePickerView {
             if scalesTVC.doShowScales == 0 {
-                selectedBoard.scaleSettings.displayMode = DisplayMode(rawValue: row)!
+                let value = arrayOfScaleDisplayModes[row]
+                selectedBoard.scaleSettings.displayMode = DisplayMode(rawValue: value)!
             }
-            else if scalesTVC.doShowScales == 1 {
-                selectedBoard.chordSettings.displayMode = DisplayMode(rawValue: row)!
-            } else if scalesTVC.doShowScales == 2 {
-                selectedBoard.basicChordSettings.displayMode = DisplayMode(rawValue: row)!
+            else {
+                let value = arrayOfChordDisplayModes[row]
+                
+                if scalesTVC.doShowScales == 1 {
+                    selectedBoard.chordSettings.displayMode = DisplayMode(rawValue: value)!
+                } else if scalesTVC.doShowScales == 2 {
+                    selectedBoard.basicChordSettings.displayMode = DisplayMode(rawValue: value)!
+                }
             }
-        
+            
             updateFretboardView()
         }
         else {

@@ -16,7 +16,7 @@ class RootScaleAndDisplaySelections: NSObject, NSCoding {
         aCoder.encode(scaleOrChord as String?, forKey: "scaleOrChord")
         
         let rawDisplayMode = displayMode.rawValue
-        aCoder.encode(rawDisplayMode as Int?, forKey: "rawDisplayMode")
+        aCoder.encode(rawDisplayMode as String?, forKey: "rawDisplayMode")
         
     }
     
@@ -31,7 +31,7 @@ class RootScaleAndDisplaySelections: NSObject, NSCoding {
             self.scaleOrChord = scaleOrChord
         }
         
-        if let rawDisplayMode = aDecoder.decodeObject(forKey: "rawDisplayMode") as? Int {
+        if let rawDisplayMode = aDecoder.decodeObject(forKey: "rawDisplayMode") as? String {
             if let displayMode = DisplayMode(rawValue: rawDisplayMode) {
                 self.displayMode = displayMode
             }
