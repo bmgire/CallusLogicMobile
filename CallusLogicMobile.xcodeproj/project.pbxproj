@@ -39,6 +39,8 @@
 		B59A8D272073E60A00223FC8 /* RootScaleAndDisplaySelections.swift in Sources */ = {isa = PBXBuildFile; fileRef = B59A8D262073E60A00223FC8 /* RootScaleAndDisplaySelections.swift */; };
 		B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */; };
 		B5C8172C2048911900C95F26 /* DisplayMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8172B2048911900C95F26 /* DisplayMode.swift */; };
+		B5E95BC32075406D0017A205 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E95BC22075406D0017A205 /* StoreKit.framework */; };
+		B5E95BC5207564C50017A205 /* UnlockProViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E95BC4207564C50017A205 /* UnlockProViewController.swift */; };
 		B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +101,8 @@
 		B59A8D262073E60A00223FC8 /* RootScaleAndDisplaySelections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScaleAndDisplaySelections.swift; sourceTree = "<group>"; };
 		B5C4CDF02050D31F0006B560 /* FBCollectionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBCollectionStore.swift; sourceTree = "<group>"; };
 		B5C8172B2048911900C95F26 /* DisplayMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMode.swift; sourceTree = "<group>"; };
+		B5E95BC22075406D0017A205 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		B5E95BC4207564C50017A205 /* UnlockProViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockProViewController.swift; sourceTree = "<group>"; };
 		B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorTVC.swift; sourceTree = "<group>"; };
 		F3C654F0994C6FC098202998 /* Pods-CallusLogicMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8FA0E987038AACA68F9F8953 /* libPods-CallusLogicMobile.a in Frameworks */,
+				B5E95BC32075406D0017A205 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +146,7 @@
 		6FD99C3DB99627BC35882759 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B5E95BC22075406D0017A205 /* StoreKit.framework */,
 				4F40DF3CFC032444B0E09A96 /* libPods-CallusLogicMobile.a */,
 			);
 			name = Frameworks;
@@ -268,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
+				B5E95BC4207564C50017A205 /* UnlockProViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -352,6 +359,11 @@
 					B536C35E1FDF855300FD886E = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 					B536C3721FDF855300FD886E = {
 						CreatedOnToolsVersion = 9.2;
@@ -476,6 +488,7 @@
 			files = (
 				B5124F20206AC47600E2F814 /* ChordShapeModel.swift in Sources */,
 				B5C4CDF12050D31F0006B560 /* FBCollectionStore.swift in Sources */,
+				B5E95BC5207564C50017A205 /* UnlockProViewController.swift in Sources */,
 				B536C3651FDF855300FD886E /* FBViewController.swift in Sources */,
 				B5786ED91FE32D3D00174544 /* FretboardModel.swift in Sources */,
 				B5786ED51FE324DE00174544 /* NSString+drawing.swift in Sources */,

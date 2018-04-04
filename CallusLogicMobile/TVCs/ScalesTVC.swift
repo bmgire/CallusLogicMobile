@@ -209,8 +209,9 @@ class ScalesTVC: UITableViewController {
         else  {
             scaleOrChord = selectedBasicChord
         }
-        delegate?.scaleChanged(scaleOrChord: scaleOrChord)
         dismiss(animated: true, completion: nil)
+        delegate?.scaleChanged(scaleOrChord: scaleOrChord)
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {

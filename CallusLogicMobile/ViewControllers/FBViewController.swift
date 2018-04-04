@@ -42,6 +42,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let pinkColor = UIColor(red: 1, green: 0.5, blue: 0.5, alpha: 1)
     let sixTonesController = SixTones()
     
+    //###################################
+    var allowsPro: Bool!
     
     //###################################
     // Array Variables
@@ -1362,8 +1364,39 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     //###########################
     // scalesTVCDelegate Method
+    
+    let arrayOfSampleScalesAndChords = ["Chromatic Scale", "Minor Pentatonic Scale", "Major Chord (v1)", "Major Chord (v2)",
+                                        "A Chord", "Am Chord", "A7 Chord"]
+   
+   // let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    //var controller = UnlockProViewController()
+    
     func scaleChanged(scaleOrChord: String) {
         
+        if allowsPro == false {
+            
+            // check that a valid selection was made,
+            if arrayOfSampleScalesAndChords.contains(scaleOrChord) {
+                updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
+            }
+            else {
+                // Present Store Modally.
+                print("Pay to unlock Pro")
+                
+                if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
+                        self.present(controller, animated: true, completion: nil)
+                }
+                
+                
+            }
+            
+            
+        } else {
+            updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
+        }
+    }
+    
+    func updateScaleButtonAndAddNotes(scaleOrChord: String) {
         // print(#function) // Displays function when called.
         scaleSelectionButton.setTitle(scaleOrChord, for: .normal)
         scaleSelectionButton.setNeedsDisplay()
@@ -1381,6 +1414,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         addNotesAction()
     }
+
     
     //###########################
     // colorSelectorTVCDelegate Method
