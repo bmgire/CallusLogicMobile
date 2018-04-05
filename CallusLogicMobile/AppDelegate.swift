@@ -9,8 +9,11 @@
 import UIKit
 import StoreKit
 
+
+
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, SKProductsRequestDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
    
     
 
@@ -26,61 +29,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKProductsRequestDelegate
     // This needs to be saved
     var allowsPro = false
     
+    
+  /*
+    //let numberFormatter = NumberFormatter()
+    var formattedPrice = ""
+    
+    
     // This product request likely needs to be injected into the
     var productRequest: SKProductsRequest!
     
-    func launchProOrLocked() {
-        if allowsPro == false {
-            // check the appStore for a receipt,
-            let request = SKReceiptRefreshRequest()
-            request.delegate = self
-            request.start()
-            
-            
-           
-            // if there is a valid receipt, update bool.
-            // Otherwise, don't update the bool. launch app as is.
-        }
-    }
+    var product: SKProduct!
+ 
+ */
     
     
-    
-    // StoreKit method: validates the product identifier.
-    func validateProductIdentifier() {
-        let id = Set(["com.bengire.CallusLogicMobile.pro"])
-        // Initialize the productRequest with the id.
-        productRequest = SKProductsRequest(productIdentifiers: id)
-        
-        // Set self as the delegate
-        productRequest.delegate = self
-        
-        //
-        productRequest.start()
-    }
-    
-    // The products request retrieves information about valid products,
-    // along with a list of the invalid product identifiers.
-    // !!!!This does not show check if a user has already bought the product
-    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        for invalidID in response.invalidProductIdentifiers {
-            print("Error: \(#function) invalid product identifier received. Bad ID = \(invalidID)")
-        }
-        
-        // Add code to display the Store UI.
-        // Display the store only if the user can make payments.
-    
-    }
 
+    
+    
+    
+    
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
         fbViewController = window!.rootViewController as! FBViewController
        
+        // This starts the request and the delegate receives the results.
+    //    if allowsPro == false {
+      //      validateProductIdentifier()
+       // }
+        
+        
+        
+        
         
         // Access the ItemsViewController and set its item store.
         fbViewController.fbCollectionStore = fbCollectionStore
-        fbViewController.allowsPro = self.allowsPro
+        fbViewController.allowsPro = allowsPro
+        
         return true
     }
 
@@ -137,6 +125,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKProductsRequestDelegate
         }
     }
     
-    
+
 }
 

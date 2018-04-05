@@ -21,6 +21,7 @@
 		B536C3781FDF855300FD886E /* CallusLogicMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3771FDF855300FD886E /* CallusLogicMobileTests.swift */; };
 		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
 		B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3901FDF86A700FD886E /* FretboardView.swift */; };
+		B53F7F9F2075B52E0061E05B /* DetectConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F7F9E2075B52E0061E05B /* DetectConnection.swift */; };
 		B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */; };
 		B552894B2061869800A27290 /* CollectionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552894A2061869800A27290 /* CollectionsTVC.swift */; };
 		B552894F2061BE7C00A27290 /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B552894E2061BE7C00A27290 /* headerView.xib */; };
@@ -83,6 +84,7 @@
 		B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallusLogicMobileUITests.swift; sourceTree = "<group>"; };
 		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B536C3901FDF86A700FD886E /* FretboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardView.swift; sourceTree = "<group>"; };
+		B53F7F9E2075B52E0061E05B /* DetectConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectConnection.swift; sourceTree = "<group>"; };
 		B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesTVC.swift; sourceTree = "<group>"; };
 		B552894A2061869800A27290 /* CollectionsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTVC.swift; sourceTree = "<group>"; };
 		B552894E2061BE7C00A27290 /* headerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = headerView.xib; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			children = (
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
 				B5E95BC4207564C50017A205 /* UnlockProViewController.swift */,
+				B53F7F9E2075B52E0061E05B /* DetectConnection.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				B57E51EE206D688300615DD6 /* BasicChordFormulas.swift in Sources */,
 				B55D51FB1FE1FBF800CB5F11 /* NoteView.swift in Sources */,
 				B5786EDA1FE32D3D00174544 /* NoteModel.swift in Sources */,
+				B53F7F9F2075B52E0061E05B /* DetectConnection.swift in Sources */,
 				B57E51F0206D6A3900615DD6 /* BasicChordModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
 				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
