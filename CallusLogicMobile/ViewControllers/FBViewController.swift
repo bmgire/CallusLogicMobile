@@ -8,6 +8,7 @@
 
 import UIKit
 import AudioKit
+import StoreKit
 
 
 class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate, CollectionsTVCDelegate {
@@ -44,8 +45,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let sixTonesController = SixTones()
     
     //###################################
-    var allowsPro: Bool!
-    var formattedPrice = ""
+  
     //###################################
     // Array Variables
     //############
@@ -108,7 +108,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
     let collectionsTVC = CollectionsTVC()
-    
+    let productStore = ProductStore()
     
     
 
@@ -537,6 +537,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // This assigns references to the modelIndex and the collectionStore in the CollectionsTVC. 
         collectionsTVC.collectionStore = fbCollectionStore
         collectionsTVC.delegate = self
+        
+        productStore.fbCollectionStore = fbCollectionStore
     }
     
     func hideOrShowEditTableViewButton() {
@@ -1359,7 +1361,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //###########################
     // scalesTVCDelegate Method
     
-    let arrayOfSampleScalesAndChords = ["Chromatic Scale", "Minor Pentatonic Scale", "Major Chord (v1)", "Major Chord (v2)",
+    let arrayOfSampleScalesAndChords = ["Chromatic Scale", "Minor Pentatonic Scale","Major Pentatonic Scale", "Major Chord (v1)", "Major Chord (v2)",
                                         "A Chord", "Am Chord", "A7 Chord"]
    
    // let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -1367,33 +1369,64 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     func scaleChanged(scaleOrChord: String) {
         
-        if allowsPro == false {
+        if fbCollectionStore.allowsPro == false {
             
             // check that a valid selection was made,
             if arrayOfSampleScalesAndChords.contains(scaleOrChord) {
                 updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
             }
             else {
-                // Present Store Modally.
-               
-                // If there is an internet connection. 
-                if currentReachabilityStatus != .notReachable {
+                // Check if the user can make payments
+                if SKPaymentQueue.canMakePayments() == false {
+                    // If not
+                    // Display an alert telling user the app store is not available.
+                    displayCantMakePaymentsAlert ()
                     
-                    if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
-                        
-                        self.present(controller, animated: true, completion: nil)
+                    // Otherwise payments are allowed.
+                }   else {
+                    
+                    // Check for an internet connection
+                    // If there is an internet connection.
+                    if currentReachabilityStatus != .notReachable {
+                        // get pricing and load into UnlockProVC.
+                        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
+                           controller.productStore = productStore
+                           productStore.delegate = controller
+                            self.present(controller, animated: true, completion: nil)
+                        }
+                    } else {
+                        displayNoInternetAlert()
                     }
-                } else {
-                    print("Error connecting to internet")
                 }
-                
-                
             }
-            
-            
         } else {
             updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
         }
+    }
+    
+    func displayNoInternetAlert() {
+        let title = "No Network Connection"
+        let message = "We are currently unable to connect to the App Store. Please check your network connection."
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        let dismissInternetAlertAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+        ac.addAction(dismissInternetAlertAction)
+        
+        present(ac, animated: true, completion: nil)
+        
+    }
+    
+    func displayCantMakePaymentsAlert () {
+        let title = "App Store Unavailable"
+        let message = "Payments cannot be made at this time. Please check your restriction settings."
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        let dismissInternetAlertAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+        ac.addAction(dismissInternetAlertAction)
+        
+        present(ac, animated: true, completion: nil)
     }
     
     func updateScaleButtonAndAddNotes(scaleOrChord: String) {

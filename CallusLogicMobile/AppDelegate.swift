@@ -23,43 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let fbCollectionStore = FBCollectionStore()
     
-    // ##################################################
-    // Store and Purchasing Variables
-    
-    // This needs to be saved
-    var allowsPro = false
-    
-    
-  /*
-    //let numberFormatter = NumberFormatter()
-    var formattedPrice = ""
-    
-    
-    // This product request likely needs to be injected into the
-    var productRequest: SKProductsRequest!
-    
-    var product: SKProduct!
- 
- */
-    
-    
-
-    
-    
-    
-    
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
         fbViewController = window!.rootViewController as! FBViewController
-       
-        // This starts the request and the delegate receives the results.
-    //    if allowsPro == false {
-      //      validateProductIdentifier()
-       // }
+
         
         
         
@@ -67,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Access the ItemsViewController and set its item store.
         fbViewController.fbCollectionStore = fbCollectionStore
-        fbViewController.allowsPro = allowsPro
         
         return true
     }
