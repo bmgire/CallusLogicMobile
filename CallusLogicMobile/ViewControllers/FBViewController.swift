@@ -9,6 +9,7 @@
 import UIKit
 import AudioKit
 
+
 class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPopoverPresentationControllerDelegate, ScalesTVCDelegate, ColorSelectorTVCDelegate, CollectionsTVCDelegate {
 
 
@@ -44,7 +45,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     //###################################
     var allowsPro: Bool!
-    
+    var formattedPrice = ""
     //###################################
     // Array Variables
     //############
@@ -57,13 +58,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     // If I exited the views bounds, I can can update it,
     // if I didn't leave the bounds, I cannot update.
     var dictOfTouchedNoteViewNumbers = [Int: Bool]()
-
-    // FBCollectionModel needs to be provided by the delegate.
-    //var fbCollectionModel: FBCollectionModel!
-    //var fbCollectionToLoadIndex = 0
-    
- //   var fbCollectionAndIndex = FBCollectionAndIndex()
-    
     
     // The index of the selected Collection.
     var selectedCollection: FBCollectionModel!
@@ -1381,10 +1375,16 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             }
             else {
                 // Present Store Modally.
-                print("Pay to unlock Pro")
-                
-                if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
+               
+                // If there is an internet connection. 
+                if currentReachabilityStatus != .notReachable {
+                    
+                    if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
+                        
                         self.present(controller, animated: true, completion: nil)
+                    }
+                } else {
+                    print("Error connecting to internet")
                 }
                 
                 
@@ -1461,8 +1461,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // Select the correct board and load the fretboard view.
         
     }
+}
 
     
- }
+
 
 
