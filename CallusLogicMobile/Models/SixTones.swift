@@ -42,7 +42,12 @@ class SixTones {
     func rampUpStart(_ index: Int, zeroTo36Number: Int) {
         if allowsRampUp {
             let os = arrayOfOscillators[index]
-            os.rampTime = 0.01
+           /* if os.rampTime == 0.8 {
+                os.rampTime = 0
+                os.amplitude = 0
+            } */
+            
+            os.rampTime = 0.005
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
         }
@@ -82,7 +87,7 @@ class SixTones {
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
-            os.amplitude = amplitude * 0.5
+            os.amplitude = amplitude * 0.54
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {

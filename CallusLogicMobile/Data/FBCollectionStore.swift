@@ -14,6 +14,8 @@ class FBCollectionStore {
     var arrayOfFBCollections = [FBCollectionModel]()
     var savedCollectionIndex = 0
     
+    var allowsPro = false
+    
     
     // the return value is a URL
     let collectionArchiveURL: URL = {
@@ -34,6 +36,15 @@ class FBCollectionStore {
         return documentDirectory.appendingPathComponent("fbCollections.savedCollectionIndex")
     }()
     
+    let allowsProURL: URL = {
+        // searchy for  the URL for the .documentDirectory in the .userDomainMask location
+        // Note, in ios: the 2nd argument .userDomainMask is always the same. always use .userDomainMask.
+        let documentsDirectories = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = documentsDirectories.first!
+        // append "items.archive" and return the documentDirectory.
+        return documentDirectory.appendingPathComponent("fbCollections.allowsPro")
+    }()
+    
     
     init() {
         if let archivedCollections = NSKeyedUnarchiver.unarchiveObject(withFile: collectionArchiveURL.path) as? [FBCollectionModel] {
@@ -43,14 +54,18 @@ class FBCollectionStore {
         if let savedIndex = NSKeyedUnarchiver.unarchiveObject(withFile: savedCollectionIndexURL.path) as? Int {
             savedCollectionIndex = savedIndex
         }
+        
+        if let allowsPro = NSKeyedUnarchiver.unarchiveObject(withFile: allowsProURL.path) as? Bool {
+            self.allowsPro = allowsPro
+        }
     }
     
     func saveChanges()-> Bool {
         //print("Saving collections to: \(collectionArchiveURL.path)")
         let saveCollections  = NSKeyedArchiver.archiveRootObject(arrayOfFBCollections, toFile: collectionArchiveURL.path)
         let saveIndex = NSKeyedArchiver.archiveRootObject(savedCollectionIndex, toFile: savedCollectionIndexURL.path)
-        
-        if saveCollections && saveIndex {
+        let saveAllowsPro = NSKeyedArchiver.archiveRootObject(allowsPro, toFile: allowsProURL.path)
+        if saveCollections && saveIndex && saveAllowsPro {
             return true
         } else {
             return false
@@ -84,4 +99,5 @@ class FBCollectionStore {
         // Insert item in array at new location
        arrayOfFBCollections.insert(movedItem, at: toIndex)
     }
+
 }

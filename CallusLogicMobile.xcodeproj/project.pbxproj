@@ -22,6 +22,7 @@
 		B536C3831FDF855300FD886E /* CallusLogicMobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3821FDF855300FD886E /* CallusLogicMobileUITests.swift */; };
 		B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B536C3901FDF86A700FD886E /* FretboardView.swift */; };
 		B53F7F9F2075B52E0061E05B /* DetectConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53F7F9E2075B52E0061E05B /* DetectConnection.swift */; };
+		B5488B3F207677E60069479E /* ProductStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5488B3E207677E60069479E /* ProductStore.swift */; };
 		B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */; };
 		B552894B2061869800A27290 /* CollectionsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B552894A2061869800A27290 /* CollectionsTVC.swift */; };
 		B552894F2061BE7C00A27290 /* headerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B552894E2061BE7C00A27290 /* headerView.xib */; };
@@ -85,6 +86,7 @@
 		B536C3841FDF855300FD886E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B536C3901FDF86A700FD886E /* FretboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardView.swift; sourceTree = "<group>"; };
 		B53F7F9E2075B52E0061E05B /* DetectConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectConnection.swift; sourceTree = "<group>"; };
+		B5488B3E207677E60069479E /* ProductStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
 		B54AFAFE204F3F7D00E8267B /* ScalesTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScalesTVC.swift; sourceTree = "<group>"; };
 		B552894A2061869800A27290 /* CollectionsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTVC.swift; sourceTree = "<group>"; };
 		B552894E2061BE7C00A27290 /* headerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = headerView.xib; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B5786ED31FE324DE00174544 /* NSString+drawing.swift */,
+				B53F7F9E2075B52E0061E05B /* DetectConnection.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -277,7 +280,7 @@
 			children = (
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
 				B5E95BC4207564C50017A205 /* UnlockProViewController.swift */,
-				B53F7F9E2075B52E0061E05B /* DetectConnection.swift */,
+				B5488B3E207677E60069479E /* ProductStore.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */,
 				B56EF3F92069636B000AAAAD /* ChordCreator.swift in Sources */,
 				B536C3911FDF86A800FD886E /* FretboardView.swift in Sources */,
+				B5488B3F207677E60069479E /* ProductStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

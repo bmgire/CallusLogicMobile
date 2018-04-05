@@ -5,7 +5,7 @@
 //  Created by Ben Gire on 4/4/18.
 //  Copyright © 2018 Gire. All rights reserved.
 //
-// From: https://stackoverflow.com/questions/39558868/check-internet-connection-ios-10
+// Got code from: https://stackoverflow.com/questions/39558868/check-internet-connection-ios-10
 
 
 import SystemConfiguration
