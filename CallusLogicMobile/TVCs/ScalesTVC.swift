@@ -12,13 +12,17 @@ protocol ScalesTVCDelegate: class {
     func scaleChanged(scaleOrChord: String)
 }
 
-class ScalesTVC: UITableViewController {
+class ScalesTVC: UITableViewController, UnlockProViewControllerDelegate {
 
+    
+
+    var fbCollectionStore: FBCollectionStore!
     
     var selectedScale = "Minor Pentatonic Scale"
     var selectedChord = "Minor Chord (v1)"
     var selectedBasicChord = "E Chord"
     
+    var arrayOfSampleScalesAndChords = [String]()
     var arrayOfScaleNames = [String]()
     var arrayOfChordNames: [String]!
     var arrayOfBasicChordNames: [String]!
@@ -181,6 +185,17 @@ class ScalesTVC: UITableViewController {
         }   else {
             cell.textLabel?.text = arrayOfBasicChordNames[indexPath.row]
         }
+        
+        if fbCollectionStore.allowsPro == false {
+            
+            if arrayOfSampleScalesAndChords.contains((cell.textLabel?.text)!) == false {
+                cell.backgroundColor = UIColor.lightGray
+            } else {
+                cell.backgroundColor = UIColor.white
+            }
+        } else {
+            cell.backgroundColor = UIColor.white
+        }
         return cell
         
     }
@@ -236,6 +251,12 @@ class ScalesTVC: UITableViewController {
            
         }
          tableView.selectRow(at: IndexPath(row: row, section: 0) , animated: true, scrollPosition: .middle)
+    }
+    
+    // UnlockProViewController Delegate.
+    func reloadData() {
+        tableView.reloadData()
+        selectSavedRow()
     }
     
 

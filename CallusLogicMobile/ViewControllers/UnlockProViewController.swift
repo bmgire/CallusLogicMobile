@@ -9,26 +9,20 @@
 import UIKit
 import StoreKit
 
-
+protocol UnlockProViewControllerDelegate {
+    func reloadData()
+}
 
 
 class UnlockProViewController: UIViewController, ProductStoreDelegate {
 
-    
-   
-    
-
-    
-
-    
- 
-    
     
     var formattedPrice = "" 
     var allowsPro = false
     
     var productStore: ProductStore!
  
+    var delegate: UnlockProViewControllerDelegate?
     
     // This product request likely needs to be injected into the
     var productRequest: SKProductsRequest!
@@ -91,7 +85,8 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
     
     func proIsNowUnlocked() {
         unlockOrRestoreProLabel.isHidden = true
-        proIsNowUnlockedLabel.isHidden = false 
+        proIsNowUnlockedLabel.isHidden = false
+        delegate?.reloadData()
     }
     
     func nothingToRestore() {
