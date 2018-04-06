@@ -3,7 +3,7 @@
 
 target 'CallusLogicMobile' do
 #  use_frameworks!
-  pod 'AudioKit', '~> 4.1'
+  pod 'AudioKit'
 
   
 end
