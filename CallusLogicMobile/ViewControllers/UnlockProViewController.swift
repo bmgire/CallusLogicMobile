@@ -13,6 +13,8 @@ import StoreKit
 
 
 class UnlockProViewController: UIViewController, ProductStoreDelegate {
+
+    
    
     
 
@@ -32,6 +34,11 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
     var productRequest: SKProductsRequest!
     
     var product: SKProduct!
+    
+    @IBOutlet var orLabel: UILabel!
+    @IBOutlet var noPreviousPurchasesFound: UILabel!
+    
+    @IBOutlet var restorePurchaseButton: UIButton!
     
     @IBOutlet var proIsNowUnlockedLabel: UILabel!
     
@@ -87,5 +94,9 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
         proIsNowUnlockedLabel.isHidden = false 
     }
     
-    
+    func nothingToRestore() {
+        restorePurchaseButton.isHidden = true
+        orLabel.isHidden = true
+        noPreviousPurchasesFound.isHidden = false
+    }
 }
