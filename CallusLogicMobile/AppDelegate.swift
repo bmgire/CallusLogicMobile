@@ -15,27 +15,24 @@ import StoreKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
    
+    let fbCollectionStore = FBCollectionStore()
+    let productStore = ProductStore()
     
-
-    var fbViewController = FBViewController()
-    
+    var fbViewController: FBViewController!
     var window: UIWindow?
     
-    let fbCollectionStore = FBCollectionStore()
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
         fbViewController = window!.rootViewController as! FBViewController
-
-        
-        
-        
-        
-        
         // Access the ItemsViewController and set its item store.
         fbViewController.fbCollectionStore = fbCollectionStore
+        fbViewController.productStore = productStore
+        
+        productStore.registerTransactionObserver()
         
         return true
     }
@@ -92,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Could not save any of the Items")
         }
     }
+    
     
 
 }
