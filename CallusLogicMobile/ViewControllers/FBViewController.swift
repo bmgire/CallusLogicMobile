@@ -1368,42 +1368,50 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     func scaleChanged(scaleOrChord: String) {
         
         if fbCollectionStore.allowsPro == false {
-            // undo the scale/chord selection in ScalesTVC.
-            if let previousSelection = scaleSelectionButton.titleLabel?.text {
-                scalesTVC.updateSelectedScaleOrChord(scaleOrChord: previousSelection)
-                scalesTVC.selectSavedRow()
-            }
             
-            
-            // check that a valid selection was made,
-            if arrayOfSampleScalesAndChords.contains(scaleOrChord) {
-                updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
-            }
-            else {
-                // Check if the user can make payments
-                if SKPaymentQueue.canMakePayments() == false {
-                    // If not
-                    // Display an alert telling user the app store is not available.
-                    displayCantMakePaymentsAlert ()
-                    
-                    // Otherwise payments are allowed.
-                }   else {
-                    
-                    // Check for an internet connection
-                    // If there is an internet connection.
-                    if currentReachabilityStatus != .notReachable {
-                        // get pricing and load into UnlockProVC.
-                        if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
-                           controller.productStore = productStore
-                           productStore.delegate = controller
-                            self.present(controller, animated: true, completion: nil)
+           // let didRestore = productStore.swiftyRestorePreviousPurchases()
+           // if didRestore == false {
+                
+                
+                
+                // undo the scale/chord selection in ScalesTVC.
+                if let previousSelection = scaleSelectionButton.titleLabel?.text {
+                    scalesTVC.updateSelectedScaleOrChord(scaleOrChord: previousSelection)
+                    scalesTVC.selectSavedRow()
+                }
+                
+                
+                // check that a valid selection was made,
+                if arrayOfSampleScalesAndChords.contains(scaleOrChord) {
+                    updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
+                }
+                else {
+                    // Check if the user can make payments
+                    if SKPaymentQueue.canMakePayments() == false {
+                        // If not
+                        // Display an alert telling user the app store is not available.
+                        displayCantMakePaymentsAlert ()
+                        
+                        // Otherwise payments are allowed.
+                    }   else {
+                        
+                        // Check for an internet connection
+                        // If there is an internet connection.
+                        if currentReachabilityStatus != .notReachable {
+                            // get pricing and load into UnlockProVC.
+                            if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
+                                controller.productStore = productStore
+                                productStore.delegate = controller
+                                self.present(controller, animated: true, completion: nil)
+                            }
+                        } else {
+                            displayNoInternetAlert()
                         }
-                    } else {
-                        displayNoInternetAlert()
                     }
                 }
             }
-        } else {
+     //   }
+        else {
             updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
         }
     }

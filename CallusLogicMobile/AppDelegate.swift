@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fbViewController.fbCollectionStore = fbCollectionStore
         fbViewController.productStore = productStore
         
-        productStore.registerTransactionObserver()
+        productStore.swiftyRegisterTransactionObserver()
         
         return true
     }
@@ -42,9 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         
         // stop playing notes if the application will resign.
-        fbViewController.sixTonesController.stopPlayingAllNotes()
-
-        
+        fbViewController.sixTonesController.stopPlayingAllNotes() 
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
