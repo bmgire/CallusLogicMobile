@@ -13,11 +13,13 @@ import StoreKit
 
 
 class UnlockProViewController: UIViewController, ProductStoreDelegate {
+   
     
+
     
-  
+
     
-    
+ 
     
     
     var formattedPrice = "" 
@@ -31,7 +33,9 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
     
     var product: SKProduct!
     
-
+    @IBOutlet var proIsNowUnlockedLabel: UILabel!
+    
+    @IBOutlet var unlockOrRestoreProLabel: UIView!
     @IBOutlet var priceLabel: UILabel!
     
     @IBAction func CancelUnlockPro(_ sender: UIButton) {
@@ -39,10 +43,13 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
     }
     
     @IBAction func unlockProAction(_ sender: UIButton) {
-       productStore.submitPaymentToAppStore()
-        
+       //productStore.submitPaymentToAppStore()
+        productStore.swiftyPurchasePoduct()
     }
     
+    @IBAction func restorePurchaseAction(_ sender: UIButton) {
+        productStore.swiftyRestorePreviousPurchases()
+    }
     
     
     override func viewDidLoad() {
@@ -56,8 +63,9 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        productStore.validateProductIdentifier()
-        
+           // productStore.swiftyRestorePreviousPurchases()
+            productStore.swiftyRetrieveProductsInfo()
+
     }
     
     
@@ -72,6 +80,11 @@ class UnlockProViewController: UIViewController, ProductStoreDelegate {
     
     func observePrice(currentFormattedPrice: String) {
         priceLabel.text = currentFormattedPrice
+    }
+    
+    func proIsNowUnlocked() {
+        unlockOrRestoreProLabel.isHidden = true
+        proIsNowUnlockedLabel.isHidden = false 
     }
     
     

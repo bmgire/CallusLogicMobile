@@ -13,17 +13,17 @@ import SwiftyStoreKit
 
 protocol ProductStoreDelegate {
     func observePrice(currentFormattedPrice: String)
-    func dismissVC()
+    //func dismissVC()
+    func proIsNowUnlocked()
 }
 
 
-class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class ProductStore: NSObject  /*, SKPaymentTransactionObserver  SKProductsRequestDelegate,*/  {
     
- 
-    
-    let unlockProProductID = "com.bengire.CallusLogicMobile.pro"
 
     
+    
+    let unlockProProductID = "com.bengire.CallusLogicMobile.pro"
     //var formattedPrice = ""
     var allowsPro = false
     
@@ -33,23 +33,105 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     var productReceiptRefreshRequest: SKReceiptRefreshRequest!
     
     var product: SKProduct!
+    //var localizedPrice: String!
     
     var delegate: ProductStoreDelegate?
-    
     var fbCollectionStore: FBCollectionStore!
 
+   
+    /*
+    // StoreKit method: validates the product identifier.
+    func validateProductIdentifier() {
+        
+        let id = Set([unlockProProductID])
+        // Initialize the productRequest with the id.
+        productRequest = SKProductsRequest(productIdentifiers: id)
+        
+        // Set self as the delegate
+        productRequest.delegate = self
+        
+        //
+        productRequest.start()
+    } */
     
+    
+    func swiftyRetrieveProductsInfo() {
+        SwiftyStoreKit.retrieveProductsInfo([unlockProProductID]) { result in
+            if let product = result.retrievedProducts.first {
+                self.product = product
+                
+               // self.localizedPrice = product.localizedPrice!
+                if let price = product.localizedPrice {
+                    self.delegate?.observePrice(currentFormattedPrice: price)
+                }
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                print("Invalid product identifier: \(invalidProductId)")
+            }
+            else {
+                print("Error: \(String(describing: result.error))")
+            }
+        }
+    }
+    
+   
+    /*
     func submitPaymentToAppStore() {
+       
+        
         let payment = SKMutablePayment(product: product)
         payment.quantity = 1
         // add(payment) submits to the appstore.
         SKPaymentQueue.default().add(payment)
         SKPaymentQueue.default().add(self)
-        
-        
+
+    } */
+    
+    
+    func swiftyPurchasePoduct() {
+        SwiftyStoreKit.purchaseProduct(unlockProProductID, quantity: 1, atomically: true) { result in
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+                 self.fbCollectionStore.allowsPro = true
+                 self.delegate?.proIsNowUnlocked()
+            case .error(let error):
+                switch error.code {
+                case .unknown: print("Unknown error. Please contact support")
+                case .clientInvalid: print("Not allowed to make the payment")
+                case .paymentCancelled: break
+                case .paymentInvalid: print("The purchase identifier was invalid")
+                case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                }
+            }
+        }
     }
     
     
+    
+    
+    func swiftyRestorePreviousPurchases(){
+
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                self.fbCollectionStore.allowsPro = true
+                self.delegate?.proIsNowUnlocked()
+            }
+            else {
+                print("Nothing to Restore")
+            }
+        }
+    }
+    
+    
+    /*
     // Delegate method for SKPaymentTransactionObserver
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
@@ -85,11 +167,11 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                     // Allow them to go back to the app and use the locked version until the payment is processed.
                 }
             }
-    }
+    } */
     
 
     
-
+/*
     func formatProductPrice() {
         let numberFormatter = NumberFormatter()
         
@@ -99,23 +181,10 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         if let price = numberFormatter.string(from: product.price) {
             delegate?.observePrice(currentFormattedPrice: price)
         }
-    }
+    } */
     
-    
-    // StoreKit method: validates the product identifier.
-    func validateProductIdentifier() {
-        
-        let id = Set([unlockProProductID])
-        // Initialize the productRequest with the id.
-        productRequest = SKProductsRequest(productIdentifiers: id)
-        
-        // Set self as the delegate
-        productRequest.delegate = self
-        
-        //
-        productRequest.start()
-    }
-    
+
+   /*
     // The products request retrieves information about valid products,
     // along with a list of the invalid product identifiers.
     // !!!!This does not show check if a user has already bought the product
@@ -133,13 +202,14 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         }
         
         formatProductPrice()
-    }
+    } */
     
+    /*
     func refreshAppReceipt() {
         productReceiptRefreshRequest = SKReceiptRefreshRequest()
         productReceiptRefreshRequest.delegate = self
         productReceiptRefreshRequest.start()
-    }
+    } */
     
     
     
@@ -149,7 +219,7 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     
     //Register a Transation Observer.
     // call this in appDelegate-- app did finish launching.
-    func registerTransactionObserver() {
+    func swiftyRegisterTransactionObserver() {
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             for purchase in purchases {
                 switch purchase.transaction.transactionState {
@@ -166,77 +236,23 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         }
     }
     
-    
-    func retrieveProductsInfo() {
-        SwiftyStoreKit.retrieveProductsInfo([unlockProProductID]) { result in
-            if let product = result.retrievedProducts.first {
-                let priceString = product.localizedPrice!
-                print("Product: \(product.localizedDescription), price: \(priceString)")
-            }
-            else if let invalidProductId = result.invalidProductIDs.first {
-                print("Invalid product identifier: \(invalidProductId)")
-            }
-            else {
-                print("Error: \(String(describing: result.error))")
-            }
-        }
-    }
-    
-    func purchaseAPoduct() {
-        SwiftyStoreKit.purchaseProduct(unlockProProductID, quantity: 1, atomically: true) { result in
-            switch result {
-            case .success(let purchase):
-                print("Purchase Success: \(purchase.productId)")
-            case .error(let error):
-                switch error.code {
-                case .unknown: print("Unknown error. Please contact support")
-                case .clientInvalid: print("Not allowed to make the payment")
-                case .paymentCancelled: break
-                case .paymentInvalid: print("The purchase identifier was invalid")
-                case .paymentNotAllowed: print("The device is not allowed to make the payment")
-                case .storeProductNotAvailable: print("The product is not available in the current storefront")
-                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
-                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
-                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
-                }
-            }
-        }
-    }
 
-    func restorePreviousPurchases() {
-        SwiftyStoreKit.restorePurchases(atomically: true) { results in
-            if results.restoreFailedPurchases.count > 0 {
-                print("Restore Failed: \(results.restoreFailedPurchases)")
-            }
-            else if results.restoredPurchases.count > 0 {
-                print("Restore Success: \(results.restoredPurchases)")
-            }
-            else {
-                print("Nothing to Restore")
-            }
-        }
-    }
     
-    
-    // I put this in a function be I'll probably include in a different receipt later.
-    func fetchLocalReceipt()  {
-        let receiptData = SwiftyStoreKit.localReceiptData
-        let receiptString = receiptData?.base64EncodedString(options: [])
-    }
-    
-    func fetchEncryptedReceipt() {
+    func swiftyFetchEncryptedReceipt() {
         SwiftyStoreKit.fetchReceipt(forceRefresh: true) { result in
             switch result {
             case .success(let receiptData):
                 let encryptedReceipt = receiptData.base64EncodedString(options: [])
                 print("Fetch receipt success:\n\(encryptedReceipt)")
+                
+                
             case .error(let error):
                 print("Fetch receipt failed: \(error)")
             }
         }
     }
     
-    func verifyReceipt() {
+    func swiftyVerifyReceipt() {
         let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "your-shared-secret")
         SwiftyStoreKit.verifyReceipt(using: appleValidator, forceRefresh: false) { result in
             switch result {
@@ -249,7 +265,7 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         
     }
     
-    func verifyPurchase(){
+    func swiftyVerifyPurchase(){
         let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "your-shared-secret")
         SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
             switch result {
