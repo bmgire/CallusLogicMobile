@@ -9,6 +9,7 @@
 
 import UIKit
 import StoreKit
+import SwiftyStoreKit
 
 protocol ProductStoreDelegate {
     func observePrice(currentFormattedPrice: String)

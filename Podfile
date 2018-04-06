@@ -2,8 +2,8 @@
  platform :ios, '11.0'
 
 target 'CallusLogicMobile' do
-#  use_frameworks!
+  use_frameworks!
   pod 'AudioKit'
-
+  pod 'SwiftyStoreKit'
   
 end
