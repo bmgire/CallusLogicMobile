@@ -1370,6 +1370,12 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     func scaleChanged(scaleOrChord: String) {
         
         if fbCollectionStore.allowsPro == false {
+            // undo the scale/chord selection in ScalesTVC.
+            if let previousSelection = scaleSelectionButton.titleLabel?.text {
+                scalesTVC.updateSelectedScaleOrChord(scaleOrChord: previousSelection)
+                scalesTVC.selectSavedRow()
+            }
+            
             
             // check that a valid selection was made,
             if arrayOfSampleScalesAndChords.contains(scaleOrChord) {

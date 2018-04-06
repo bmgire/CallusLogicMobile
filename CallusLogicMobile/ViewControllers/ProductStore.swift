@@ -29,6 +29,7 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     
     // This product request likely needs to be injected into the
     var productRequest: SKProductsRequest!
+    var productReceiptRefreshRequest: SKReceiptRefreshRequest!
     
     var product: SKProduct!
     
@@ -50,15 +51,18 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     
     // Delegate method for SKPaymentTransactionObserver
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for singleTransaction in transactions {
-                let state = singleTransaction.transactionState
+        for transaction in transactions {
+                let state = transaction.transactionState
                 switch state {
                 case .purchased, .restored:
-                    let payment = singleTransaction.payment
+                    let payment = transaction.payment
                     if payment.productIdentifier == unlockProProductID
                     {
                         fbCollectionStore.allowsPro = true
-                        queue.finishTransaction(singleTransaction)
+                        
+                        
+                        
+                        queue.finishTransaction(transaction)
                         delegate?.dismissVC()
                     }
                     
@@ -69,7 +73,7 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                    break
                 // display a status update that purchasing is in progress.
                 case .failed:
-                   queue.finishTransaction(singleTransaction)
+                   queue.finishTransaction(transaction)
                 // display failed to purchase alert
 
                 // diplay a message
@@ -80,8 +84,8 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
                     // Allow them to go back to the app and use the locked version until the payment is processed.
                 }
             }
-       
     }
+    
 
     
 
@@ -99,6 +103,7 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     
     // StoreKit method: validates the product identifier.
     func validateProductIdentifier() {
+        
         let id = Set([unlockProProductID])
         // Initialize the productRequest with the id.
         productRequest = SKProductsRequest(productIdentifiers: id)
@@ -115,14 +120,24 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
     // !!!!This does not show check if a user has already bought the product
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         
-        // There should only be one product.
-        self.product = response.products[0]
+        // There is only one product.
+        for product in response.products {
+            if product.productIdentifier == unlockProProductID {
+                self.product = product
+            }
+        }
         
         for invalidID in response.invalidProductIdentifiers {
             print("Error: \(#function) invalid product identifier received. Bad ID = \(invalidID)")
         }
         
         formatProductPrice()
+    }
+    
+    func refreshAppReceipt() {
+        productReceiptRefreshRequest = SKReceiptRefreshRequest()
+        productReceiptRefreshRequest.delegate = self
+        productReceiptRefreshRequest.start()
     }
     
     // I might end up using this later... though I'm confused by who received thje info.
