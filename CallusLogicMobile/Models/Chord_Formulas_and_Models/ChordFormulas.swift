@@ -95,10 +95,10 @@ class ChordFormulas {
         createChordShapeModel(shapeName: "6 Chord (v1)",
                               arrayOfIntervals: ["root", "", "M6", "M3", "P5", ""],
                               arrayOfFingerings: ["M", "", "I", "P", "R", ""],
-                              arrayOfOpenStringFingers: ["", "I", "O", "R", "M", ""],
+                              arrayOfOpenStringFingers: ["I", "", "O", "R", "M", ""],
                               arrayOfRootNotesForOpenStringFingers: ["E#", "F"],
                               arrayOfInvalidRootNotes: ["E", "Fb"],
-                              alternateChordShapeName: "6 Chord (v2)",
+                              alternateChordShapeName: "6 Chord (v3)",
                               arpeggioToBuildChordFrom: "6 Arpeggio")
         
         createChordShapeModel(shapeName: "6 Chord (v2)",
@@ -168,7 +168,7 @@ class ChordFormulas {
                               arrayOfOpenStringFingers: ["O", "M", "O", "I", "O", "O"],
                               arrayOfRootNotesForOpenStringFingers: ["E", "Fb"],
                               arrayOfInvalidRootNotes: ["D#", "Eb"],
-                              alternateChordShapeName: "7 Chord (v2)",
+                              alternateChordShapeName: "7 Chord (v4)",
                               arpeggioToBuildChordFrom: "Dominant 7th Arpeggio")
         
         
@@ -178,7 +178,7 @@ class ChordFormulas {
                               arrayOfOpenStringFingers: ["", "O", "M", "O", "R", "O"],
                               arrayOfRootNotesForOpenStringFingers: ["A"],
                               arrayOfInvalidRootNotes: ["G#", "Ab"],
-                              alternateChordShapeName: "7 Chord (v3)",
+                              alternateChordShapeName: "7 Chord (v5)",
                               arpeggioToBuildChordFrom: "Dominant 7th Arpeggio")
         
         
@@ -236,7 +236,7 @@ class ChordFormulas {
                               arrayOfOpenStringFingers: ["", "", "O", "M", "M", "M"],
                               arrayOfRootNotesForOpenStringFingers: ["D"],
                               arrayOfInvalidRootNotes: ["C#", "Db"],
-                              alternateChordShapeName: "maj7 Chord (v4)",
+                              alternateChordShapeName: "maj7 Chord (v2)",
                               arpeggioToBuildChordFrom: "Maj7 Arpeggio")
         
         createChordShapeModel(shapeName: "maj7 Chord (v4)",
@@ -376,32 +376,35 @@ class ChordFormulas {
         //################################################
         // Major 9 Chords.
         
+        
         createChordShapeModel(shapeName: "maj9 Chord (v1)",
+                              arrayOfIntervals: [ "root", "M3", "M7", "M2", "", ""],
+                              arrayOfFingerings: ["M", "I", "R", "I", "", ""],
+                              arrayOfOpenStringFingers: ["I", "O", "R", "O", "", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["E#",  "F"],
+                              arrayOfInvalidRootNotes: ["E", "Fb"],
+                              alternateChordShapeName: "maj9 Chord (v3)",
+                              arpeggioToBuildChordFrom: "Ionian Mode")
+        
+        createChordShapeModel(shapeName: "maj9 Chord (v2)",
                               arrayOfIntervals: [  "", "root", "M3", "M7", "M2", ""],
                               arrayOfFingerings: ["", "M", "I", "P", "R", ""],
                               arrayOfOpenStringFingers: ["", "I", "O", "R", "M", ""],
                               arrayOfRootNotesForOpenStringFingers: ["A#", "Bb"],
                               arrayOfInvalidRootNotes: ["A"],
-                              alternateChordShapeName: "maj9 Chord (v2)",
+                              alternateChordShapeName: "maj9 Chord (v3)",
                               arpeggioToBuildChordFrom: "Ionian Mode")
         
-        createChordShapeModel(shapeName: "maj9 Chord (v2)",
+        createChordShapeModel(shapeName: "maj9 Chord (v3)",
                               arrayOfIntervals: [  "", "", "M7", "M3", "P5", "M2"],
                               arrayOfFingerings: ["", "", "M", "R", "I", "P"],
-                              arrayOfOpenStringFingers: ["", "", "I", "M", "O", "R"],
+                              arrayOfOpenStringFingers: ["", "", "I", "M", "O", "P"],
                               arrayOfRootNotesForOpenStringFingers: ["E", "Fb"],
                               arrayOfInvalidRootNotes: ["D#", "Eb"],
                               alternateChordShapeName: "maj9 Chord (v1)",
                               arpeggioToBuildChordFrom: "Ionian Mode")
         
-        createChordShapeModel(shapeName: "maj9 Chord (v3)",
-                              arrayOfIntervals: [  "", "", "M3", "M7", "M2", "P5"],
-                              arrayOfFingerings: ["", "", "I", "R", "M", "M"],
-                              arrayOfOpenStringFingers: ["", "", "O", "M", "I", "I"],
-                              arrayOfRootNotesForOpenStringFingers: ["A#", "Bb"],
-                              arrayOfInvalidRootNotes:  ["A"], //["G#", "Ab"],
-                              alternateChordShapeName: "maj9 Chord (v2)",
-                              arpeggioToBuildChordFrom: "Ionian Mode")
+  
         
     
         //################################################

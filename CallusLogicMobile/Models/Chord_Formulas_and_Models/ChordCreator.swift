@@ -65,8 +65,15 @@ class ChordCreator {
                 // If there is an alternate chord shape, load those settings.
                 if altChordShapeName != "" {
                     if let altChordShapeModel = chordFormulas.dictOfChordNamesAndShapes[altChordShapeName] {
+                        
                         formula = altChordShapeModel.arrayOfIntervals
-                        fingerings = altChordShapeModel.arrayOfFingers
+                        
+                        // Check if the open string fingers should be used.
+                        if altChordShapeModel.arrayOfRootNotesForOpenStringFingers.contains(fullRoot) {
+                            fingerings = altChordShapeModel.arrayOfOpenStringFingers
+                        } else {
+                            fingerings = altChordShapeModel.arrayOfFingers
+                        }
                     
                         // Otherwise, could not locate altChordShape in dictionary: print an error statement.
                     }
