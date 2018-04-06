@@ -126,7 +126,7 @@ class ProductStore: NSObject  /*, SKPaymentTransactionObserver  SKProductsReques
                 self.delegate?.proIsNowUnlocked()
             }
             else {
-                print("Nothing to Restore")
+               // print("Nothing to Restore")
                 self.delegate?.nothingToRestore()
             }
         }

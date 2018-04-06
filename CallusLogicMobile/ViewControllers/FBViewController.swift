@@ -1369,23 +1369,19 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         if fbCollectionStore.allowsPro == false {
             
-           // let didRestore = productStore.swiftyRestorePreviousPurchases()
-           // if didRestore == false {
-                
-                
-                
-                // undo the scale/chord selection in ScalesTVC.
-                if let previousSelection = scaleSelectionButton.titleLabel?.text {
-                    scalesTVC.updateSelectedScaleOrChord(scaleOrChord: previousSelection)
-                    scalesTVC.selectSavedRow()
-                }
-                
-                
                 // check that a valid selection was made,
                 if arrayOfSampleScalesAndChords.contains(scaleOrChord) {
                     updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
                 }
+                // Otherwise a valid selection was not made.
                 else {
+                    
+                    // undo the scale/chord selection in ScalesTVC.
+                    if let previousSelection = scaleSelectionButton.titleLabel?.text {
+                        scalesTVC.updateSelectedScaleOrChord(scaleOrChord: previousSelection)
+                        scalesTVC.selectSavedRow()
+                    }
+                    
                     // Check if the user can make payments
                     if SKPaymentQueue.canMakePayments() == false {
                         // If not
@@ -1410,7 +1406,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     }
                 }
             }
-     //   }
+
         else {
             updateScaleButtonAndAddNotes(scaleOrChord: scaleOrChord)
         }
