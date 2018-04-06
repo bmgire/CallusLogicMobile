@@ -15,6 +15,7 @@ protocol ProductStoreDelegate {
     func observePrice(currentFormattedPrice: String)
     //func dismissVC()
     func proIsNowUnlocked()
+    func nothingToRestore()
 }
 
 
@@ -126,6 +127,7 @@ class ProductStore: NSObject  /*, SKPaymentTransactionObserver  SKProductsReques
             }
             else {
                 print("Nothing to Restore")
+                self.delegate?.nothingToRestore()
             }
         }
     }
