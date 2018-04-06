@@ -29,6 +29,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let toneArraysCreator = ToneArraysCreator()
     let chordCreator = ChordCreator()
     
+     let arrayOfSampleScalesAndChords = ["Chromatic Scale", "Minor Pentatonic Scale","Major Pentatonic Scale", "Major Chord (v1)",
+                                         "Major Chord (v2)", "A Chord", "Am Chord", "A7 Chord"]
+    
     let arrayOfScaleDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfChordDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
@@ -503,6 +506,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         // Injecting chordNames into scalesTVC
+        scalesTVC.fbCollectionStore = fbCollectionStore
+        scalesTVC.arrayOfSampleScalesAndChords = arrayOfSampleScalesAndChords
         scalesTVC.arrayOfChordNames = chordFormulas.arrayOfShapeNames
         scalesTVC.arrayOfBasicChordNames = basicChordFormulas.arrayOfBasicChordNames
         
@@ -1359,8 +1364,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //###########################
     // scalesTVCDelegate Method
     
-    let arrayOfSampleScalesAndChords = ["Chromatic Scale", "Minor Pentatonic Scale","Major Pentatonic Scale", "Major Chord (v1)", "Major Chord (v2)",
-                                        "A Chord", "Am Chord", "A7 Chord"]
+   
    
    // let storyboard = UIStoryboard(name: "Main", bundle: nil)
     //var controller = UnlockProViewController()
@@ -1398,6 +1402,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                             if let controller = self.storyboard?.instantiateViewController(withIdentifier: "UnlockProViewController") as? UnlockProViewController {
                                 controller.productStore = productStore
                                 productStore.delegate = controller
+                                controller.delegate = scalesTVC
                                 self.present(controller, animated: true, completion: nil)
                             }
                         } else {
