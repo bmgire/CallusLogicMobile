@@ -29,8 +29,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let toneArraysCreator = ToneArraysCreator()
     let chordCreator = ChordCreator()
     
-     let arrayOfSampleScalesAndChords = ["Chromatic Scale", "Minor Pentatonic Scale","Major Pentatonic Scale", "Major Chord (v1)",
-                                         "Major Chord (v2)", "A Chord", "Am Chord", "A7 Chord"]
+     let arrayOfSampleScalesAndChords = ["Chromatic Scale",
+                                         "Minor Pentatonic Scale",
+                                         "Major Pentatonic Scale",
+                                         "Major Chord (v1)",
+                                         "Major Chord (v2)",
+                                         "Major Chord (v3)",
+                                         "Major Chord (v4)",
+                                         "A Chord", "Am Chord", "A7 Chord"]
     
     let arrayOfScaleDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfChordDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
