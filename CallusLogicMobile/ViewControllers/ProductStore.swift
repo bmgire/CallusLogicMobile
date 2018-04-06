@@ -141,17 +141,136 @@ class ProductStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObs
         productReceiptRefreshRequest.start()
     }
     
-    // I might end up using this later... though I'm confused by who received thje info.
-    /*  func launchProOrLock() {
-     if allowsPro == false {
-     // check the appStore for a receipt,
-     let request = SKReceiptRefreshRequest()
-     request.delegate = self
-     request.start()
-     
-     // if there is a valid receipt, update bool.
-     // Otherwise, don't update the bool. launch app as is.
-     }
-     } */
+    
+    
+    
+    //##############################################################################################################
+    // Adding methods for SwiftyStoreKit
+    
+    //Register a Transation Observer.
+    // call this in appDelegate-- app did finish launching.
+    func registerTransactionObserver() {
+        SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
+            for purchase in purchases {
+                switch purchase.transaction.transactionState {
+                case .purchased, .restored:
+                    if purchase.needsFinishTransaction {
+                        // Deliver content from server, then:
+                        SwiftyStoreKit.finishTransaction(purchase.transaction)
+                    }
+                // Unlock content
+                case .failed, .purchasing, .deferred:
+                    break // do nothing
+                }
+            }
+        }
+    }
+    
+    
+    func retrieveProductsInfo() {
+        SwiftyStoreKit.retrieveProductsInfo([unlockProProductID]) { result in
+            if let product = result.retrievedProducts.first {
+                let priceString = product.localizedPrice!
+                print("Product: \(product.localizedDescription), price: \(priceString)")
+            }
+            else if let invalidProductId = result.invalidProductIDs.first {
+                print("Invalid product identifier: \(invalidProductId)")
+            }
+            else {
+                print("Error: \(String(describing: result.error))")
+            }
+        }
+    }
+    
+    func purchaseAPoduct() {
+        SwiftyStoreKit.purchaseProduct(unlockProProductID, quantity: 1, atomically: true) { result in
+            switch result {
+            case .success(let purchase):
+                print("Purchase Success: \(purchase.productId)")
+            case .error(let error):
+                switch error.code {
+                case .unknown: print("Unknown error. Please contact support")
+                case .clientInvalid: print("Not allowed to make the payment")
+                case .paymentCancelled: break
+                case .paymentInvalid: print("The purchase identifier was invalid")
+                case .paymentNotAllowed: print("The device is not allowed to make the payment")
+                case .storeProductNotAvailable: print("The product is not available in the current storefront")
+                case .cloudServicePermissionDenied: print("Access to cloud service information is not allowed")
+                case .cloudServiceNetworkConnectionFailed: print("Could not connect to the network")
+                case .cloudServiceRevoked: print("User has revoked permission to use this cloud service")
+                }
+            }
+        }
+    }
+
+    func restorePreviousPurchases() {
+        SwiftyStoreKit.restorePurchases(atomically: true) { results in
+            if results.restoreFailedPurchases.count > 0 {
+                print("Restore Failed: \(results.restoreFailedPurchases)")
+            }
+            else if results.restoredPurchases.count > 0 {
+                print("Restore Success: \(results.restoredPurchases)")
+            }
+            else {
+                print("Nothing to Restore")
+            }
+        }
+    }
+    
+    
+    // I put this in a function be I'll probably include in a different receipt later.
+    func fetchLocalReceipt()  {
+        let receiptData = SwiftyStoreKit.localReceiptData
+        let receiptString = receiptData?.base64EncodedString(options: [])
+    }
+    
+    func fetchEncryptedReceipt() {
+        SwiftyStoreKit.fetchReceipt(forceRefresh: true) { result in
+            switch result {
+            case .success(let receiptData):
+                let encryptedReceipt = receiptData.base64EncodedString(options: [])
+                print("Fetch receipt success:\n\(encryptedReceipt)")
+            case .error(let error):
+                print("Fetch receipt failed: \(error)")
+            }
+        }
+    }
+    
+    func verifyReceipt() {
+        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "your-shared-secret")
+        SwiftyStoreKit.verifyReceipt(using: appleValidator, forceRefresh: false) { result in
+            switch result {
+            case .success(let receipt):
+                print("Verify receipt success: \(receipt)")
+            case .error(let error):
+                print("Verify receipt failed: \(error)")
+            }
+        }
+        
+    }
+    
+    func verifyPurchase(){
+        let appleValidator = AppleReceiptValidator(service: .production, sharedSecret: "your-shared-secret")
+        SwiftyStoreKit.verifyReceipt(using: appleValidator) { result in
+            switch result {
+            case .success(let receipt):
+                let productId = "com.musevisions.SwiftyStoreKit.Purchase1"
+                // Verify the purchase of Consumable or NonConsumable
+                let purchaseResult = SwiftyStoreKit.verifyPurchase(
+                    productId: productId,
+                    inReceipt: receipt)
+                
+                switch purchaseResult {
+                case .purchased(let receiptItem):
+                    print("\(productId) is purchased: \(receiptItem)")
+                case .notPurchased:
+                    print("The user has never purchased \(productId)")
+                }
+            case .error(let error):
+                print("Receipt verification failed: \(error)")
+            }
+        }
+    }
+    
     
 }

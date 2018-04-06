@@ -44,12 +44,18 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let pinkColor = UIColor(red: 1, green: 0.5, blue: 0.5, alpha: 1)
     let sixTonesController = SixTones()
     
+    let scalesTVC = ScalesTVC()
+    let colorSelectorTVC = ColorSelectorTVC()
+    let collectionsTVC = CollectionsTVC()
+    
+    
     //###################################
   
     //###################################
     // Array Variables
     //############
-    
+   
+    var productStore: ProductStore!
     var fbCollectionStore: FBCollectionStore!
     
     // Variable to keep track of views updated during a single view track event.
@@ -104,14 +110,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     @IBOutlet var doShowScalesControl: UISegmentedControl!
     
-    
-    let scalesTVC = ScalesTVC()
-    let colorSelectorTVC = ColorSelectorTVC()
-    let collectionsTVC = CollectionsTVC()
-    let productStore = ProductStore()
-    
-    
-
     //###################################
     // Actions
     //
