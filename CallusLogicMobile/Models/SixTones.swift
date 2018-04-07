@@ -83,6 +83,7 @@ class SixTones {
     func limitedDurationPlay(_ index: Int, zeroTo36Number: Int) {
         if allowsRampUp {
             let os = arrayOfOscillators[index]
+            
             os.rampTime = 0.01
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
