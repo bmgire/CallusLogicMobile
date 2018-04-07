@@ -89,6 +89,49 @@ class ChordFormulas {
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
         
+        
+        //################################################
+        // Power Chords.
+      
+        createChordShapeModel(shapeName: "Power Chord (v1)",
+                              arrayOfIntervals: ["root", "P5", "", "", "", ""],
+                              arrayOfFingerings: ["I", "R", "", "", "", ""],
+                              arrayOfOpenStringFingers: ["O", "I", "", "", "", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["E", "Fb"],
+                              arrayOfInvalidRootNotes: ["D#", "Eb"],
+                              alternateChordShapeName: "Power Chord (v3)",
+                              arpeggioToBuildChordFrom: "Chromatic Scale")
+        
+        
+        createChordShapeModel(shapeName: "Power Chord (v2)",
+                              arrayOfIntervals: ["root", "P5", "root", "", "", ""],
+                              arrayOfFingerings: ["I", "R", "P", "", "", ""],
+                              arrayOfOpenStringFingers: ["O", "I", "I", "", "", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["E", "Fb"],
+                              arrayOfInvalidRootNotes: ["D#", "Eb"],
+                              alternateChordShapeName: "Power Chord (v4)",
+                              arpeggioToBuildChordFrom: "Chromatic Scale")
+        
+        createChordShapeModel(shapeName: "Power Chord (v3)",
+                              arrayOfIntervals: ["", "root", "P5", "", "", ""],
+                              arrayOfFingerings: ["", "I", "R", "", "", ""],
+                              arrayOfOpenStringFingers: ["", "O", "I", "", "", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["A"],
+                              arrayOfInvalidRootNotes: ["G#", "Bb"],
+                              alternateChordShapeName: "Power Chord (v1)",
+                              arpeggioToBuildChordFrom: "Chromatic Scale")
+        
+        createChordShapeModel(shapeName: "Power Chord (v4)",
+                              arrayOfIntervals: ["", "root", "P5", "root", "", ""],
+                              arrayOfFingerings: ["", "I", "R", "P", "", ""],
+                              arrayOfOpenStringFingers: ["", "O", "I", "I", "", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["A"],
+                              arrayOfInvalidRootNotes: ["G#", "Ab"],
+                              alternateChordShapeName: "Power Chord (v2)",
+                              arpeggioToBuildChordFrom: "Chromatic Scale")
+        
+        
+        
         //################################################
         // 6 Chords.
         
