@@ -30,6 +30,8 @@ class ScalesByIntervals {
         
         // Call to private member function that builds a scale and key.
         
+        //###########################################
+        // Sample Scales
         buildAndAddScale(aScale: Scale(name:  "Chromatic Scale", formula:  [ "root", "m2", "M2", "m3",  "M3",  "P4",  "D5",  "P5",    "m6",    "M6",  "m7",    "M7",  "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name: "Minor Pentatonic Scale", formula: ["root", "", "", "m3", "", "P4", "D5", "P5","","", "m7", "", "offset"], thePassingInterval: "D5"))
@@ -37,6 +39,21 @@ class ScalesByIntervals {
         buildAndAddScale(aScale: Scale(name: "Major Pentatonic Scale", formula: [ "root",  "",   "M2", "m3", "M3", "",   "", "P5",  "", "M6",  "",  "",  "offset"], thePassingInterval: "m3"))
         
         
+        //###########################################
+        // Non-free hybrid pentatonic.
+        buildAndAddScale(aScale: Scale(name: "Hybrid Pentatonic Scale", formula: ["root", "", "", "", "M3", "P4", "", "P5","","", "m7", "", "offset"], thePassingInterval: "D5"))
+        
+        
+        
+        // Major and Minor because that is what people will be expecting.
+        // even though major and minor are coveredd by the Ionian and Aeolian modes.
+        
+        buildAndAddScale(aScale: Scale(name:  "Major Scale", formula:  [ "root",   "",    "M2",     "",    "M3",  "P4",  "",     "P5",  "",    "M6",  "",    "M7",  "offset"], thePassingInterval: "" ))
+        
+         buildAndAddScale(aScale: Scale(name:  "Natural Minor Scale", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "m6",  "",    "m7",  "",    "offset"], thePassingInterval: "" ))
+        
+        //###########################################
+        // Modes
         buildAndAddScale(aScale: Scale(name:  "Ionian Mode", formula:  [ "root",   "",    "M2",     "",    "M3",  "P4",  "",     "P5",  "",    "M6",  "",    "M7",  "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name:  "Dorian Mode", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "",      "M6",  "m7",  "",    "offset"], thePassingInterval: "" ))
@@ -51,8 +68,10 @@ class ScalesByIntervals {
         
         buildAndAddScale(aScale: Scale(name:  "Locrian Mode", formula:  [ "root",   "m2",  "",         "m3",  "",    "P4",  "D5",   "",    "m6",  "",    "m7",  "",    "offset"], thePassingInterval: "" ))
         
+        //###########################################
+        // Other Scales
         
-        buildAndAddScale(aScale: Scale(name:  "Harmonic Minor Scale", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "m6",  "",    "",    "M7",  "offset"], thePassingInterval: "" ))
+         buildAndAddScale(aScale: Scale(name:  "Harmonic Minor Scale", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "m6",  "",    "",    "M7",  "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name:  "Harmonic Major Scale", formula:  [ "root",   "",    "M2",     "",    "M3",  "P4",  "",     "P5",  "m6",  "",    "",    "M7",  "offset"], thePassingInterval: "" ))
         
@@ -62,6 +81,10 @@ class ScalesByIntervals {
         
         buildAndAddScale(aScale: Scale(name:  "Persian Scale", formula:  [ "root",   "m2",  "",     "",    "M3",  "P4",  "D5",     "",    "m6",    "",  "",    "M7",  "offset"], thePassingInterval: "" ))
         
+        buildAndAddScale(aScale: Scale(name:  "Whole Tone Scale", formula:  [ "root",   "",  "M2",     "",    "M3",  "",  "D5",     "",    "m6",    "",  "m7",    "",  "offset"], thePassingInterval: "" ))
+        
+        //###########################################
+        // Arpeggios
         buildAndAddScale(aScale: Scale(name:  "Major Arpeggio", formula: [ "root",   "",    "",         "",    "M3",  "",    "",     "P5",  "",      "",    "",    "",    "offset"], thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name: "Minor Arpeggio" ,
@@ -93,6 +116,12 @@ class ScalesByIntervals {
         buildAndAddScale(aScale: Scale(name: "m7b5 Arpeggio",
                                        formula: [ "root",   "",    "",  "m3",  "",         "",    "D5",   "",     "",    "",    "m7",  "",    "offset"],
                                        thePassingInterval: "" ))
+        
+        buildAndAddScale(aScale: Scale(name: "7#5 Arpeggio",
+                                       formula: [ "root",   "",    "",  "",  "M3",         "",    "",   "",     "A5",    "",    "m7",  "",    "offset"],
+                                       thePassingInterval: "" ))
+        
+        
         buildAndAddScale(aScale: Scale(name:  "dim7 Arpeggio",
                                        formula: [ "root",   "",    "",     "m3",  "",         "",    "D5",   "",     "",    "D7",  "",    "",    "offset"],
                                        thePassingInterval: "" ))
@@ -103,7 +132,8 @@ class ScalesByIntervals {
         
         
         
-        
+        //###########################################
+        // Root and other intervals. 
         buildAndAddScale(aScale: Scale(name:  "Root",
                             formula: [ "root",   "",    "",       "",     "",	 "",     "",     "",     "",   "",  "",  "",  "offset"],
                             thePassingInterval: "" ))

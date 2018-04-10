@@ -353,6 +353,27 @@ class ChordFormulas {
         
         
         //################################################
+        // m7#5 Chords.
+        
+        createChordShapeModel(shapeName: "7#5 Chord (v1)",
+                              arrayOfIntervals: ["root", "", "m7", "M3", "A5", ""],
+                              arrayOfFingerings: ["I", "", "M", "R", "P", ""],
+                              arrayOfOpenStringFingers: ["O", "", "O", "I", "M", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["E", "Fb"],
+                              arrayOfInvalidRootNotes: ["NA"],
+                              alternateChordShapeName: "NA",
+                              arpeggioToBuildChordFrom: "7#5 Arpeggio")
+        
+        createChordShapeModel(shapeName: "7#5 Chord (v2)",
+                              arrayOfIntervals: ["", "root", "", "m7", "M3", "A5"],
+                              arrayOfFingerings: ["", "I", "", "M", "P", "R"],
+                              arrayOfOpenStringFingers: ["", "O", "", "O", "R", "M"],
+                              arrayOfRootNotesForOpenStringFingers: ["A"],
+                              arrayOfInvalidRootNotes: ["G#", "Ab"],
+                              alternateChordShapeName: "7#5 Chord (v1)",
+                              arpeggioToBuildChordFrom: "7#5 Arpeggio")
+        
+        //################################################
         // dim7 Chords.
         
         createChordShapeModel(shapeName: "dim7 Chord (v1)",
