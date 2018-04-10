@@ -373,6 +373,40 @@ class ChordFormulas {
                               alternateChordShapeName: "7#5 Chord (v1)",
                               arpeggioToBuildChordFrom: "7#5 Arpeggio")
         
+        
+        //################################################
+        // 7#9 Chords.
+        
+        createChordShapeModel(shapeName: "7#9 Chord (v1)",
+                              arrayOfIntervals: ["root", "M3", "m7", "A2", "", ""],
+                              arrayOfFingerings: ["M", "I", "R", "P", "", ""],
+                              arrayOfOpenStringFingers: [ "I", "O", "M", "R", "", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["E#", "F"],
+                              arrayOfInvalidRootNotes: ["NA"],
+                              alternateChordShapeName: "NA",
+                              arpeggioToBuildChordFrom: "7#9 Arpeggio")
+        
+        createChordShapeModel(shapeName: "7#9 Chord (v2)",
+                              arrayOfIntervals: ["", "root", "M3", "m7", "A2", ""],
+                              arrayOfFingerings: ["", "M", "I", "R", "P", ""],
+                              arrayOfOpenStringFingers: ["", "I", "O", "M", "R", ""],
+                              arrayOfRootNotesForOpenStringFingers: ["Bb", "A#"],
+                              arrayOfInvalidRootNotes: ["A"],
+                              alternateChordShapeName: "7#9 Chord (v1)",
+                              arpeggioToBuildChordFrom: "7#9 Arpeggio")
+        
+        
+        createChordShapeModel(shapeName: "7#9 Chord (v3)",
+                              arrayOfIntervals: ["", "", "root", "M3", "m7", "A2"],
+                              arrayOfFingerings: ["", "", "M", "I", "R", "P"],
+                              arrayOfOpenStringFingers: ["", "", "I", "O", "R", "P"],
+                              arrayOfRootNotesForOpenStringFingers: ["D#", "Eb"],
+                              arrayOfInvalidRootNotes: ["D"],
+                              alternateChordShapeName: "7#9 Chord (v2)",
+                              arpeggioToBuildChordFrom: "7#9 Arpeggio")
+        
+        
+        
         //################################################
         // dim7 Chords.
         

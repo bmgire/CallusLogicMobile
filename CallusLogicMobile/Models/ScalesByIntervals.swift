@@ -50,7 +50,7 @@ class ScalesByIntervals {
         
         buildAndAddScale(aScale: Scale(name:  "Major Scale", formula:  [ "root",   "",    "M2",     "",    "M3",  "P4",  "",     "P5",  "",    "M6",  "",    "M7",  "offset"], thePassingInterval: "" ))
         
-         buildAndAddScale(aScale: Scale(name:  "Natural Minor Scale", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "m6",  "",    "m7",  "",    "offset"], thePassingInterval: "" ))
+         buildAndAddScale(aScale: Scale(name:  "Minor Scale", formula:  [ "root",   "",    "M2",     "m3",  "",    "P4",  "",     "P5",  "m6",  "",    "m7",  "",    "offset"], thePassingInterval: "" ))
         
         //###########################################
         // Modes
@@ -121,13 +121,17 @@ class ScalesByIntervals {
                                        formula: [ "root",   "",    "",  "",  "M3",         "",    "",   "",     "A5",    "",    "m7",  "",    "offset"],
                                        thePassingInterval: "" ))
         
+        buildAndAddScale(aScale: Scale(name: "7#9 Arpeggio",
+                                       formula: [ "root",   "",    "",  "A2",  "M3",         "",    "",   "P5",     "",    "",    "m7",  "",    "offset"],
+                                       thePassingInterval: "" ))
+        
         
         buildAndAddScale(aScale: Scale(name:  "dim7 Arpeggio",
                                        formula: [ "root",   "",    "",     "m3",  "",         "",    "D5",   "",     "",    "D7",  "",    "",    "offset"],
                                        thePassingInterval: "" ))
         
         buildAndAddScale(aScale: Scale(name:  "Dominant 7th Arpeggio",
-                                       formula: [ "root",   "",    "",     "",    "M3",     "",     "",     "P5",  "",    "",    "m7",  "",    "offset"],
+                                       formula: [ "root",   "",    "",     "A2",    "M3",     "",     "",     "P5",  "",    "",    "m7",  "",    "offset"],
                                        thePassingInterval: "" ))
         
         
