@@ -139,11 +139,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 let view = self.fretboardView.arrayOfNoteViews[viewNumber]
                 view.flash()
             })
-            //sixTonesController.limitedDurationPlay(stringIndex, zeroTo36Number: zeroTo36Number)
-            //sixTonesController.rampUpStart(stringIndex, zeroTo36Number: zeroTo36Number)
-           // let view = fretboardView.arrayOfNoteViews[viewNumber]
-            //view.flash()
-            //sixTonesController.rampDownStop(stringIndex)
         }
     
     }
@@ -528,9 +523,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         loadSettingsFromSelectedBoard()
         
         hideOrShowEditTableViewButton()
-        
+       
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
-        AudioKit.start()
+        do {
+            try AudioKit.start()
+        } catch {
+            print("Audiokit did not start")
+        }
+        
         
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -539,6 +539,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         } catch {
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
+        
+       
         
         scalesTVC.delegate = self
         colorSelectorTVC.delegate = self

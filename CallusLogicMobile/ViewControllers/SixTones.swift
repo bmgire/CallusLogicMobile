@@ -21,51 +21,47 @@ class SixTones {
     let arrayOfNoteFrequencies = NoteFrequencies().arrayOfNoteFrequencies
     let arrayOfNoteAmplitudes = NoteFrequencies().arrayOfAmplitudes
     
+    
     var allowsRampUp = true
     
     init() {
-            createArrayOfOscillators()
-        
+        createArrayOfOscillators()
     }
     
     // Create 1 oscillator for each string.
     func createArrayOfOscillators() {
         for _ in 0...5 {
+            //let os = AKOscillator()
             let os = AKOscillator(waveform: square)
             os.amplitude = 0
-            //os.frequency = 660 + index * 40
-            os.start()
+            
             arrayOfOscillators.append(os)
         }
     }
     
-    func startOscillators(){
-        for os in arrayOfOscillators {
-            os.start()
-        }
-    }
     
     func rampUpStart(_ index: Int, zeroTo36Number: Int) {
+       // print(#function)
+        
         if allowsRampUp {
             let os = arrayOfOscillators[index]
-           /* if os.rampTime == 0.8 {
-                os.rampTime = 0
-                os.amplitude = 0
-            } */
             
-            os.rampTime = 0.005
+            os.stop()
+            os.rampTime =  0.005
+            os.start()
+           
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
+
         }
-        
-        
     }
     
     func rampDownStop(_ stringIndex: Int) {
-        let os = arrayOfOscillators[stringIndex]
-        os.rampTime = 0.8
-        os.amplitude = 0
-        
+        // print(#function)
+            
+            let os = arrayOfOscillators[stringIndex]
+            os.rampTime = 0.8
+            os.amplitude = 0
     }
     
     func stopPlayingAllNotes() {
@@ -73,7 +69,6 @@ class SixTones {
             allowsRampUp = false
             os.amplitude = 0
             os.stop()
-            
         }
     }
     

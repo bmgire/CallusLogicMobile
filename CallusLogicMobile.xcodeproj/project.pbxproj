@@ -258,7 +258,6 @@
 				B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */,
 				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
-				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 				B542E6CE2070675300EE0BE2 /* Chord_Formulas_and_Models */,
 				B59A8D262073E60A00223FC8 /* RootScaleAndDisplaySelections.swift */,
@@ -279,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
+				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B5E95BC4207564C50017A205 /* UnlockProViewController.swift */,
 				B5488B3E207677E60069479E /* ProductStore.swift */,
 			);
@@ -304,8 +304,7 @@
 				B536C35B1FDF855300FD886E /* Sources */,
 				B536C35C1FDF855300FD886E /* Frameworks */,
 				B536C35D1FDF855300FD886E /* Resources */,
-				8DF43B24FF80EC81E7A416F0 /* [CP] Embed Pods Frameworks */,
-				4985E01BEE446D31B346474F /* [CP] Copy Pods Resources */,
+				7C82013D6D272B9EA9A582D9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -359,7 +358,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Gire;
 				TargetAttributes = {
 					B536C35E1FDF855300FD886E = {
@@ -432,36 +431,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4985E01BEE446D31B346474F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8DF43B24FF80EC81E7A416F0 /* [CP] Embed Pods Frameworks */ = {
+		7C82013D6D272B9EA9A582D9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-frameworks.sh",
-				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
-				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -591,6 +571,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -598,6 +579,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -648,6 +630,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -655,6 +638,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
