@@ -39,6 +39,12 @@ class SixTones {
         }
     }
     
+    func startOscillators(){
+        for os in arrayOfOscillators {
+            os.start()
+        }
+    }
+    
     func rampUpStart(_ index: Int, zeroTo36Number: Int) {
         if allowsRampUp {
             let os = arrayOfOscillators[index]
