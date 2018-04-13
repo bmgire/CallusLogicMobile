@@ -75,8 +75,14 @@ class SixTones {
     func startPlayingAllNotes() {
         for os in arrayOfOscillators {
             allowsRampUp = true
+            
             os.amplitude = 0
-            os.start()
+            os.rampTime = 0
+            
+            // All os's are being started in function call appDidBecomeActive.
+            // This is to help stop then restart the notes when the app becomes inactive.
+            // Preventing notes from gettings stuck playing.
+            //os.start()
             
         }
     }
