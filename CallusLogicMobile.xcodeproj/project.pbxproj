@@ -259,6 +259,7 @@
 				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
 				B5196C9220324101005A018E /* NoteFrequencies.swift */,
+				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B542E6CE2070675300EE0BE2 /* Chord_Formulas_and_Models */,
 				B59A8D262073E60A00223FC8 /* RootScaleAndDisplaySelections.swift */,
 			);
@@ -278,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				B536C3641FDF855300FD886E /* FBViewController.swift */,
-				B531471F2030BEF30022AAC5 /* SixTones.swift */,
 				B5E95BC4207564C50017A205 /* UnlockProViewController.swift */,
 				B5488B3E207677E60069479E /* ProductStore.swift */,
 			);
