@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		202CCD16C4B2452137A9179A /* Pods_CallusLogicMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC523138FBAB60FD1914000 /* Pods_CallusLogicMobile.framework */; };
+		B5053B6E20827F5A00BCF559 /* FretboardValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5053B6D20827F5A00BCF559 /* FretboardValues.swift */; };
 		B5124F20206AC47600E2F814 /* ChordShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */; };
 		B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5196C9220324101005A018E /* NoteFrequencies.swift */; };
 		B52A97B42064538A00E056C3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A97B32064538A00E056C3 /* HeaderView.swift */; };
@@ -67,6 +68,7 @@
 		18EA96A61000533821DEB2CC /* Pods-CallusLogicMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.release.xcconfig"; sourceTree = "<group>"; };
 		2F4694AA6851A91015C6301D /* Pods-CallusLogicMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		4BC523138FBAB60FD1914000 /* Pods_CallusLogicMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CallusLogicMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5053B6D20827F5A00BCF559 /* FretboardValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardValues.swift; sourceTree = "<group>"; };
 		B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordShapeModel.swift; sourceTree = "<group>"; };
 		B5196C9220324101005A018E /* NoteFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFrequencies.swift; sourceTree = "<group>"; };
 		B52A97B32064538A00E056C3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B5053B6C20827EA800BCF559 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
+				B5053B6D20827F5A00BCF559 /* FretboardValues.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		B524E2B52054814800219C5A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +219,7 @@
 				B524E2B52054814800219C5A /* Extensions */,
 				B536C3661FDF855300FD886E /* Main.storyboard */,
 				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
+				B5053B6C20827EA800BCF559 /* Enums */,
 				B5C4CDF32050D68D0006B560 /* Data */,
 				B57926E22034C4D500272C74 /* ViewControllers */,
 				B52DD17C204E097F00C7D9B3 /* TVCs */,
@@ -250,7 +262,6 @@
 		B55D51F91FE1F22600CB5F11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
 				B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */,
 				B5786ED71FE32D3D00174544 /* FretboardModel.swift */,
 				B5786ED81FE32D3D00174544 /* NoteModel.swift */,
@@ -487,6 +498,7 @@
 				B53F7F9F2075B52E0061E05B /* DetectConnection.swift in Sources */,
 				B57E51F0206D6A3900615DD6 /* BasicChordModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
+				B5053B6E20827F5A00BCF559 /* FretboardValues.swift in Sources */,
 				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
 				B59A8D272073E60A00223FC8 /* RootScaleAndDisplaySelections.swift in Sources */,
 				B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */,

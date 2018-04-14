@@ -10,8 +10,8 @@ import UIKit
 
 class FretboardModel: NSObject, NSCoding {
     
-    let NOTES_PER_STRING = 15
-    let NOTES_ON_FRETBOARD = 90
+  //  let NOTES_PER_STRING = 15
+  //  let NOTES_ON_FRETBOARD = 90
     let offset = 12
     
     // Offsets for toneNumber for each open string in standard tuning.
@@ -43,7 +43,7 @@ class FretboardModel: NSObject, NSCoding {
         
         // Encode arrayOfNoteModels
         
-        for index in 0...NOTES_ON_FRETBOARD - 1 {
+        for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
             aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
         
@@ -69,7 +69,7 @@ class FretboardModel: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         
         // Decode fretboardArray
-        for index in 0...NOTES_ON_FRETBOARD - 1 {
+        for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
             if let noteModel = aDecoder.decodeObject(forKey: "noteModel\(index)"){
                 arrayOfNoteModels.append(noteModel as! NoteModel)
             } else {
@@ -123,7 +123,7 @@ class FretboardModel: NSObject, NSCoding {
         if arrayOfNoteModels.count == 0 {
             // Build 77 item array of NoteModels.
             var temp : [NoteModel] = []
-            for _ in 0...NOTES_ON_FRETBOARD - 1 {
+            for _ in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
                 temp.append(NoteModel())
             }
             swap(&arrayOfNoteModels, &temp)
@@ -137,7 +137,7 @@ class FretboardModel: NSObject, NSCoding {
         for note in arrayOfNoteModels {
             note.setFretNumber(String(fret))
             fret += 1
-            if fret == NOTES_PER_STRING {
+            if fret == FretboardValues.notesPerString.rawValue {
                 fret = 0
             }
         }
@@ -153,11 +153,11 @@ class FretboardModel: NSObject, NSCoding {
         // For each string
         for stringIndex in 0...5 {
             // For each fret along the string.
-            for fretIndex in 0...NOTES_PER_STRING - 1 {
+            for fretIndex in 0...FretboardValues.notesPerString.rawValue - 1 {
                 //get the array values and plug update the fretboard model.
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
-                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
+                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * FretboardValues.notesPerString.rawValue] //{
                 
                 noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
                 noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
@@ -243,9 +243,9 @@ class FretboardModel: NSObject, NSCoding {
             // Search all the frets for the interval.
             var noteHasNotBeenFound = true
             
-            for fretIndex in 0..<NOTES_PER_STRING  {
+            for fretIndex in 0..<FretboardValues.notesPerString.rawValue {
                 
-                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING]
+                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * FretboardValues.notesPerString.rawValue]
                 // If there is a note for the chord along that string.
                 if chordFormula[stringIndex] == "" {
                     

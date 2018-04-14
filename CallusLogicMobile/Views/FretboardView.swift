@@ -10,8 +10,8 @@ import UIKit
 
 class FretboardView: UIImageView {
     
-    let NOTES_PER_STRING = 15
-    let NOTES_ON_FRETBOARD =  90
+  //  let NOTES_PER_STRING = 15
+ //   let NOTES_ON_FRETBOARD =  90
     let NUMBER_OF_STRINGS = 6
     
     let offsets = [0, 15, 30, 45, 60, 75]
@@ -111,7 +111,7 @@ class FretboardView: UIImageView {
             var noteX = CGFloat(0)
             
             // For all notes on 1 string.
-            for index in 0...NOTES_PER_STRING - 1 {
+            for index in 0...FretboardValues.notesPerString.rawValue - 1 {
                 
                 // Calculate the X position.
                 noteX = width * fretPositions[index]
@@ -133,10 +133,10 @@ class FretboardView: UIImageView {
         for stringIndex in 0...5 {
             
             // rectIndex is the index of each notes rect on each guitar string.
-            for noteIndex in 0...(NOTES_PER_STRING - 1) {
+            for noteIndex in 0...FretboardValues.notesPerString.rawValue - 1 {
                 let note = NoteView()
                 
-                let index = noteIndex + stringIndex * NOTES_PER_STRING
+                let index = noteIndex + stringIndex * FretboardValues.notesPerString.rawValue
                 
                 // Update the appropriate frame.
                 note.frame = arrayOfNoteRects[index]
@@ -165,7 +165,7 @@ class FretboardView: UIImageView {
 
     // Updates the contents of each noteView.
     func updateSubviews(_ fretboardArray: [NoteModel], displayMode: DisplayMode) {
-        for index in 0...NOTES_ON_FRETBOARD - 1  {
+        for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1  {
             let view = subviews[index] as! NoteView
             let noteModel = fretboardArray[index]
             
@@ -188,9 +188,6 @@ class FretboardView: UIImageView {
             
             // Update noteView
             view.updateNoteView(noteModel, display: displayText)
-            if view.isDisplayed {
-                print("FretNumber \(view.viewNumber) = \(view.displayText)")
-            }
         }
     }
     
@@ -208,7 +205,7 @@ class FretboardView: UIImageView {
         var arrayOfViewNumbers = [Int]()
         var arrayOfStringIndexes = [Int]()
         for stringIndex in 0..<NUMBER_OF_STRINGS {
-            for fretIndex in stride(from: (NOTES_PER_STRING - 1), through: 0, by: -1) {
+            for fretIndex in stride(from: (FretboardValues.notesPerString.rawValue - 1), through: 0, by: -1) {
                 
                 let view =  arrayOfNoteViews[offsets[stringIndex] + fretIndex]
                 if view.isDisplayed {
