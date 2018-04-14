@@ -21,37 +21,37 @@ class FretboardView: UIImageView {
     // right handed fretboardView dimensions. 1092 * 307
     
     let fretPositions: [CGFloat] =
-            [0, // 0
-            0.086,
-            0.182,
-            0.274, // 3
-            0.360,
-            0.445, // 5
-            0.525,
-            0.60, // 7
+            [-0.004, // 0
+            0.070,
+            0.157,
+            0.239, // 3
+            0.319,
+            0.394, // 5
+            0.466,
+            0.538, // 7
+            0.606,     /// I'm leaving off here
             0.671,
-            0.743,
-            0.81, // 10
-            0.875,
-            0.94] // 12
+            0.734, // 10
+            0.793,
+            0.848] // 12
     
     //#####################################
 
     
     let noteWidths: [CGFloat] =
-        [0.725,
+        [0.66,
         1.0,
         1.0,
         1.0, // 3
         1.0,
         1.0,
         1.0, //6
-        1.0,
-        1.0,
         0.95,
-        0.9,
-        0.85,
-        0.80]
+        0.92,
+        0.88, // 9
+        0.81,
+        0.76,
+        0.72]
     
     
     //#####################################
@@ -87,52 +87,8 @@ class FretboardView: UIImageView {
     //#####################################
     override func awakeFromNib() {
         
-        // Build rects for each guitar string of notes.
-       
-        /*
-        for index in 0...5{
-            buildNoteRects(stringHeightMultipliers[index], radians: radians[index])
-       }
- 
- */
-     /*   buildNoteRects()
-        buildNoteViews()
-        addSubviews()
- */
-        
-        
-        
-        
-        
-        
-        /*    let point = CGPoint(x: 66, y: 220)
-        let size = CGSize(width: 88, height: 40)
-        
-        
-        // the frame has to be set for the noteView, or it screws up.
-        // previously I was setting the noteView.bounds property but that wasn't working
-        
-        noteView.frame = CGRect(origin: point, size: size)
-        
-        // OMG!!! isOpaque needs to be set to false so the note will not include a black background.
-        // I don't know why that is.
-        noteView.isOpaque = false
-        
-        addSubview(noteView)
- 
-         */
-        
     }
     
-
-/*    fileprivate func buildNoteRects() {
-        var array = [CGRect]()
-        for _ in 0...NOTES_ON_FRETBOARD - 1 {
-            array.append(CGRect())
-        }
-        arrayOfNoteRects = array
-    }
-  */
     //#####################################
     // update Note Rects. Build 13 rects and reuse them on each string.
     func buildNoteRects()  {
