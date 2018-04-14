@@ -10,11 +10,11 @@ import UIKit
 
 class FretboardView: UIImageView {
     
-    let NOTES_PER_STRING = 13
-    let NOTES_ON_FRETBOARD =  78
+    let NOTES_PER_STRING = 15
+    let NOTES_ON_FRETBOARD =  90
     let NUMBER_OF_STRINGS = 6
     
-    let offsets = [0, 13, 26, 39, 52, 65]
+    let offsets = [0, 15, 30, 45, 60, 75]
     
    // let noteView = NoteView()
     //#####################################
@@ -33,7 +33,9 @@ class FretboardView: UIImageView {
             0.671,
             0.734, // 10
             0.793,
-            0.848] // 12
+            0.848, // 12
+            0.901,
+            0.95] // 14
     
     //#####################################
 
@@ -51,7 +53,9 @@ class FretboardView: UIImageView {
         0.88, // 9
         0.81,
         0.76,
-        0.72]
+        0.72, // 12
+        0.68,
+        0.64] // 14
     
     
     //#####################################
@@ -184,7 +188,9 @@ class FretboardView: UIImageView {
             
             // Update noteView
             view.updateNoteView(noteModel, display: displayText)
-            
+            if view.isDisplayed {
+                print("FretNumber \(view.viewNumber) = \(view.displayText)")
+            }
         }
     }
     

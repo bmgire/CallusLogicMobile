@@ -27,7 +27,7 @@ class ChordFormulas {
                               arrayOfFingerings: ["I", "R", "P", "M", "I", "I"],
                               arrayOfOpenStringFingers: ["O", "M", "R", "I", "O", "O"],
                               arrayOfRootNotesForOpenStringFingers: ["E", "Fb"],
-                              arrayOfInvalidRootNotes: ["D#", "Eb"],
+                              arrayOfInvalidRootNotes: ["NA"],//["D#", "Eb"],
                               alternateChordShapeName: "Major Chord (v2)",
                               arpeggioToBuildChordFrom: "Major Arpeggio")
         
@@ -589,7 +589,7 @@ class ChordFormulas {
         model.arrayOfFingers = arrayOfFingerings
         model.arrayOfOpenStringFingers = arrayOfOpenStringFingers
         model.arrayOfRootNotesForOpenStringFingers = arrayOfRootNotesForOpenStringFingers
-        model.arrayOfInvalidRootNotes = arrayOfInvalidRootNotes
+       // model.arrayOfInvalidRootNotes = arrayOfInvalidRootNotes
         model.alternateChordShapeName = alternateChordShapeName
         model.arpeggioToBuildChordFrom = arpeggioToBuildChordFrom
         
@@ -600,14 +600,14 @@ class ChordFormulas {
     
     
     // This funct might not be needed. 
-    func getInvalidChordNamesForRoot(fullRoot: String)-> [String] {
-        var arrayOfInvalidChordNamesForRoot = [String]()
+  /*  func getInvalidChordNamesForRoot(fullRoot: String)-> [String] {
+      /*  var arrayOfInvalidChordNamesForRoot = [String]()
         
         for (shapeName, chordShapeModel) in dictOfChordNamesAndShapes {
             if chordShapeModel.arrayOfInvalidRootNotes.contains(fullRoot) {
                 arrayOfInvalidChordNamesForRoot.append(shapeName)
             }
         }
-        return arrayOfInvalidChordNamesForRoot
-    }
+        return arrayOfInvalidChordNamesForRoot   */
+    } */
 }

@@ -54,7 +54,7 @@ class ChordCreator {
                 // Load the arpeggio into the fretboard
                 //fretboardModel.loadNewNotesNumbersAndIntervals(toneArraysCreator.getArrayOfToneArrays())
                 
-                // ################################################
+         /*      // ################################################
                 // Check if an alternate chordShape is needed.
                 var altChordShapeName = ""
                 
@@ -80,7 +80,7 @@ class ChordCreator {
                     else {
                         print("Error in \(#function): unable to obtain altChordShapeModel from chordFormulas.dictOfChordNamesAndShapes[altChordShapeName]")
                     }
-                }
+                } */
                 // Otherwise, no alternate chordShape is needed. use the regular one.
                 else {
                     formula = (chordFormulas.dictOfChordNamesAndShapes[chord]?.arrayOfIntervals)!

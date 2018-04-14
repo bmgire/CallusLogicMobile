@@ -214,7 +214,7 @@ class BasicChordFormulas {
         model.fullRoot = fullRoot
         model.shapeModel.arrayOfIntervals = arrayOfIntervals
         model.shapeModel.arrayOfFingers = arrayOfChordFingerings
-        model.shapeModel.arrayOfInvalidRootNotes = arrayOfInvalidRootNotes
+    //    model.shapeModel.arrayOfInvalidRootNotes = arrayOfInvalidRootNotes
         model.shapeModel.alternateChordShapeName = alternateChordShapeName
         model.shapeModel.arpeggioToBuildChordFrom = arpeggioToBuildChordFrom
         

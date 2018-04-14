@@ -10,8 +10,8 @@ import UIKit
 
 class FretboardModel: NSObject, NSCoding {
     
-    let NOTES_PER_STRING = 13
-    let NOTES_ON_FRETBOARD = 78
+    let NOTES_PER_STRING = 15
+    let NOTES_ON_FRETBOARD = 90
     let offset = 12
     
     // Offsets for toneNumber for each open string in standard tuning.
@@ -43,7 +43,7 @@ class FretboardModel: NSObject, NSCoding {
         
         // Encode arrayOfNoteModels
         
-        for index in 0...77 {
+        for index in 0...NOTES_ON_FRETBOARD - 1 {
             aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
         
@@ -69,9 +69,11 @@ class FretboardModel: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         
         // Decode fretboardArray
-        for index in 0...77 {
+        for index in 0...NOTES_ON_FRETBOARD - 1 {
             if let noteModel = aDecoder.decodeObject(forKey: "noteModel\(index)"){
                 arrayOfNoteModels.append(noteModel as! NoteModel)
+            } else {
+                arrayOfNoteModels.append(NoteModel())
             }
         }
 
@@ -121,7 +123,7 @@ class FretboardModel: NSObject, NSCoding {
         if arrayOfNoteModels.count == 0 {
             // Build 77 item array of NoteModels.
             var temp : [NoteModel] = []
-            for _ in 0...77 {
+            for _ in 0...NOTES_ON_FRETBOARD - 1 {
                 temp.append(NoteModel())
             }
             swap(&arrayOfNoteModels, &temp)
@@ -313,8 +315,10 @@ class FretboardModel: NSObject, NSCoding {
         // Find the notes on the zero fret and move to the 12th.
             for index in 0..<arrayOfNoteModels.count {
                 let noteModel = arrayOfNoteModels[index]
-                // If the noteModel is displayed and the fretnumber value is "0"
-                if noteModel.getIsDisplayed() && noteModel.getFretNumber() == "0" {
+                let fretNumber = noteModel.getFretNumber()
+                // If the noteModel is displayed and the fretnumber value is "0" or "1"
+                if noteModel.getIsDisplayed() &&
+                    (fretNumber == "0" || fretNumber == "1" || fretNumber == "2" || fretNumber == "3") {
                     // Do note display noteModel
                     noteModel.setIsDisplayed(false)
                     // Do display the model 1 octave up.
