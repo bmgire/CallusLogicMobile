@@ -50,7 +50,8 @@ struct NoteFrequencies {
         1244.51,
         1318.51,
         1396.91,
-        1476.98]
+        1479.98,
+        1567.98]
     
     
     let arrayOfAmplitudes = [
@@ -92,6 +93,7 @@ struct NoteFrequencies {
         0.29,
         0.29,
         0.29, // 35
+        0.29,
         0.29,
         0.29,
         0.29] // 38
