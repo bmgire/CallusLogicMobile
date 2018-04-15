@@ -1233,10 +1233,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // print(#function) // Displays function when called.
         
+        
         for touch in touches {
             if let noteView = getNoteViewOrNil(touch.view) {
                 if noteView.isDisplayed {
-                     sixTonesController.rampDownStop(noteView.stringNumber)
+                    let zeroTo39Number = Int(selectedBoard.getFretboardArray()[noteView.viewNumber].getNumber0to36())!
+                    
+                    
+                    sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
                 }
             }
         }
@@ -1244,8 +1248,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // Turn off all notes in the stored in the dictionary.
         // Maybe I should be removing dictionary entries when they are turned off. Maybe?
         for (noteViewNumber, _) in dictOfTouchedNoteViewNumbers {
-            let stringNumber = fretboardView.arrayOfNoteViews[noteViewNumber].stringNumber
-            sixTonesController.rampDownStop(stringNumber)
+            
+            let view = fretboardView.arrayOfNoteViews[noteViewNumber]
+            let stringNumber = view.stringNumber
+            
+            
+            let zeroTo39Number = Int(selectedBoard.getFretboardArray()[view.viewNumber].getNumber0to36())!
+            
+            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
         }
         dictOfTouchedNoteViewNumbers.removeAll()
         super.touchesEnded(touches, with: event)
@@ -1283,7 +1293,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                         // if the dictionary canTouchView bool is false, update to true
                         if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
                             dictOfTouchedNoteViewNumbers[noteViewNumber] = true
-                            sixTonesController.rampDownStop(noteView.stringNumber)
+                            let zeroTo39Number = Int(noteModel.getNumber0to36())!
+                            sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
                         }
                     }
                 }
@@ -1356,7 +1367,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 noteView.flash()
             }
         } else {
-            sixTonesController.rampDownStop(stringNumber)
+            let zeroTo39Number = Int(noteModel.getNumber0to36())!
+            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
         }
        
         dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false

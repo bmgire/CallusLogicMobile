@@ -40,11 +40,11 @@ class SixTones {
     }
     
     
-    func rampUpStart(_ index: Int, zeroTo36Number: Int) {
+    func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int) {
        // print(#function)
         
         if allowsRampUp {
-            let os = arrayOfOscillators[index]
+            let os = arrayOfOscillators[stringIndex]
             
             os.stop()
             os.rampTime =  0.005
@@ -56,12 +56,17 @@ class SixTones {
         }
     }
     
-    func rampDownStop(_ stringIndex: Int) {
+    func rampDownStop(_ stringIndex: Int, zeroTo36Number: Int) {
         // print(#function)
-            
-            let os = arrayOfOscillators[stringIndex]
+        let os = arrayOfOscillators[stringIndex]
+        
+        let freqToStop = arrayOfNoteFrequencies[zeroTo36Number]
+        if os.frequency == freqToStop {
             os.rampTime = 0.8
             os.amplitude = 0
+        }
+        
+        
     }
     
     func stopPlayingAllNotes() {
@@ -99,7 +104,7 @@ class SixTones {
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                self.rampDownStop(index)
+                self.rampDownStop(index, zeroTo36Number: zeroTo36Number)
             })
             
         }
