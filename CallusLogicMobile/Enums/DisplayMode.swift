@@ -14,7 +14,8 @@ enum DisplayMode: String {
     case intervals = "Intervals"
     case chordFingers = "Chord Fingers"
     case numbers0to11 = "Numbers 0-11"
-    case numbers0to36 = "Numbers 0-36"
+    case numbers0to39 = "Numbers 0-39"
+    //   case numbers0to36 = "Numbers 0-36"
 }
 
 
