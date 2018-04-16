@@ -34,7 +34,6 @@ class SixTones {
             //let os = AKOscillator()
             let os = AKOscillator(waveform: square)
             os.amplitude = 0
-            os.start()
             arrayOfOscillators.append(os)
         }
     }
