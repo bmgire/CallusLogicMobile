@@ -160,7 +160,7 @@ class FretboardModel: NSObject, NSCoding {
                 let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * FretboardValues.notesPerString.rawValue] //{
                 
                 noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
-                noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
+                noteModel.setNumber0to39(anArrayOfToneArrays[1][toneIndex])
                 noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
                 noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
                 noteModel.setChordFinger("")
@@ -210,7 +210,7 @@ class FretboardModel: NSObject, NSCoding {
     
     func copyModelData(importModel: NoteModel, modelToUpdate: NoteModel) {
         modelToUpdate.setNumber0to11(importModel.getNumber0to11())
-        modelToUpdate.setNumber0to36(importModel.getNumber0to36())
+        modelToUpdate.setNumber0to39(importModel.getNumber0to39())
         modelToUpdate.setNote(importModel.getNote())
         modelToUpdate.setInterval(importModel.getInterval())
         modelToUpdate.setChordFinger(importModel.getChordFinger())

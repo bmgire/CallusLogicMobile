@@ -1237,7 +1237,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         for touch in touches {
             if let noteView = getNoteViewOrNil(touch.view) {
                 if noteView.isDisplayed {
-                    let zeroTo39Number = Int(selectedBoard.getFretboardArray()[noteView.viewNumber].getNumber0to36())!
+                    let zeroTo39Number = Int(selectedBoard.getFretboardArray()[noteView.viewNumber].getNumber0to39())!
                     
                     
                     sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
@@ -1253,7 +1253,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             let stringNumber = view.stringNumber
             
             
-            let zeroTo39Number = Int(selectedBoard.getFretboardArray()[view.viewNumber].getNumber0to36())!
+            let zeroTo39Number = Int(selectedBoard.getFretboardArray()[view.viewNumber].getNumber0to39())!
             
             sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
         }
@@ -1293,7 +1293,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                         // if the dictionary canTouchView bool is false, update to true
                         if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
                             dictOfTouchedNoteViewNumbers[noteViewNumber] = true
-                            let zeroTo39Number = Int(noteModel.getNumber0to36())!
+                            let zeroTo39Number = Int(noteModel.getNumber0to39())!
                             sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
                         }
                     }
@@ -1367,7 +1367,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 noteView.flash()
             }
         } else {
-            let zeroTo39Number = Int(noteModel.getNumber0to36())!
+            let zeroTo39Number = Int(noteModel.getNumber0to39())!
             sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
         }
        
@@ -1378,7 +1378,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         // Get zeroTo46Number
         
-        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to36())!
+        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to39())!
     }
     
     //###########################
