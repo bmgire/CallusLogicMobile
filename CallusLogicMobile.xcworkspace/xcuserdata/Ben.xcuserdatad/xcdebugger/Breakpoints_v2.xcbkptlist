@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5279109"
+            timestampString = "545540675.98458"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1392"
-            endingLineNumber = "1392"
+            startingLineNumber = "1393"
+            endingLineNumber = "1393"
             landmarkName = "scaleChanged(scaleOrChord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/UnlockProViewController.swift"
-            timestampString = "545257342.605731"
+            timestampString = "545540675.985322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "67"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/UnlockProViewController.swift"
-            timestampString = "545257342.6059231"
+            timestampString = "545540675.985394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.528432"
+            timestampString = "545540675.985455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1422"
-            endingLineNumber = "1422"
+            startingLineNumber = "1423"
+            endingLineNumber = "1423"
             landmarkName = "scaleChanged(scaleOrChord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5286911"
+            timestampString = "545540675.9859819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1436"
-            endingLineNumber = "1436"
+            startingLineNumber = "1437"
+            endingLineNumber = "1437"
             landmarkName = "scaleChanged(scaleOrChord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.528939"
+            timestampString = "545540675.986528"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1465"
-            endingLineNumber = "1465"
+            startingLineNumber = "1466"
+            endingLineNumber = "1466"
             landmarkName = "updateScaleButtonAndAddNotes(scaleOrChord:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +122,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5291899"
+            timestampString = "545540675.98712"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1469"
+            endingLineNumber = "1469"
+            landmarkName = "updateScaleButtonAndAddNotes(scaleOrChord:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
+            timestampString = "545540675.988924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1468"
@@ -138,23 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5294321"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1467"
-            endingLineNumber = "1467"
-            landmarkName = "updateScaleButtonAndAddNotes(scaleOrChord:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.529673"
+            timestampString = "545540675.990743"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "308"
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5299031"
+            timestampString = "545540675.991197"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
+            startingLineNumber = "642"
+            endingLineNumber = "642"
             landmarkName = "updateToneArraysCreator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.530139"
+            timestampString = "545540675.9916019"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
+            startingLineNumber = "647"
+            endingLineNumber = "647"
             landmarkName = "updateToneArraysCreator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5303839"
+            timestampString = "545540675.992009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "529"
-            endingLineNumber = "529"
+            startingLineNumber = "531"
+            endingLineNumber = "531"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.530617"
+            timestampString = "545540675.992376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "527"
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/ViewControllers/FBViewController.swift"
-            timestampString = "545536304.5308419"
+            timestampString = "545540675.992726"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,7 +266,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/AppDelegate.swift"
-            timestampString = "545425569.191425"
+            timestampString = "545539186.693772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -330,7 +330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/AppDelegate.swift"
-            timestampString = "545425569.191537"
+            timestampString = "545539186.6941479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "61"
@@ -378,7 +378,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.531145"
+            timestampString = "545540675.993219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
@@ -394,7 +394,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Views/FretboardView.swift"
-            timestampString = "545536304.531194"
+            timestampString = "545540675.993287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
@@ -410,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Views/FretboardView.swift"
-            timestampString = "545536304.531233"
+            timestampString = "545540675.993347"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
@@ -426,7 +426,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Views/FretboardView.swift"
-            timestampString = "545536304.531267"
+            timestampString = "545540675.9934011"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "169"
@@ -442,7 +442,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.531301"
+            timestampString = "545540675.993453"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "291"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.5313359"
+            timestampString = "545540675.993508"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "309"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.531368"
+            timestampString = "545540675.99356"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "310"
@@ -490,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.531402"
+            timestampString = "545540675.993614"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "313"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.531435"
+            timestampString = "545540675.993665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "320"
@@ -522,12 +522,124 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CallusLogicMobile/Models/FretboardModel.swift"
-            timestampString = "545536304.531468"
+            timestampString = "545540675.993718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "323"
             endingLineNumber = "323"
             landmarkName = "fixChordNoteSpacingIssues()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.993773"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "limitedDurationPlay(_:zeroTo36Number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.993843"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "limitedDurationPlay(_:zeroTo36Number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.993906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "limitedDurationPlay(_:zeroTo36Number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.993968"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "limitedDurationPlay(_:zeroTo36Number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.994035"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "stopPlayingAllNotes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.994091"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "rampDownStop(_:zeroTo36Number:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CallusLogicMobile/Models/SixTones.swift"
+            timestampString = "545540675.994151"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "createArrayOfOscillators()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

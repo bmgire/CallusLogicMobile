@@ -525,12 +525,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         hideOrShowEditTableViewButton()
        
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
+        
+        
         do {
             try AudioKit.start()
         } catch {
             print("Audiokit did not start")
         }
-        
         
         let audioSession = AVAudioSession.sharedInstance()
         

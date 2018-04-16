@@ -34,7 +34,7 @@ class SixTones {
             //let os = AKOscillator()
             let os = AKOscillator(waveform: square)
             os.amplitude = 0
-            
+            os.start()
             arrayOfOscillators.append(os)
         }
     }
@@ -81,6 +81,9 @@ class SixTones {
         for os in arrayOfOscillators {
             allowsRampUp = true
             
+            
+            
+            
             os.amplitude = 0
             os.rampTime = 0
             
@@ -92,19 +95,20 @@ class SixTones {
         }
     }
     
-    func limitedDurationPlay(_ index: Int, zeroTo36Number: Int) {
+    func limitedDurationPlay(_ stringIndex: Int, zeroTo36Number: Int) {
         if allowsRampUp {
-            let os = arrayOfOscillators[index]
-            
-            os.rampTime = 0.01
-            os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
+            let os = arrayOfOscillators[stringIndex]
+            os.stop()
+            os.rampTime =  0.005
+            os.start()
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
             os.amplitude = amplitude * 0.54
+            os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                self.rampDownStop(index, zeroTo36Number: zeroTo36Number)
+                self.rampDownStop(stringIndex, zeroTo36Number: zeroTo36Number)
             })
             
         }
