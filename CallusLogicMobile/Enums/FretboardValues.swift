@@ -11,5 +11,6 @@ import Foundation
 enum FretboardValues: Int {
     case notesPerString = 16
     case totalNotesOnFretboard = 96
-    
+    case twelveFretsTotalNotesOnFretboard = 78
+    case twelveFretsNotesPerString = 13
 }

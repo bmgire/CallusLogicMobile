@@ -184,7 +184,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             //scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.basicChordSelectedRow)
             scaleSelectionButton.setTitle(scalesTVC.selectedBasicChord, for: .normal)
             
-            
             rootPickerView.isHidden = true
             accidentalPickerView.isHidden = true
         }
@@ -551,6 +550,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         collectionsTVC.delegate = self
         
         productStore.fbCollectionStore = fbCollectionStore
+        
+  
     }
     
     func hideOrShowEditTableViewButton() {
@@ -584,6 +585,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             
             doBuildNoteViews = false
         }
+        
     }
 
   
@@ -745,11 +747,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // update lockSwitch and action settings.
         lockSwitch.isOn = selectedBoard.getIsLocked()
         lockOrUnlockFretboard(lockSwitch)
-        
-        
-        //rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
-        //accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
-        
+
         // loads doShowScalesSettings.
         if selectedBoard.doShowScales == 0 {
             doShowScalesControl.selectedSegmentIndex = 0
@@ -903,6 +901,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let myRow = indexPath.row
         modelIndex = myRow
         loadSettingsFromSelectedBoard()
+        
+      /*  if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
+            addNotesAction()
+        } */
         updateFretboardView()
         
         //}
@@ -1509,6 +1511,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         loadSettingsFromSelectedBoard()
         
+        
         tableView.reloadData()
         // If the collection is new add notes,
         if isNewCollection {
@@ -1516,6 +1519,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             addNotesAction()
         }
         else {
+            
+            /*if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
+                addNotesAction()
+            } */
             // Otherwise, just load the settings.
             updateFretboardView()
             hideOrShowEditTableViewButton()
