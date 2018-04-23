@@ -46,7 +46,7 @@ class SixTones {
             let os = arrayOfOscillators[stringIndex]
             
             os.stop()
-            os.rampTime =  0.005
+            os.rampTime =  0 // 0.005
             os.start()
            
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
