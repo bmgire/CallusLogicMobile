@@ -430,8 +430,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         colorButton.isHidden = isLocked
         colorButtonBorderView.isHidden = isLocked
         selectedBoard.setIsLocked(isLocked)
-      
-        // I will keep the displaymode picker available.
+        // I will keep the displaymode picker available at all times.
         
     }
     
@@ -744,9 +743,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         customizationSwitch.isOn = selectedBoard.allowsCustomizations
         enableOrDisableCustomizations(customizationSwitch)
         
-        // update lockSwitch and action settings.
-        lockSwitch.isOn = selectedBoard.getIsLocked()
-        lockOrUnlockFretboard(lockSwitch)
+       
 
         // loads doShowScalesSettings.
         if selectedBoard.doShowScales == 0 {
@@ -770,6 +767,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             accidentalPickerView.isHidden = true
         }
         
+        // update lockSwitch and action settings.
+        lockSwitch.isOn = selectedBoard.getIsLocked()
+        lockOrUnlockFretboard(lockSwitch)
         
         loadPickerViewSelections(doShowScalesIndex: scalesTVC.doShowScales)
         updateScaleSelectionButton()
@@ -902,9 +902,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         modelIndex = myRow
         loadSettingsFromSelectedBoard()
         
-      /*  if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
+        if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
             addNotesAction()
-        } */
+        }
         updateFretboardView()
         
         //}
@@ -1520,9 +1520,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         else {
             
-            /*if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
+            if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
                 addNotesAction()
-            } */
+            }
             // Otherwise, just load the settings.
             updateFretboardView()
             hideOrShowEditTableViewButton()
