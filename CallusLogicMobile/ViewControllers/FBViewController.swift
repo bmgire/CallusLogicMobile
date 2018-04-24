@@ -61,6 +61,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     //###################################
   
     //###################################
+  
+    //###################################
     // Array Variables
     //############
    
@@ -549,8 +551,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         collectionsTVC.delegate = self
         
         productStore.fbCollectionStore = fbCollectionStore
-        
-  
     }
     
     func hideOrShowEditTableViewButton() {
@@ -584,7 +584,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             
             doBuildNoteViews = false
         }
-        
     }
 
   
@@ -707,8 +706,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             
         }
         
+        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
     }
     
+
     //############
     func updateFretboardView() {
         // print(#function) // Displays function when called.
@@ -728,6 +729,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
     }
     
+
 
     
     //#############
@@ -774,7 +776,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         loadPickerViewSelections(doShowScalesIndex: scalesTVC.doShowScales)
         updateScaleSelectionButton()
         
-
         
         // loadUserColor
         colorButton.backgroundColor = selectedBoard.getUserColor()
@@ -1485,6 +1486,38 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
 
     
+    func displayCantMakePaymentsAlert () {
+        let title = "App Store Unavailable"
+        let message = "Payments cannot be made at this time. Please check your restriction settings."
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        let dismissInternetAlertAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+        ac.addAction(dismissInternetAlertAction)
+        
+        present(ac, animated: true, completion: nil)
+    }
+    
+    func updateScaleButtonAndAddNotes(scaleOrChord: String) {
+        // print(#function) // Displays function when called.
+        scaleSelectionButton.setTitle(scaleOrChord, for: .normal)
+        scaleSelectionButton.setNeedsDisplay()
+        
+        if scalesTVC.doShowScales == 0 {
+            selectedBoard.scaleSettings.scaleOrChord = scaleOrChord
+        }
+            
+        else if scalesTVC.doShowScales == 1 {
+            selectedBoard.chordSettings.scaleOrChord = scaleOrChord
+        }
+            
+        else {
+            selectedBoard.basicChordSettings.scaleOrChord = scaleOrChord
+        }
+        addNotesAction()
+    }
+
+    
     //###########################
     // colorSelectorTVCDelegate Method
     // use the color for note selections or additions.
@@ -1511,7 +1544,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         loadSettingsFromSelectedBoard()
         
-        
         tableView.reloadData()
         // If the collection is new add notes,
         if isNewCollection {
@@ -1523,6 +1555,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
                 addNotesAction()
             }
+
             // Otherwise, just load the settings.
             updateFretboardView()
             hideOrShowEditTableViewButton()

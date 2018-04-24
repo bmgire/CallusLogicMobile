@@ -81,15 +81,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Save data.
         // Save all data.
         let success = fbCollectionStore.saveChanges()
-     
+
         if (success) {
             print("Saved all of the Items")
         } else {
             print("Could not save any of the Items")
         }
     } 
-    
-    
-
 }
 

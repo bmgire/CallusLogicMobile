@@ -12,10 +12,9 @@ import Foundation
 // This class is almost completely copied from BNR Homepwner. 
 class FBCollectionStore {
     var arrayOfFBCollections = [FBCollectionModel]()
-    var savedCollectionIndex = 0
-    
-    var allowsPro = true
-    
+    var savedCollectionIndex = 0  
+    var allowsPro = false
+  
     
     // the return value is a URL
     let collectionArchiveURL: URL = {

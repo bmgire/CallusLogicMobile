@@ -29,7 +29,6 @@ class BasicChordFormulas {
                               arrayOfChordFingerings: ["", "O", "M", "R", "I", "O"],
                               arpeggioToBuildChordFrom: "Minor Arpeggio")
         
-        
         createChordShapeModel(fullRoot: "A",
                               chordName: "7 Chord",
                               arrayOfIntervals: ["", "root", "P5", "m7", "M3", "P5"],
@@ -166,6 +165,7 @@ class BasicChordFormulas {
                                arrayOfChordFingerings: [String],
                              //  arrayOfInvalidRootNotes: [String],
                              //  alternateChordShapeName: String,
+
                                arpeggioToBuildChordFrom: String) {
         
         let model = BasicChordModel()
@@ -174,6 +174,7 @@ class BasicChordFormulas {
         model.shapeModel.arrayOfFingers = arrayOfChordFingerings
     //    model.shapeModel.arrayOfInvalidRootNotes = arrayOfInvalidRootNotes
      //   model.shapeModel.alternateChordShapeName = alternateChordShapeName
+
         model.shapeModel.arpeggioToBuildChordFrom = arpeggioToBuildChordFrom
         
          let name = fullRoot + chordName

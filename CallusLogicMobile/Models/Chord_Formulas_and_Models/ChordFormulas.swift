@@ -496,12 +496,15 @@ class ChordFormulas {
     // This funct might not be needed. 
   /*  func getInvalidChordNamesForRoot(fullRoot: String)-> [String] {
       /*  var arrayOfInvalidChordNamesForRoot = [String]()
+
         
         for (shapeName, chordShapeModel) in dictOfChordNamesAndShapes {
             if chordShapeModel.arrayOfInvalidRootNotes.contains(fullRoot) {
                 arrayOfInvalidChordNamesForRoot.append(shapeName)
             }
         }
+
         return arrayOfInvalidChordNamesForRoot   */
-    } */
+    } */ 
+
 }

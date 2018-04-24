@@ -21,7 +21,6 @@ class SixTones {
     let arrayOfNoteFrequencies = NoteFrequencies().arrayOfNoteFrequencies
     let arrayOfNoteAmplitudes = NoteFrequencies().arrayOfAmplitudes
     
-    
     var allowsRampUp = true
     
     init() {
@@ -38,6 +37,7 @@ class SixTones {
         }
     }
     
+
     
     func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int) {
        // print(#function)

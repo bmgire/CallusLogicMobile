@@ -45,6 +45,7 @@
 		B5E95BC32075406D0017A205 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E95BC22075406D0017A205 /* StoreKit.framework */; };
 		B5E95BC5207564C50017A205 /* UnlockProViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5E95BC4207564C50017A205 /* UnlockProViewController.swift */; };
 		B5EDA618203F598A0012DC79 /* ColorSelectorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */; };
+		C16C089E6FE7B3E6E93632A2 /* Pods_CallusLogicMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03628BC5EDA1598D9B46C071 /* Pods_CallusLogicMobile.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		B5E95BC22075406D0017A205 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B5E95BC4207564C50017A205 /* UnlockProViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockProViewController.swift; sourceTree = "<group>"; };
 		B5EDA617203F598A0012DC79 /* ColorSelectorTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectorTVC.swift; sourceTree = "<group>"; };
+		F3C654F0994C6FC098202998 /* Pods-CallusLogicMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +264,7 @@
 		B55D51F91FE1F22600CB5F11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
 				B52DD17F204E127A00C7D9B3 /* FBCollectionModel.swift */,
 				B5786ED71FE32D3D00174544 /* FretboardModel.swift */,
 				B5786ED81FE32D3D00174544 /* NoteModel.swift */,

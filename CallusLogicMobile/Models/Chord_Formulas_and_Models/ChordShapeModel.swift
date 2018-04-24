@@ -16,6 +16,7 @@ class ChordShapeModel {
     var arrayOfOpenStringFingers = ["", "", "", "", "", ""]
     var arrayOfRootNotesForOpenStringFingers = [String]()
    // var alternateChordShapeName = ""
+
     var arpeggioToBuildChordFrom = ""
 }
 

@@ -44,6 +44,7 @@ class FretboardModel: NSObject, NSCoding {
         // Encode arrayOfNoteModels
         
         for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
+
             aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
         
@@ -149,6 +150,7 @@ class FretboardModel: NSObject, NSCoding {
             // Build 77 item array of NoteModels.
             var temp : [NoteModel] = []
             for _ in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
+
                 temp.append(NoteModel())
             }
             swap(&arrayOfNoteModels, &temp)
@@ -271,6 +273,7 @@ class FretboardModel: NSObject, NSCoding {
             for fretIndex in 0..<FretboardValues.notesPerString.rawValue {
                 
                 let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * FretboardValues.notesPerString.rawValue]
+
                 // If there is a note for the chord along that string.
                 if chordFormula[stringIndex] == "" {
                     
