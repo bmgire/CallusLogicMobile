@@ -38,7 +38,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                                          "Major Chord (v4)",
                                          "A Chord", "Am Chord", "A7 Chord"]
     
-    let arrayOfScaleDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-36"]
+    let arrayOfScaleDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-39"]
     let arrayOfChordDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
@@ -58,6 +58,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     let collectionsTVC = CollectionsTVC()
     
     
+    //###################################
+  
     //###################################
   
     //###################################
@@ -139,11 +141,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 let view = self.fretboardView.arrayOfNoteViews[viewNumber]
                 view.flash()
             })
-            //sixTonesController.limitedDurationPlay(stringIndex, zeroTo36Number: zeroTo36Number)
-            //sixTonesController.rampUpStart(stringIndex, zeroTo36Number: zeroTo36Number)
-           // let view = fretboardView.arrayOfNoteViews[viewNumber]
-            //view.flash()
-            //sixTonesController.rampDownStop(stringIndex)
         }
     
     }
@@ -188,7 +185,6 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             scalesTVC.updateSelectedScaleOrChord(scaleOrChord: selectedBoard.basicChordSettings.scaleOrChord)
             //scalesTVC.updateSelectedScaleOrChord(index: selectedBoard.basicChordSelectedRow)
             scaleSelectionButton.setTitle(scalesTVC.selectedBasicChord, for: .normal)
-            
             
             rootPickerView.isHidden = true
             accidentalPickerView.isHidden = true
@@ -436,8 +432,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         colorButton.isHidden = isLocked
         colorButtonBorderView.isHidden = isLocked
         selectedBoard.setIsLocked(isLocked)
-      
-        // I will keep the displaymode picker available.
+        // I will keep the displaymode picker available at all times.
         
     }
     
@@ -528,9 +523,15 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         loadSettingsFromSelectedBoard()
         
         hideOrShowEditTableViewButton()
-        
+       
         AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
-        AudioKit.start()
+        
+        
+        do {
+            try AudioKit.start()
+        } catch {
+            print("Audiokit did not start")
+        }
         
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -539,6 +540,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         } catch {
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
+        
+       
         
         scalesTVC.delegate = self
         colorSelectorTVC.delegate = self
@@ -703,8 +706,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             
         }
         
+        fretboardView.updateSubviews(selectedBoard.getFretboardArray(), displayMode: displayMode)
     }
     
+
     //############
     func updateFretboardView() {
         // print(#function) // Displays function when called.
@@ -725,6 +730,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
 
+
     
     //#############
     // Loads settings from the selected board.
@@ -739,14 +745,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         customizationSwitch.isOn = selectedBoard.allowsCustomizations
         enableOrDisableCustomizations(customizationSwitch)
         
-        // update lockSwitch and action settings.
-        lockSwitch.isOn = selectedBoard.getIsLocked()
-        lockOrUnlockFretboard(lockSwitch)
-        
-        
-        //rootPickerView.selectRow(selectedBoard.rootNote, inComponent: 0, animated: true)
-        //accidentalPickerView.selectRow(selectedBoard.accidental, inComponent: 0, animated: true)
-        
+       
+
         // loads doShowScalesSettings.
         if selectedBoard.doShowScales == 0 {
             doShowScalesControl.selectedSegmentIndex = 0
@@ -769,11 +769,13 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             accidentalPickerView.isHidden = true
         }
         
+        // update lockSwitch and action settings.
+        lockSwitch.isOn = selectedBoard.getIsLocked()
+        lockOrUnlockFretboard(lockSwitch)
         
         loadPickerViewSelections(doShowScalesIndex: scalesTVC.doShowScales)
         updateScaleSelectionButton()
         
-
         
         // loadUserColor
         colorButton.backgroundColor = selectedBoard.getUserColor()
@@ -900,6 +902,10 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let myRow = indexPath.row
         modelIndex = myRow
         loadSettingsFromSelectedBoard()
+        
+        if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
+            addNotesAction()
+        }
         updateFretboardView()
         
         //}
@@ -1231,10 +1237,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         // print(#function) // Displays function when called.
         
+        
         for touch in touches {
             if let noteView = getNoteViewOrNil(touch.view) {
                 if noteView.isDisplayed {
-                     sixTonesController.rampDownStop(noteView.stringNumber)
+                    let zeroTo39Number = Int(selectedBoard.getFretboardArray()[noteView.viewNumber].getNumber0to39())!
+                    
+                    
+                    sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
                 }
             }
         }
@@ -1242,8 +1252,14 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // Turn off all notes in the stored in the dictionary.
         // Maybe I should be removing dictionary entries when they are turned off. Maybe?
         for (noteViewNumber, _) in dictOfTouchedNoteViewNumbers {
-            let stringNumber = fretboardView.arrayOfNoteViews[noteViewNumber].stringNumber
-            sixTonesController.rampDownStop(stringNumber)
+            
+            let view = fretboardView.arrayOfNoteViews[noteViewNumber]
+            let stringNumber = view.stringNumber
+            
+            
+            let zeroTo39Number = Int(selectedBoard.getFretboardArray()[view.viewNumber].getNumber0to39())!
+            
+            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
         }
         dictOfTouchedNoteViewNumbers.removeAll()
         super.touchesEnded(touches, with: event)
@@ -1281,7 +1297,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                         // if the dictionary canTouchView bool is false, update to true
                         if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
                             dictOfTouchedNoteViewNumbers[noteViewNumber] = true
-                            sixTonesController.rampDownStop(noteView.stringNumber)
+                            let zeroTo39Number = Int(noteModel.getNumber0to39())!
+                            sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
                         }
                     }
                 }
@@ -1354,7 +1371,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                 noteView.flash()
             }
         } else {
-            sixTonesController.rampDownStop(stringNumber)
+            let zeroTo39Number = Int(noteModel.getNumber0to39())!
+            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
         }
        
         dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false
@@ -1364,7 +1382,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // print(#function) // Displays function when called.
         // Get zeroTo46Number
         
-        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to36())!
+        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to39())!
     }
     
     //###########################
@@ -1468,6 +1486,38 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
 
     
+    func displayCantMakePaymentsAlert () {
+        let title = "App Store Unavailable"
+        let message = "Payments cannot be made at this time. Please check your restriction settings."
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        
+        let dismissInternetAlertAction = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+        ac.addAction(dismissInternetAlertAction)
+        
+        present(ac, animated: true, completion: nil)
+    }
+    
+    func updateScaleButtonAndAddNotes(scaleOrChord: String) {
+        // print(#function) // Displays function when called.
+        scaleSelectionButton.setTitle(scaleOrChord, for: .normal)
+        scaleSelectionButton.setNeedsDisplay()
+        
+        if scalesTVC.doShowScales == 0 {
+            selectedBoard.scaleSettings.scaleOrChord = scaleOrChord
+        }
+            
+        else if scalesTVC.doShowScales == 1 {
+            selectedBoard.chordSettings.scaleOrChord = scaleOrChord
+        }
+            
+        else {
+            selectedBoard.basicChordSettings.scaleOrChord = scaleOrChord
+        }
+        addNotesAction()
+    }
+
+    
     //###########################
     // colorSelectorTVCDelegate Method
     // use the color for note selections or additions.
@@ -1501,6 +1551,11 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             addNotesAction()
         }
         else {
+            
+            if selectedBoard.getIsLocked() == false && selectedBoard.allowsCustomizations == false {
+                addNotesAction()
+            }
+
             // Otherwise, just load the settings.
             updateFretboardView()
             hideOrShowEditTableViewButton()

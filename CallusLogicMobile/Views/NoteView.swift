@@ -153,6 +153,8 @@ class NoteView: UIView {
             // define a font.
             let font = UIFont.systemFont(ofSize: noteFontSize)
             
+           
+            
             // Attributes for drawing.
             let attrs = [
                 NSAttributedStringKey.foregroundColor: UIColor.black,
@@ -164,6 +166,22 @@ class NoteView: UIView {
             
             //Draw Note
             attributedNote = NSMutableAttributedString(string: displayText, attributes: attrs)
+            
+            // Test if the font needs to be changed.
+            if displayText.count > 2 {
+                if bounds.size.width * 0.80 < attributedNote.size().width {
+                    // Create new font and attributes,
+                    let newFont = UIFont.systemFont(ofSize: 18)
+                    let newAttrs = [NSAttributedStringKey.foregroundColor: UIColor.black,
+                                    NSAttributedStringKey.font: newFont,
+                                    NSAttributedStringKey.paragraphStyle: paraStyle]
+                    
+                    // set the attributedNote to those new attributes.
+                    attributedNote = NSMutableAttributedString(string: displayText, attributes: newAttrs)
+                }
+            }
+            
+            
             attributedNote.drawCenterCustomInRect(bounds, withAttributes: attrs)
         
         }

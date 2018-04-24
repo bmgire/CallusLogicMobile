@@ -24,41 +24,47 @@ class SixTones {
     var allowsRampUp = true
     
     init() {
-            createArrayOfOscillators()
-        
+        createArrayOfOscillators()
     }
     
     // Create 1 oscillator for each string.
     func createArrayOfOscillators() {
         for _ in 0...5 {
+            //let os = AKOscillator()
             let os = AKOscillator(waveform: square)
             os.amplitude = 0
-            //os.frequency = 660 + index * 40
-            os.start()
             arrayOfOscillators.append(os)
         }
     }
     
-    func rampUpStart(_ index: Int, zeroTo36Number: Int) {
+
+    
+    func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int) {
+       // print(#function)
+        
         if allowsRampUp {
-            let os = arrayOfOscillators[index]
-           /* if os.rampTime == 0.8 {
-                os.rampTime = 0
-                os.amplitude = 0
-            } */
+            let os = arrayOfOscillators[stringIndex]
             
-            os.rampTime = 0.005
+            os.stop()
+            os.rampTime =  0 // 0.005
+            os.start()
+           
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
+
         }
-        
-        
     }
     
-    func rampDownStop(_ stringIndex: Int) {
+    func rampDownStop(_ stringIndex: Int, zeroTo36Number: Int) {
+        // print(#function)
         let os = arrayOfOscillators[stringIndex]
-        os.rampTime = 0.8
-        os.amplitude = 0
+        
+        let freqToStop = arrayOfNoteFrequencies[zeroTo36Number]
+        if os.frequency == freqToStop {
+            os.rampTime = 0.8
+            os.amplitude = 0
+        }
+        
         
     }
     
@@ -67,32 +73,41 @@ class SixTones {
             allowsRampUp = false
             os.amplitude = 0
             os.stop()
-            
         }
     }
     
     func startPlayingAllNotes() {
         for os in arrayOfOscillators {
             allowsRampUp = true
+            
+            
+            
+            
             os.amplitude = 0
-            os.start()
+            os.rampTime = 0
+            
+            // All os's are being started in function call appDidBecomeActive.
+            // This is to help stop then restart the notes when the app becomes inactive.
+            // Preventing notes from gettings stuck playing.
+            //os.start()
             
         }
     }
     
-    func limitedDurationPlay(_ index: Int, zeroTo36Number: Int) {
+    func limitedDurationPlay(_ stringIndex: Int, zeroTo36Number: Int) {
         if allowsRampUp {
-            let os = arrayOfOscillators[index]
-            
-            os.rampTime = 0.01
-            os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
+            let os = arrayOfOscillators[stringIndex]
+            os.stop()
+            os.rampTime =  0.005
+            os.start()
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
             os.amplitude = amplitude * 0.54
+            os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                self.rampDownStop(index)
+                self.rampDownStop(stringIndex, zeroTo36Number: zeroTo36Number)
             })
             
         }

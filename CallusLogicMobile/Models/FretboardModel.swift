@@ -10,9 +10,9 @@ import UIKit
 
 class FretboardModel: NSObject, NSCoding {
     
-    let NOTES_PER_STRING = 13
-    let NOTES_ON_FRETBOARD = 78
-    let offset = 12
+  //  let NOTES_PER_STRING = 15
+  //  let NOTES_ON_FRETBOARD = 90
+  //  let offset = 12
     
     // Offsets for toneNumber for each open string in standard tuning.
     let offsets = [12, 17, 22, 27, 31, 36]
@@ -43,7 +43,8 @@ class FretboardModel: NSObject, NSCoding {
         
         // Encode arrayOfNoteModels
         
-        for index in 0...77 {
+        for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
+
             aCoder.encode(arrayOfNoteModels[index], forKey: "noteModel\(index)")
         }
         
@@ -68,10 +69,37 @@ class FretboardModel: NSObject, NSCoding {
     //##########################################################
     required init?(coder aDecoder: NSCoder) {
         
+        //var tempArrayOfNoteModels = [NoteModel]()
         // Decode fretboardArray
-        for index in 0...77 {
-            if let noteModel = aDecoder.decodeObject(forKey: "noteModel\(index)"){
-                arrayOfNoteModels.append(noteModel as! NoteModel)
+        for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
+            
+            if let noteModel = aDecoder.decodeObject(forKey: "noteModel\(index)") as? NoteModel {
+                arrayOfNoteModels.append(noteModel)
+            }
+          /*  else {
+                arrayOfNoteModels.append(NoteModel())
+            } */
+            
+        }
+    
+        // Check the number of arrays written to the tempArrayOfNoteModels
+        let count = arrayOfNoteModels.count
+        
+        // If the number doesn't match what is needed. Insert new NoteModels.
+        if count != FretboardValues.totalNotesOnFretboard.rawValue {
+            // If count is for 12 Notes
+            if count == FretboardValues.twelveFretsTotalNotesOnFretboard.rawValue {
+                
+                let neededNotesPerString = FretboardValues.notesPerString.rawValue
+                let insertPosition = FretboardValues.twelveFretsNotesPerString.rawValue
+                
+                for stringIndex in 0...5 {
+                   
+                    for insertAddition in 0...2 {
+                        let location = neededNotesPerString * stringIndex + insertPosition + insertAddition
+                        arrayOfNoteModels.insert(NoteModel(), at: location)
+                    }
+                }
             }
         }
 
@@ -121,7 +149,8 @@ class FretboardModel: NSObject, NSCoding {
         if arrayOfNoteModels.count == 0 {
             // Build 77 item array of NoteModels.
             var temp : [NoteModel] = []
-            for _ in 0...77 {
+            for _ in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1 {
+
                 temp.append(NoteModel())
             }
             swap(&arrayOfNoteModels, &temp)
@@ -135,7 +164,7 @@ class FretboardModel: NSObject, NSCoding {
         for note in arrayOfNoteModels {
             note.setFretNumber(String(fret))
             fret += 1
-            if fret == NOTES_PER_STRING {
+            if fret == FretboardValues.notesPerString.rawValue {
                 fret = 0
             }
         }
@@ -151,14 +180,14 @@ class FretboardModel: NSObject, NSCoding {
         // For each string
         for stringIndex in 0...5 {
             // For each fret along the string.
-            for fretIndex in 0...NOTES_PER_STRING - 1 {
+            for fretIndex in 0...FretboardValues.notesPerString.rawValue - 1 {
                 //get the array values and plug update the fretboard model.
                 
                 let toneIndex = fretIndex + offsets[stringIndex]
-                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING] //{
+                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * FretboardValues.notesPerString.rawValue] //{
                 
                 noteModel.setNumber0to11(anArrayOfToneArrays[0][toneIndex])
-                noteModel.setNumber0to36(anArrayOfToneArrays[1][toneIndex])
+                noteModel.setNumber0to39(anArrayOfToneArrays[1][toneIndex])
                 noteModel.setNote(anArrayOfToneArrays[2][toneIndex])
                 noteModel.setInterval(anArrayOfToneArrays[3][toneIndex])
                 noteModel.setChordFinger("")
@@ -208,7 +237,7 @@ class FretboardModel: NSObject, NSCoding {
     
     func copyModelData(importModel: NoteModel, modelToUpdate: NoteModel) {
         modelToUpdate.setNumber0to11(importModel.getNumber0to11())
-        modelToUpdate.setNumber0to36(importModel.getNumber0to36())
+        modelToUpdate.setNumber0to39(importModel.getNumber0to39())
         modelToUpdate.setNote(importModel.getNote())
         modelToUpdate.setInterval(importModel.getInterval())
         modelToUpdate.setChordFinger(importModel.getChordFinger())
@@ -241,9 +270,10 @@ class FretboardModel: NSObject, NSCoding {
             // Search all the frets for the interval.
             var noteHasNotBeenFound = true
             
-            for fretIndex in 0..<NOTES_PER_STRING  {
+            for fretIndex in 0..<FretboardValues.notesPerString.rawValue {
                 
-                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * NOTES_PER_STRING]
+                let noteModel = arrayOfNoteModels[fretIndex  + stringIndex * FretboardValues.notesPerString.rawValue]
+
                 // If there is a note for the chord along that string.
                 if chordFormula[stringIndex] == "" {
                     
@@ -313,8 +343,10 @@ class FretboardModel: NSObject, NSCoding {
         // Find the notes on the zero fret and move to the 12th.
             for index in 0..<arrayOfNoteModels.count {
                 let noteModel = arrayOfNoteModels[index]
-                // If the noteModel is displayed and the fretnumber value is "0"
-                if noteModel.getIsDisplayed() && noteModel.getFretNumber() == "0" {
+                let fretNumber = noteModel.getFretNumber()
+                // If the noteModel is displayed and the fretnumber value is "0" or "1"
+                if noteModel.getIsDisplayed() &&
+                    (fretNumber == "0" || fretNumber == "1" || fretNumber == "2" || fretNumber == "3") {
                     // Do note display noteModel
                     noteModel.setIsDisplayed(false)
                     // Do display the model 1 octave up.

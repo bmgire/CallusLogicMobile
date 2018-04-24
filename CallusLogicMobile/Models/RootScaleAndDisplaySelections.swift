@@ -10,6 +10,12 @@ import UIKit
 
 class RootScaleAndDisplaySelections: NSObject, NSCoding {
     
+    var root = ""
+    var accidental = ""
+    var scaleOrChord = ""
+    // Specifying the data type just to be extra clear.
+    var displayMode: DisplayMode = DisplayMode.notes
+    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(root as String? , forKey: "root")
         aCoder.encode(accidental as String? , forKey: "accidental")
@@ -31,18 +37,23 @@ class RootScaleAndDisplaySelections: NSObject, NSCoding {
             self.scaleOrChord = scaleOrChord
         }
         
+        // if let to get the DisplayMode as a string.
         if let rawDisplayMode = aDecoder.decodeObject(forKey: "rawDisplayMode") as? String {
+            // Convert the string displayMode into the enum.
             if let displayMode = DisplayMode(rawValue: rawDisplayMode) {
                 self.displayMode = displayMode
+            }
+            // If the DisplayMode rawValue conversion didn't work,
+            // it's likely because the user is had the 0-36 number rather than the 0to39 number enum.
+            // Check the text, if it is 0-36, use the 0-39
+            else if rawDisplayMode == "Numbers 0-36" {
+                self.displayMode = DisplayMode.numbers0to39
+                
             }
         }
     }
     
-    var root = ""
-    var accidental = ""
-    var scaleOrChord = ""
-    // Specifying the data type just to be extra clear. 
-    var displayMode: DisplayMode = DisplayMode.notes
+  
     
     init(root: String, accidental: String, scaleOrChord: String, displayMode: DisplayMode) {
         self.root = root
