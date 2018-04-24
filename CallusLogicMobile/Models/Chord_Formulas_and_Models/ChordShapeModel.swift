@@ -11,12 +11,11 @@ import Foundation
 class ChordShapeModel {
     
     var arrayOfIntervals = [String]()
-   // var arrayOfInvalidRootNotes = [String]()
+    var arrayOfInvalidRootNotes = [String]()
     var arrayOfFingers = ["", "", "", "", "", ""]
     var arrayOfOpenStringFingers = ["", "", "", "", "", ""]
     var arrayOfRootNotesForOpenStringFingers = [String]()
-   // var alternateChordShapeName = ""
-
+    var alternateChordShapeName = ""
     var arpeggioToBuildChordFrom = ""
 }
 

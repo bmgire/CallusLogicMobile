@@ -11,7 +11,7 @@ class NoteModel : NSObject, NSCoding {
    // The position of the note on the entire fretboard. 0-77
     fileprivate var note = ""
     fileprivate var number0to11 = ""
-    fileprivate var number0to39 = ""
+    fileprivate var number0to36 = ""
     fileprivate var interval = ""
     fileprivate var fretNumber = ""
     fileprivate var chordFinger = ""
@@ -27,7 +27,7 @@ class NoteModel : NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(note as String?, forKey: "note")
         aCoder.encode(number0to11 as String?, forKey: "number0to11")
-        aCoder.encode(number0to39 as String?, forKey: "number0to39")
+        aCoder.encode(number0to36 as String?, forKey: "number0to36")
         aCoder.encode(interval as String?, forKey: "interval")
         aCoder.encode(fretNumber as String?, forKey: "fretNumber")
         aCoder.encode(chordFinger as String?, forKey: "chordFinger")
@@ -47,19 +47,12 @@ class NoteModel : NSObject, NSCoding {
             self.number0to11 = number0to11
         }
         
-        // try to get the number0to39 which is a string.
-        if let number0to39 = aDecoder.decodeObject(forKey: "number0to39") as? String {
-            self.number0to39 = number0to39
-            
-            // otherwise try to read the number0to36, if successfull write that string to number0to39
-        }   else if let number0to36 = aDecoder.decodeObject(forKey: "number0to36") as? String {
-            self.number0to39 = number0to36
+        if let number0to36 = aDecoder.decodeObject(forKey: "number0to36") as? String {
+            self.number0to36 = number0to36
         }
-        
         if let interval = aDecoder.decodeObject(forKey: "interval") as? String {
             self.interval = interval
         }
-        
         if let fretNumber = aDecoder.decodeObject(forKey: "fretNumber") as? String {
             self.fretNumber = fretNumber
         }
@@ -113,12 +106,12 @@ class NoteModel : NSObject, NSCoding {
         number0to11 = newNumber
     }
     
-    func getNumber0to39()-> String {
-        return number0to39
+    func getNumber0to36()-> String {
+        return number0to36
     }
     
-    func setNumber0to39(_ newNumber: String) {
-        number0to39 = newNumber
+    func setNumber0to36(_ newNumber: String) {
+        number0to36 = newNumber
     }
     
     func getInterval()-> String {
@@ -179,7 +172,7 @@ class NoteModel : NSObject, NSCoding {
     func setNoteModel(_ newModel: NoteModel) {
         note = newModel.getNote()
         number0to11 = newModel.getNumber0to11()
-        number0to39 = newModel.getNumber0to39()
+        number0to36 = newModel.getNumber0to36()
         interval = newModel.getInterval()
         if newModel.fretNumber != ""{
           fretNumber = newModel.getFretNumber()

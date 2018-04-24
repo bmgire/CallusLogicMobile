@@ -10,54 +10,49 @@ import UIKit
 
 class FretboardView: UIImageView {
     
-  //  let NOTES_PER_STRING = 15
- //   let NOTES_ON_FRETBOARD =  90
+    let NOTES_PER_STRING = 13
+    let NOTES_ON_FRETBOARD =  78
     let NUMBER_OF_STRINGS = 6
     
-    let offsets = [0, 16, 32, 48, 64, 80]
+    let offsets = [0, 13, 26, 39, 52, 65]
     
    // let noteView = NoteView()
     //#####################################
     // right handed fretboardView dimensions. 1092 * 307
     
     let fretPositions: [CGFloat] =
-            [-0.004, // 0
-            0.063,
-            0.146,
-            0.225, // 3
-            0.301,
-            0.374, // 5
-            0.446,
-            0.514, // 7
-            0.581,     /// I'm leaving off here
-            0.643,
-            0.701, // 10
-            0.757,
-            0.811, // 12
-            0.862,
-            0.910, // 14
-            0.955]
+            [0, // 0
+            0.086,
+            0.182,
+            0.274, // 3
+            0.360,
+            0.445, // 5
+            0.525,
+            0.60, // 7
+            0.671,
+            0.743,
+            0.81, // 10
+            0.875,
+            0.94] // 12
     
     //#####################################
 
     
     let noteWidths: [CGFloat] =
-        [0.65,
+        [0.725,
         1.0,
         1.0,
         1.0, // 3
         1.0,
         1.0,
-        0.95, //6
-        0.92,
+        1.0, //6
+        1.0,
+        1.0,
+        0.95,
+        0.9,
         0.85,
-        0.81, // 9
-        0.77,
-        0.74,
-        0.69, // 12
-        0.65,
-        0.59, // 14
-        0.55]
+        0.80]
+    
     
     //#####################################
     // Radians for guitar string rotation, ordered from lowest pitched string to highest.
@@ -92,8 +87,52 @@ class FretboardView: UIImageView {
     //#####################################
     override func awakeFromNib() {
         
+        // Build rects for each guitar string of notes.
+       
+        /*
+        for index in 0...5{
+            buildNoteRects(stringHeightMultipliers[index], radians: radians[index])
+       }
+ 
+ */
+     /*   buildNoteRects()
+        buildNoteViews()
+        addSubviews()
+ */
+        
+        
+        
+        
+        
+        
+        /*    let point = CGPoint(x: 66, y: 220)
+        let size = CGSize(width: 88, height: 40)
+        
+        
+        // the frame has to be set for the noteView, or it screws up.
+        // previously I was setting the noteView.bounds property but that wasn't working
+        
+        noteView.frame = CGRect(origin: point, size: size)
+        
+        // OMG!!! isOpaque needs to be set to false so the note will not include a black background.
+        // I don't know why that is.
+        noteView.isOpaque = false
+        
+        addSubview(noteView)
+ 
+         */
+        
     }
     
+
+/*    fileprivate func buildNoteRects() {
+        var array = [CGRect]()
+        for _ in 0...NOTES_ON_FRETBOARD - 1 {
+            array.append(CGRect())
+        }
+        arrayOfNoteRects = array
+    }
+  */
     //#####################################
     // update Note Rects. Build 13 rects and reuse them on each string.
     func buildNoteRects()  {
@@ -112,7 +151,7 @@ class FretboardView: UIImageView {
             var noteX = CGFloat(0)
             
             // For all notes on 1 string.
-            for index in 0...FretboardValues.notesPerString.rawValue - 1 {
+            for index in 0...NOTES_PER_STRING - 1 {
                 
                 // Calculate the X position.
                 noteX = width * fretPositions[index]
@@ -134,10 +173,10 @@ class FretboardView: UIImageView {
         for stringIndex in 0...5 {
             
             // rectIndex is the index of each notes rect on each guitar string.
-            for noteIndex in 0...FretboardValues.notesPerString.rawValue - 1 {
+            for noteIndex in 0...(NOTES_PER_STRING - 1) {
                 let note = NoteView()
                 
-                let index = noteIndex + stringIndex * FretboardValues.notesPerString.rawValue
+                let index = noteIndex + stringIndex * NOTES_PER_STRING
                 
                 // Update the appropriate frame.
                 note.frame = arrayOfNoteRects[index]
@@ -166,7 +205,7 @@ class FretboardView: UIImageView {
 
     // Updates the contents of each noteView.
     func updateSubviews(_ fretboardArray: [NoteModel], displayMode: DisplayMode) {
-        for index in 0...FretboardValues.totalNotesOnFretboard.rawValue - 1  {
+        for index in 0...NOTES_ON_FRETBOARD - 1  {
             let view = subviews[index] as! NoteView
             let noteModel = fretboardArray[index]
             
@@ -179,8 +218,8 @@ class FretboardView: UIImageView {
                 displayText = noteModel.getInterval()
             case .numbers0to11:
                 displayText = noteModel.getNumber0to11()
-            case .numbers0to39:
-                displayText = noteModel.getNumber0to39()
+            case .numbers0to36:
+                displayText = noteModel.getNumber0to36()
             case .chordFingers:
                 displayText = noteModel.getChordFinger()
             default:
@@ -189,6 +228,7 @@ class FretboardView: UIImageView {
             
             // Update noteView
             view.updateNoteView(noteModel, display: displayText)
+            
         }
     }
     
@@ -206,7 +246,7 @@ class FretboardView: UIImageView {
         var arrayOfViewNumbers = [Int]()
         var arrayOfStringIndexes = [Int]()
         for stringIndex in 0..<NUMBER_OF_STRINGS {
-            for fretIndex in stride(from: (FretboardValues.notesPerString.rawValue - 1), through: 0, by: -1) {
+            for fretIndex in stride(from: (NOTES_PER_STRING - 1), through: 0, by: -1) {
                 
                 let view =  arrayOfNoteViews[offsets[stringIndex] + fretIndex]
                 if view.isDisplayed {

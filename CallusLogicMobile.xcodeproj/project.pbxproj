@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		202CCD16C4B2452137A9179A /* Pods_CallusLogicMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BC523138FBAB60FD1914000 /* Pods_CallusLogicMobile.framework */; };
-		B5053B6E20827F5A00BCF559 /* FretboardValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5053B6D20827F5A00BCF559 /* FretboardValues.swift */; };
 		B5124F20206AC47600E2F814 /* ChordShapeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */; };
 		B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5196C9220324101005A018E /* NoteFrequencies.swift */; };
 		B52A97B42064538A00E056C3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52A97B32064538A00E056C3 /* HeaderView.swift */; };
@@ -66,10 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		18EA96A61000533821DEB2CC /* Pods-CallusLogicMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.release.xcconfig"; sourceTree = "<group>"; };
-		2F4694AA6851A91015C6301D /* Pods-CallusLogicMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.debug.xcconfig"; sourceTree = "<group>"; };
-		4BC523138FBAB60FD1914000 /* Pods_CallusLogicMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CallusLogicMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5053B6D20827F5A00BCF559 /* FretboardValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FretboardValues.swift; sourceTree = "<group>"; };
+		03628BC5EDA1598D9B46C071 /* Pods_CallusLogicMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CallusLogicMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DAF80C7F230D15484CCB005 /* Pods-CallusLogicMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CallusLogicMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		B5124F1F206AC47600E2F814 /* ChordShapeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChordShapeModel.swift; sourceTree = "<group>"; };
 		B5196C9220324101005A018E /* NoteFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteFrequencies.swift; sourceTree = "<group>"; };
 		B52A97B32064538A00E056C3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
@@ -121,7 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5E95BC32075406D0017A205 /* StoreKit.framework in Frameworks */,
-				202CCD16C4B2452137A9179A /* Pods_CallusLogicMobile.framework in Frameworks */,
+				C16C089E6FE7B3E6E93632A2 /* Pods_CallusLogicMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,11 +138,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		58C0E53077E4A7DC92E1A088 /* Pods */ = {
+		354264993DEBCF6EE26DEB3A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2F4694AA6851A91015C6301D /* Pods-CallusLogicMobile.debug.xcconfig */,
-				18EA96A61000533821DEB2CC /* Pods-CallusLogicMobile.release.xcconfig */,
+				7DAF80C7F230D15484CCB005 /* Pods-CallusLogicMobile.debug.xcconfig */,
+				F3C654F0994C6FC098202998 /* Pods-CallusLogicMobile.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -155,18 +151,9 @@
 			isa = PBXGroup;
 			children = (
 				B5E95BC22075406D0017A205 /* StoreKit.framework */,
-				4BC523138FBAB60FD1914000 /* Pods_CallusLogicMobile.framework */,
+				03628BC5EDA1598D9B46C071 /* Pods_CallusLogicMobile.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B5053B6C20827EA800BCF559 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				B5C8172B2048911900C95F26 /* DisplayMode.swift */,
-				B5053B6D20827F5A00BCF559 /* FretboardValues.swift */,
-			);
-			path = Enums;
 			sourceTree = "<group>";
 		};
 		B524E2B52054814800219C5A /* Extensions */ = {
@@ -197,8 +184,8 @@
 				B536C3761FDF855300FD886E /* CallusLogicMobileTests */,
 				B536C3811FDF855300FD886E /* CallusLogicMobileUITests */,
 				B536C3601FDF855300FD886E /* Products */,
+				354264993DEBCF6EE26DEB3A /* Pods */,
 				6FD99C3DB99627BC35882759 /* Frameworks */,
-				58C0E53077E4A7DC92E1A088 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,7 +208,6 @@
 				B524E2B52054814800219C5A /* Extensions */,
 				B536C3661FDF855300FD886E /* Main.storyboard */,
 				B536C36B1FDF855300FD886E /* LaunchScreen.storyboard */,
-				B5053B6C20827EA800BCF559 /* Enums */,
 				B5C4CDF32050D68D0006B560 /* Data */,
 				B57926E22034C4D500272C74 /* ViewControllers */,
 				B52DD17C204E097F00C7D9B3 /* TVCs */,
@@ -272,8 +258,8 @@
 				B55D51F51FE1EE8F00CB5F11 /* RootToIntervalNotes.swift */,
 				B55D51F41FE1EE8E00CB5F11 /* ScalesByIntervals.swift */,
 				B55D51F31FE1EE8E00CB5F11 /* Scale.swift */,
-				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 				B531471F2030BEF30022AAC5 /* SixTones.swift */,
+				B5196C9220324101005A018E /* NoteFrequencies.swift */,
 				B542E6CE2070675300EE0BE2 /* Chord_Formulas_and_Models */,
 				B59A8D262073E60A00223FC8 /* RootScaleAndDisplaySelections.swift */,
 			);
@@ -314,11 +300,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B536C3871FDF855300FD886E /* Build configuration list for PBXNativeTarget "CallusLogicMobile" */;
 			buildPhases = (
-				9AD740D75730EDE0BBC54AF2 /* [CP] Check Pods Manifest.lock */,
+				F1D309CB220BF40B0F51CE46 /* [CP] Check Pods Manifest.lock */,
 				B536C35B1FDF855300FD886E /* Sources */,
 				B536C35C1FDF855300FD886E /* Frameworks */,
 				B536C35D1FDF855300FD886E /* Resources */,
-				AE440C16640C07DC03EDD7A1 /* [CP] Embed Pods Frameworks */,
+				8DF43B24FF80EC81E7A416F0 /* [CP] Embed Pods Frameworks */,
+				4985E01BEE446D31B346474F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -372,7 +359,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Gire;
 				TargetAttributes = {
 					B536C35E1FDF855300FD886E = {
@@ -445,7 +432,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9AD740D75730EDE0BBC54AF2 /* [CP] Check Pods Manifest.lock */ = {
+		4985E01BEE446D31B346474F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DF43B24FF80EC81E7A416F0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-frameworks.sh",
+				"${PODS_ROOT}/AudioKit/iOS/AudioKit.framework",
+				"${PODS_ROOT}/AudioKit/iOS/AudioKitUI.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AudioKitUI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1D309CB220BF40B0F51CE46 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -461,24 +485,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE440C16640C07DC03EDD7A1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyStoreKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CallusLogicMobile/Pods-CallusLogicMobile-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -501,7 +507,6 @@
 				B53F7F9F2075B52E0061E05B /* DetectConnection.swift in Sources */,
 				B57E51F0206D6A3900615DD6 /* BasicChordModel.swift in Sources */,
 				B536C3631FDF855300FD886E /* AppDelegate.swift in Sources */,
-				B5053B6E20827F5A00BCF559 /* FretboardValues.swift in Sources */,
 				B5196C9320324101005A018E /* NoteFrequencies.swift in Sources */,
 				B59A8D272073E60A00223FC8 /* RootScaleAndDisplaySelections.swift in Sources */,
 				B54AFAFF204F3F7E00E8267B /* ScalesTVC.swift in Sources */,
@@ -586,7 +591,6 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -594,7 +598,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -645,7 +648,6 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -653,7 +655,6 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -685,7 +686,7 @@
 		};
 		B536C3881FDF855300FD886E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F4694AA6851A91015C6301D /* Pods-CallusLogicMobile.debug.xcconfig */;
+			baseConfigurationReference = 7DAF80C7F230D15484CCB005 /* Pods-CallusLogicMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -708,7 +709,7 @@
 		};
 		B536C3891FDF855300FD886E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18EA96A61000533821DEB2CC /* Pods-CallusLogicMobile.release.xcconfig */;
+			baseConfigurationReference = F3C654F0994C6FC098202998 /* Pods-CallusLogicMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
