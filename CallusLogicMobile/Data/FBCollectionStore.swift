@@ -14,7 +14,7 @@ class FBCollectionStore {
     var arrayOfFBCollections = [FBCollectionModel]()
     var savedCollectionIndex = 0
     
-    var allowsPro = true
+    var allowsPro = false
     
     
     // the return value is a URL

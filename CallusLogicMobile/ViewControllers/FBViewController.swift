@@ -355,7 +355,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.reloadRows(at: [indexPath], with: .automatic)
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .top)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         } else {
             // I should probably provide a default if the above if let statement fails.
             
