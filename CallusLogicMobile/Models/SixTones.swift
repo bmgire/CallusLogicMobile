@@ -80,9 +80,6 @@ class SixTones {
         for os in arrayOfOscillators {
             allowsRampUp = true
             
-            
-            
-            
             os.amplitude = 0
             os.rampTime = 0
             
