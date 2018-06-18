@@ -1280,24 +1280,31 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     let (noteViewNumber, pointIsInNoteView) = getKeyTestPointHit(noteView, touch: touch)
                     
                     if pointIsInNoteView {
-                        // Check the dictionary for the key,
+                        // Check the dictionary for the noteView number,
                         if let canTouchView = dictOfTouchedNoteViewNumbers[noteViewNumber] {
-                            // respond to canUse value
                             if canTouchView {
                             playOrStopTouchAndUpdateDictionary(noteView, noteModel: noteModel)
+                              //  print("A")
                             }
-                            // Else there is no entry for the key Dictionary record,
-                        } else {
+                        }
+                            
+                        // Else there the point is in the noteView being examined in the for loop and
+                        // there is no entry for the key Dictionary record,
+                        else {
+                            addViewIdToDictionary(noteView)
                             playOrStopTouchAndUpdateDictionary(noteView, noteModel: noteModel)
+                           // print("B")
                         }
                         //Else, the NoteView DOES NOT contain the point
                         // so stop playing a note.
-                    } else {
+                    }
+                    else {
                         // if the dictionary canTouchView bool is false, update to true
                         if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
                             dictOfTouchedNoteViewNumbers[noteViewNumber] = true
                             let zeroTo39Number = Int(noteModel.getNumber0to39())!
                             sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number)
+                            //print("C")
                         }
                     }
                 }
@@ -1305,6 +1312,47 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         super.touchesMoved(touches, with: event)
     }
+    
+    //########################################
+    
+    func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView, noteModel: NoteModel) {
+        // print(#function) // Displays function when called.
+        
+        let allowsCustomizations = selectedBoard.allowsCustomizations
+        // If allows customizations and the fretboard is not locked.
+        if allowsCustomizations && lockSwitch.isOn == false {
+            
+            // Update the noteModel
+            let viewNumber = noteView.viewNumber
+            selectedBoard.updateSingleNoteModel(modelNumber: viewNumber, flipIsGhost: true, flipIsKept: true)
+            // Update the noteView
+            fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: noteModel.getIsGhost(), color: colorButton.backgroundColor!)
+        }
+        
+        // Rampup or rampdown note.
+        let stringNumber = noteView.stringNumber
+        let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
+        if noteModel.getIsGhost() == false || allowsCustomizations == false {
+            sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
+            // only flash if allowsCustomizations == false.
+            if allowsCustomizations == false || lockSwitch.isOn == true {
+                noteView.flash()
+            }
+        } else {
+            let zeroTo39Number = Int(noteModel.getNumber0to39())!
+            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
+        }
+        
+        dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false
+    }
+    
+    func getZeroTo36Number(_ viewNumber: Int)->Int {
+        // print(#function) // Displays function when called.
+        // Get zeroTo46Number
+        
+        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to39())!
+    }
+    
     
     //########################################
     // return a noteView or nil
@@ -1344,45 +1392,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             return (number, noteView.bounds.contains(point) ? true : false)
         
     }
-    //########################################
-    
-    func playOrStopTouchAndUpdateDictionary(_ noteView: NoteView, noteModel: NoteModel) {
-        // print(#function) // Displays function when called.
-        
-        let allowsCustomizations = selectedBoard.allowsCustomizations
-        // If allows customizations and the fretboard is not locked.
-        if allowsCustomizations && lockSwitch.isOn == false {
-            
-            // Update the noteModel
-            let viewNumber = noteView.viewNumber
-            selectedBoard.updateSingleNoteModel(modelNumber: viewNumber, flipIsGhost: true, flipIsKept: true)
-            // Update the noteView
-            fretboardView.updateSingleNoteView(viewNumber: viewNumber, isGhost: noteModel.getIsGhost(), color: colorButton.backgroundColor!)
-        }
-        
-        // Rampup or rampdown note.
-        let stringNumber = noteView.stringNumber
-        let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
-        if noteModel.getIsGhost() == false || allowsCustomizations == false {
-            sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number)
-            // only flash if allowsCustomizations == false.
-            if allowsCustomizations == false || lockSwitch.isOn == true {
-                noteView.flash()
-            }
-        } else {
-            let zeroTo39Number = Int(noteModel.getNumber0to39())!
-            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number)
-        }
-       
-        dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false
-    }
-    
-    func getZeroTo36Number(_ viewNumber: Int)->Int {
-        // print(#function) // Displays function when called.
-        // Get zeroTo46Number
-        
-        return Int(selectedBoard.getFretboardArray()[viewNumber].getNumber0to39())!
-    }
+
     
     //###########################
     // scalesTVCDelegate Method

@@ -21,7 +21,6 @@ class SixTones {
     let arrayOfNoteFrequencies = NoteFrequencies().arrayOfNoteFrequencies
     let arrayOfNoteAmplitudes = NoteFrequencies().arrayOfAmplitudes
     
-    
     var allowsRampUp = true
     
     init() {
@@ -43,15 +42,19 @@ class SixTones {
        // print(#function)
         
         if allowsRampUp {
-            let os = arrayOfOscillators[stringIndex]
             
+            let os = arrayOfOscillators[stringIndex]
+            os.rampDuration =  0
+            os.amplitude = 0
             os.stop()
-            os.rampTime =  0 // 0.005
             os.start()
-           
+            
+            
+           // if arrayOfNoteRampups[stringIndex] == true
+            
             os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
-
+            
         }
     }
     
@@ -60,12 +63,12 @@ class SixTones {
         let os = arrayOfOscillators[stringIndex]
         
         let freqToStop = arrayOfNoteFrequencies[zeroTo36Number]
-        if os.frequency == freqToStop {
-            os.rampTime = 0.8
-            os.amplitude = 0
-        }
         
-        
+            if os.frequency == freqToStop {
+                os.rampDuration = 0.8
+                os.amplitude = 0
+            }
+
     }
     
     func stopPlayingAllNotes() {
@@ -81,7 +84,7 @@ class SixTones {
             allowsRampUp = true
             
             os.amplitude = 0
-            os.rampTime = 0
+            os.rampDuration = 0
             
             // All os's are being started in function call appDidBecomeActive.
             // This is to help stop then restart the notes when the app becomes inactive.
@@ -95,7 +98,7 @@ class SixTones {
         if allowsRampUp {
             let os = arrayOfOscillators[stringIndex]
             os.stop()
-            os.rampTime =  0.005
+            os.rampDuration =  0.005
             os.start()
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
