@@ -27,13 +27,27 @@ class SixTones {
         createArrayOfOscillators()
     }
     
+
     // Create 1 oscillator for each string.
     func createArrayOfOscillators() {
-        for _ in 0...5 {
+        for index in 0...95 {
             //let os = AKOscillator()
             let os = AKOscillator(waveform: square)
             os.amplitude = 0
+            var offset = 0
+                 if index < 16 { offset = 0}
+            else if index < 32 && index > 15 {offset = -11}
+            else if index < 48 && index > 31 {offset = -22}
+            else if index < 64 && index > 47 {offset = -34}
+            else if index < 80 && index > 63 {offset = -45}
+            else {offset = -56}
+            
+            print(index + offset)
+            // Set frequency:
+            os.frequency = arrayOfNoteFrequencies[index + offset]
+         
             arrayOfOscillators.append(os)
+            
         }
     }
     

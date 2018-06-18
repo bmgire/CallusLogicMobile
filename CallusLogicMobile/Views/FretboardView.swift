@@ -14,7 +14,7 @@ class FretboardView: UIImageView {
  //   let NOTES_ON_FRETBOARD =  90
     let NUMBER_OF_STRINGS = 6
     
-    let offsets = [0, 16, 32, 48, 64, 80]
+  let offsets = [0, 16, 32, 48, 64, 80]
     
    // let noteView = NoteView()
     //#####################################
