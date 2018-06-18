@@ -38,11 +38,10 @@ class SixTones {
                  if index < 16 { offset = 0}
             else if index < 32 && index > 15 {offset = -11}
             else if index < 48 && index > 31 {offset = -22}
-            else if index < 64 && index > 47 {offset = -34}
+            else if index < 64 && index > 47 {offset = -33}
             else if index < 80 && index > 63 {offset = -45}
             else {offset = -56}
             
-            print(index + offset)
             // Set frequency:
             os.frequency = arrayOfNoteFrequencies[index + offset]
          
@@ -52,36 +51,37 @@ class SixTones {
     }
     
     
-    func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int) {
+    func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int, viewNumber: Int) {
        // print(#function)
         
         if allowsRampUp {
             
-            let os = arrayOfOscillators[stringIndex]
-            os.rampDuration =  0
-            os.amplitude = 0
+            let os = arrayOfOscillators[viewNumber]
             os.stop()
+            os.rampDuration = 0
+            os.amplitude = 0
+            //os.stop()
             os.start()
             
             
            // if arrayOfNoteRampups[stringIndex] == true
             
-            os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
+            //os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
             
         }
     }
     
-    func rampDownStop(_ stringIndex: Int, zeroTo36Number: Int) {
+    func rampDownStop(_ stringIndex: Int, zeroTo36Number: Int,viewNumber: Int) {
         // print(#function)
-        let os = arrayOfOscillators[stringIndex]
+        let os = arrayOfOscillators[viewNumber]
         
-        let freqToStop = arrayOfNoteFrequencies[zeroTo36Number]
+        //let freqToStop = arrayOfNoteFrequencies[zeroTo36Number]
         
-            if os.frequency == freqToStop {
-                os.rampDuration = 0.8
+          //  if os.frequency == freqToStop {
+                os.rampDuration = 0.5
                 os.amplitude = 0
-            }
+            //}
 
     }
     
@@ -108,20 +108,20 @@ class SixTones {
         }
     }
     
-    func limitedDurationPlay(_ stringIndex: Int, zeroTo36Number: Int) {
+    func limitedDurationPlay(_ stringIndex: Int, zeroTo36Number: Int, viewNumber: Int) {
         if allowsRampUp {
-            let os = arrayOfOscillators[stringIndex]
+            let os = arrayOfOscillators[viewNumber]
             os.stop()
             os.rampDuration =  0.005
             os.start()
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
             os.amplitude = amplitude * 0.54
-            os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
+         //   os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                self.rampDownStop(stringIndex, zeroTo36Number: zeroTo36Number)
+                self.rampDownStop(stringIndex, zeroTo36Number: zeroTo36Number, viewNumber: viewNumber)
             })
             
         }
