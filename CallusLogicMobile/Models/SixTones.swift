@@ -52,37 +52,24 @@ class SixTones {
     
     
     func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int, viewNumber: Int) {
-       // print(#function)
-        
         if allowsRampUp {
             
             let os = arrayOfOscillators[viewNumber]
             os.stop()
             os.rampDuration = 0
             os.amplitude = 0
-            //os.stop()
             os.start()
             
-            
-           // if arrayOfNoteRampups[stringIndex] == true
-            
-            //os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             os.amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
             
         }
     }
     
     func rampDownStop(_ stringIndex: Int, zeroTo36Number: Int,viewNumber: Int) {
-        // print(#function)
         let os = arrayOfOscillators[viewNumber]
+        os.rampDuration = 0.5
+        os.amplitude = 0
         
-        //let freqToStop = arrayOfNoteFrequencies[zeroTo36Number]
-        
-          //  if os.frequency == freqToStop {
-                os.rampDuration = 0.5
-                os.amplitude = 0
-            //}
-
     }
     
     func stopPlayingAllNotes() {
@@ -103,9 +90,7 @@ class SixTones {
             // All os's are being started in function call appDidBecomeActive.
             // This is to help stop then restart the notes when the app becomes inactive.
             // Preventing notes from gettings stuck playing.
-            //os.start()
-            
-        }
+           }
     }
     
     func limitedDurationPlay(_ stringIndex: Int, zeroTo36Number: Int, viewNumber: Int) {
@@ -117,7 +102,6 @@ class SixTones {
             
             let amplitude = arrayOfNoteAmplitudes[zeroTo36Number]
             os.amplitude = amplitude * 0.54
-         //   os.frequency = arrayOfNoteFrequencies[zeroTo36Number]
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
