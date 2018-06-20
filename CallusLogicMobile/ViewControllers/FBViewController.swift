@@ -51,7 +51,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     let lightYellowColor = UIColor(red: 1, green: 1, blue: 155/255, alpha: 1)
     let pinkColor = UIColor(red: 1, green: 0.5, blue: 0.5, alpha: 1)
-    let sixTonesController = SixTones()
+    let tonesController = SixTones()
     
     let scalesTVC = ScalesTVC()
     let colorSelectorTVC = ColorSelectorTVC()
@@ -135,7 +135,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
             let stringIndex = arrayOfStringIndexes[index]
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(stringIndex * 50), execute: {
-                self.sixTonesController.limitedDurationPlay(stringIndex, zeroTo36Number: zeroTo36Number, viewNumber: viewNumber)
+                self.tonesController.limitedDurationPlay(zeroTo36Number: zeroTo36Number, viewNumber: viewNumber)
                 let view = self.fretboardView.arrayOfNoteViews[viewNumber]
                 view.flash()
             })
@@ -522,7 +522,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         hideOrShowEditTableViewButton()
        
-        AudioKit.output = AKMixer(sixTonesController.arrayOfOscillators)
+        AudioKit.output = AKMixer(tonesController.arrayOfOscillators)
         
         
         do {
@@ -1220,7 +1220,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     // If the canEditFretboard == false, I need to ensure there are no ghosted notes while loading the notes.
                     if noteModel.getIsGhost() ==  false || allowsCustomizations == false {
                         let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
-                        sixTonesController.rampUpStart(noteView.stringNumber, zeroTo36Number: zeroTo36Number, viewNumber: noteView.viewNumber)
+                        tonesController.rampUpStart(zeroTo36Number: zeroTo36Number, viewNumber: noteView.viewNumber)
                         // Only flash when you can't customize the fretboard.
                         if allowsCustomizations == false || lockSwitch.isOn == true {
                             noteView.flash()
@@ -1243,7 +1243,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     let zeroTo39Number = Int(selectedBoard.getFretboardArray()[noteView.viewNumber].getNumber0to39())!
                     
                     
-                    sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number, viewNumber: noteView.viewNumber)
+                    tonesController.rampDownStop(zeroTo36Number: zeroTo39Number, viewNumber: noteView.viewNumber)
                 }
             }
         }
@@ -1251,14 +1251,9 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         // Turn off all notes in the stored in the dictionary.
         // Maybe I should be removing dictionary entries when they are turned off. Maybe?
         for (noteViewNumber, _) in dictOfTouchedNoteViewNumbers {
-            
             let view = fretboardView.arrayOfNoteViews[noteViewNumber]
-            let stringNumber = view.stringNumber
-            
-            
             let zeroTo39Number = Int(selectedBoard.getFretboardArray()[view.viewNumber].getNumber0to39())!
-            
-            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number, viewNumber: noteViewNumber)
+            tonesController.rampDownStop(zeroTo36Number: zeroTo39Number, viewNumber: noteViewNumber)
         }
         dictOfTouchedNoteViewNumbers.removeAll()
         super.touchesEnded(touches, with: event)
@@ -1303,7 +1298,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                         if dictOfTouchedNoteViewNumbers[noteViewNumber] == false {
                             dictOfTouchedNoteViewNumbers[noteViewNumber] = true
                             let zeroTo39Number = Int(noteModel.getNumber0to39())!
-                            sixTonesController.rampDownStop(noteView.stringNumber, zeroTo36Number: zeroTo39Number, viewNumber: noteViewNumber)
+                            tonesController.rampDownStop(zeroTo36Number: zeroTo39Number, viewNumber: noteViewNumber)
                             //print("C")
                         }
                     }
@@ -1330,17 +1325,16 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
         
         // Rampup or rampdown note.
-        let stringNumber = noteView.stringNumber
         let zeroTo36Number = getZeroTo36Number(noteView.viewNumber)
         if noteModel.getIsGhost() == false || allowsCustomizations == false {
-            sixTonesController.rampUpStart(stringNumber, zeroTo36Number: zeroTo36Number, viewNumber: noteView.viewNumber)
+            tonesController.rampUpStart(zeroTo36Number: zeroTo36Number, viewNumber: noteView.viewNumber)
             // only flash if allowsCustomizations == false.
             if allowsCustomizations == false || lockSwitch.isOn == true {
                 noteView.flash()
             }
         } else {
             let zeroTo39Number = Int(noteModel.getNumber0to39())!
-            sixTonesController.rampDownStop(stringNumber, zeroTo36Number: zeroTo39Number, viewNumber: noteView.viewNumber)
+            tonesController.rampDownStop(zeroTo36Number: zeroTo39Number, viewNumber: noteView.viewNumber)
         }
         
         dictOfTouchedNoteViewNumbers[noteView.viewNumber] = false

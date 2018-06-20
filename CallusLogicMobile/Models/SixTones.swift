@@ -51,7 +51,7 @@ class SixTones {
     }
     
     
-    func rampUpStart(_ stringIndex: Int, zeroTo36Number: Int, viewNumber: Int) {
+    func rampUpStart(zeroTo36Number: Int, viewNumber: Int) {
         if allowsRampUp {
             
             let os = arrayOfOscillators[viewNumber]
@@ -65,7 +65,7 @@ class SixTones {
         }
     }
     
-    func rampDownStop(_ stringIndex: Int, zeroTo36Number: Int,viewNumber: Int) {
+    func rampDownStop(zeroTo36Number: Int,viewNumber: Int) {
         let os = arrayOfOscillators[viewNumber]
         os.rampDuration = 0.5
         os.amplitude = 0
@@ -93,7 +93,7 @@ class SixTones {
            }
     }
     
-    func limitedDurationPlay(_ stringIndex: Int, zeroTo36Number: Int, viewNumber: Int) {
+    func limitedDurationPlay(zeroTo36Number: Int, viewNumber: Int) {
         if allowsRampUp {
             let os = arrayOfOscillators[viewNumber]
             os.stop()
@@ -105,7 +105,7 @@ class SixTones {
             
             // wait 2 seconds to rampDown the notes.
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                self.rampDownStop(stringIndex, zeroTo36Number: zeroTo36Number, viewNumber: viewNumber)
+                self.rampDownStop(zeroTo36Number: zeroTo36Number, viewNumber: viewNumber)
             })
             
         }

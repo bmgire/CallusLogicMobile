@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
         
         // stop playing notes if the application will resign.
-        fbViewController.sixTonesController.stopPlayingAllNotes() 
+        fbViewController.tonesController.stopPlayingAllNotes()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -58,19 +58,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // stop playing notes if the application will resign.
-        fbViewController.sixTonesController.stopPlayingAllNotes()
+        fbViewController.tonesController.stopPlayingAllNotes()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
         // oscilators will be allowed to play notes after this function is run.
-        fbViewController.sixTonesController.startPlayingAllNotes()
+        fbViewController.tonesController.startPlayingAllNotes()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        fbViewController.sixTonesController.startPlayingAllNotes()
+        fbViewController.tonesController.startPlayingAllNotes()
 
         
     }
