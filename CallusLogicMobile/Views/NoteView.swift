@@ -155,9 +155,9 @@ class NoteView: UIView {
             
             // Attributes for drawing.
             let attrs = [
-                NSAttributedStringKey.foregroundColor: UIColor.black,
-                NSAttributedStringKey.font: font,
-                NSAttributedStringKey.paragraphStyle: paraStyle]
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.paragraphStyle: paraStyle]
             
             // Define an attributed string set to display the note.
             var attributedNote = NSMutableAttributedString()
@@ -170,9 +170,9 @@ class NoteView: UIView {
                 if bounds.size.width * 0.80 < attributedNote.size().width {
                     // Create new font and attributes,
                     let newFont = UIFont.systemFont(ofSize: 18)
-                    let newAttrs = [NSAttributedStringKey.foregroundColor: UIColor.black,
-                                    NSAttributedStringKey.font: newFont,
-                                    NSAttributedStringKey.paragraphStyle: paraStyle]
+                    let newAttrs = [NSAttributedString.Key.foregroundColor: UIColor.black,
+                                    NSAttributedString.Key.font: newFont,
+                                    NSAttributedString.Key.paragraphStyle: paraStyle]
                     
                     // set the attributedNote to those new attributes.
                     attributedNote = NSMutableAttributedString(string: displayText, attributes: newAttrs)
@@ -191,7 +191,7 @@ class NoteView: UIView {
         flash.duration = 0.1
         flash.fromValue = 1
         flash.toValue = 0.1
-        flash.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        flash.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         flash.autoreverses = true
         flash.repeatCount = 0
         

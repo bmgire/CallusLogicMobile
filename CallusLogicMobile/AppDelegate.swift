@@ -23,11 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         // Load saved array of FBCollectionModels.
         
-        fbViewController = window!.rootViewController as! FBViewController
+        fbViewController = window!.rootViewController as? FBViewController
         // Access the ItemsViewController and set its item store.
         fbViewController.fbCollectionStore = fbCollectionStore
         fbViewController.productStore = productStore

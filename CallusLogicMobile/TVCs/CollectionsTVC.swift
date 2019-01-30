@@ -196,7 +196,7 @@ class CollectionsTVC: UITableViewController {
    
     // Presents editing alerts.
     override func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCellEditingStyle,
+                   commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         // Presents editing alerts.
         if editingStyle == .delete {
@@ -258,7 +258,7 @@ class CollectionsTVC: UITableViewController {
     }
     
     // Disables Swipe to delete if there are less than 2 collections
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if tableView.isEditing {
             return .delete
         }

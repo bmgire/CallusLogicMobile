@@ -39,7 +39,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                                          "A Chord", "Am Chord", "A7 Chord"]
     
     let arrayOfScaleDisplayModes = ["Notes", "Fret Numbers","Intervals", "Numbers 0-11", "Numbers 0-39"]
-    let arrayOfChordDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-36"]
+    let arrayOfChordDisplayModes = ["Notes", "Fret Numbers","Intervals", "Chord Fingers", "Numbers 0-11", "Numbers 0-39"]
     let arrayOfRootNotes = ["A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G", "A", "B", "C", "D", "E", "F", "G"]
     let arrayOfAccidentals = ["Natural", "b", "#" ]
     let chordFormulas = ChordFormulas()
@@ -534,7 +534,8 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryAmbient, with: AVAudioSessionCategoryOptions.mixWithOthers)
+            //try audioSession.setCategory(convertFromAVAudioSessionCategory(AVAudioSession.Category.ambient), with: AVAudioSession.CategoryOptions.mixWithOthers)
+            try audioSession.setCategory(AVAudioSession.Category.ambient, mode: AVAudioSession.Mode.default, options: AVAudioSession.CategoryOptions.mixWithOthers)
         } catch {
             print("Error: Setting category to AVAudioSessionCategoryPlayback failed.")
         }
@@ -912,7 +913,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     // Presents editing alerts.
     func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCellEditingStyle,
+                   commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         // Presents editing alerts.
         if editingStyle == .delete {
@@ -999,7 +1000,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     // Disables Swipe to delete if there are less than 2 collections
-     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if tableView.isEditing {
             return .delete
         } else {
@@ -1071,7 +1072,7 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     forComponent component: Int) -> NSAttributedString? {
         // print(#function) // Displays function when called.
         
-        let attributedStringKey = [NSAttributedStringKey.foregroundColor: UIColor.blue]
+        let attributedStringKey = [NSAttributedString.Key.foregroundColor: UIColor.blue]
         
         switch pickerView {
         case rootPickerView:
@@ -1540,8 +1541,5 @@ class FBViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
     }
 }
-
-    
-
 
 
