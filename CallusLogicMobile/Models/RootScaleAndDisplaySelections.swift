@@ -43,6 +43,7 @@ class RootScaleAndDisplaySelections: NSObject, NSCoding {
             if let displayMode = DisplayMode(rawValue: rawDisplayMode) {
                 self.displayMode = displayMode
             }
+            // For updating previous versions of the app. 
             // If the DisplayMode rawValue conversion didn't work,
             // it's likely because the user is had the 0-36 number rather than the 0to39 number enum.
             // Check the text, if it is 0-36, use the 0-39
